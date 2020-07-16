@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-// import reducer from ./reducer
+import endPoints from './endPoints.js'
 
 export default combineReducers({
-//   reducer names,
+  endPoints
 });

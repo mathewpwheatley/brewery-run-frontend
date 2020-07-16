@@ -1,122 +1,62 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom';
-
+import {NavLink} from 'react-router-dom'
+import CreateAccountForm from './CreateAccountForm.js'
+import LogInForm from './LogInForm.js'
 
 const NavigationBar = () => {
     return (
-        <header class="navbar navbar-expand navbar-dark bg-primary shadow flex-column flex-md-row bd-navbar">
+        <header className="navbar navbar-expand navbar-dark bg-primary shadow flex-column flex-md-row bd-navbar">
 
-            <nav class="collapse navbar-collapse" >
-                <NavLink exact to="/" class="navbar-brand" title="Beer Run">
-                    <i class="fas fa-beer"/>
-                    <span class="d-none d-sm-none d-md-inline"> Beer Run</span>
+            <nav className="collapse navbar-collapse" >
+                <NavLink className="navbar-brand" exact to="/" title="Beer Run">
+                    <i className="fas fa-beer"/>
+                    <span className="d-none d-sm-none d-md-inline"> Beer Run</span>
                 </NavLink>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <NavLink exact to="/" class="nav-link" title="Breweries">
-                            <i class="fas fa-industry"/>
-                            <span class="d-none d-sm-none d-md-inline"> Breweries</span>
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <NavLink className="nav-link" exact to="/" title="Breweries">
+                            <i className="fas fa-industry"/>
+                            <span className="d-none d-sm-none d-md-inline"> Breweries</span>
                         </NavLink>
                     </li>
-                    <li class="nav-item">
-                        <NavLink exact to="/" class="nav-link" title="Circuits">
-                            <i class="fas fa-route"/>
-                            <span class="d-none d-sm-none d-md-inline"> Circuits</span>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" exact to="/" title="Circuits">
+                            <i className="fas fa-route"/>
+                            <span className="d-none d-sm-none d-md-inline"> Circuits</span>
                         </NavLink>
                     </li>
                 </ul>
 
-                <ul class="navbar-nav ml-md-auto">
-                    <li class="nav-item dropdown">
-                        <NavLink exact to="/" class="nav-link dropdown-toggle" title="Create Account" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user-plus"/>
-                            <span class="d-none d-sm-none d-md-inline"> Create Account</span>
+                <ul className="navbar-nav ml-md-auto">
+                    <li className="nav-item dropdown">
+                        <NavLink className="nav-link dropdown-toggle" exact to="/" title="Create Account" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i className="fas fa-user-plus"/>
+                            <span className="d-none d-sm-none d-md-inline"> Create Account</span>
                         </NavLink>
-                        <form class="dropdown-menu dropdown-menu-right p-4 signup-login-form">
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <input type="text" class="form-control" placeholder="First Name" />
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Last Name" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email Address" />
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder=" Password" />
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password" />
-                            </div>
-                            <div class="form-row">
-                                <div class="col-6">
-                                    <button class="btn btn-block btn-primary">
-                                        <i class="fab fa-google"/>
-                                        <span class="d-none d-sm-none d-md-inline"> Sign up with Google</span>
-                                    </button>
-                                </div>
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-block btn-success">
-                                        <i class="fas fa-user-plus"/>
-                                        <span class="d-none d-sm-none d-md-inline"> Create Account</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <CreateAccountForm />
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <NavLink exact to="/" class="nav-link dropdown-toggle" title="Login" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-sign-in-alt"/>
-                            <span class="d-none d-sm-none d-md-inline"> Login</span>
+                    <li className="nav-item dropdown">
+                        <NavLink className="nav-link dropdown-toggle" exact to="/" title="Log In" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i className="fas fa-sign-in-alt"/>
+                            <span className="d-none d-sm-none d-md-inline"> Log In</span>
                         </NavLink>
-                        <form class="dropdown-menu dropdown-menu-right p-4 signup-login-form">
-                            <div class="form-group">
-                                <input type="email" id="email" class="form-control" placeholder="Email Address" />
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-8">
-                                    <input type="password" class="form-control" placeholder="Password" />
-                                </div>
-                                <div class="form-group col-4">
-                                    <button type="button" class="btn btn-block btn-primary">
-                                        <span class="d-none d-sm-none d-md-inline"> Forgot</span>
-                                        <i class="far fa-question-circle"/>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="form-row justify-content-center">
-                                <div class="col-6">
-                                    <button class="btn btn-block btn-primary">
-                                        <i class="fab fa-google"/>
-                                        <span class="d-none d-sm-none d-md-inline"> Login with Google</span>
-                                        </button>
-                                </div>
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-block btn-success">
-                                        <i class="fas fa-sign-in-alt"/>
-                                        <span class="d-none d-sm-none d-md-inline"> Login to Beer Run</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <LogInForm />
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <NavLink exact to="/" class="nav-link dropdown-toggle" title="User Name" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-running"/>
-                            <span class="d-none d-sm-none d-md-inline"> User Name</span>
+                    <li className="nav-item dropdown">
+                        <NavLink className="nav-link dropdown-toggle" exact to="/" title="User Name" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i className="fas fa-running"/>
+                            <span className="d-none d-sm-none d-md-inline"> User Name</span>
                         </NavLink>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <h6 class="dropdown-header"><i class="fas fa-bookmark"/> Bookmarked</h6>
-                            <NavLink exact to="/" class="dropdown-item"><i class="fas fa-industry"/> Breweries</NavLink>
-                            <NavLink exact to="/" class="dropdown-item"><i class="fas fa-route"/> Circuits</NavLink>
-                            <div class="dropdown-divider"></div>
-                            <NavLink exact to="/" class="dropdown-item"><i class="fas fa-address-card"/> Account</NavLink>
-                            <div class="dropdown-divider"></div>
-                            <NavLink exact to="/" class="dropdown-item"><i class="fas fa-sign-out-alt"/> Logout</NavLink>
+                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <h6 className="dropdown-header"><i className="fas fa-star"/> Favorite</h6>
+                            <NavLink className="dropdown-item" exact to="/" title="Favorite Breweries"><i className="fas fa-industry"/> Breweries</NavLink>
+                            <NavLink className="dropdown-item" exact to="/" title="Favorite Circuits"><i className="fas fa-route"/> Circuits</NavLink>
+                            <div className="dropdown-divider"></div>
+                            <NavLink className="dropdown-item" exact to="/" title="Account"><i className="fas fa-address-card"/> Account</NavLink>
+                            <div className="dropdown-divider"></div>
+                            <NavLink className="dropdown-item" exact to="/" title="Log Out"><i className="fas fa-sign-out-alt"/> Log Out</NavLink>
                         </div>
                     </li>
                 </ul>
