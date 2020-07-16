@@ -14,13 +14,13 @@ const NavigationBar = () => {
                 </NavLink>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <NavLink className="nav-link" exact to="/" title="Breweries">
+                        <NavLink className="nav-link" exact to="/breweries" title="Breweries">
                             <i className="fas fa-industry"/>
                             <span className="d-none d-sm-none d-md-inline"> Breweries</span>
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" exact to="/" title="Circuits">
+                        <NavLink className="nav-link" exact to="/circuits" title="Circuits">
                             <i className="fas fa-route"/>
                             <span className="d-none d-sm-none d-md-inline"> Circuits</span>
                         </NavLink>
@@ -29,7 +29,7 @@ const NavigationBar = () => {
 
                 <ul className="navbar-nav ml-md-auto">
                     <li className="nav-item dropdown">
-                        <NavLink className="nav-link dropdown-toggle" exact to="/" title="Create Account" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <NavLink className="nav-link dropdown-toggle" exact to="/create-account" title="Create Account" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-user-plus"/>
                             <span className="d-none d-sm-none d-md-inline"> Create Account</span>
                         </NavLink>
@@ -37,7 +37,7 @@ const NavigationBar = () => {
                     </li>
 
                     <li className="nav-item dropdown">
-                        <NavLink className="nav-link dropdown-toggle" exact to="/" title="Log In" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <NavLink className="nav-link dropdown-toggle" exact to="/log-in" title="Log In" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-sign-in-alt"/>
                             <span className="d-none d-sm-none d-md-inline"> Log In</span>
                         </NavLink>
@@ -51,12 +51,12 @@ const NavigationBar = () => {
                         </NavLink>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <h6 className="dropdown-header"><i className="fas fa-star"/> Favorite</h6>
-                            <NavLink className="dropdown-item" exact to="/" title="Favorite Breweries"><i className="fas fa-industry"/> Breweries</NavLink>
-                            <NavLink className="dropdown-item" exact to="/" title="Favorite Circuits"><i className="fas fa-route"/> Circuits</NavLink>
+                            <NavLink className="dropdown-item" exact to="/favorite-breweries" title="Favorite Breweries"><i className="fas fa-industry"/> Breweries</NavLink>
+                            <NavLink className="dropdown-item" exact to="/favorite-circuits" title="Favorite Circuits"><i className="fas fa-route"/> Circuits</NavLink>
                             <div className="dropdown-divider"></div>
-                            <NavLink className="dropdown-item" exact to="/" title="Account"><i className="fas fa-address-card"/> Account</NavLink>
+                            <NavLink className="dropdown-item" exact to="/account" title="Account"><i className="fas fa-address-card"/> Account</NavLink>
                             <div className="dropdown-divider"></div>
-                            <NavLink className="dropdown-item" exact to="/" title="Log Out"><i className="fas fa-sign-out-alt"/> Log Out</NavLink>
+                            <NavLink className="dropdown-item" exact to="/log-out" title="Log Out"><i className="fas fa-sign-out-alt"/> Log Out</NavLink>
                         </div>
                     </li>
                 </ul>

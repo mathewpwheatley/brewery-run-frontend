@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 class LogInForm extends Component {
     state = {
         email: "",
-        password: ""
+        password: "",
+        errors: []
     }
 
     handleChange = event => {
@@ -29,12 +30,28 @@ class LogInForm extends Component {
         // fetch request to login user
         const options = {
             method: 'POST',
+            credentials: 'same-origin',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({user: this.state})
+            body: JSON.stringify({
+                user: {
+                    email: this.state.email,
+                    password: this.state.password
+                }
+            })
         }
-        fetch(this.props.logInURL, options).then(resp => resp.json()).then(console.log)
+        fetch(this.props.logInURL, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                this.setState({errors: json.errors})
+            }
+        })
         
         console.log("This feature doesn't work yet")
+    }
+
+    displayFormErrors = () => {
+        return this.state.errors.map(error => {
+            return <li>{error}</li>
+        }) 
     }
 
     render () {
@@ -55,19 +72,27 @@ class LogInForm extends Component {
                     </div>
                 </div>
                 <div className="form-row justify-content-center">
-                    <div className="col-6">
+                    <div className="form-group col-6">
                         <button className="btn btn-block btn-primary" type="button" onClick={event => this.handleGoogleButtonClick(event)}>
                             <i className="fab fa-google"/>
                             <span className="d-none d-sm-none d-md-inline"> Login with Google</span>
                             </button>
                     </div>
-                    <div className="col-6">
+                    <div className="form-group col-6">
                         <button className="btn btn-block btn-success" type="submit">
                             <i className="fas fa-sign-in-alt"/>
                             <span className="d-none d-sm-none d-md-inline"> Login to Beer Run</span>
                         </button>
                     </div>
                 </div>
+                {/* Conditionally render via && operator acting as if statement */}
+                {this.state.errors &&
+                    <div className="d-flex justify-content-center">
+                        <ul className="list-unstyled text-danger">
+                            {this.state.errors.map((message, index) => <li key={index}>{message}</li>)}
+                        </ul>
+                    </div>
+                }
             </form>
         )
     }
