@@ -26,32 +26,27 @@ class LogInForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        // I think the goal would be to move this to an action but for now lets just do it here
-        // fetch request to login user
+        // Fetch request to login user
+        const body = {...this.state}
+        delete body.errors
         const options = {
             method: 'POST',
             credentials: 'same-origin',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                user: {
-                    email: this.state.email,
-                    password: this.state.password
-                }
-            })
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({user: body})
         }
         fetch(this.props.logInURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 this.setState({errors: json.errors})
+            } else {
+                console.log(json)
             }
         })
         
         console.log("This feature doesn't work yet")
-    }
-
-    displayFormErrors = () => {
-        return this.state.errors.map(error => {
-            return <li>{error}</li>
-        }) 
     }
 
     render () {
@@ -85,7 +80,7 @@ class LogInForm extends Component {
                         </button>
                     </div>
                 </div>
-                
+
                 {/* Conditionally render via && operator acting as if statement */}
                 {this.state.errors &&
                     <div className="d-flex justify-content-center">

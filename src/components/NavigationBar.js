@@ -14,20 +14,20 @@ const NavigationBar = () => {
                 </NavLink>
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <NavLink className="nav-link" exact to="/breweries" title="Breweries">
+                        <NavLink className="nav-link" exact to="/breweries/table" title="Breweries">
                             <i className="fas fa-industry"/>
                             <span className="d-none d-sm-none d-md-inline"> Breweries</span>
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" exact to="/circuits" title="Circuits">
+                        <NavLink className="nav-link" exact to="/circuits/table" title="Circuits">
                             <i className="fas fa-route"/>
                             <span className="d-none d-sm-none d-md-inline"> Circuits</span>
                         </NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" exact to="/test-fetch" title="Test Fetch">
-                            <i class="fas fa-vial"/>
+                            <i className="fas fa-vial"/>
                             <span className="d-none d-sm-none d-md-inline"> Test Fetch</span>
                         </NavLink>
                     </li>
