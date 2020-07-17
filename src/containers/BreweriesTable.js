@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import BreweryTableRow from '../components/BreweryTableRow.js'
+import BreweriesTableRow from '../components/BreweriesTableRow.js'
 
 class BreweriesTable extends Component {
     // State is only used for sorting functions in this class
@@ -24,7 +24,7 @@ class BreweriesTable extends Component {
     }
 
     mapBreweries = (breweries) => {
-        return breweries.map(brewery => <BreweryTableRow key={brewery.id} brewery={brewery}/>)
+        return breweries.map(brewery => <BreweriesTableRow key={brewery.id} brewery={brewery}/>)
     }
 
     handleClick = event => {

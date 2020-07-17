@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BreweryTableRow = ({brewery}) => {
+const BreweriesTableRow = ({brewery}) => {
     const {name, brewery_type, rating, likes_count, tag_list, full_address, website_url} = brewery
     return (
         <tr>
@@ -15,4 +15,4 @@ const BreweryTableRow = ({brewery}) => {
     )
 }
 
-export default BreweryTableRow
+export default BreweriesTableRow

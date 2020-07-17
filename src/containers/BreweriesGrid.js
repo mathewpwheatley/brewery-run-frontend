@@ -1,10 +1,10 @@
 import React from 'react'
-import BreweryGridCard from '../components/BreweryGridCard.js'
+import BreweriesGridCard from '../components/BreweriesGridCard.js'
 
 const BreweriesList = ({breweries}) => {
 
     const mapBreweries = () => {
-        return breweries.map(brewery => <BreweryGridCard key={brewery.id} brewery={brewery}/>)
+        return breweries.map(brewery => <BreweriesGridCard key={brewery.id} brewery={brewery}/>)
     } 
 
     return (
