@@ -50,7 +50,6 @@ class CreateAccountForm extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <form className="dropdown-menu dropdown-menu-right p-4 signup-login-form" onSubmit={event => this.handleSubmit(event)}>
                 <div className="form-row">
