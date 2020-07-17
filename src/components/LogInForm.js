@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux';
+import {connect} from 'react-redux'
+import {logIn} from '../actions/user.js'
 
 class LogInForm extends Component {
     state = {
@@ -42,11 +43,10 @@ class LogInForm extends Component {
             if (json.errors) {
                 this.setState({errors: json.errors})
             } else {
-                console.log(json)
+                // Set redux store state to let fronte end know a user is logged in
+                this.props.logIn(json)
             }
         })
-        
-        console.log("This feature doesn't work yet")
     }
 
     render () {
@@ -95,9 +95,15 @@ class LogInForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return ({
+    return {
         logInURL: state.endPoints.logInURL
-    })
-  }
+    }
+}
 
-export default connect(mapStateToProps, {})(LogInForm)
+const mapDispatchToProps = dispatch => {
+    return {
+        logIn: (user) => {dispatch(logIn(user))}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm)

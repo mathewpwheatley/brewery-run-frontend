@@ -1,8 +1,9 @@
-const user = (state = {}, action) => {
+export default (state = {}, action) => {
     
     switch (action.type) {
 
         case 'LOG_IN':
+            console.log("in reducer")
             state.userId = action.userId
             state.userName = action.userName
             return state
@@ -14,6 +15,4 @@ const user = (state = {}, action) => {
         default:
             return state
     }
-}
-
-export default user
+} 

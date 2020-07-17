@@ -1,8 +1,9 @@
 export const logIn = user => {
+    console.log("In Action")
     return {
         type: 'LOG_IN',
         userId: user.id,
-        userName: user.name
+        userName: user.full_name
     }
 }
 

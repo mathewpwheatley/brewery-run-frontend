@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import {logIn} from '../actions/user.js'
 
 class CreateAccountForm extends Component {
 
@@ -42,14 +43,14 @@ class CreateAccountForm extends Component {
             if (json.errors) {
                 this.setState({errors: json.errors})
             } else {
-                console.log(json)
+                // Set redux store state to let fronte end know a user is logged in
+                this.props.logIn(json)
             }
         })
-        
-        console.log("This feature doesn't work yet")
     }
 
     render() {
+        console.log(this.props)
         return (
             <form className="dropdown-menu dropdown-menu-right p-4 signup-login-form" onSubmit={event => this.handleSubmit(event)}>
                 <div className="form-row">
@@ -100,9 +101,16 @@ class CreateAccountForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return ({
-        usersURL: state.endPoints.usersURL
-    })
-  }
+    return {
+        usersURL: state.endPoints.usersURL,
+        user: state.user
+    }
+}
 
-export default connect(mapStateToProps, {})(CreateAccountForm)
+const mapDispatchToProps = dispatch => {
+    return {
+        logIn: (user) => {dispatch(logIn(user))}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateAccountForm)
