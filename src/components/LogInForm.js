@@ -85,6 +85,7 @@ class LogInForm extends Component {
                         </button>
                     </div>
                 </div>
+                
                 {/* Conditionally render via && operator acting as if statement */}
                 {this.state.errors &&
                     <div className="d-flex justify-content-center">

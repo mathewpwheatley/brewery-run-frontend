@@ -25,30 +25,36 @@ const NavigationBar = () => {
                             <span className="d-none d-sm-none d-md-inline"> Circuits</span>
                         </NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" exact to="/test-fetch" title="Test Fetch">
+                            <i class="fas fa-vial"/>
+                            <span className="d-none d-sm-none d-md-inline"> Test Fetch</span>
+                        </NavLink>
+                    </li>
                 </ul>
 
                 <ul className="navbar-nav ml-md-auto">
                     <li className="nav-item dropdown">
-                        <NavLink className="nav-link dropdown-toggle" exact to="/create-account" title="Create Account" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-user-plus"/>
                             <span className="d-none d-sm-none d-md-inline"> Create Account</span>
-                        </NavLink>
+                        </div>
                         <CreateAccountForm />
                     </li>
 
                     <li className="nav-item dropdown">
-                        <NavLink className="nav-link dropdown-toggle" exact to="/log-in" title="Log In" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-sign-in-alt"/>
                             <span className="d-none d-sm-none d-md-inline"> Log In</span>
-                        </NavLink>
+                        </div>
                         <LogInForm />
                     </li>
 
                     <li className="nav-item dropdown">
-                        <NavLink className="nav-link dropdown-toggle" exact to="/" title="User Name" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i className="fas fa-running"/>
                             <span className="d-none d-sm-none d-md-inline"> User Name</span>
-                        </NavLink>
+                        </div>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <h6 className="dropdown-header"><i className="fas fa-star"/> Favorite</h6>
                             <NavLink className="dropdown-item" exact to="/favorite-breweries" title="Favorite Breweries"><i className="fas fa-industry"/> Breweries</NavLink>
