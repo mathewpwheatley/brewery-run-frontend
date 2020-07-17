@@ -3,14 +3,13 @@ export default (state = {}, action) => {
     switch (action.type) {
 
         case 'LOG_IN':
-            console.log("in reducer")
-            state.userId = action.userId
-            state.userName = action.userName
-            return state
+            return {...state, userID: action.userId, userName: action.userName}
 
         case 'LOG_OUT':
-            state = {}
-            return state
+            const newState = {...state}
+            delete newState.userId
+            delete newState.userName
+            return newState
         
         default:
             return state

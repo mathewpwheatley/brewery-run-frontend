@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {logIn} from '../actions/user.js'
+import FormErrors from './FormErrors.js';
 
 class LogInForm extends Component {
     state = {
@@ -67,28 +68,20 @@ class LogInForm extends Component {
                     </div>
                 </div>
                 <div className="form-row justify-content-center">
-                    <div className="form-group col-6">
+                    <div className="col-6">
                         <button className="btn btn-block btn-primary" type="button" onClick={event => this.handleGoogleButtonClick(event)}>
                             <i className="fab fa-google"/>
                             <span className="d-none d-sm-none d-md-inline"> Login with Google</span>
                             </button>
                     </div>
-                    <div className="form-group col-6">
+                    <div className="col-6">
                         <button className="btn btn-block btn-success" type="submit">
                             <i className="fas fa-sign-in-alt"/>
                             <span className="d-none d-sm-none d-md-inline"> Login to Beer Run</span>
                         </button>
                     </div>
                 </div>
-
-                {/* Conditionally render via && operator acting as if statement */}
-                {this.state.errors &&
-                    <div className="d-flex justify-content-center">
-                        <ul className="list-unstyled text-danger">
-                            {this.state.errors.map((message, index) => <li key={index}>{message}</li>)}
-                        </ul>
-                    </div>
-                }
+                <FormErrors errors={this.state.errors}/>
             </form>
         )
     }

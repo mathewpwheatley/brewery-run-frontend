@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import {logIn} from '../actions/user.js'
+import FormErrors from './FormErrors.js';
 
 class CreateAccountForm extends Component {
 
@@ -8,7 +9,6 @@ class CreateAccountForm extends Component {
         first_name: "",
         last_name: "",
         email: "",
-        email_confirmation: "",
         password: "",
         password_confirmation: "",
         errors: []
@@ -64,9 +64,6 @@ class CreateAccountForm extends Component {
                     <input className="form-control" type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
                 </div>
                 <div className="form-group">
-                    <input className="form-control" type="email" placeholder="Confirm Email Address" name="email_confirmation" value={this.state.email_confirmation} onChange={event => this.handleChange(event)}/>
-                </div>
-                <div className="form-group">
                     <input className="form-control" type="password" placeholder=" Password" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
                 </div>
                 <div className="form-group">
@@ -86,14 +83,7 @@ class CreateAccountForm extends Component {
                         </button>
                     </div>
                 </div>
-                {/* Conditionally render via && operator acting as if statement */}
-                {this.state.errors &&
-                    <div className="d-flex justify-content-center">
-                        <ul className="list-unstyled text-danger">
-                            {this.state.errors.map((message, index) => <li key={index}>{message}</li>)}
-                        </ul>
-                    </div>
-                }
+                <FormErrors errors={this.state.errors}/>
             </form>
         )
     }

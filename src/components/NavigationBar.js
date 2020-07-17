@@ -38,7 +38,7 @@ class NavigationBar extends Component {
                     <ul className="navbar-nav ml-md-auto">
 
                         {/* Conditionally render via && operator acting as if statement */}
-                        {!this.props.user.userId &&
+                        {!this.props.user.userID &&
                             <Fragment>
                                 <li className="nav-item dropdown">
                                     <div className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,11 +59,11 @@ class NavigationBar extends Component {
                         }
 
                         {/* Conditionally render via && operator acting as if statement */}
-                        {this.props.user.userId &&
+                        {this.props.user.userID &&
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="fas fa-running"/>
-                                    <span className="d-none d-sm-none d-md-inline"> {this.props.user.name}</span>
+                                    <span className="d-none d-sm-none d-md-inline"> {this.props.user.userName}</span>
                                 </div>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <h6 className="dropdown-header"><i className="fas fa-star"/> Favorite</h6>
