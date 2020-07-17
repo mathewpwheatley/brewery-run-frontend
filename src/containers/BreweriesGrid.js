@@ -3,15 +3,13 @@ import BreweryGridCard from '../components/BreweryGridCard.js'
 
 const BreweriesList = ({breweries}) => {
 
-    const mapListRows = () => {
+    const mapBreweries = () => {
         return breweries.map(brewery => <BreweryGridCard key={brewery.id} brewery={brewery}/>)
     } 
 
     return (
-        <div class="container">
-            <div class="row row-cols-4">
-                {mapListRows()}
-            </div>
+        <div className="row row-cols-4">
+            {mapBreweries()}
         </div>
     )
 }

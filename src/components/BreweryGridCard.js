@@ -3,7 +3,7 @@ import React from 'react'
 const BreweryTableRow = ({brewery}) => {
     const {name, brewery_type, rating, likes_count, tag_list, full_address, website_url} = brewery
     return (
-        <div className="col my-2">
+        <div className="col m-2">
             <div className="card col m-1">
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
@@ -14,7 +14,7 @@ const BreweryTableRow = ({brewery}) => {
                         <li className="card-text">Tags: {tag_list}</li>
                         <li className="card-text">Address: {full_address}</li>
                     </ul>
-                    <a className="btn btn-light border-secondary" href={website_url} target="_blank">Brewery Website</a>
+                    <a className="btn btn-light border-secondary" href={website_url} target="_blank" rel="noopener noreferrer" >Brewery Website</a>
                 </div>
             </div>
         </div>

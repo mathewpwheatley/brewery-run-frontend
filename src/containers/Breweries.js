@@ -7,7 +7,8 @@ import BreweriesGrid from './BreweriesGrid.js'
 class Breweries extends Component {
     state = {
         breweries: [],
-        errors: []
+        errors: [],
+        filter: ""
     }
 
     componentDidMount() {
@@ -22,6 +23,20 @@ class Breweries extends Component {
                 this.setState({breweries: json})
             }
         })
+    }
+
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    filteredBreweries = () => {
+        if (this.state.filter) {
+            return this.state.breweries.filter(brewery => brewery.name.toLowerCase().includes(this.state.filter.toLowerCase()))
+        } else {
+            return this.state.breweries
+        }
     }
 
     render () {
@@ -42,21 +57,18 @@ class Breweries extends Component {
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" exact to="/breweries/list" title="Grid View">
-                                <i class="fas fa-th"/>
+                                <i className="fas fa-th"/>
                                 <span className="d-none d-sm-none d-md-inline"> Grid View</span>
                             </NavLink>
                         </li>
 
                     </ul>
                     <form className="form-inline">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Brewery Name" aria-label="Search" />
-                        <button className="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+                        <input className="form-control mr-sm-2" type="search" placeholder="Brewery Name Search" aria-label="Search" name="filter" value={this.state.filter} onChange={event => this.handleChange(event)}/>
                     </form>
                 </nav>
-
-                {/* <BreweriesTable breweries={this.state.breweries} /> */}
-
-                <BreweriesGrid breweries={this.state.breweries} />
+                {/* I feel like there should be a route way to check this.... */}
+                {window.location.pathname === "/breweries/table" ? <BreweriesTable breweries={this.filteredBreweries()} /> : <BreweriesGrid breweries={this.filteredBreweries()} />}
             </div>
         )
     }
