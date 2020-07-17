@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
-import { connect } from 'react-redux';
-import BreweryTableRow from '../components/BreweryTableRow.js'
+import {connect} from 'react-redux';
+import BreweriesTable from './BreweriesTable.js'
+import BreweriesGrid from './BreweriesGrid.js'
 
 class Breweries extends Component {
     state = {
@@ -23,10 +24,6 @@ class Breweries extends Component {
         })
     }
 
-    mapTableRows = () => {
-        return this.state.breweries.map(brewery => <BreweryTableRow key={brewery.id} brewery={brewery}/>)
-    } 
-
     render () {
         return (
             <div className="continer my-3 mx-5 border border-secondary rounded-lg">
@@ -44,9 +41,9 @@ class Breweries extends Component {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" exact to="/breweries/list" title="List View">
-                                <i className="fas fa-list"/>
-                                <span className="d-none d-sm-none d-md-inline"> List View</span>
+                            <NavLink className="nav-link" exact to="/breweries/list" title="Grid View">
+                                <i class="fas fa-th"/>
+                                <span className="d-none d-sm-none d-md-inline"> Grid View</span>
                             </NavLink>
                         </li>
 
@@ -57,22 +54,9 @@ class Breweries extends Component {
                     </form>
                 </nav>
 
-                <table className="table table-hover">
-                    <thead className="thead-light ">
-                        <tr>
-                        <th scope="col">Name <i className="fas fa-sort"/></th>
-                        <th scope="col">Type <i className="fas fa-sort"/></th>
-                        <th scope="col">Rating <i className="fas fa-sort"/></th>
-                        <th scope="col">Likes <i className="fas fa-sort"/></th>
-                        <th scope="col">Tags</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Website</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.mapTableRows()}
-                    </tbody>
-                </table>
+                {/* <BreweriesTable breweries={this.state.breweries} /> */}
+
+                <BreweriesGrid breweries={this.state.breweries} />
             </div>
         )
     }
