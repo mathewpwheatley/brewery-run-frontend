@@ -44,7 +44,7 @@ class LogInForm extends Component {
             if (json.errors) {
                 this.setState({errors: json.errors})
             } else {
-                // Set redux store state to let fronte end know a user is logged in
+                // Set redux store state to let frontend know a user is logged in
                 this.props.logIn(json)
             }
         })
