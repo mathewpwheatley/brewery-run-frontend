@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'
+import Form from 'react-bootstrap/Form'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 import {createUser} from '../actions/user.js'
-import FormMessages from './FormMessages.js';
+import FormMessages from './FormMessages.js'
 
 class CreateAccountForm extends Component {
 
@@ -31,40 +34,40 @@ class CreateAccountForm extends Component {
 
     render() {
         return (
-            <form className="dropdown-menu dropdown-menu-right p-4 signup-login-form" onSubmit={event => this.handleSubmit(event)}>
-                <div className="form-row">
-                    <div className="form-group col-sm-6">
-                        <input className="form-control" type="text" placeholder="First Name" name="first_name" value={this.state.first_name} onChange={event => this.handleChange(event)}/>
-                    </div>
-                    <div className="form-group col-sm-6">
-                        <input className="form-control" type="text" placeholder="Last Name" name="last_name" value={this.state.last_name} onChange={event => this.handleChange(event)}/>
-                    </div>
-                </div>
-                <div className="form-group">
-                    <input className="form-control" type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
-                </div>
-                <div className="form-group">
-                    <input className="form-control" type="password" placeholder=" Password" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
-                </div>
-                <div className="form-group">
-                    <input className="form-control" type="password" placeholder="Confirm Password" name="password_confirmation" value={this.state.password_confirmation} onChange={event => this.handleChange(event)}/>
-                </div>
-                <div className="form-row">
-                    <div className="col-6">
-                        <button className="btn btn-block btn-primary" type="button" onClick={event => this.handleGoogleButtonClick(event)} >
+            <Form className="py-2 px-3 signup-login-form" onSubmit={event => this.handleSubmit(event)}>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Control type="text" placeholder="First Name" name="first_name" value={this.state.first_name} onChange={event => this.handleChange(event)}/>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Control type="text" placeholder="Last Name" name="last_name" value={this.state.last_name} onChange={event => this.handleChange(event)}/>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Group>
+                    <Form.Control type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control type="password" placeholder=" Password" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control type="password" placeholder="Confirm Password" name="password_confirmation" value={this.state.password_confirmation} onChange={event => this.handleChange(event)}/>
+                </Form.Group>
+                <Form.Row>
+                    <Col>
+                        <Button block variant="primary" type="button" onClick={event => this.handleGoogleButtonClick(event)} >
                             <i className="fab fa-google"/>
                             <span className="d-none d-sm-none d-md-inline"> Sign up with Google</span>
-                        </button>
-                    </div>
-                    <div className="col-6">
-                        <button className="btn btn-block btn-success" type="submit">
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button block variant="success" type="submit">
                             <i className="fas fa-user-plus"/>
                             <span className="d-none d-sm-none d-md-inline"> Create Account</span>
-                        </button>
-                    </div>
-                </div>
+                        </Button>
+                    </Col>
+                </Form.Row>
                 <FormMessages loading={this.props.loading} errors={this.props.errors} />
-            </form>
+            </Form>
         )
     }
 }

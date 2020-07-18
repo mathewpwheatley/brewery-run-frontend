@@ -50,7 +50,7 @@ class NavigationBar extends Component {
                                         <span className="d-none d-sm-none d-md-inline"> Create Account</span>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu alignRight>
-                                        <Dropdown.Item><CreateAccountForm /></Dropdown.Item>
+                                        <CreateAccountForm />
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 <Dropdown as={Nav.Item}>
@@ -59,7 +59,7 @@ class NavigationBar extends Component {
                                         <span className="d-none d-sm-none d-md-inline"> Log In</span>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu alignRight>
-                                        <Dropdown.Item><LogInForm /></Dropdown.Item>
+                                        <LogInForm />
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Fragment>
@@ -73,31 +73,13 @@ class NavigationBar extends Component {
                                     <span className="d-none d-sm-none d-md-inline"> {this.props.user.userName}</span>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu alignRight>
-                                    <Dropdown.Header>
-                                        <i className="fas fa-star"/> Favorite
-                                    </Dropdown.Header>
-                                    <Dropdown.Item>
-                                        <NavLink className="nav-link" exact to="/favorite-breweries" title="Favorite Breweries">
-                                            <i className="fas fa-industry"/> Breweries
-                                        </NavLink>
-                                    </Dropdown.Item>
-                                    <Dropdown.Item>
-                                        <NavLink className="nav-link" exact to="/favorite-circuits" title="Favorite Circuits">
-                                            <i className="fas fa-route"/> Circuits
-                                        </NavLink>
-                                    </Dropdown.Item>
+                                    <Dropdown.Header><i className="fas fa-star"/> Favorite</Dropdown.Header>
+                                    <NavLink className="dropdown-item" exact to="/favorite-breweries" title="Favorite Breweries"><i className="fas fa-industry"/> Breweries</NavLink>
+                                    <NavLink className="dropdown-item" exact to="/favorite-circuits" title="Favorite Circuits"><i className="fas fa-route"/> Circuits</NavLink>
                                     <Dropdown.Divider />
-                                    <Dropdown.Item>
-                                        <NavLink className="nav-link" exact to="/account" title="Account">
-                                            <i className="fas fa-address-card"/> Account
-                                        </NavLink>
-                                    </Dropdown.Item>
+                                    <NavLink className="dropdown-item" exact to="/account" title="Account"><i className="fas fa-address-card"/> Account</NavLink>
                                     <Dropdown.Divider />
-                                    <Dropdown.Item>
-                                        <NavLink className="nav-link" exact to="/log-out" title="Log Out">
-                                            <i className="fas fa-sign-out-alt"/> Log Out
-                                        </NavLink>
-                                    </Dropdown.Item>
+                                    <NavLink className="dropdown-item" exact to="/log-out" title="Log Out"><i className="fas fa-sign-out-alt"/> Log Out</NavLink>
                                 </Dropdown.Menu>
                             </Dropdown>
                         }
