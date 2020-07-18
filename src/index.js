@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import App from './App.js'
 import rootReducer from './reducers/index.js'
 import * as serviceWorker from './serviceWorker'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 // Create redux store, the two window options connect to the redux chrome extension and the last is for asynchronous dispatch
 const composeEnhancers = composeWithDevTools({})
