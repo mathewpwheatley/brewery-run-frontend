@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
 import BreweriesTableRow from '../components/BreweriesTableRow.js'
 
 class BreweriesTable extends Component {
@@ -42,36 +44,36 @@ class BreweriesTable extends Component {
 
     render () {
         return (
-            <table className="table table-hover">
-                <thead className="thead-light ">
+            <Table className="text-center" hover size="sm">
+                <thead className="thead-light">
                     <tr>
-                        <th scope="col">
-                            Name <button className="btn btn-sm btn-light border-secondary" name="name" value={this.state.name} onClick={event => this.handleClick(event)} >
+                        <th>
+                            Name <Button size="sm" variant="outline-secondary" name="name" value={this.state.name} onClick={event => this.handleClick(event)} >
                                 <i className="fas fa-sort"/>
-                            </button>
+                            </Button>
                         </th>
-                        <th scope="col">
-                            Type <button className="btn btn-sm btn-light border-secondary" name="brewery_type" value={this.state.brewery_type} onClick={event => this.handleClick(event)} >
+                        <th>
+                            Type <Button size="sm" variant="outline-secondary" name="brewery_type" value={this.state.brewery_type} onClick={event => this.handleClick(event)} >
                                 <i className="fas fa-sort"/>
-                            </button>
+                            </Button>
                         </th>
-                        <th scope="col">
-                            Rating <button className="btn btn-sm btn-light border-secondary" name="rating" value={this.state.rating} onClick={event => this.handleClick(event)} >
+                        <th>
+                            Rating <Button size="sm" variant="outline-secondary" name="rating" value={this.state.rating} onClick={event => this.handleClick(event)} >
                                 <i className="fas fa-sort"/>
-                            </button>
+                            </Button>
                         </th>
-                        <th scope="col">
-                            Likes <button className="btn btn-sm btn-light border-secondary" name="likes_count" value={this.state.likes_count} onClick={event => this.handleClick(event)} >
+                        <th>
+                            Likes <Button size="sm" variant="outline-secondary" name="likes_count" value={this.state.likes_count} onClick={event => this.handleClick(event)} >
                                 <i className="fas fa-sort"/>
-                            </button>
+                            </Button>
                         </th>
-                        <th scope="col">
+                        <th>
                             Tags
                         </th>
-                        <th scope="col">
+                        <th>
                             Address
                         </th>
-                        <th scope="col">
+                        <th>
                             Website
                         </th>
                     </tr>
@@ -79,7 +81,7 @@ class BreweriesTable extends Component {
                 <tbody>
                     {this.mapBreweries(this.sortBreweries())}
                 </tbody>
-            </table>
+            </Table>
         )
     }
 }

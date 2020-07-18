@@ -1,23 +1,26 @@
 import React from 'react'
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Button from 'react-bootstrap/Button'
 
 const BreweriesGridCard = ({brewery}) => {
     const {name, brewery_type, rating, likes_count, tag_list, full_address, website_url} = brewery
     return (
-        <div className="col m-2">
-            <div className="card col m-1">
-                <div className="card-body">
-                    <h5 className="card-title">{name}</h5>
-                    <ul>
-                        <li className="card-text">Type: {brewery_type}</li>
-                        <li className="card-text">Rating: {rating}</li>
-                        <li className="card-text">Likes: {likes_count}</li>
-                        <li className="card-text">Tags: {tag_list}</li>
-                        <li className="card-text">Address: {full_address}</li>
-                    </ul>
-                    <a className="btn btn-light border-secondary" href={website_url} target="_blank" rel="noopener noreferrer" >Brewery Website</a>
-                </div>
-            </div>
-        </div>
+        <Card>
+            <Card.Body>
+                <Card.Title>{name}</Card.Title>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+                <ListGroup.Item>Type: {brewery_type}</ListGroup.Item>
+                <ListGroup.Item>Rating: {rating}</ListGroup.Item>
+                <ListGroup.Item>Likes: {likes_count}</ListGroup.Item>
+                <ListGroup.Item>Tags: {tag_list}</ListGroup.Item>
+                <ListGroup.Item>Address: {full_address}</ListGroup.Item>
+            </ListGroup>
+            <Card.Body>
+                <Button size="sm" variant="outline-secondary" href={website_url} target="_blank" rel="noopener noreferrer" >Brewery Website</Button>
+            </Card.Body>
+        </Card>
     )
 }
 

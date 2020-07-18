@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Form from 'react-bootstrap/Form'
 import BreweriesTable from './BreweriesTable.js'
 import BreweriesGrid from './BreweriesGrid.js'
 
@@ -41,32 +44,30 @@ class Breweries extends Component {
 
     render () {
         return (
-            <div className="continer my-3 mx-5 border border-secondary rounded-lg">
-                <nav className="navbar navbar-expand navbar-dark bg-primary shadow">
-                
-                    <div className="navbar-brand">
+            <div className="my-3 mx-5 border border-secondary rounded-lg">
+                <Navbar className="shadow" bg="primary" variant="dark">
+                    <Navbar.Brand>
                         <i className="fas fa-industry"/>
                         <span className="d-none d-sm-none d-md-inline"> Breweries in Seattle, WA</span>
-                    </div>
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
+                    </Navbar.Brand>
+                    <Nav className="mr-auto">
+                        <Nav.Item>
                             <NavLink className="nav-link" exact to="/breweries/table" title="Table View">
                                 <i className="fas fa-table"/>
                                 <span className="d-none d-sm-none d-md-inline"> Table View</span>
                             </NavLink>
-                        </li>
-                        <li className="nav-item">
+                        </Nav.Item>
+                        <Nav.Item>
                             <NavLink className="nav-link" exact to="/breweries/list" title="Grid View">
                                 <i className="fas fa-th"/>
                                 <span className="d-none d-sm-none d-md-inline"> Grid View</span>
                             </NavLink>
-                        </li>
-
-                    </ul>
-                    <form className="form-inline">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Brewery Name Search" aria-label="Search" name="filter" value={this.state.filter} onChange={event => this.handleChange(event)}/>
-                    </form>
-                </nav>
+                        </Nav.Item>
+                    </Nav>
+                    <Form inline>
+                        <Form.Control type="search" placeholder="Brewery Name Search" aria-label="Search" name="filter" value={this.state.filter} onChange={event => this.handleChange(event)}/>
+                    </Form>
+                </Navbar>
                 {/* I feel like there should be a route way to check this.... */}
                 {window.location.pathname === "/breweries/table" ? <BreweriesTable breweries={this.filteredBreweries()} /> : <BreweriesGrid breweries={this.filteredBreweries()} />}
             </div>

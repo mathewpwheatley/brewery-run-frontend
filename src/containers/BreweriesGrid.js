@@ -1,4 +1,5 @@
 import React from 'react'
+import CardColumns from 'react-bootstrap/CardColumns'
 import BreweriesGridCard from '../components/BreweriesGridCard.js'
 
 const BreweriesList = ({breweries}) => {
@@ -8,9 +9,9 @@ const BreweriesList = ({breweries}) => {
     } 
 
     return (
-        <div className="row row-cols-4">
+        <CardColumns className="p-4">
             {mapBreweries()}
-        </div>
+        </CardColumns>
     )
 }
 
