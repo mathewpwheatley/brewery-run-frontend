@@ -5,7 +5,7 @@ const FormMessages = ({loading, errors}) => {
         <Fragment>
             {/* Conditionally render via && operator acting as if statement */}
             {loading &&
-                <div className="text-center mt-3" role="error" >
+                <div className="text-center mt-3" >
                     <span className="spinner-border spinner-border-sm text-primary"/>
                     <span className="d-none d-sm-none d-md-inline"> Loading</span>
                 </div>

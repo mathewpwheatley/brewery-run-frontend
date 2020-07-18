@@ -1,9 +1,10 @@
-import React from 'react';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
-import NavigationBar from './components/NavigationBar.js';
-import Breweries from './containers/Breweries.js';
-import Circuits from './containers/Circuits.js';
-import TestFetch from './containers/TestFetch.js';
+import React from 'react'
+import { BrowserRouter as Router, Route} from 'react-router-dom'
+import NavigationBar from './components/NavigationBar.js'
+import Breweries from './containers/Breweries.js'
+import Circuits from './containers/Circuits.js'
+import TestFetch from './containers/TestFetch.js'
+import LogOutForm from './components/LogOutForm.js'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route exact path="/test-fetch" component={TestFetch} />
       {/* <Route exact path="/log-in" component={Login} /> */}
       {/* <Route exact path="/create-account" component={CreateAccount} /> */}
+      <Route exact path="/log-out" component={LogOutForm} />
     </Router>
   );
 }

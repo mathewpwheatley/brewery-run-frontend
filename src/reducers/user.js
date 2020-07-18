@@ -9,7 +9,7 @@ export default (state = {loading: false, errors: []}, action) => {
             return {...state, loading: false, errors: action.errors}
 
         case 'LOG_IN':
-            return {...state, loading: false, userID: action.userId, userName: action.userName}
+            return {...state, loading: false, errors: [], userID: action.userId, userName: action.userName}
 
         case 'LOG_OUT':
             const newState = {...state}

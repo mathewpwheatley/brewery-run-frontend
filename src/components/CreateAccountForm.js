@@ -27,7 +27,6 @@ class CreateAccountForm extends Component {
     handleSubmit = event => {
         event.preventDefault()
         this.props.createUser(this.state)
-        // Fetch request create user
     }
 
     render() {
@@ -52,7 +51,7 @@ class CreateAccountForm extends Component {
                 </div>
                 <div className="form-row">
                     <div className="col-6">
-                        <button className="btn btn-block btn-primary" type="button">
+                        <button className="btn btn-block btn-primary" type="button" onClick={event => this.handleGoogleButtonClick(event)} >
                             <i className="fab fa-google"/>
                             <span className="d-none d-sm-none d-md-inline"> Sign up with Google</span>
                         </button>

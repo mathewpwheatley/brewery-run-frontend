@@ -13,6 +13,7 @@ const postFetch = (user, endPoint) => {
             },
             body: JSON.stringify({user: user})
         }
+        // Note: The backend is setup to send a signed httponly cookie with a jwt token on this fetch
         fetch(endPoint, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
@@ -39,6 +40,7 @@ export const logInUser = user => {
 }
 
 export const logOutUser = () => {
+    // Delete cookie from key
     return {
         type: 'LOG_OUT'
     }
