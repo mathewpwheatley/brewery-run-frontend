@@ -1,12 +1,44 @@
-export const logIn = user => {
-    return {
-        type: 'LOG_IN',
-        userId: user.id,
-        userName: user.full_name
+const logInURL = "http://localhost:3001/log-in"
+const usersURL = "http://localhost:3001/users"
+
+const postFetch = (user, endPoint) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({user: user})
+        }
+        fetch(endPoint, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({
+                    type: 'LOG_IN',
+                    userId: json.id,
+                    userName: json.full_name
+                })
+            }
+        })
     }
 }
 
-export const logOut = () => {
+export const createUser = user => {
+    return postFetch(user, usersURL)
+}
+
+export const logInUser = user => {
+    return postFetch(user, logInURL)
+}
+
+export const logOutUser = () => {
     return {
         type: 'LOG_OUT'
     }

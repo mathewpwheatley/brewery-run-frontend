@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {logIn} from '../actions/user.js'
-import FormErrors from './FormErrors.js';
+import {logInUser} from '../actions/user.js'
+import FormMessages from './FormMessages.js';
 
 class LogInForm extends Component {
     state = {
         email: "",
         password: "",
-        errors: []
     }
 
     handleChange = event => {
@@ -28,26 +27,7 @@ class LogInForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        // Fetch request to login user
-        const body = {...this.state}
-        delete body.errors
-        const options = {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({user: body})
-        }
-        fetch(this.props.logInURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                this.setState({errors: json.errors})
-            } else {
-                // Set redux store state to let frontend know a user is logged in
-                this.props.logIn(json)
-            }
-        })
+        this.props.logInUser(this.state)
     }
 
     render () {
@@ -81,7 +61,7 @@ class LogInForm extends Component {
                         </button>
                     </div>
                 </div>
-                <FormErrors errors={this.state.errors}/>
+                <FormMessages loading={this.props.loading} errors={this.props.errors} />
             </form>
         )
     }
@@ -89,13 +69,14 @@ class LogInForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        logInURL: state.endPoints.logInURL
+        loading: state.user.loading,
+        errors: state.user.errors
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        logIn: (user) => {dispatch(logIn(user))}
+        logInUser: (user) => {dispatch(logInUser(user))}
     }
 }
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
-import {logIn} from '../actions/user.js'
-import FormErrors from './FormErrors.js';
+import {createUser} from '../actions/user.js'
+import FormMessages from './FormMessages.js';
 
 class CreateAccountForm extends Component {
 
@@ -11,7 +11,6 @@ class CreateAccountForm extends Component {
         email: "",
         password: "",
         password_confirmation: "",
-        errors: []
     }
 
     handleChange = event => {
@@ -27,26 +26,8 @@ class CreateAccountForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
+        this.props.createUser(this.state)
         // Fetch request create user
-        const body = {...this.state}
-        delete body.errors
-        const options = {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({user: body})
-        }
-        fetch(this.props.usersURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                this.setState({errors: json.errors})
-            } else {
-                // Set redux store state to let frontend know a user is logged in
-                this.props.logIn(json)
-            }
-        })
     }
 
     render() {
@@ -83,7 +64,7 @@ class CreateAccountForm extends Component {
                         </button>
                     </div>
                 </div>
-                <FormErrors errors={this.state.errors}/>
+                <FormMessages loading={this.props.loading} errors={this.props.errors} />
             </form>
         )
     }
@@ -91,13 +72,14 @@ class CreateAccountForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        usersURL: state.endPoints.usersURL,
+        loading: state.user.loading,
+        errors: state.user.errors
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        logIn: (user) => {dispatch(logIn(user))}
+        createUser: (user) => {dispatch(createUser(user))}
     }
 }
 
