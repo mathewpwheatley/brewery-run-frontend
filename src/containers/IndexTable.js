@@ -1,20 +1,19 @@
 import React, {Component} from 'react'
 import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
 import IndexTableRow from '../components/IndexTableRow.js'
 
 class IndexTable extends Component {
 
     mapHeadings = () => {
-        return this.props.headings.map((heading, index) => {
+        return this.props.dataDisplayNames.map((dataDisplayName, index) => {
             return (
-                <th key={index} >{heading}</th>
+                <th key={index} >{dataDisplayName}</th>
             )
         })
     }
 
     mapData = () => {
-        return this.props.data.map(datum => <IndexTableRow key={datum.id} datum={datum} columns={this.props.columns} />)
+        return this.props.data.map(datum => <IndexTableRow key={datum.id} datum={datum} dataKeys={this.props.dataKeys} />)
     }
 
     // handleClick = event => {

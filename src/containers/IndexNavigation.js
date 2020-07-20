@@ -9,6 +9,7 @@ import {getAllBreweries} from '../actions/brewery.js'
 import {getAllCircuits} from '../actions/circuit.js'
 import FormMessage from '../components/FormMessage.js'
 import IndexTable from './IndexTable.js'
+import IndexGrid from './IndexGrid.js'
 
 class IndexNavigation extends Component {
 
@@ -17,8 +18,8 @@ class IndexNavigation extends Component {
         keywordKey: '',
         icon: '',
         data: [],
-        tableHeadings: [], // The strings that will be displayed as table headings
-        tableDataColumns: [] // The object keys that will be used to pull the data, must match the order of tableHeadings
+        dataDisplayNames: [], // The strings that will be displayed as data headings
+        dataKeys: [] // The object keys that will be used to pull the data, must match the order of dataDisplayNames
     }
 
     fetchData = async () => {
@@ -47,8 +48,8 @@ class IndexNavigation extends Component {
                     keywordKey: 'name',
                     icon: <i className="fas fa-industry"/>,
                     data: this.props.breweries,
-                    tableHeadings: ['Name', 'Type', 'Rating', 'Likes', 'Tags', 'Address', 'Website'],
-                    tableDataColumns: ['name', 'brewery_type', 'rating', 'likes_count', 'tag_list', 'full_address', 'website_url']
+                    dataDisplayNames: ['Name', 'Type', 'Rating', 'Likes', 'Tags', 'Address', 'Website'],
+                    dataKeys: ['name', 'brewery_type', 'rating', 'likes_count', 'tag_list', 'full_address', 'website_url']
                 })
                 break 
             case "circuits":
@@ -56,8 +57,8 @@ class IndexNavigation extends Component {
                     keywordKey: 'title',
                     icon: <i className="fas fa-route"/>,
                     data: this.props.circuits,
-                    tableHeadings: ['Title', 'Rating', 'Likes', 'Favorites', 'Reviews'],
-                    tableDataColumns: ['title', 'rating', 'likes_count', 'favorites_count', 'reviews_count']
+                    dataDisplayNames: ['Title', 'Rating', 'Likes', 'Favorites', 'Reviews'],
+                    dataKeys: ['title', 'rating', 'likes_count', 'favorites_count', 'reviews_count']
                 })
                 break 
             case "runners":
@@ -65,8 +66,8 @@ class IndexNavigation extends Component {
                     keywordKey: 'full_name',
                     icon: <i className="fas fa-running"/>,
                     data: this.props.users,
-                    tableHeadings: ['Name', 'Circuits', 'Followers'],
-                    tableDataColumns: ['full_name', 'public_circuits_count', 'followers_count']
+                    dataDisplayNames: ['Name', 'Circuits', 'Followers'],
+                    dataKeys: ['full_name', 'public_circuits_count', 'followers_count']
                 })
                 break 
             default:
@@ -124,7 +125,8 @@ class IndexNavigation extends Component {
                     </Form>
                 </Navbar>
                 <FormMessage />
-                <IndexTable data={this.filterDataByName()} headings={this.state.tableHeadings} columns={this.state.tableDataColumns}/>
+                <IndexGrid data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>
+                <IndexTable data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>
             </div>
         )
     }
