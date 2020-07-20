@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {logInUser} from '../actions/user.js'
-import FormMessages from './FormMessages.js'
+import FormMessage from './FormMessage.js'
 
 class LogInForm extends Component {
     state = {
@@ -64,16 +64,9 @@ class LogInForm extends Component {
                         </Button>
                     </Col>
                 </Form.Row>
-                <FormMessages loading={this.props.loading} errors={this.props.errors} />
+                <FormMessage />
             </Form>
         )
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        loading: state.user.loading,
-        errors: state.user.errors
     }
 }
 
@@ -83,4 +76,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogInForm)
+export default connect(null, mapDispatchToProps)(LogInForm)

@@ -13,8 +13,9 @@ export const getAllBreweries = () => {
                     errors: json.errors
                 })
             } else {
+                dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'ALL',
+                    type: 'ALL_BREWERIES',
                     breweries: json
                 })
             }
@@ -24,6 +25,6 @@ export const getAllBreweries = () => {
 
 export const clearAllBreweries = () => {
     return (dispatch) => {
-        dispatch({type: 'CLEAR_ALL'})
+        dispatch({type: 'CLEAR_ALL_BREWERIES'})
     }
 }

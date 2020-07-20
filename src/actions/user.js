@@ -13,8 +13,9 @@ export const getAllUsers = () => {
                     errors: json.errors
                 })
             } else {
+                dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'ALL',
+                    type: 'ALL_USERS',
                     users: json
                 })
             }
@@ -24,7 +25,7 @@ export const getAllUsers = () => {
 
 export const clearAllUsers = () => {
     return (dispatch) => {
-        dispatch({type: 'CLEAR_ALL'})
+        dispatch({type: 'CLEAR_ALL_USERS'})
     }
 }
 
@@ -38,6 +39,7 @@ export const getUser = (userId) => {
                     errors: json.errors
                 })
             } else {
+                dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'GET',
                     user: json
@@ -63,6 +65,7 @@ const postFetch = (user, endPoint) => {
                     errors: json.errors
                 })
             } else {
+                dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'LOG_IN',
                     userId: json.id,
@@ -107,6 +110,7 @@ export const updateUser = (userId, user) => {
                     errors: json.errors
                 })
             } else {
+                dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'UPDATE',
                     user: json
@@ -129,6 +133,7 @@ export const deleteUser = (userId) => {
                     errors: json.errors
                 })
             } else {
+                dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'DELETE'
                 })

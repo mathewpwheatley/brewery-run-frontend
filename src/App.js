@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import NavigationBar from './components/NavigationBar.js'
-import IndexNavigation from './components/IndexNavigation.js'
+import IndexNavigation from './containers/IndexNavigation.js'
 import CreateAccountForm from './components/CreateAccountForm.js'
 import LogInForm from './components/LogInForm'
 import LogOutForm from './components/LogOutForm.js'
@@ -15,11 +15,9 @@ function App() {
       <Route path="/runners" component={() => <IndexNavigation variant='runners'/>} />
       <Route path="/create-account" component={CreateAccountForm} />
       <Route path="/log-in" component={LogInForm} />
-      {/* <Route exact path="/log-in" component={Login} /> */}
-      {/* <Route exact path="/create-account" component={CreateAccount} /> */}
       <Route exact path="/log-out" component={LogOutForm} />
     </Router>
-  );
+  )
 }
 
 export default App;

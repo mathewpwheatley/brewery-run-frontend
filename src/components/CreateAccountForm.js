@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {createUser} from '../actions/user.js'
-import FormMessages from './FormMessages.js'
+import FormMessage from './FormMessage.js'
 
 class CreateAccountForm extends Component {
 
@@ -66,7 +66,7 @@ class CreateAccountForm extends Component {
                         </Button>
                     </Col>
                 </Form.Row>
-                <FormMessages loading={this.props.loading} errors={this.props.errors} />
+                <FormMessage />
             </Form>
         )
     }

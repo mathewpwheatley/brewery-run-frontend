@@ -45,6 +45,7 @@ class BreweriesTable extends Component {
     render () {
         return (
             <Table className="text-center" hover size="sm">
+                {console.log(this.props.breweries)}
                 <thead className="thead-light">
                     <tr>
                         <th>
@@ -80,6 +81,7 @@ class BreweriesTable extends Component {
                 </thead>
                 <tbody>
                     {this.mapBreweries(this.sortBreweries())}
+                    {/* {this.mapBreweries(this.sortBreweries())} */}
                 </tbody>
             </Table>
         )

@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react'
+import {connect} from 'react-redux'
 
-const FormMessages = ({loading, errors}) => {
+const FormMessage = ({loading, errors}) => {
     return (
         <Fragment >
             {/* Conditionally render via && operator acting as if statement */}
@@ -22,4 +23,11 @@ const FormMessages = ({loading, errors}) => {
     )
 }
 
-export default FormMessages
+const mapStateToProps = state => {
+    return {
+        loading: state.fetchMessage.loading,
+        errors: state.fetchMessage.errors
+    }
+}
+
+export default connect(mapStateToProps)(FormMessage)

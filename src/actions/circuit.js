@@ -13,8 +13,9 @@ export const getAllCircuits = () => {
                     errors: json.errors
                 })
             } else {
+                dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'ALL',
+                    type: 'ALL_CIRCUITS',
                     circuits: json
                 })
             }
@@ -24,6 +25,6 @@ export const getAllCircuits = () => {
 
 export const clearAllCircuits = () => {
     return (dispatch) => {
-        dispatch({type: 'CLEAR_ALL'})
+        dispatch({type: 'CLEAR_ALL_CIRCUITS'})
     }
 }
