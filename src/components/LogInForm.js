@@ -9,7 +9,7 @@ import FormMessages from './FormMessages.js'
 class LogInForm extends Component {
     state = {
         email: "",
-        password: "",
+        password: ""
     }
 
     handleChange = event => {

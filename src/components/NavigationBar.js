@@ -32,6 +32,12 @@ class NavigationBar extends Component {
                                 <span className="d-none d-sm-none d-md-inline"> Circuits</span>
                             </NavLink>
                         </Nav.Item>
+                        <Nav.Item>
+                            <NavLink className="nav-link" to="/runners" title="Runners">
+                                <i className="fas fa-running"/>
+                                <span className="d-none d-sm-none d-md-inline"> Runners</span>
+                            </NavLink>
+                        </Nav.Item>
                     </Nav>
 
                     <Nav className="ml-md-auto">

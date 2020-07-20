@@ -14,13 +14,19 @@ export const getAllUsers = () => {
                 })
             } else {
                 dispatch({
-                    type: 'ALL_USERS',
-                    user: json
+                    type: 'ALL',
+                    users: json
                 })
             }
         })
     } 
 } 
+
+export const clearAllUsers = () => {
+    return (dispatch) => {
+        dispatch({type: 'CLEAR_ALL'})
+    }
+}
 
 export const getUser = (userId) => {
     return (dispatch) => {

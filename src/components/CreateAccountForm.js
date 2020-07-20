@@ -13,7 +13,7 @@ class CreateAccountForm extends Component {
         last_name: "",
         email: "",
         password: "",
-        password_confirmation: "",
+        password_confirmation: ""
     }
 
     handleChange = event => {

@@ -1,4 +1,6 @@
 export default (state = {loading: false, errors: []}, action) => {
+
+    let newState
     
     switch (action.type) {
 
@@ -12,11 +14,19 @@ export default (state = {loading: false, errors: []}, action) => {
             return {...state, loading: false, errors: [], userID: action.userId, userName: action.userName}
 
         case 'LOG_OUT':
-            const newState = {...state}
+            newState = {...state, loading: false, errors: []}
             delete newState.userId
             delete newState.userName
             return newState
         
+        case 'ALL':
+            return {...state, loading: false, errors: [], users: action.users}
+
+        case 'CLEAR_ALL':
+            newState = {...state, loading: false, errors: []}
+            delete newState.users
+            return newState
+
         default:
             return state
     }
