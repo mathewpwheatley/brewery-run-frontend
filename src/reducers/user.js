@@ -1,17 +1,12 @@
-export default (state = {all: []}, action) => {
-
-    let newState
+export default (state = {id: '', name: '', all: []}, action) => {
     
     switch (action.type) {
 
         case 'LOG_IN':
-            return {...state, userID: action.userId, userName: action.userName}
+            return {...state, id: action.id, name: action.name}
 
         case 'LOG_OUT':
-            newState = {...state}
-            delete newState.userId
-            delete newState.userName
-            return newState
+            return {...state, id: '', name: ''}
         
         case 'ALL_USERS':
             return {...state, all: action.users}

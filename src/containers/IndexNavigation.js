@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
@@ -100,7 +101,7 @@ class IndexNavigation extends Component {
 
     render () {
         return (
-            <div className="my-3 mx-5 border border-secondary rounded-lg">
+            <Container className="col-11 mt-4 px-0 border border-secondary rounded-lg">
                 <Navbar className="shadow" bg="primary" variant="dark">
                     <Navbar.Brand>
                         {this.state.icon}
@@ -127,7 +128,7 @@ class IndexNavigation extends Component {
                 <FormMessage />
                 <IndexGrid data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>
                 <IndexTable data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>
-            </div>
+            </Container>
         )
     }
 }

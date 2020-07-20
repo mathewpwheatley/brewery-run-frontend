@@ -4,8 +4,7 @@ import {NavLink} from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Dropdown from 'react-bootstrap/Dropdown'
-import CreateAccountForm from './CreateAccountForm.js'
-import LogInForm from './LogInForm.js'
+import {logOutUser} from '../actions/user.js'
 
 class NavigationBar extends Component {
     render () {
@@ -42,35 +41,29 @@ class NavigationBar extends Component {
 
                     <Nav className="ml-md-auto">
                         {/* Conditionally render via && operator acting as if statement */}
-                        {!this.props.user.userID &&
+                        {!this.props.userName &&
                             <Fragment>
-                                <Dropdown as={Nav.Item}>
-                                    <Dropdown.Toggle as={Nav.Link}>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to="/create-account" title="Create Account">
                                         <i className="fas fa-user-plus"/>
                                         <span className="d-none d-sm-none d-md-inline"> Create Account</span>
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu alignRight>
-                                        <CreateAccountForm />
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                                <Dropdown as={Nav.Item}>
-                                    <Dropdown.Toggle as={Nav.Link}>
+                                    </NavLink>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to="/log-in" title="Log In">
                                         <i className="fas fa-sign-in-alt"/>
                                         <span className="d-none d-sm-none d-md-inline"> Log In</span>
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu alignRight>
-                                        <LogInForm />
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                    </NavLink>
+                                </Nav.Item>
                             </Fragment>
                         }
 
                         {/* Conditionally render via && operator acting as if statement */}
-                        {this.props.user.userID &&
+                        {this.props.userName &&
                             <Dropdown as={Nav.Item}>
                                 <Dropdown.Toggle as={Nav.Link}>
                                     <i className="fas fa-running"/>
-                                    <span className="d-none d-sm-none d-md-inline"> {this.props.user.userName}</span>
+                                    <span className="d-none d-sm-none d-md-inline"> {this.props.userName}</span>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu alignRight>
                                     <Dropdown.Header><i className="fas fa-star"/> Favorite</Dropdown.Header>
@@ -79,7 +72,7 @@ class NavigationBar extends Component {
                                     <Dropdown.Divider />
                                     <NavLink className="dropdown-item" exact to="/account" title="Account"><i className="fas fa-address-card"/> Account</NavLink>
                                     <Dropdown.Divider />
-                                    <NavLink className="dropdown-item" exact to="/log-out" title="Log Out"><i className="fas fa-sign-out-alt"/> Log Out</NavLink>
+                                    <Dropdown.Item title="Log Out" onClick={() => this.props.logOutUser()}><i className="fas fa-sign-out-alt"/> Log Out</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         }
@@ -92,8 +85,14 @@ class NavigationBar extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        userName: state.user.name
     }
 }
 
-export default connect(mapStateToProps)(NavigationBar)
+const mapDispatchToProps = dispatch => {
+    return {
+        logOutUser: () => {dispatch(logOutUser())}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar)

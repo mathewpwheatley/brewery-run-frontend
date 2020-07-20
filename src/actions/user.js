@@ -68,8 +68,8 @@ const postFetch = (user, endPoint) => {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'LOG_IN',
-                    userId: json.id,
-                    userName: json.full_name
+                    id: json.id,
+                    name: json.full_name
                 })
             }
         })
@@ -84,15 +84,13 @@ export const logInUser = user => {
     return postFetch(user, logInURL)
 }
 
-// STILL WORKINNG ON LOG OUT USER!!!
 export const logOutUser = () => {
     return (dispatch) => {
-        dispatch({type: 'LOADING'})
+        // dispatch({type: 'LOADING'})
+        // dispatch({type: 'CLEAR_ERRORS'})
+        dispatch({type: 'LOG_OUT'})
     }
-    //
-    return {
-        type: 'LOG_OUT'
-    }
+    // send somethingt to the server to delete cookie
 }
 
 export const updateUser = (userId, user) => {
@@ -134,9 +132,7 @@ export const deleteUser = (userId) => {
                 })
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
-                dispatch({
-                    type: 'DELETE'
-                })
+                dispatch({type: 'DELETE'})
             }
         })
     }

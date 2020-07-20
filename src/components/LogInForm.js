@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -33,40 +35,55 @@ class LogInForm extends Component {
         this.props.logInUser(this.state)
     }
 
+    handleRedirect = () => {
+        if (this.props.id) {
+            return <Redirect to='/' />
+        }
+    }
+
     render () {
         return (
-            <Form className="py-2 px-3 signup-login-form" onSubmit={event => this.handleSubmit(event)}>
-                <Form.Group>
-                    <Form.Control type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
-                </Form.Group>
-                <Form.Row>
-                    <Form.Group as={Col} md="8"> 
-                        <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
+            <Container className='col-4 my-5 py-0 border border-secondary rounded-lg'>
+                <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
+                    <Form.Group>
+                        <Form.Control type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
                     </Form.Group>
-                    <Form.Group as={Col} md="4"> 
-                        <Button block variant="primary" type="button" onClick={event => this.handleForgotButtonClick(event)}>
-                            <i className="far fa-question-circle"/>
-                            <span className="d-none d-sm-none d-md-inline"> Forgot</span>
-                        </Button>
-                    </Form.Group>
-                </Form.Row>
-                <Form.Row className="justify-content-center">
-                    <Col>
-                        <Button block variant="primary" type="button" onClick={event => this.handleGoogleButtonClick(event)}>
-                            <i className="fab fa-google"/>
-                            <span className="d-none d-sm-none d-md-inline"> Login with Google</span>
-                        </Button>
-                    </Col>
-                    <Col>
-                        <Button block variant="success" type="submit">
-                            <i className="fas fa-sign-in-alt"/>
-                            <span className="d-none d-sm-none d-md-inline"> Login to Beer Run</span>
-                        </Button>
-                    </Col>
-                </Form.Row>
-                <FormMessage />
-            </Form>
+                    <Form.Row>
+                        <Form.Group as={Col} md="8"> 
+                            <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
+                        </Form.Group>
+                        <Form.Group as={Col} md="4"> 
+                            <Button block variant="primary" type="button" onClick={event => this.handleForgotButtonClick(event)}>
+                                <i className="far fa-question-circle"/>
+                                <span className="d-none d-sm-none d-md-inline"> Forgot</span>
+                            </Button>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row className="justify-content-center">
+                        <Col>
+                            <Button block variant="primary" type="button" onClick={event => this.handleGoogleButtonClick(event)}>
+                                <i className="fab fa-google"/>
+                                <span className="d-none d-sm-none d-md-inline"> Login with Google</span>
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button block variant="success" type="submit">
+                                <i className="fas fa-sign-in-alt"/>
+                                <span className="d-none d-sm-none d-md-inline"> Login to Beer Run</span>
+                            </Button>
+                        </Col>
+                    </Form.Row>
+                    <FormMessage />
+                </Form>
+                {this.handleRedirect()}
+            </Container>
         )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        id: state.user.id
     }
 }
 
@@ -76,4 +93,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(LogInForm)
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm)
