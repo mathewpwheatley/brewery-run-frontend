@@ -7,7 +7,7 @@ const endPoints = {
     breweriesURL: baseURL + "/breweries",
     circuitsURL: baseURL + "/circuits",
     standardOptions: {
-        credentials: 'same-origin',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'

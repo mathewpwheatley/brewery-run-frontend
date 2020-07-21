@@ -66,7 +66,7 @@ class IndexNavigation extends Component {
                 this.setState({
                     keywordKey: 'full_name',
                     icon: <i className="fas fa-running"/>,
-                    data: this.props.users,
+                    data: this.props.runners,
                     dataDisplayNames: ['Name', 'Circuits', 'Followers'],
                     dataKeys: ['full_name', 'public_circuits_count', 'followers_count']
                 })
@@ -135,7 +135,7 @@ class IndexNavigation extends Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.user.all,
+        runners: state.runner.all,
         breweries: state.brewery.all,
         circuits: state.circuit.all
     }
