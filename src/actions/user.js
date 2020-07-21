@@ -9,10 +9,11 @@ export const getUser = (userId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
+            method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Credentials': 'include'
+                'Accept': 'application/json'
             }
         }
         fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
@@ -42,7 +43,8 @@ export const getAllUsers = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            credentials: 'same-origin',
+            method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -76,14 +78,13 @@ const postFetch = (user, endPoint) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Credentials': 'include'
+                'Accept': 'application/json'
             },
             body: JSON.stringify({user: user})
         }
-        // Note: The backend is setup to send a signed httponly cookie with a jwt token on this fetch
         fetch(endPoint, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
@@ -112,11 +113,23 @@ export const logInUser = user => {
 
 export const logOutUser = () => {
     return (dispatch) => {
-        // dispatch({type: 'LOADING'})
-        // dispatch({type: 'CLEAR_ERRORS'})
-        dispatch({type: 'LOG_OUT'})
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'DELETE',
+            credentials: 'include'
+        }
+        fetch(logOutURL, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'LOG_OUT'})
+            }
+        })
     }
-    // send somethingt to the server to delete cookie
 }
 
 export const updateUser = (userId, user) => {
@@ -124,6 +137,7 @@ export const updateUser = (userId, user) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'PATCH',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -152,7 +166,8 @@ export const deleteUser = (userId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'DELETE'
+            method: 'DELETE',
+            credentials: 'include'
         }
         fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {

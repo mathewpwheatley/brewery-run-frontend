@@ -1,13 +1,13 @@
 import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
-import Welcome from '../components/Welcome.js'
-import DashBoard from './DashBoard.js'
+import {Redirect} from 'react-router-dom'
+
 
 const Home = ({userId}) => {
 
     return (
         <Fragment>
-            {userId ? <DashBoard/> : <Welcome/>}
+            {userId ? <Redirect to="/dashboard"/> : <Redirect to="/welcome"/>}
         </Fragment>
     )
 }
