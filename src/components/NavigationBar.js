@@ -59,6 +59,15 @@ class NavigationBar extends Component {
                         }
 
                         {/* Conditionally render via && operator acting as if statement */}
+                        {this.props.notificationsCount > 0 &&
+                            <Nav.Item>
+                                <NavLink className="nav-link" to="/notifications" title="Notifications">
+                                    <i className="fas fa-bell"/>
+                                </NavLink>
+                            </Nav.Item>
+                        }
+
+                        {/* Conditionally render via && operator acting as if statement */}
                         {this.props.userName &&
                             <Dropdown as={Nav.Item}>
                                 <Dropdown.Toggle as={Nav.Link}>
@@ -70,6 +79,7 @@ class NavigationBar extends Component {
                                     <NavLink className="dropdown-item" exact to="/favorite-breweries" title="Favorite Breweries"><i className="fas fa-industry"/> Breweries</NavLink>
                                     <NavLink className="dropdown-item" exact to="/favorite-circuits" title="Favorite Circuits"><i className="fas fa-route"/> Circuits</NavLink>
                                     <Dropdown.Divider />
+                                    <NavLink className="dropdown-item" exact to="/notifications" title="Notifications"><i className="fas fa-bell"/> Notifications ({this.props.notificationsCount})</NavLink>
                                     <NavLink className="dropdown-item" exact to="/account" title="Account"><i className="fas fa-address-card"/> Account</NavLink>
                                     <Dropdown.Divider />
                                     <Dropdown.Item title="Log Out" onClick={() => this.props.logOutUser()}><i className="fas fa-sign-out-alt"/> Log Out</Dropdown.Item>
@@ -85,7 +95,8 @@ class NavigationBar extends Component {
 
 const mapStateToProps = state => {
     return {
-        userName: state.user.name
+        userName: state.user.name,
+        notificationsCount: state.notification.count
     }
 }
 

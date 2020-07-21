@@ -96,7 +96,8 @@ const postFetch = (user, endPoint) => {
                 dispatch({
                     type: 'LOG_IN',
                     id: json.id,
-                    name: json.full_name
+                    name: json.full_name,
+                    notifications_count: json.notifications_count
                 })
             }
         })
