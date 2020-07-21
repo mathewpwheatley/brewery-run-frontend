@@ -1,4 +1,4 @@
-export default (state = {all: [], user: {}}, action) => {
+export default (state = {user: {}, all: []}, action) => {
     
     switch (action.type) {
 

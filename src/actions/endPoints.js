@@ -5,14 +5,7 @@ const endPoints = {
     logOutURL: baseURL + "/log-out",
     usersURL: baseURL + "/users",
     breweriesURL: baseURL + "/breweries",
-    circuitsURL: baseURL + "/circuits",
-    standardOptions: {
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
-    }
+    circuitsURL: baseURL + "/circuits"
 }
 
 export default endPoints

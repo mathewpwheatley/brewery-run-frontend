@@ -1,12 +1,19 @@
 import endPoints from './endPoints.js'
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
-const {circuitsURL, standardOptions} = endPoints
+const {circuitsURL} = endPoints
 
 export const getAllCircuits = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
-        fetch(circuitsURL, standardOptions).then(resp => resp.json()).then(json => {
+        const options = {
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }
+        fetch(circuitsURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'ERRORS',

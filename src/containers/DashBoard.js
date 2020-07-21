@@ -3,20 +3,21 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
-import {getRunner} from '../actions/runner.js'
+import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 
 
 class DashBoard extends Component {
 
     componentDidMount() {
-        this.props.getRunner(this.props.userId)
+        this.props.getUser(this.props.userId)
     }
 
     render () {
         return (
             <Container className="col-11 mt-4 border border-secondary rounded-lg">
                 <FetchMessage/>
+                {this.props.user.name}
                 <h3>Suggested Circuits:</h3>
                 <h3>Favorite Circuits:</h3>
                 <h3>Favorite Breweries:</h3>
@@ -38,7 +39,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getRunner: (id) => {dispatch(getRunner(id))}
+        getUser: (id) => {dispatch(getUser(id))}
     }
 }
 

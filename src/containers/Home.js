@@ -7,8 +7,7 @@ const Home = ({userId}) => {
 
     return (
         <Fragment>
-            {/* {userId ? <DashBoard/> :<Welcome/>} */}
-            <DashBoard/>
+            {userId ? <DashBoard/> : <Welcome/>}
         </Fragment>
     )
 }

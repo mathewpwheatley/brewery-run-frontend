@@ -5,9 +5,9 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
-import {getAllRunners} from '../actions/runner.js'
 import {getAllBreweries} from '../actions/brewery.js'
 import {getAllCircuits} from '../actions/circuit.js'
+import {getAllUsers} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import IndexTable from './IndexTable.js'
 import IndexGrid from './IndexGrid.js'
@@ -32,7 +32,7 @@ class IndexNavigation extends Component {
                 this.props.getAllCircuits()
                 break
             case "runners":
-                this.props.getAllRunners()
+                this.props.getAllUsers()
                 break
             default:
                 break
@@ -66,7 +66,7 @@ class IndexNavigation extends Component {
                 this.setState({
                     keywordKey: 'full_name',
                     icon: <i className="fas fa-running"/>,
-                    data: this.props.runners,
+                    data: this.props.users,
                     dataDisplayNames: ['Name', 'Circuits', 'Followers'],
                     dataKeys: ['full_name', 'public_circuits_count', 'followers_count']
                 })
@@ -135,17 +135,17 @@ class IndexNavigation extends Component {
 
 const mapStateToProps = state => {
     return {
-        runners: state.runner.all,
         breweries: state.brewery.all,
-        circuits: state.circuit.all
+        circuits: state.circuit.all,
+        user: state.user.all
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllRunners: () => {dispatch(getAllRunners())},
         getAllBreweries: () => {dispatch(getAllBreweries())},
-        getAllCircuits: () => {dispatch(getAllCircuits())}
+        getAllCircuits: () => {dispatch(getAllCircuits())},
+        getAllUsers: () => {dispatch(getAllUsers())}
     }
 }
 
