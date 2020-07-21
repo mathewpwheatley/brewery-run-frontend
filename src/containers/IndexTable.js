@@ -13,7 +13,7 @@ class IndexTable extends Component {
     }
 
     mapData = () => {
-        return this.props.data.map(datum => <IndexTableRow key={datum.id} datum={datum} dataKeys={this.props.dataKeys} />)
+        return this.props.data.map(datum => <IndexTableRow key={datum.id} basePath={this.props.basePath} datum={datum} dataKeys={this.props.dataKeys} />)
     }
 
     // handleClick = event => {
@@ -36,6 +36,7 @@ class IndexTable extends Component {
                 <thead className="thead-light">
                     <tr>
                         {this.mapHeadings()}
+                        <th>Link</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -7,23 +7,19 @@ import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 
 
-class DashBoard extends Component {
+class User extends Component {
 
     componentDidMount() {
-        this.props.getUser(this.props.userId)
+        this.props.getUser(this.props.id)
     }
 
     render () {
+        const user = this.props.user
         return (
             <Container className="col-11 mt-4 border border-secondary rounded-lg">
                 <FetchMessage/>
-                {this.props.user.full_name}
-                <h3>Suggested Circuits:</h3>
-                <h3>Favorite Circuits:</h3>
-                <h3>Favorite Breweries:</h3>
-                <h3>States: (followers, followeing, reviews count, circuits count,</h3>
-                <Button>Create Route</Button>
-                
+                <h2>{user.full_name}</h2>
+                <h5>Reviews ({user.reviews_count}):</h5>
             </Container>
         )
     }
@@ -31,8 +27,6 @@ class DashBoard extends Component {
 
 const mapStateToProps = state => {
     return {
-        userId: state.user.id,
-        userName: state.user.name,
         user: state.user.selected
     }
 }
@@ -43,4 +37,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashBoard)
+export default connect(mapStateToProps, mapDispatchToProps)(User)

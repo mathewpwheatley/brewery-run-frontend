@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
-import {NavLink, Redirect} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -20,19 +20,19 @@ class NavigationBar extends Component {
                     
                     <Nav className="mr-auto">
                         <Nav.Item>
-                            <NavLink className="nav-link" to="/breweries" title="Breweries">
+                            <NavLink className="nav-link" to="/index/breweries" title="Breweries">
                                 <i className="fas fa-industry"/>
                                 <span className="d-none d-sm-none d-md-inline"> Breweries</span>
                             </NavLink>
                         </Nav.Item>
                         <Nav.Item>
-                            <NavLink className="nav-link" to="/circuits" title="Circuits">
+                            <NavLink className="nav-link" to="/index/circuits" title="Circuits">
                                 <i className="fas fa-route"/>
                                 <span className="d-none d-sm-none d-md-inline"> Circuits</span>
                             </NavLink>
                         </Nav.Item>
                         <Nav.Item>
-                            <NavLink className="nav-link" to="/users" title="Runners">
+                            <NavLink className="nav-link" to="/index/users" title="Runners">
                                 <i className="fas fa-running"/>
                                 <span className="d-none d-sm-none d-md-inline"> Runners</span>
                             </NavLink>

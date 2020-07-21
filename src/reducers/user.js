@@ -1,4 +1,4 @@
-export default (state = {user: {}, all: []}, action) => {
+export default (state = {selected: {}, all: []}, action) => {
     
     switch (action.type) {
 
@@ -10,18 +10,18 @@ export default (state = {user: {}, all: []}, action) => {
             delete newState.id
             delete newState.name
             return newState
+
+        case 'USER':
+            return {...state, selected: action.selected}
+    
+        case 'CLEAR_USER':
+            return {...state, selected: {}}
         
         case 'ALL_USERS':
-            return {...state, all: action.users}
+            return {...state, all: action.all}
 
         case 'CLEAR_ALL_USERS':
             return {...state, all: []}
-        
-        case 'USER':
-        return {...state, user: action.user}
-
-        case 'CLEAR_USER':
-        return {...state, user: {}}
 
         default:
             return state

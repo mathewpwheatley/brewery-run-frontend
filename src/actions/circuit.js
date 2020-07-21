@@ -3,6 +3,39 @@ import endPoints from './endPoints.js'
 
 const {circuitsURL} = endPoints
 
+export const getCircuit = (circuitId) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Credentials': 'include'
+            }
+        }
+        fetch(circuitsURL + '/' + circuitId, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({
+                    type: 'CIRCUIT',
+                    selected: json
+                })
+            }
+        })
+    }
+}
+
+export const clearCircuit = () => {
+    return (dispatch) => {
+        dispatch({type: 'CLEAR_CIRCUIT'})
+    }
+}
+
 export const getAllCircuits = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
@@ -23,7 +56,7 @@ export const getAllCircuits = () => {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'ALL_CIRCUITS',
-                    circuits: json
+                    all: json
                 })
             }
         })

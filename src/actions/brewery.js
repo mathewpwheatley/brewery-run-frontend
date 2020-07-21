@@ -3,6 +3,39 @@ import endPoints from './endPoints.js'
 
 const {breweriesURL} = endPoints
 
+export const getBrewery = (breweryId) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Credentials': 'include'
+            }
+        }
+        fetch(breweriesURL + '/' + breweryId, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({
+                    type: 'BREWERY',
+                    selected: json
+                })
+            }
+        })
+    }
+}
+
+export const clearBrewery = () => {
+    return (dispatch) => {
+        dispatch({type: 'CLEAR_BREWERY'})
+    }
+}
+
 export const getAllBreweries = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
@@ -23,7 +56,7 @@ export const getAllBreweries = () => {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'ALL_BREWERIES',
-                    breweries: json
+                    all: json
                 })
             }
         })

@@ -25,7 +25,7 @@ export const getUser = (userId) => {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'USER',
-                    user: json
+                    selected: json
                 })
             }
         })
@@ -58,7 +58,7 @@ export const getAllUsers = () => {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'ALL_USERS',
-                    users: json
+                    all: json
                 })
             }
         })

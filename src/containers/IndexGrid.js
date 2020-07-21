@@ -2,11 +2,11 @@ import React from 'react'
 import CardColumns from 'react-bootstrap/CardColumns'
 import IndexGridCard from '../components/IndexGridCard.js'
 
-const IndexGrid = ({data, dataDisplayNames, dataKeys}) => {
+const IndexGrid = ({basePath, data, dataDisplayNames, dataKeys}) => {
 
     return (
         <CardColumns className="p-4">
-            {data.map(datum => <IndexGridCard key={datum.id} datum={datum} dataDisplayNames={dataDisplayNames} dataKeys={dataKeys}/>)}
+            {data.map(datum => <IndexGridCard key={datum.id} datum={datum} basePath={basePath} dataDisplayNames={dataDisplayNames} dataKeys={dataKeys}/>)}
         </CardColumns>
     )
 }
