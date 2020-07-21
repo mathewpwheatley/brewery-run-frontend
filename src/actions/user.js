@@ -3,51 +3,27 @@ import endPoints from './endPoints.js'
 
 const {usersURL, logInURL, logOutURL, standardOptions} = endPoints
 
-export const getAllUsers = () => {
-    return (dispatch) => {
-        dispatch({type: 'LOADING'})
-        fetch(usersURL, standardOptions).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'ERRORS',
-                    errors: json.errors
-                })
-            } else {
-                dispatch({type: 'CLEAR_ERRORS'})
-                dispatch({
-                    type: 'ALL_USERS',
-                    users: json
-                })
-            }
-        })
-    } 
-} 
+// This function should be handled by the runner actions 
 
-export const clearAllUsers = () => {
-    return (dispatch) => {
-        dispatch({type: 'CLEAR_ALL_USERS'})
-    }
-}
-
-export const getUser = (userId) => {
-    return (dispatch) => {
-        dispatch({type: 'LOADING'})
-        fetch(usersURL + '/' + userId, standardOptions).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'ERRORS',
-                    errors: json.errors
-                })
-            } else {
-                dispatch({type: 'CLEAR_ERRORS'})
-                dispatch({
-                    type: 'GET',
-                    user: json
-                })
-            }
-        })
-    }
-}
+// export const getUser = (userId) => {
+//     return (dispatch) => {
+//         dispatch({type: 'LOADING'})
+//         fetch(usersURL + '/' + userId, standardOptions).then(resp => resp.json()).then(json => {
+//             if (json.errors) {
+//                 dispatch({
+//                     type: 'ERRORS',
+//                     errors: json.errors
+//                 })
+//             } else {
+//                 dispatch({type: 'CLEAR_ERRORS'})
+//                 dispatch({
+//                     type: 'USER',
+//                     user: json
+//                 })
+//             }
+//         })
+//     }
+// }
 
 const postFetch = (user, endPoint) => {
     return (dispatch) => {

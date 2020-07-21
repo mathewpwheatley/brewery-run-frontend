@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {createUser} from '../actions/user.js'
-import FormMessage from './FormMessage.js'
+import FetchMessage from './FetchMessage.js'
 
 class CreateAccountForm extends Component {
 
@@ -42,7 +42,7 @@ class CreateAccountForm extends Component {
 
     render() {
         return (
-            <Container className='col-4 my-5 border border-secondary rounded-lg'>
+            <Container className='col-4 my-4 border border-secondary rounded-lg'>
                 <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col}>
@@ -75,7 +75,7 @@ class CreateAccountForm extends Component {
                             </Button>
                         </Col>
                     </Form.Row>
-                    <FormMessage />
+                    <FetchMessage />
                 </Form>
                 {this.handleRedirect()}
             </Container>

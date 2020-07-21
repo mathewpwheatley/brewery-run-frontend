@@ -1,13 +1,14 @@
 import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
-import Welcome from './Welcome.js'
+import Welcome from '../components/Welcome.js'
 import DashBoard from './DashBoard.js'
 
 const Home = ({userId}) => {
 
     return (
         <Fragment>
-            {userId ? <DashBoard/> :<Welcome/>}
+            {/* {userId ? <DashBoard/> :<Welcome/>} */}
+            <DashBoard/>
         </Fragment>
     )
 }

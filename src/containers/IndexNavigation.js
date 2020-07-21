@@ -5,10 +5,10 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
-import {getAllUsers} from '../actions/user.js'
+import {getAllRunners} from '../actions/runner.js'
 import {getAllBreweries} from '../actions/brewery.js'
 import {getAllCircuits} from '../actions/circuit.js'
-import FormMessage from '../components/FormMessage.js'
+import FetchMessage from '../components/FetchMessage.js'
 import IndexTable from './IndexTable.js'
 import IndexGrid from './IndexGrid.js'
 
@@ -32,7 +32,7 @@ class IndexNavigation extends Component {
                 this.props.getAllCircuits()
                 break
             case "runners":
-                this.props.getAllUsers()
+                this.props.getAllRunners()
                 break
             default:
                 break
@@ -125,7 +125,7 @@ class IndexNavigation extends Component {
                         <Form.Control type="search" placeholder={this.capitalize(this.props.variant) + " Name Search"} aria-label="Search" name="keyword" value={this.state.keyword} onChange={event => this.handleChange(event)}/>
                     </Form>
                 </Navbar>
-                <FormMessage />
+                <FetchMessage />
                 <IndexGrid data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>
                 <IndexTable data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>
             </Container>
@@ -143,7 +143,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllUsers: () => {dispatch(getAllUsers())},
+        getAllRunners: () => {dispatch(getAllRunners())},
         getAllBreweries: () => {dispatch(getAllBreweries())},
         getAllCircuits: () => {dispatch(getAllCircuits())}
     }
