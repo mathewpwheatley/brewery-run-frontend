@@ -73,8 +73,8 @@ class LogInForm extends Component {
                             </Button>
                         </Col>
                     </Form.Row>
-                    <FetchMessage />
                 </Form>
+                <FetchMessage/>
                 {this.handleRedirect()}
             </Container>
         )

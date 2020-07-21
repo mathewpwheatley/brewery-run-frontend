@@ -75,8 +75,8 @@ class CreateAccountForm extends Component {
                             </Button>
                         </Col>
                     </Form.Row>
-                    <FetchMessage />
                 </Form>
+                <FetchMessage/>
                 {this.handleRedirect()}
             </Container>
         )

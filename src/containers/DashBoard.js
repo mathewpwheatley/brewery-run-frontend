@@ -26,7 +26,6 @@ class DashBoard extends Component {
                 <FetchMessage/>
 
                 <CardColumns className="p-4">
-
                     <Card>
                         <Card.Header>User Information</Card.Header>
                         <Card.Body>
