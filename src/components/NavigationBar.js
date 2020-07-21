@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -32,7 +32,7 @@ class NavigationBar extends Component {
                             </NavLink>
                         </Nav.Item>
                         <Nav.Item>
-                            <NavLink className="nav-link" to="/runners" title="Runners">
+                            <NavLink className="nav-link" to="/users" title="Runners">
                                 <i className="fas fa-running"/>
                                 <span className="d-none d-sm-none d-md-inline"> Runners</span>
                             </NavLink>

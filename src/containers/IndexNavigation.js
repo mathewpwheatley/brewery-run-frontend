@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Route, Redirect} from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -23,7 +23,7 @@ class IndexNavigation extends Component {
         dataKeys: [] // The object keys that will be used to pull the data, must match the order of dataDisplayNames
     }
 
-    fetchData = async () => {
+    fetchData = () => {
         switch (this.props.variant) {
             case "breweries":
                 this.props.getAllBreweries()
@@ -31,7 +31,7 @@ class IndexNavigation extends Component {
             case "circuits":
                 this.props.getAllCircuits()
                 break
-            case "runners":
+            case "users":
                 this.props.getAllUsers()
                 break
             default:
@@ -40,9 +40,6 @@ class IndexNavigation extends Component {
     }
 
     setVariantion = () => {
-        // Wait for data to be pulled from backend before setting state
-        this.fetchData()
-
         switch (this.props.variant) {
             case "breweries":
                 this.setState({
@@ -62,7 +59,7 @@ class IndexNavigation extends Component {
                     dataKeys: ['title', 'rating', 'likes_count', 'favorites_count', 'reviews_count']
                 })
                 break 
-            case "runners":
+            case "users":
                 this.setState({
                     keywordKey: 'full_name',
                     icon: <i className="fas fa-running"/>,
@@ -77,6 +74,7 @@ class IndexNavigation extends Component {
     }
 
     componentDidMount() {
+        this.fetchData()
         this.setVariantion()
     }
 
@@ -126,8 +124,16 @@ class IndexNavigation extends Component {
                     </Form>
                 </Navbar>
                 <FetchMessage />
-                <IndexGrid data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>
-                <IndexTable data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>
+                <Route path={"/" + this.props.variant + "/table"} component={() => {
+                    return <IndexTable data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>}
+                }/>
+                <Route path={"/" + this.props.variant + "/grid"} component={() => {
+                    return <IndexGrid data={this.filterDataByName()} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>}
+                }/>
+
+                {/* Redirect to table view as default upon load */}
+                <Redirect to={"/" + this.props.variant + "/table"} />
+
             </Container>
         )
     }
@@ -137,7 +143,7 @@ const mapStateToProps = state => {
     return {
         breweries: state.brewery.all,
         circuits: state.circuit.all,
-        user: state.user.all
+        users: state.user.all
     }
 }
 

@@ -17,7 +17,7 @@ class DashBoard extends Component {
         return (
             <Container className="col-11 mt-4 border border-secondary rounded-lg">
                 <FetchMessage/>
-                {this.props.user.name}
+                {this.props.user.full_name}
                 <h3>Suggested Circuits:</h3>
                 <h3>Favorite Circuits:</h3>
                 <h3>Favorite Breweries:</h3>

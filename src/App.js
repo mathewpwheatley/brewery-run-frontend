@@ -12,7 +12,7 @@ function App() {
       <NavigationBar/>
       <Route path="/breweries" component={() => <IndexNavigation variant='breweries'/>} />
       <Route path="/circuits" component={() => <IndexNavigation variant='circuits'/>} />
-      <Route path="/runners" component={() => <IndexNavigation variant='runners'/>} />
+      <Route path="/users" component={() => <IndexNavigation variant='users'/>} />
       <Route exact path="/create-account" component={CreateAccountForm} />
       <Route exact path="/log-in" component={LogInForm} />
       <Route exact path="/" component={Home} />
