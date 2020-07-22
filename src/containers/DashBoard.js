@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
+import IndexNavigation from './IndexNavigation.js'
 
 
 class DashBoard extends Component {
@@ -64,47 +65,33 @@ class DashBoard extends Component {
                     </Card.Body>
                 </Card>
 
-                <Card>
-                    <Card.Header>Circuits From Followed</Card.Header>
-                    <Card.Body>
-                        <Card.Text>TBD</Card.Text>
-                    </Card.Body>
-                </Card>
+                {!!user.favorite_breweries &&
+                    <IndexNavigation variant='breweries' subTitle=': Favorite' data={user.favorite_breweries} />
+                }
 
-                <Card>
-                    <Card.Header>Favorite Circuits</Card.Header>
-                    <Card.Body>
-                        <Card.Text>TBD</Card.Text>
-                    </Card.Body>
-                </Card>
+                {!!user.public_followees_circuits &&
+                    <IndexNavigation variant='circuits' subTitle=': from Followees' data={user.public_followees_circuits} />
+                }
 
-                <Card>
-                    <Card.Header>Created Circuits (Public + Private)</Card.Header>
-                    <Card.Body>
-                        <Card.Text>TBD</Card.Text>
-                    </Card.Body>
-                </Card>
+                {!!user.favorite_circuits &&
+                    <IndexNavigation variant='circuits' subTitle=': Favorite' data={user.favorite_circuits} />
+                }
 
-                <Card>
-                    <Card.Header>Favorite Breweries</Card.Header>
-                    <Card.Body>
-                        <Card.Text>TBD</Card.Text>
-                    </Card.Body>
-                </Card>
+                {!!user.private_circuits &&
+                    <IndexNavigation variant='circuits' subTitle=': Private' data={user.private_circuits} />
+                }
 
-                <Card>
-                    <Card.Header>Authored Circuit Reviews</Card.Header>
-                    <Card.Body>
-                        <Card.Text>TBD</Card.Text>
-                    </Card.Body>
-                </Card>
+                {!!user.public_circuits &&
+                    <IndexNavigation variant='circuits' subTitle=': Public' data={user.public_circuits} />
+                }
 
-                <Card>
-                    <Card.Header>Authored Brewery Reviews</Card.Header>
-                    <Card.Body>
-                        <Card.Text>TBD</Card.Text>
-                    </Card.Body>
-                </Card>
+                {!!user.brewery_reviews &&
+                    <IndexNavigation variant='reviews' subTitle=': Brewery' data={user.brewery_reviews} />
+                }
+
+                {!!user.circuit_reviews &&
+                    <IndexNavigation variant='reviews' subTitle=': Circuit' data={user.circuit_reviews} />
+                }
                 
             </CardColumns>
         )

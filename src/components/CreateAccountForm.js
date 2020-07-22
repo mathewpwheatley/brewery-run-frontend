@@ -43,6 +43,7 @@ class CreateAccountForm extends Component {
     render() {
         return (
             <Container className='col-4 my-4 border border-secondary rounded-lg'>
+                {this.handleRedirect()}
                 <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col}>
@@ -77,7 +78,6 @@ class CreateAccountForm extends Component {
                     </Form.Row>
                 </Form>
                 <FetchMessage/>
-                {this.handleRedirect()}
             </Container>
         )
     }

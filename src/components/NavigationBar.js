@@ -20,20 +20,20 @@ class NavigationBar extends Component {
                     
                     <Nav className="mr-auto">
                         <Nav.Item>
-                            <NavLink className="nav-link" to="/index/breweries" title="Breweries">
+                            <NavLink className="nav-link" to="/breweries" title="Breweries">
                                 <i className="fas fa-industry"/>
                                 <span className="d-none d-sm-none d-md-inline"> Breweries</span>
                             </NavLink>
                         </Nav.Item>
                         <Nav.Item>
-                            <NavLink className="nav-link" to="/index/circuits" title="Circuits">
+                            <NavLink className="nav-link" to="/circuits" title="Circuits">
                                 <i className="fas fa-route"/>
                                 <span className="d-none d-sm-none d-md-inline"> Circuits</span>
                             </NavLink>
                         </Nav.Item>
                         {this.props.userName &&
                             <Nav.Item>
-                                <NavLink className="nav-link" to="/index/users" title="Users">
+                                <NavLink className="nav-link" to="/users" title="Users">
                                     <i className="fas fa-running"/>
                                     <span className="d-none d-sm-none d-md-inline"> Users</span>
                                 </NavLink>

@@ -44,6 +44,7 @@ class LogInForm extends Component {
     render () {
         return (
             <Container className='col-4 my-4 py-0 border border-secondary rounded-lg'>
+                {this.handleRedirect()}
                 <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Group>
                         <Form.Control type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
@@ -75,7 +76,6 @@ class LogInForm extends Component {
                     </Form.Row>
                 </Form>
                 <FetchMessage/>
-                {this.handleRedirect()}
             </Container>
         )
     }
