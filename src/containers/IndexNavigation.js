@@ -1,16 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {NavLink, Route, Redirect} from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import {getAllBreweries} from '../actions/brewery.js'
 import {getAllCircuits} from '../actions/circuit.js'
 import {getAllUsers} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import IndexTable from './IndexTable.js'
-import IndexGrid from './IndexGrid.js'
 
 class IndexNavigation extends Component {
 
@@ -19,8 +16,7 @@ class IndexNavigation extends Component {
         keywordKey: '',
         icon: '',
         data: [],
-        dataDisplayNames: [], // The strings that will be displayed as data headings
-        dataKeys: [] // The object keys that will be used to pull the data, must match the order of dataDisplayNames
+        displayKeys: {}
     }
 
     setVariantion = () => {
@@ -31,8 +27,7 @@ class IndexNavigation extends Component {
                     keywordKey: 'name',
                     icon: <i className="fas fa-industry"/>,
                     data: this.props.breweries,
-                    dataDisplayNames: ['Name', 'Type', 'Tags', 'Rating', 'Likes', 'Reviews', 'Favorited', 'Circuits'],
-                    dataKeys: ['name', 'brewery_type', 'tag_list', 'rating', 'likes_count', 'reviews_count', 'favorites_count', 'public_circuits_count']
+                    displayKeys: {name: 'Name', brewery_type: 'Type', public_circuits_count: 'Circuits', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorited'}
                 })
                 break 
             case "circuits":
@@ -41,8 +36,7 @@ class IndexNavigation extends Component {
                     keywordKey: 'title',
                     icon: <i className="fas fa-route"/>,
                     data: this.props.circuits,
-                    dataDisplayNames: ['Title', 'Favorites', 'Likes', 'Reviews', 'Rating'],
-                    dataKeys: ['title', 'favorites_count', 'likes_count', 'reviews_count', 'rating']
+                    displayKeys: {title: 'Title', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorites'}
                 })
                 break 
             case "users":
@@ -51,8 +45,7 @@ class IndexNavigation extends Component {
                     keywordKey: 'full_name',
                     icon: <i className="fas fa-running"/>,
                     data: this.props.users,
-                    dataDisplayNames: ['Name', 'Circuits', 'Followers'],
-                    dataKeys: ['full_name', 'public_circuits_count', 'followers_count']
+                    displayKeys: {full_name: 'Name', public_circuits_count: 'Circuits', followers_count: 'Followers'}
                 })
                 break 
             default:
@@ -87,39 +80,16 @@ class IndexNavigation extends Component {
         return (
             <Container className="col-11 mt-4 px-0 border border-secondary rounded-lg">
                 <Navbar className="shadow" bg="primary" variant="dark">
-                    <Navbar.Brand>
+                    <Navbar.Brand className="mr-auto">
                         {this.state.icon}
                         <span className="d-none d-sm-none d-md-inline"> {this.capitalize(this.props.variant)}</span>
                     </Navbar.Brand>
-                    <Nav className="mr-auto">
-                        <Nav.Item>
-                            <NavLink className="nav-link" exact to={this.props.path + "/table"} title="Table View">
-                                <i className="fas fa-table"/>
-                                <span className="d-none d-sm-none d-md-inline"> Table View</span>
-                            </NavLink>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <NavLink className="nav-link" exact to={this.props.path + "/grid"} title="Grid View">
-                                <i className="fas fa-th"/>
-                                <span className="d-none d-sm-none d-md-inline"> Grid View</span>
-                            </NavLink>
-                        </Nav.Item>
-                    </Nav>
                     <Form inline>
                         <Form.Control type="search" placeholder={"Name Search"} aria-label="Search" name="keyword" value={this.state.keyword} onChange={event => this.handleChange(event)}/>
                     </Form>
                 </Navbar>
-                <FetchMessage />
-                <Route path={this.props.path + "/table"} component={() => {
-                    return <IndexTable data={this.filterDataByName()} basePath={"/" + this.props.variant} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>}
-                }/>
-                <Route path={this.props.path + "/grid"} component={() => {
-                    return <IndexGrid data={this.filterDataByName()} basePath={"/" + this.props.variant} dataDisplayNames={this.state.dataDisplayNames} dataKeys={this.state.dataKeys}/>}
-                }/>
-
-                {/* Redirect to table view as default upon load */}
-                <Redirect to={this.props.path + "/table"} />
-
+                <FetchMessage/>
+                <IndexTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={"/" + this.props.variant} />
             </Container>
         )
     }

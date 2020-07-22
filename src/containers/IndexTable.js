@@ -1,36 +1,34 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Table from 'react-bootstrap/Table'
 import IndexTableRow from '../components/IndexTableRow.js'
 
-class IndexTable extends Component {
+const IndexTable = ({data, displayKeys, basePath}) => {
 
-    mapHeadings = () => {
-        return this.props.dataDisplayNames.map((dataDisplayName, index) => {
+    const mapHeadings = () => {
+        return Object.values(displayKeys).map((displayName, index) => {
             return (
-                <th key={index} >{dataDisplayName}</th>
+                <th key={index} >{displayName}</th>
             )
         })
     }
 
-    mapData = () => {
-        return this.props.data.map(datum => <IndexTableRow key={datum.id} basePath={this.props.basePath} datum={datum} dataKeys={this.props.dataKeys} />)
+    const mapData = () => {
+        return data.map(datum => <IndexTableRow key={datum.id} basePath={basePath} datum={datum} dataKeys={Object.keys(displayKeys)} />)
     }
     
-    render () {
-        return (
-            <Table className="text-center" hover size="sm">
-                <thead className="thead-light">
-                    <tr>
-                        {this.mapHeadings()}
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.mapData()}
-                </tbody>
-            </Table>
-        )
-    }
+    return (
+        <Table className="text-center" hover size="sm">
+            <thead className="thead-light">
+                <tr>
+                    {mapHeadings()}
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {mapData()}
+            </tbody>
+        </Table>
+    )
 }
 
 export default IndexTable
