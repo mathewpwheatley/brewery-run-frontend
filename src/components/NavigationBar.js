@@ -31,12 +31,14 @@ class NavigationBar extends Component {
                                 <span className="d-none d-sm-none d-md-inline"> Circuits</span>
                             </NavLink>
                         </Nav.Item>
-                        <Nav.Item>
-                            <NavLink className="nav-link" to="/index/users" title="Users">
-                                <i className="fas fa-running"/>
-                                <span className="d-none d-sm-none d-md-inline"> Users</span>
-                            </NavLink>
-                        </Nav.Item>
+                        {this.props.userName &&
+                            <Nav.Item>
+                                <NavLink className="nav-link" to="/index/users" title="Users">
+                                    <i className="fas fa-running"/>
+                                    <span className="d-none d-sm-none d-md-inline"> Users</span>
+                                </NavLink>
+                            </Nav.Item>
+                        }
                     </Nav>
 
                     <Nav className="ml-md-auto">
@@ -75,11 +77,8 @@ class NavigationBar extends Component {
                                     <span className="d-none d-sm-none d-md-inline"> {this.props.userName}</span>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu alignRight>
-                                    <Dropdown.Header><i className="fas fa-star"/> Favorite</Dropdown.Header>
-                                    <NavLink className="dropdown-item" exact to="/favorite-breweries" title="Favorite Breweries"><i className="fas fa-industry"/> Breweries</NavLink>
-                                    <NavLink className="dropdown-item" exact to="/favorite-circuits" title="Favorite Circuits"><i className="fas fa-route"/> Circuits</NavLink>
-                                    <Dropdown.Divider />
                                     <NavLink className="dropdown-item" exact to="/notifications" title="Notifications"><i className="fas fa-bell"/> Notifications ({this.props.notificationsCount})</NavLink>
+                                    <NavLink className="dropdown-item" exact to="/dashboard" title="Dashboard"><i className="fas fa-house-user"/> Dashboard</NavLink>
                                     <NavLink className="dropdown-item" exact to="/account" title="Account"><i className="fas fa-address-card"/> Account</NavLink>
                                     <Dropdown.Divider />
                                     <Dropdown.Item title="Log Out" onClick={() => this.props.logOutUser()}><i className="fas fa-sign-out-alt"/> Log Out</Dropdown.Item>
