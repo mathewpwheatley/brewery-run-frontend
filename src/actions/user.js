@@ -143,8 +143,7 @@ export const editUser = (userId) => {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Credentials': 'include'
+                'Accept': 'application/json'
             }
         }
         fetch(usersURL + '/' + userId + '/edit', options).then(resp => resp.json()).then(json => {
@@ -172,11 +171,11 @@ export const updateUser = (userId, user) => {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Credentials': 'include'
+                'Accept': 'application/json'
             },
             body: JSON.stringify({user: user})
         }
+        console.log(user)
         fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
@@ -187,6 +186,7 @@ export const updateUser = (userId, user) => {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'UPDATE_USER',
+                    name: json.full_name,
                     selected: json
                 })
             }
@@ -209,7 +209,8 @@ export const deleteUser = (userId) => {
                 })
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
-                dispatch({type: 'DELETE_USER'})
+                dispatch({type: 'CLEAR_USER'})
+                dispatch(logOutUser())
             }
         })
     }

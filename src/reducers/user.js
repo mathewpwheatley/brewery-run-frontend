@@ -16,6 +16,9 @@ export default (state = {selected: {}, all: []}, action) => {
     
         case 'CLEAR_USER':
             return {...state, selected: {}}
+
+        case 'UPDATE_USER':
+            return {...state, name: action.name, selected: action.selected}
         
         case 'ALL_USERS':
             return {...state, all: action.all}

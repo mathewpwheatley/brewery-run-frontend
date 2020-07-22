@@ -33,7 +33,12 @@ class DashBoard extends Component {
                         <Card.Text>About: {user.about}</Card.Text>
                         <Card.Text>Email: {user.email}</Card.Text>
                         <Card.Text>Address: {user.full_address}</Card.Text>
-                        <Button variant="warning">Edit (Doesnt Work)</Button>
+                        <Link to="/edit-account">
+                            <Button variant="warning">
+                                <i className="fas fa-user-edit"/>
+                                <span className="d-none d-sm-none d-md-inline"> Edit Account</span>
+                            </Button>
+                        </Link>
                     </Card.Body>
                 </Card>
 
