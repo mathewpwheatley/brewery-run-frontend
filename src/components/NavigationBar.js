@@ -70,7 +70,7 @@ class NavigationBar extends Component {
                         {/* Conditionally render via && operator acting as if statement */}
                         {this.props.userName &&
                             <Dropdown as={Nav.Item}>
-                                <Dropdown.Toggle as={Nav.Link}>
+                                <Dropdown.Toggle as={Nav.Link} title={this.props.userName}>
                                     <i className="fas fa-running"/>
                                     <span className="d-none d-sm-none d-md-inline"> {this.props.userName}</span>
                                 </Dropdown.Toggle>

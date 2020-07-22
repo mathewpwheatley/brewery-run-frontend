@@ -1,5 +1,7 @@
-import React from 'react'
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {autoLogInUser} from './actions/user.js'
 import NavigationBar from './components/NavigationBar.js'
 import Home from './containers/Home.js'
 import Welcome from './components/Welcome.js'
@@ -11,7 +13,13 @@ import Brewery from './containers/Brewery.js'
 import Circuit from './containers/Circuit.js'
 import User from './containers/User.js'
 
-function App() {
+function App({autoLogInUser}) {
+
+  // Automatically log in on component mount if valid jwt cookie exists
+  useEffect(() => {
+    autoLogInUser()
+  },[])
+  
   return (
     <Router>
       <NavigationBar/>
@@ -30,4 +38,10 @@ function App() {
   )
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    autoLogInUser: () => {dispatch(autoLogInUser())}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App)

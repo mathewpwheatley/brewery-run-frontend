@@ -1,7 +1,7 @@
 import endPoints from './endPoints.js'
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
-const {usersURL, logInURL, logOutURL} = endPoints
+const {usersURL, logInURL, autoLogInURL, logOutURL} = endPoints
 
 export const getUser = (userId) => {
     return (dispatch) => {
@@ -108,6 +108,10 @@ export const createUser = user => {
 
 export const logInUser = user => {
     return postFetch(user, logInURL)
+}
+
+export const autoLogInUser = () => {
+    return postFetch("dsdsdsd", autoLogInURL)
 }
 
 export const logOutUser = () => {
