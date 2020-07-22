@@ -12,7 +12,8 @@ import Welcome from './components/Welcome.js'
 import DashBoard from './containers/DashBoard.js'
 import IndexNavigation from './containers/IndexNavigation.js'
 import CreateAccountForm from './components/CreateAccountForm.js'
-import LogInForm from './components/LogInForm'
+import EditAccountForm from './components/EditAccountForm.js'
+import LogInForm from './components/LogInForm.js'
 import Brewery from './containers/Brewery.js'
 import Circuit from './containers/Circuit.js'
 import User from './containers/User.js'
@@ -40,6 +41,7 @@ class App extends Component {
         <Route path="/users/:id" component={(routerProps) => <User id={routerProps.match.params.id}/>} />
         <Route exact path="/create-account" component={CreateAccountForm} />
         <Route exact path="/log-in" component={LogInForm} />
+        <Route exact path="/edit-account" component={EditAccountForm} />
       </Router>
     )
   }

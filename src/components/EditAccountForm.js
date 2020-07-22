@@ -5,17 +5,30 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import {createUser} from '../actions/user.js'
+import {editUser} from '../actions/user.js'
+import {updateUser} from '../actions/user.js'
+import {deleteUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
 
-class CreateAccountForm extends Component {
+class EditAccountForm extends Component {
 
     state = {
-        first_name: "",
-        last_name: "",
-        email: "",
-        password: "",
-        password_confirmation: ""
+        first_name: this.props.user.first_name,
+        middle_name: this.props.user.middle_name,
+        last_name: this.props.user.last_name,
+        email: '',
+        password: '',
+        password_confirmation: '',
+        about: '',
+        street: '',
+        city: '',
+        state: '',
+        postal_code: '',
+        country: ''
+    }
+
+    componentDidMount() {
+        this.props.editUser(this.props.userId)
     }
 
     handleChange = event => {
@@ -24,18 +37,17 @@ class CreateAccountForm extends Component {
         })
     }
 
-    handleGoogleButtonClick = event => {
-        // Log user in via google
+    handleDeleteClick = event => {
         console.log("This feature doesn't work yet")
     }
 
     handleSubmit = event => {
         event.preventDefault()
-        this.props.createUser(this.state)
+        this.props.updateUser(this.state)
     }
 
     handleRedirect = () => {
-        if (this.props.userId) {
+        if (!this.props.userId) {
             return <Redirect to='/' />
         }
     }
@@ -64,15 +76,15 @@ class CreateAccountForm extends Component {
                     </Form.Group>
                     <Form.Row>
                         <Col>
-                            <Button block variant="primary" type="button" onClick={event => this.handleGoogleButtonClick(event)} >
-                                <i className="fab fa-google"/>
-                                <span className="d-none d-sm-none d-md-inline"> Sign up with Google</span>
+                            <Button block variant="danger" type="button" onClick={event => this.handleDeleteClick(event)} >
+                                <i className="fas fa-trash-alt"/>
+                                <span className="d-none d-sm-none d-md-inline"> Delete Account</span>
                             </Button>
                         </Col>
                         <Col>
                             <Button block variant="success" type="submit">
                                 <i className="fas fa-user-plus"/>
-                                <span className="d-none d-sm-none d-md-inline"> Create Account</span>
+                                <span className="d-none d-sm-none d-md-inline"> Update Account</span>
                             </Button>
                         </Col>
                     </Form.Row>
@@ -85,14 +97,17 @@ class CreateAccountForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        userId: state.user.id
+        userId: state.user.id,
+        user: state.user.selected
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        createUser: (user) => {dispatch(createUser(user))}
+        editUser: (userId) => {dispatch(editUser(userId))},
+        updateUser: (user) => {dispatch(updateUser(user))},
+        deleteUser: (user) => {dispatch(deleteUser(user))}
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateAccountForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditAccountForm)

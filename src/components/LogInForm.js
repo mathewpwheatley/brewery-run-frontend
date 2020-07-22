@@ -36,7 +36,7 @@ class LogInForm extends Component {
     }
 
     handleRedirect = () => {
-        if (this.props.id) {
+        if (this.props.userId) {
             return <Redirect to='/' />
         }
     }
@@ -83,7 +83,7 @@ class LogInForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        id: state.user.id
+        userId: state.user.id
     }
 }
 

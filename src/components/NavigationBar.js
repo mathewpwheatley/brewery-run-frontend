@@ -79,7 +79,7 @@ class NavigationBar extends Component {
                                 <Dropdown.Menu alignRight>
                                     <NavLink className="dropdown-item" exact to="/notifications" title="Notifications"><i className="fas fa-bell"/> Notifications ({this.props.notificationsCount})</NavLink>
                                     <NavLink className="dropdown-item" exact to="/dashboard" title="Dashboard"><i className="fas fa-house-user"/> Dashboard</NavLink>
-                                    <NavLink className="dropdown-item" exact to="/account" title="Account"><i className="fas fa-address-card"/> Account</NavLink>
+                                    <NavLink className="dropdown-item" exact to="/edit-account" title="Account"><i className="fas fa-user-edit"/> Edit Account</NavLink>
                                     <Dropdown.Divider />
                                     <Dropdown.Item title="Log Out" onClick={() => this.props.logOutUser()}><i className="fas fa-sign-out-alt"/> Log Out</Dropdown.Item>
                                 </Dropdown.Menu>

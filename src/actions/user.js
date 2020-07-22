@@ -111,7 +111,7 @@ export const logInUser = user => {
 }
 
 export const autoLogInUser = () => {
-    return postFetch("dsdsdsd", autoLogInURL)
+    return postFetch(null, autoLogInURL)
 }
 
 export const logOutUser = () => {
@@ -130,6 +130,35 @@ export const logOutUser = () => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({type: 'LOG_OUT'})
+            }
+        })
+    }
+}
+
+export const editUser = (userId) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Credentials': 'include'
+            }
+        }
+        fetch(usersURL + '/' + userId + '/edit', options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({
+                    type: 'USER',
+                    selected: json
+                })
             }
         })
     }
@@ -158,7 +187,7 @@ export const updateUser = (userId, user) => {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'UPDATE_USER',
-                    user: json
+                    selected: json
                 })
             }
         })
