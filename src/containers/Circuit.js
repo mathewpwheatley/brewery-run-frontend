@@ -19,10 +19,7 @@ class Circuit extends Component {
 
         return (
             <CardColumns className="p-4">
-
-                {/* Redirect to logged in user dashboard if they are looking at their own page */}
-                {/* {this.props.userId === parseInt(this.props.id) && <Redirect to="/dashboard" />} */}
-
+                
                 <FetchMessage/>
 
                 <Card>
@@ -57,7 +54,7 @@ class Circuit extends Component {
                 }
 
                 {!!circuit.reviews &&
-                    <IndexNavigation variant='reviews' data={circuit.reviews} />
+                    <IndexNavigation variant='circuit-reviews' data={circuit.reviews} />
                 }
 
             </CardColumns>

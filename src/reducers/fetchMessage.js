@@ -5,7 +5,7 @@ export default (state = {loading: false, errors: []}, action) => {
         case 'LOADING':
             return {...state, loading: true, errors: []}
         
-        case 'ERRORS':
+        case 'SET_ERRORS':
             return {...state, loading: false, errors: action.errors}
 
         case 'CLEAR_ERRORS':

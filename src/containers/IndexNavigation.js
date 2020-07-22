@@ -9,25 +9,27 @@ class IndexNavigation extends Component {
 
     state = {
         keyWord: '',
-        title: '',
+        navTitle: '',
+        navColor: '',
         icon: '',
         basePath: '',
         displayKeys: {}
     }
 
     componentDidMount() {
-        const subTitle = this.props.subTitle ? this.props.subTitle : ''
-        this.setVariantion(subTitle)
+        const navSubTitle = this.props.navSubTitle ? this.props.navSubTitle : ''
+        this.setVariantion(navSubTitle)
 
         // I dont like this, it feels a bit janky and requires a refresh of page to get new data
         if (this.props.getData) {if (this.props.data.length === 0) {this.props.getData()}}
     }
 
-    setVariantion = (subTitle) => {
+    setVariantion = (navSubTitle) => {
         switch (this.props.variant) {
             case "breweries":
                 this.setState({
-                    title: 'Breweries' + subTitle,
+                    navTitle: 'Breweries' + navSubTitle,
+                    navColor: 'warning',
                     icon: <i className="fas fa-industry"/>,
                     basePath: '/breweries',
                     displayKeys: {name: 'Name', brewery_type: 'Type', public_circuits_count: 'Circuits', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorited'}
@@ -35,7 +37,8 @@ class IndexNavigation extends Component {
                 break 
             case "circuits":
                 this.setState({
-                    title: 'Circuits' + subTitle,
+                    navTitle: 'Circuits' + navSubTitle,
+                    navColor: 'success',
                     icon: <i className="fas fa-route"/>,
                     basePath: '/circuits',
                     displayKeys: {title: 'Title', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorites'}
@@ -43,23 +46,34 @@ class IndexNavigation extends Component {
                 break 
             case "users":
                 this.setState({
-                    title: 'Runners' + subTitle,
+                    navTitle: 'Runners' + navSubTitle,
+                    navColor: 'info',
                     icon: <i className="fas fa-running"/>,
                     basePath: '/users',
                     displayKeys: {full_name: 'Name', public_circuits_count: 'Circuits', followers_count: 'Followers'}
                 })
                 break
-            case "reviews":
+            case "brewery-reviews":
                 this.setState({
-                    title: 'Reviews' + subTitle,
+                    navTitle: 'Reviews' + navSubTitle,
+                    navColor: 'secondary',
                     icon: <i className="far fa-newspaper"/>,
-                    basePath: '/reviews',
+                    basePath: 'breweries/reviews',
+                    displayKeys: {title: 'Title', author_name: 'Author', rating: 'Rating'}
+                })
+                break
+            case "circuit-reviews":
+                this.setState({
+                    navTitle: 'Reviews' + navSubTitle,
+                    navColor: 'secondary',
+                    icon: <i className="far fa-newspaper"/>,
+                    basePath: 'circuits/reviews',
                     displayKeys: {title: 'Title', author_name: 'Author', rating: 'Rating'}
                 })
                 break
             case "notifications":
                 this.setState({
-                    title: 'Notifications' + subTitle,
+                    navTitle: 'Notifications' + navSubTitle,
                     icon: <i className="fas fa-bell"/>,
                     basePath: '/notifications',
                     displayKeys: {title: 'Title', read: 'Read'}
@@ -88,10 +102,10 @@ class IndexNavigation extends Component {
     render () {
         return (
             <Card className="col-11 mt-4 px-0 mx-auto border border-secondary rounded-lg">
-                <Navbar className="shadow" bg="primary" variant="dark">
+                <Navbar className="shadow" bg={this.state.navColor} variant="dark">
                     <Navbar.Brand className="mr-auto">
                         {this.state.icon}
-                        <span className="d-none d-sm-none d-md-inline"> {this.state.title}</span>
+                        <span className="d-none d-sm-none d-md-inline"> {this.state.navTitle}</span>
                     </Navbar.Brand>
                     <Form inline>
                         <Form.Control type="search" placeholder={Object.values(this.state.displayKeys)[0] + " Search"} aria-label="Search" name="keyWord" value={this.state.keyWord} onChange={event => this.handleChange(event)}/>

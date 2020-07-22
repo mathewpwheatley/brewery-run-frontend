@@ -6,7 +6,9 @@ const endPoints = {
     logOutURL: baseURL + "/log-out",
     usersURL: baseURL + "/users",
     breweriesURL: baseURL + "/breweries",
-    circuitsURL: baseURL + "/circuits"
+    breweryReviewsURL: baseURL + "/brewery_reviews",
+    circuitsURL: baseURL + "/circuits",
+    circuitReviewsURL: baseURL + "/circuit_reviews"
 }
 
 export default endPoints

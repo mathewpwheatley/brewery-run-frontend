@@ -23,7 +23,7 @@ export const getUser = (userId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'USER',
+                    type: 'SET_USER',
                     selected: json
                 })
             }
@@ -57,7 +57,7 @@ export const getAllUsers = () => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'ALL_USERS',
+                    type: 'SET_ALL_USERS',
                     all: json
                 })
             }
@@ -155,7 +155,7 @@ export const editUser = (userId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'USER',
+                    type: 'SET_USER',
                     selected: json
                 })
             }

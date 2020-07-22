@@ -71,31 +71,31 @@ class DashBoard extends Component {
                 </Card>
 
                 {!!user.favorite_breweries &&
-                    <IndexNavigation variant='breweries' subTitle=': Favorite' data={user.favorite_breweries} />
+                    <IndexNavigation variant='breweries' navSubTitle=': Favorite' data={user.favorite_breweries} />
                 }
 
                 {!!user.public_followees_circuits &&
-                    <IndexNavigation variant='circuits' subTitle=': from Followees' data={user.public_followees_circuits} />
+                    <IndexNavigation variant='circuits' navSubTitle=': from Followees' data={user.public_followees_circuits} />
                 }
 
                 {!!user.favorite_circuits &&
-                    <IndexNavigation variant='circuits' subTitle=': Favorite' data={user.favorite_circuits} />
+                    <IndexNavigation variant='circuits' navSubTitle=': Favorite' data={user.favorite_circuits} />
                 }
 
                 {!!user.private_circuits &&
-                    <IndexNavigation variant='circuits' subTitle=': Private' data={user.private_circuits} />
+                    <IndexNavigation variant='circuits' navSubTitle=': Private' data={user.private_circuits} />
                 }
 
                 {!!user.public_circuits &&
-                    <IndexNavigation variant='circuits' subTitle=': Public' data={user.public_circuits} />
+                    <IndexNavigation variant='circuits' navSubTitle=': Public' data={user.public_circuits} />
                 }
 
                 {!!user.brewery_reviews &&
-                    <IndexNavigation variant='reviews' subTitle=': Brewery' data={user.brewery_reviews} />
+                    <IndexNavigation variant='brewery-reviews' navSubTitle=': Brewery' data={user.brewery_reviews} />
                 }
 
                 {!!user.circuit_reviews &&
-                    <IndexNavigation variant='reviews' subTitle=': Circuit' data={user.circuit_reviews} />
+                    <IndexNavigation variant='circuit-reviews' navSubTitle=': Circuit' data={user.circuit_reviews} />
                 }
                 
             </CardColumns>

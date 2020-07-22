@@ -22,7 +22,7 @@ export const getBrewery = (breweryId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'BREWERY',
+                    type: 'SET_BREWERY',
                     selected: json
                 })
             }
@@ -55,7 +55,7 @@ export const getAllBreweries = () => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'ALL_BREWERIES',
+                    type: 'SET_ALL_BREWERIES',
                     all: json
                 })
             }

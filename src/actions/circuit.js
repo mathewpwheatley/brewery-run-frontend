@@ -22,7 +22,7 @@ export const getCircuit = (circuitId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'CIRCUIT',
+                    type: 'SET_CIRCUIT',
                     selected: json
                 })
             }
@@ -55,7 +55,7 @@ export const getAllCircuits = () => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'ALL_CIRCUITS',
+                    type: 'SET_ALL_CIRCUITS',
                     all: json
                 })
             }

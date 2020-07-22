@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
-const IndexTableRow = ({datum, dataKeys, basePath}) => {
+const CommonTableRow = ({datum, dataKeys, basePath}) => {
 
     const mapColumns = () => {
         return dataKeys.map((dataKey, index) => <td key={index}>{datum[dataKey]}</td>)
@@ -22,4 +22,4 @@ const IndexTableRow = ({datum, dataKeys, basePath}) => {
     )
 }
 
-export default IndexTableRow
+export default CommonTableRow

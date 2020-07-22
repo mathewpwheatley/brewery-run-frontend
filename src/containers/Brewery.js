@@ -20,9 +20,6 @@ class Brewery extends Component {
         return (
             <CardColumns className="p-4">
 
-                {/* Redirect to logged in user dashboard if they are looking at their own page */}
-                {/* {this.props.userId === parseInt(this.props.id) && <Redirect to="/dashboard" />} */}
-
                 <FetchMessage/>
 
                 <Card>
@@ -53,7 +50,7 @@ class Brewery extends Component {
                 }
 
                 {!!brewery.reviews &&
-                    <IndexNavigation variant='reviews' data={brewery.reviews} />
+                    <IndexNavigation variant='brewery-reviews' data={brewery.reviews} />
                 }
 
             </CardColumns>

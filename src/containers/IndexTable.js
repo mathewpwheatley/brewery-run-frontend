@@ -1,6 +1,6 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table'
-import IndexTableRow from '../components/IndexTableRow.js'
+import CommonTableRow from '../components/CommonTableRow.js'
 
 const IndexTable = ({data, displayKeys, basePath}) => {
 
@@ -13,7 +13,7 @@ const IndexTable = ({data, displayKeys, basePath}) => {
     }
 
     const mapData = () => {
-        return data.map(datum => <IndexTableRow key={datum.id} basePath={basePath} datum={datum} dataKeys={Object.keys(displayKeys)} />)
+        return data.map(datum => <CommonTableRow key={datum.id} basePath={basePath} datum={datum} dataKeys={Object.keys(displayKeys)} />)
     }
     
     return (

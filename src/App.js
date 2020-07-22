@@ -16,6 +16,7 @@ import EditAccountForm from './components/EditAccountForm.js'
 import LogInForm from './components/LogInForm.js'
 import Brewery from './containers/Brewery.js'
 import Circuit from './containers/Circuit.js'
+import Review from './containers/Review.js'
 import User from './containers/User.js'
 
 
@@ -34,9 +35,11 @@ class App extends Component {
         <Route exact path="/welcome" component={Welcome} />
         <Route exact path="/dashboard" component={DashBoard} />
         <Route exact path="/breweries" component={() => <IndexNavigation variant='breweries' data={this.props.breweries} getData={this.props.getAllBreweries} />} />
-        <Route path="/breweries/:id" component={(routerProps) => <Brewery id={routerProps.match.params.id}/>} />
+        <Route exact path="/breweries/:id" component={(routerProps) => <Brewery id={routerProps.match.params.id}/>} />
+        <Route exact path="/breweries/reviews/:id" component={(routerProps) => <Review variant='brewery-reviews' id={routerProps.match.params.id}/>} />
         <Route exact path="/circuits" component={() => <IndexNavigation variant='circuits' data={this.props.circuits} getData={this.props.getAllCircuits} />} />
-        <Route path="/circuits/:id" component={(routerProps) => <Circuit id={routerProps.match.params.id}/>} />
+        <Route exact path="/circuits/:id" component={(routerProps) => <Circuit id={routerProps.match.params.id}/>} />
+        <Route exact path="/circuits/reviews/:id" component={(routerProps) => <Review variant='circuit-reviews' id={routerProps.match.params.id}/>} />
         <Route exact path="/users" component={() => <IndexNavigation variant='users' data={this.props.users} getData={this.props.getAllUsers} />} />
         <Route path="/users/:id" component={(routerProps) => <User id={routerProps.match.params.id}/>} />
         <Route exact path="/create-account" component={CreateAccountForm} />

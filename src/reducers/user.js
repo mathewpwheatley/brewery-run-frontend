@@ -11,7 +11,7 @@ export default (state = {selected: {}, all: []}, action) => {
             delete newState.name
             return newState
 
-        case 'USER':
+        case 'SET_USER':
             return {...state, selected: action.selected}
     
         case 'CLEAR_USER':
@@ -20,7 +20,7 @@ export default (state = {selected: {}, all: []}, action) => {
         case 'UPDATE_USER':
             return {...state, name: action.name, selected: action.selected}
         
-        case 'ALL_USERS':
+        case 'SET_ALL_USERS':
             return {...state, all: action.all}
 
         case 'CLEAR_ALL_USERS':
