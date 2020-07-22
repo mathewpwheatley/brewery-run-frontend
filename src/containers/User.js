@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
+import IndexTable from './IndexTable.js'
 
 
 class User extends Component {
@@ -17,6 +18,9 @@ class User extends Component {
 
     render () {
         const user = this.props.user
+        const publicCircuitsDataDisplayNames = ['Title', 'Favorites', 'Likes', 'Reviews', 'Rating']
+        const publicCircuitsDataKeys = ['title', 'favorites_count', 'likes_count', 'reviews_count', 'rating']
+        
         return (
             <Container className="col-11 mt-4 border border-secondary rounded-lg">
 
@@ -30,7 +34,7 @@ class User extends Component {
                     <Card>
                         <Card.Header>User Information</Card.Header>
                         <Card.Body>
-                            <Card.Title>{user.full_name}</Card.Title>
+                            <Card.Title>Name: {user.full_name}</Card.Title>
                             <Card.Text>About: {user.about}</Card.Text>
                             <Card.Text>City: {user.city_address}</Card.Text>
                         </Card.Body>
@@ -45,12 +49,12 @@ class User extends Component {
                         </Card.Body>
                     </Card>
 
-                    <Card>
-                        <Card.Header>Public Created Circuits</Card.Header>
-                        <Card.Body>
-                            <Card.Text>TBD</Card.Text>
-                        </Card.Body>
-                    </Card>
+                    {!!user.public_circuits &&
+                        <Card>
+                            <Card.Header>Public Created Circuits</Card.Header>
+                            <IndexTable data={user.public_circuits} basePath={"/circuits"} dataDisplayNames={publicCircuitsDataDisplayNames} dataKeys={publicCircuitsDataKeys}/>
+                        </Card>
+                    }
 
                 </CardColumns>
             </Container>

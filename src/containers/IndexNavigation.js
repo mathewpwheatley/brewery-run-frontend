@@ -31,8 +31,8 @@ class IndexNavigation extends Component {
                     keywordKey: 'name',
                     icon: <i className="fas fa-industry"/>,
                     data: this.props.breweries,
-                    dataDisplayNames: ['Name', 'Type', 'Tags', 'Rating', 'Likes', 'Reviews', 'Favorited'],
-                    dataKeys: ['name', 'brewery_type', 'tag_list', 'rating', 'likes_count', 'reviews_count', 'favorites_count']
+                    dataDisplayNames: ['Name', 'Type', 'Tags', 'Rating', 'Likes', 'Reviews', 'Favorited', 'Circuits'],
+                    dataKeys: ['name', 'brewery_type', 'tag_list', 'rating', 'likes_count', 'reviews_count', 'favorites_count', 'public_circuits_count']
                 })
                 break 
             case "circuits":
@@ -41,8 +41,8 @@ class IndexNavigation extends Component {
                     keywordKey: 'title',
                     icon: <i className="fas fa-route"/>,
                     data: this.props.circuits,
-                    dataDisplayNames: ['Title', 'Rating', 'Likes', 'Reviews', 'Favorited'],
-                    dataKeys: ['title', 'rating', 'likes_count', 'reviews_count', 'favorites_count']
+                    dataDisplayNames: ['Title', 'Favorites', 'Likes', 'Reviews', 'Rating'],
+                    dataKeys: ['title', 'favorites_count', 'likes_count', 'reviews_count', 'rating']
                 })
                 break 
             case "users":

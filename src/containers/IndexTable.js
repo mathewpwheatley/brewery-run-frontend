@@ -15,20 +15,6 @@ class IndexTable extends Component {
     mapData = () => {
         return this.props.data.map(datum => <IndexTableRow key={datum.id} basePath={this.props.basePath} datum={datum} dataKeys={this.props.dataKeys} />)
     }
-
-    // handleClick = event => {
-    //     let sort_by
-    //     if (event.currentTarget.value === "ascending") {
-    //         sort_by = "descending"
-    //     } else {
-    //         sort_by = "ascending"
-    //     }
-    //     this.setState({
-    //         current: event.currentTarget.name,
-    //         [event.currentTarget.name]: sort_by
-    //     })
-    // }
-
     
     render () {
         return (
