@@ -3,8 +3,6 @@ import endPoints from './endPoints.js'
 
 const {usersURL, logInURL, logOutURL} = endPoints
 
-// This function should be handled by the runner actions 
-
 export const getUser = (userId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})

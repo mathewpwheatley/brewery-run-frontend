@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
@@ -24,53 +22,51 @@ class Brewery extends Component {
         const reviewDataKeys = ['title', 'author_name', 'rating']
 
         return (
-            <Container className="col-11 mt-4 border border-secondary rounded-lg">
+            <CardColumns className="p-4">
+
                 {/* Redirect to logged in user dashboard if they are looking at their own page */}
                 {/* {this.props.userId === parseInt(this.props.id) && <Redirect to="/dashboard" />} */}
 
                 <FetchMessage/>
 
-                <CardColumns className="p-4">
+                <Card>
+                    <Card.Header>Brewery Information</Card.Header>
+                    <Card.Body>
+                        <Card.Title>Name: {brewery.name}</Card.Title>
+                        <Card.Text>Type: {brewery.brewery_type}</Card.Text>
+                        <Card.Text>Tags: {brewery.tag_list}</Card.Text>
+                        <Card.Text>Address: {brewery.full_address}</Card.Text>
+                        <Card.Text>Phone: {brewery.phone}</Card.Text>
+                        <Card.Text><Button variant="outline-secondary" href={brewery.website_url} >Brewery Website</Button></Card.Text>
+                    </Card.Body>
+                </Card>
 
+                <Card>
+                    <Card.Header>Statistics</Card.Header>
+                    <Card.Body>
+                        <Card.Text>Circuits: {brewery.public_circuits_count}</Card.Text>
+                        <Card.Text>Favorited: {brewery.favorites_count}</Card.Text>
+                        <Card.Text>Likes: {brewery.likes_count}</Card.Text>
+                        <Card.Text>Reviews: {brewery.reviews_count}</Card.Text>
+                        <Card.Text>Rating: {brewery.rating}</Card.Text>
+                    </Card.Body>
+                </Card>
+
+                {!!brewery.public_circuits &&
                     <Card>
-                        <Card.Header>Brewery Information</Card.Header>
-                        <Card.Body>
-                            <Card.Title>Name: {brewery.name}</Card.Title>
-                            <Card.Text>Type: {brewery.brewery_type}</Card.Text>
-                            <Card.Text>Tags: {brewery.tag_list}</Card.Text>
-                            <Card.Text>Address: {brewery.full_address}</Card.Text>
-                            <Card.Text>Phone: {brewery.phone}</Card.Text>
-                            <Card.Text><Button variant="outline-secondary" href={brewery.website_url} >Brewery Website</Button></Card.Text>
-                        </Card.Body>
+                        <Card.Header>Circuits</Card.Header>
+                        <IndexTable data={brewery.public_circuits} basePath={"/circuits"} dataDisplayNames={publicCircuitsDataDisplayNames} dataKeys={publicCircuitsDataKeys}/>
                     </Card>
+                }
 
+                {!!brewery.reviews &&
                     <Card>
-                        <Card.Header>Statistics</Card.Header>
-                        <Card.Body>
-                            <Card.Text>Circuits: {brewery.public_circuits_count}</Card.Text>
-                            <Card.Text>Favorited: {brewery.favorites_count}</Card.Text>
-                            <Card.Text>Likes: {brewery.likes_count}</Card.Text>
-                            <Card.Text>Reviews: {brewery.reviews_count}</Card.Text>
-                            <Card.Text>Rating: {brewery.rating}</Card.Text>
-                        </Card.Body>
+                        <Card.Header>Reviews</Card.Header>
+                        <IndexTable data={brewery.reviews} basePath={"/reviews"} dataDisplayNames={reviewDataDisplayNames} dataKeys={reviewDataKeys}/>
                     </Card>
+                }
 
-                    {!!brewery.public_circuits &&
-                        <Card>
-                            <Card.Header>Circuits</Card.Header>
-                            <IndexTable data={brewery.public_circuits} basePath={"/circuits"} dataDisplayNames={publicCircuitsDataDisplayNames} dataKeys={publicCircuitsDataKeys}/>
-                        </Card>
-                    }
-
-                    {!!brewery.reviews &&
-                        <Card>
-                            <Card.Header>Reviews</Card.Header>
-                            <IndexTable data={brewery.reviews} basePath={"/reviews"} dataDisplayNames={reviewDataDisplayNames} dataKeys={reviewDataKeys}/>
-                        </Card>
-                    }
-
-                </CardColumns>
-            </Container>
+            </CardColumns>
         )
     }
 }

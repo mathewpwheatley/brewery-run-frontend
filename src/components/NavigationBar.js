@@ -32,9 +32,9 @@ class NavigationBar extends Component {
                             </NavLink>
                         </Nav.Item>
                         <Nav.Item>
-                            <NavLink className="nav-link" to="/index/users" title="Runners">
+                            <NavLink className="nav-link" to="/index/users" title="Users">
                                 <i className="fas fa-running"/>
-                                <span className="d-none d-sm-none d-md-inline"> Runners</span>
+                                <span className="d-none d-sm-none d-md-inline"> Users</span>
                             </NavLink>
                         </Nav.Item>
                     </Nav>

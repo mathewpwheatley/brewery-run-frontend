@@ -23,10 +23,10 @@ class IndexNavigation extends Component {
         dataKeys: [] // The object keys that will be used to pull the data, must match the order of dataDisplayNames
     }
 
-    setVariantion = async () => {
+    setVariantion = () => {
         switch (this.props.variant) {
             case "breweries":
-                await this.props.getAllBreweries()
+                // this.props.getAllBreweries()
                 this.setState({
                     keywordKey: 'name',
                     icon: <i className="fas fa-industry"/>,
@@ -36,7 +36,7 @@ class IndexNavigation extends Component {
                 })
                 break 
             case "circuits":
-                await this.props.getAllCircuits()
+                // this.props.getAllCircuits()
                 this.setState({
                     keywordKey: 'title',
                     icon: <i className="fas fa-route"/>,
@@ -46,7 +46,7 @@ class IndexNavigation extends Component {
                 })
                 break 
             case "users":
-                await this.props.getAllUsers()
+                // this.props.getAllUsers()
                 this.setState({
                     keywordKey: 'full_name',
                     icon: <i className="fas fa-running"/>,
@@ -61,6 +61,7 @@ class IndexNavigation extends Component {
     }
 
     componentDidMount() {
+        this.props.getAllBreweries()
         this.setVariantion()
     }
 
