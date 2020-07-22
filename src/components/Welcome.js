@@ -10,7 +10,7 @@ const Welcome = () => {
         
         <Container className="col-6 mt-4">
             <Jumbotron className="text-center p-3 border border-secondary">
-                <h1 className="display-4"><i className="fas fa-beer"/> Welcome to Beer Run</h1>
+                <h1 className="display-4"><i className="fas fa-beer" style={{color: "#ffbe32"}} /> Welcome to Beer Run</h1>
                 <p className="lead"> Bringing the fun back to your run!</p>
                 <hr className="my-3"/>
                 <Link to="/create-account" title="Create Account">
