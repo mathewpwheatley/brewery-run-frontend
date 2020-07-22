@@ -1,60 +1,64 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
-import {getAllBreweries} from '../actions/brewery.js'
-import {getAllCircuits} from '../actions/circuit.js'
-import {getAllUsers} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import IndexTable from './IndexTable.js'
 
 class IndexNavigation extends Component {
 
     state = {
-        keyword: '',
-        keywordKey: '',
+        keyWord: '',
+        title: '',
         icon: '',
-        data: [],
+        basePath: '',
         displayKeys: {}
+    }
+
+    componentDidMount() {
+        this.setVariantion()
+
+        // I dont like this, it feels a bit janky and requires a refresh of page to get new data
+        // Also, you could get stuck in a render load loop if the dataset is empty
+        if (this.props.data.length === 0) {this.props.getData()}
     }
 
     setVariantion = () => {
         switch (this.props.variant) {
             case "breweries":
-                this.props.getAllBreweries()
                 this.setState({
-                    keywordKey: 'name',
+                    title: 'Breweries',
                     icon: <i className="fas fa-industry"/>,
-                    data: this.props.breweries,
+                    basePath: '/breweries',
                     displayKeys: {name: 'Name', brewery_type: 'Type', public_circuits_count: 'Circuits', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorited'}
                 })
                 break 
             case "circuits":
-                this.props.getAllCircuits()
                 this.setState({
-                    keywordKey: 'title',
+                    title: 'Circuits',
                     icon: <i className="fas fa-route"/>,
-                    data: this.props.circuits,
+                    basePath: '/circuits',
                     displayKeys: {title: 'Title', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorites'}
                 })
                 break 
             case "users":
-                this.props.getAllUsers()
                 this.setState({
-                    keywordKey: 'full_name',
+                    title: 'Runners',
                     icon: <i className="fas fa-running"/>,
-                    data: this.props.users,
+                    basePath: '/users',
                     displayKeys: {full_name: 'Name', public_circuits_count: 'Circuits', followers_count: 'Followers'}
                 })
-                break 
+                break
+            case "reviews":
+                this.setState({
+                    title: 'Reviews',
+                    icon: <i className="far fa-newspaper"/>,
+                    basePath: '/reviews',
+                    displayKeys: {title: 'Title', author_name: 'Author', rating: 'Rating'}
+                })
             default:
                 break
         }
-    }
-
-    componentDidMount() {
-        this.setVariantion()
     }
 
     handleChange = (event) => {
@@ -63,52 +67,32 @@ class IndexNavigation extends Component {
         })
     }
 
-    capitalize = (string) => {
-        if (typeof string !== 'string') return ''
-        return string.charAt(0).toUpperCase() + string.slice(1)
-    }
-
     filterDataByName = () => {
-        if (this.state.keyword) {
-            return this.state.data.filter(datum => datum[this.state.keywordKey].toLowerCase().includes(this.state.keyword.toLowerCase()))
+        if (this.state.keyWord) {
+            const keyWordKey = Object.keys(this.state.displayKeys)[0]
+            return this.props.data.filter(datum => datum[keyWordKey].toLowerCase().includes(this.state.keyWord.toLowerCase()))
         } else {
-            return this.state.data
+            return this.props.data
         }
     }
 
     render () {
         return (
-            <Container className="col-11 mt-4 px-0 border border-secondary rounded-lg">
+            <Card className="col-11 mt-4 px-0 mx-auto border border-secondary rounded-lg">
                 <Navbar className="shadow" bg="primary" variant="dark">
                     <Navbar.Brand className="mr-auto">
                         {this.state.icon}
-                        <span className="d-none d-sm-none d-md-inline"> {this.capitalize(this.props.variant)}</span>
+                        <span className="d-none d-sm-none d-md-inline"> {this.state.title}</span>
                     </Navbar.Brand>
                     <Form inline>
-                        <Form.Control type="search" placeholder={"Name Search"} aria-label="Search" name="keyword" value={this.state.keyword} onChange={event => this.handleChange(event)}/>
+                        <Form.Control type="search" placeholder={Object.values(this.state.displayKeys)[0] + " Search"} aria-label="Search" name="keyWord" value={this.state.keyWord} onChange={event => this.handleChange(event)}/>
                     </Form>
                 </Navbar>
                 <FetchMessage/>
-                <IndexTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={"/" + this.props.variant} />
-            </Container>
+                <IndexTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} />
+            </Card>
         )
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        breweries: state.brewery.all,
-        circuits: state.circuit.all,
-        users: state.user.all
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getAllBreweries: () => {dispatch(getAllBreweries())},
-        getAllCircuits: () => {dispatch(getAllCircuits())},
-        getAllUsers: () => {dispatch(getAllUsers())}
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IndexNavigation)
+export default IndexNavigation

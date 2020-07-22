@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {autoLogInUser} from './actions/user.js'
+import {getAllBreweries} from './actions/brewery.js'
+import {getAllCircuits} from './actions/circuit.js'
+import {getAllUsers} from './actions/user.js'
 import NavigationBar from './components/NavigationBar.js'
 import Home from './containers/Home.js'
 import Welcome from './components/Welcome.js'
@@ -13,12 +16,14 @@ import Brewery from './containers/Brewery.js'
 import Circuit from './containers/Circuit.js'
 import User from './containers/User.js'
 
+
 class App extends Component {
 
   // Automatically log in on component mount if valid jwt cookie exists
   componentDidMount() {
     this.props.autoLogInUser()
   }
+
   render () {
     return (
       <Router>
@@ -26,11 +31,11 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/welcome" component={Welcome} />
         <Route path="/dashboard" component={DashBoard} />
-        <Route path="/index/breweries" component={(routerProps) => <IndexNavigation path={routerProps.match.path} variant='breweries'/>} />
+        <Route path="/index/breweries" component={() => <IndexNavigation variant='breweries' data={this.props.breweries} getData={this.props.getAllBreweries} />} />
         <Route path="/breweries/:id" component={(routerProps) => <Brewery id={routerProps.match.params.id}/>} />
-        <Route path="/index/circuits" component={(routerProps) => <IndexNavigation path={routerProps.match.path} variant='circuits'/>} />
+        <Route path="/index/circuits" component={() => <IndexNavigation variant='circuits' data={this.props.circuits} getData={this.props.getAllCircuits} />} />
         <Route path="/circuits/:id" component={(routerProps) => <Circuit id={routerProps.match.params.id}/>} />
-        <Route path="/index/users" component={(routerProps) => <IndexNavigation path={routerProps.match.path} variant='users'/>} />
+        <Route path="/index/users" component={() => <IndexNavigation variant='users' data={this.props.users} getData={this.props.getAllUsers} />} />
         <Route path="/users/:id" component={(routerProps) => <User id={routerProps.match.params.id}/>} />
         <Route exact path="/create-account" component={CreateAccountForm} />
         <Route exact path="/log-in" component={LogInForm} />
@@ -39,10 +44,21 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    autoLogInUser: () => {dispatch(autoLogInUser())}
+      breweries: state.brewery.all,
+      circuits: state.circuit.all,
+      users: state.user.all
   }
 }
 
-export default connect(null, mapDispatchToProps)(App)
+const mapDispatchToProps = dispatch => {
+  return {
+    autoLogInUser: () => {dispatch(autoLogInUser())},
+    getAllBreweries: () => {dispatch(getAllBreweries())},
+    getAllCircuits: () => {dispatch(getAllCircuits())},
+    getAllUsers: () => {dispatch(getAllUsers())}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

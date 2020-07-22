@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
-import IndexTable from './IndexTable.js'
+import IndexNavigation from './IndexNavigation.js'
 
 
 class Circuit extends Component {
@@ -16,10 +16,6 @@ class Circuit extends Component {
 
     render () {
         const circuit = this.props.circuit
-        const breweryDataDisplayNames = ['Name', 'Type', 'Tags', 'Rating', 'Likes', 'Reviews', 'Favorited']
-        const breweryDataKeys = ['name', 'brewery_type', 'tag_list', 'rating', 'likes_count', 'reviews_count', 'favorites_count']
-        const reviewDataDisplayNames = ['Title', 'Author', 'Rating']
-        const reviewDataKeys = ['title', 'author_name', 'rating']
 
         return (
             <CardColumns className="p-4">
@@ -57,17 +53,11 @@ class Circuit extends Component {
                 </Card>
 
                 {!!circuit.breweries &&
-                    <Card>
-                        <Card.Header>Breweries</Card.Header>
-                        <IndexTable data={circuit.breweries} basePath={"/breweries"} dataDisplayNames={breweryDataDisplayNames} dataKeys={breweryDataKeys}/>
-                    </Card>
+                    <IndexNavigation variant='breweries' data={circuit.breweries} />
                 }
 
                 {!!circuit.reviews &&
-                    <Card>
-                        <Card.Header>Reviews</Card.Header>
-                        <IndexTable data={circuit.reviews} basePath={"/reviews"} dataDisplayNames={reviewDataDisplayNames} dataKeys={reviewDataKeys}/>
-                    </Card>
+                    <IndexNavigation variant='reviews' data={circuit.reviews} />
                 }
 
             </CardColumns>

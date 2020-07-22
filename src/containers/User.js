@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
-import IndexTable from './IndexTable.js'
+import IndexNavigation from './IndexNavigation.js'
 
 
 class User extends Component {
@@ -17,8 +17,6 @@ class User extends Component {
 
     render () {
         const user = this.props.user
-        const publicCircuitsDataDisplayNames = ['Title', 'Favorites', 'Likes', 'Reviews', 'Rating']
-        const publicCircuitsDataKeys = ['title', 'favorites_count', 'likes_count', 'reviews_count', 'rating']
         
         return (
             <CardColumns className="p-4">
@@ -47,10 +45,7 @@ class User extends Component {
                 </Card>
 
                 {!!user.public_circuits &&
-                    <Card>
-                        <Card.Header>Public Created Circuits</Card.Header>
-                        <IndexTable data={user.public_circuits} basePath={"/circuits"} dataDisplayNames={publicCircuitsDataDisplayNames} dataKeys={publicCircuitsDataKeys}/>
-                    </Card>
+                    <IndexNavigation variant='circuits' data={user.public_circuits} />
                 }
 
             </CardColumns>
