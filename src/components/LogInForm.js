@@ -62,15 +62,15 @@ class LogInForm extends Component {
                     </Form.Row>
                     <Form.Row className="justify-content-center">
                         <Col>
-                            <Button block variant="primary" type="button" onClick={event => this.handleGoogleButtonClick(event)}>
+                            <Button block variant="primary" type="button" title="Log in with Google" onClick={event => this.handleGoogleButtonClick(event)}>
                                 <i className="fab fa-google"/>
-                                <span className="d-none d-sm-none d-md-inline"> Login with Google</span>
+                                <span className="d-none d-sm-none d-md-inline"> Log in with Google</span>
                             </Button>
                         </Col>
                         <Col>
-                            <Button block variant="success" type="submit">
+                            <Button block variant="success" type="submit" title="Log in to Beer Run">
                                 <i className="fas fa-sign-in-alt"/>
-                                <span className="d-none d-sm-none d-md-inline"> Login to Beer Run</span>
+                                <span className="d-none d-sm-none d-md-inline"> Log in to Beer Run</span>
                             </Button>
                         </Col>
                     </Form.Row>

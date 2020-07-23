@@ -17,7 +17,7 @@ export const getBreweryReview = (reviewId) => {
         fetch(breweryReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {
@@ -45,7 +45,7 @@ export const getCircuitReview = (reviewId) => {
         fetch(circuitReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {

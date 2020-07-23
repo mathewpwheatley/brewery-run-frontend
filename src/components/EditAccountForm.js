@@ -61,6 +61,7 @@ class EditAccountForm extends Component {
                         <Form.Group as={Col}>
                             <Form.Label>First Name</Form.Label>
                             <Form.Control type="text" placeholder="First Name" name="first_name" value={this.state.first_name} onChange={event => this.handleChange(event)}/>
+                            <Form.Text className="text-muted">Required</Form.Text>
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Middle Name</Form.Label>
@@ -69,20 +70,24 @@ class EditAccountForm extends Component {
                         <Form.Group as={Col}>
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control type="text" placeholder="Last Name" name="last_name" value={this.state.last_name} onChange={event => this.handleChange(event)}/>
+                            <Form.Text className="text-muted">Required</Form.Text>
                         </Form.Group>
                     </Form.Row>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
+                        <Form.Text className="text-muted">Required</Form.Text>
                     </Form.Group>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder=" Password" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
+                            <Form.Text className="text-muted">Required <small>(You are updating your password here, right now we do not check if this matches your current password)</small></Form.Text>
                         </Form.Group>
                         <Form.Group as={Col}>
                         <Form.Label>Confirm Password</Form.Label>
                             <Form.Control type="password" placeholder="Confirm Password" name="password_confirmation" value={this.state.password_confirmation} onChange={event => this.handleChange(event)}/>
+                            <Form.Text className="text-muted">Required</Form.Text>
                         </Form.Group>
                     </Form.Row>
                     <Form.Group>
@@ -113,13 +118,13 @@ class EditAccountForm extends Component {
                     </Form.Group>
                     <Form.Row>
                         <Col>
-                            <Button block variant="danger" type="button" onClick={() => this.handleDeleteClick()} >
+                            <Button block variant="danger" type="button" title="Delete Account" onClick={() => this.handleDeleteClick()} >
                                 <i className="fas fa-trash-alt"/>
                                 <span className="d-none d-sm-none d-md-inline"> Delete Account</span>
                             </Button>
                         </Col>
                         <Col>
-                            <Button block variant="success" type="submit">
+                            <Button block variant="success" type="submit" title="Update Account">
                                 <i className="fas fa-user-plus"/>
                                 <span className="d-none d-sm-none d-md-inline"> Update Account</span>
                             </Button>

@@ -33,14 +33,21 @@ class DashBoard extends Component {
                         <Card.Text>About: {user.about}</Card.Text>
                         <Card.Text>Email: {user.email}</Card.Text>
                         <Card.Text>Address: {user.full_address}</Card.Text>
-                        <Link to="/edit-account">
-                            <Button variant="warning">
-                                <i className="fas fa-user-edit"/>
-                                <span className="d-none d-sm-none d-md-inline"> Edit Account</span>
-                            </Button>
-                        </Link>
                     </Card.Body>
                 </Card>
+
+                <Link to="/new-circuit">
+                    <Button variant="primary" type="button" title="New Circuit">
+                        <i className="fas fa-route"/>
+                        <span className="d-none d-sm-none d-md-inline"> New Circuit</span>
+                    </Button>
+                </Link>
+                <Link to="/edit-account">
+                    <Button variant="secondary" type="button" title="Edit Account">
+                        <i className="fas fa-user-edit"/>
+                        <span className="d-none d-sm-none d-md-inline"> Edit Account</span>
+                    </Button>
+                </Link>
 
                 <Card>
                     <Card.Header>Statistics</Card.Header>
@@ -70,31 +77,31 @@ class DashBoard extends Component {
                     </Card.Body>
                 </Card>
 
-                {!!user.favorite_breweries &&
+                {(!!user.favorite_breweries && user.favorite_breweries.length > 0) &&
                     <CommonNavigation variant='breweries' navSubTitle=': Favorite' data={user.favorite_breweries} />
                 }
 
-                {!!user.public_followees_circuits &&
+                {(!!user.public_followees_circuits && user.public_followees_circuits.length > 0) &&
                     <CommonNavigation variant='circuits' navSubTitle=' from Followees' data={user.public_followees_circuits} />
                 }
 
-                {!!user.favorite_circuits &&
+                {(!!user.favorite_circuits && user.favorite_circuits.length > 0) &&
                     <CommonNavigation variant='circuits' navSubTitle=': Favorite' data={user.favorite_circuits} />
                 }
 
-                {!!user.private_circuits &&
+                {(!!user.private_circuits && user.private_circuits.length > 0) &&
                     <CommonNavigation variant='circuits' navSubTitle=': Private' data={user.private_circuits} />
                 }
 
-                {!!user.public_circuits &&
+                {(!!user.public_circuits && user.public_circuits.length > 0) &&
                     <CommonNavigation variant='circuits' navSubTitle=': Public' data={user.public_circuits} />
                 }
 
-                {!!user.brewery_reviews &&
+                {(!!user.brewery_reviews && user.brewery_reviews.length > 0) &&
                     <CommonNavigation variant='brewery-reviews' navSubTitle=': Brewery' data={user.brewery_reviews} />
                 }
 
-                {!!user.circuit_reviews &&
+                {(!!user.circuit_reviews && user.circuit_reviews.length > 0) &&
                     <CommonNavigation variant='circuit-reviews' navSubTitle=': Circuit' data={user.circuit_reviews} />
                 }
                 

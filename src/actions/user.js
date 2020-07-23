@@ -17,7 +17,7 @@ export const getUser = (userId) => {
         fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {
@@ -51,7 +51,7 @@ export const getAllUsers = () => {
         fetch(usersURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {
@@ -86,10 +86,11 @@ const postFetch = (user, endPoint) => {
         fetch(endPoint, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
-            } else {
+            } else if (json.id) {
+                // Succesful loggin on backend
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
                     type: 'LOG_IN',
@@ -97,6 +98,9 @@ const postFetch = (user, endPoint) => {
                     name: json.full_name,
                     notifications: json.notifications
                 })
+            } else {
+                // Not logged in on backend but no errors (ie. auto log-in did not find valid jwt)
+                dispatch({type: 'CLEAR_ERRORS'})
             }
         })
     }
@@ -124,7 +128,7 @@ export const logOutUser = () => {
         fetch(logOutURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {
@@ -149,7 +153,7 @@ export const editUser = (userId) => {
         fetch(usersURL + '/' + userId + '/edit', options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {
@@ -179,7 +183,7 @@ export const updateUser = (userId, user) => {
         fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {
@@ -204,7 +208,7 @@ export const deleteUser = (userId) => {
         fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {

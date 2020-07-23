@@ -16,7 +16,7 @@ export const getBrewery = (breweryId) => {
         fetch(breweriesURL + '/' + breweryId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {
@@ -49,7 +49,7 @@ export const getAllBreweries = () => {
         fetch(breweriesURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
-                    type: 'ERRORS',
+                    type: 'SET_ERRORS',
                     errors: json.errors
                 })
             } else {
