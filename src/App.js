@@ -18,6 +18,7 @@ import Brewery from './containers/Brewery.js'
 import Circuit from './containers/Circuit.js'
 import Review from './containers/Review.js'
 import User from './containers/User.js'
+import Notification from './components/Notification.js'
 
 
 class App extends Component {
@@ -48,6 +49,8 @@ class App extends Component {
         <Route exact path="/create-account" component={CreateAccountForm} />
         <Route exact path="/log-in" component={LogInForm} />
         <Route exact path="/edit-account" component={EditAccountForm} />
+
+        <Route exact path="/notifications" component={Notification} />
       </Router>
     )
   }
