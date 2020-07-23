@@ -5,9 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import {editUser} from '../actions/user.js'
-import {updateUser} from '../actions/user.js'
-import {deleteUser} from '../actions/user.js'
+import {editUser, updateUser, deleteUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
 
 class EditAccountForm extends Component {

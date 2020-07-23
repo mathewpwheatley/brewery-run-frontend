@@ -1,12 +1,24 @@
-export default (state = {count: 0, all: []}, action) => {
+export default (state = {all: []}, action) => {
     
     switch (action.type) {
 
         case 'LOG_IN':
-            return {...state, count: action.notifications_count}
+            return {...state, all: action.notifications}
 
         case 'LOG_OUT':
-            return {...state, count: 0}
+            return {...state, all: []}
+
+        case 'MARK_READ_NOTIFICATION':
+            return {...state, all: [...state.all].map(one => {
+                if (one.id === action.id) {
+                    return action.notification
+                } else {
+                    return one
+                }
+            })}
+
+        case 'DELETE_NOTIFICATION':
+            return {...state, all: [...state.all].filter(one => one.id !== action.id)}
 
         default:
             return state

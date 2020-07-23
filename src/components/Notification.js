@@ -1,19 +1,32 @@
-
 import React from 'react'
+import {connect} from 'react-redux'
+import Toast from 'react-bootstrap/Toast'
+import {markReadNotification, deleteNotification} from '../actions/notification.js'
 
-const Notification = () => {
+const Notification = ({notification, markReadNotification, deleteNotification}) => {
+
+  const handleClick = () => {
+    if (!notification.read) {markReadNotification(notification.id)}
+  }
+
   return (
-    <div className="card">
-      <div className="toast-header">
-        <strong className="mr-auto">Bootstrap</strong>
-        <small className="text-muted">just now</small>
-      </div>
-      <div className="toast-body">
-        See? Just like this.
-      </div>
-    </div>
+    <Toast onClose={() => deleteNotification(notification.id)} onClick={handleClick} >
+      <Toast.Header className={!notification.read && "bg-primary text-light"}>
+        <strong className="mr-auto">{notification.title}</strong>
+        <small>{notification.read ? "Read" : "Unread"}</small>
+      </Toast.Header>
+      <Toast.Body>
+        {notification.content} {notification.link && <a href={notification.link} target="_blank" rel="noopener noreferrer">Details</a>}
+      </Toast.Body>
+    </Toast>
   )
 }
 
-export default Notification
+const mapDispatchToProps = dispatch => {
+  return {
+    markReadNotification: (notificationId) => {dispatch(markReadNotification(notificationId))},
+    deleteNotification: (notificationId) => {dispatch(deleteNotification(notificationId))}
+  }
+}
 
+export default connect(null, mapDispatchToProps)(Notification)

@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Notifications from '../containers/Notifications.js'
 import {logOutUser} from '../actions/user.js'
 
 class NavigationBar extends Component {
@@ -61,12 +62,13 @@ class NavigationBar extends Component {
                         }
 
                         {/* Conditionally render via && operator acting as if statement */}
-                        {this.props.notificationsCount > 0 &&
-                            <Nav.Item>
-                                <NavLink className="nav-link" to="/notifications" title="Notifications">
+                        {this.props.notifications.length > 0 &&
+                            <Dropdown as={Nav.Item}>
+                                <Dropdown.Toggle as={Nav.Link} title="Notifications">
                                     <i className="fas fa-bell"/>
-                                </NavLink>
-                            </Nav.Item>
+                                </Dropdown.Toggle>
+                                <Notifications/>
+                            </Dropdown>
                         }
 
                         {/* Conditionally render via && operator acting as if statement */}
@@ -77,9 +79,8 @@ class NavigationBar extends Component {
                                     <span className="d-none d-sm-none d-md-inline"> {this.props.userName}</span>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu alignRight>
-                                    <NavLink className="dropdown-item" exact to="/notifications" title="Notifications"><i className="fas fa-bell"/> Notifications ({this.props.notificationsCount})</NavLink>
-                                    <NavLink className="dropdown-item" exact to="/dashboard" title="Dashboard"><i className="fas fa-house-user"/> Dashboard</NavLink>
-                                    <NavLink className="dropdown-item" exact to="/edit-account" title="Edit Account"><i className="fas fa-user-edit"/> Edit Account</NavLink>
+                                    <Dropdown.Item as={NavLink} exact to="/dashboard" title="Dashboard"><i className="fas fa-house-user"/> Dashboard</Dropdown.Item>
+                                    <Dropdown.Item as={NavLink} exact to="/edit-account" title="Edit Account"><i className="fas fa-user-edit"/> Edit Account</Dropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item title="Log Out" onClick={() => this.props.logOutUser()}><i className="fas fa-sign-out-alt"/> Log Out</Dropdown.Item>
                                 </Dropdown.Menu>
@@ -95,7 +96,7 @@ class NavigationBar extends Component {
 const mapStateToProps = state => {
     return {
         userName: state.user.name,
-        notificationsCount: state.notification.count
+        notifications: state.notification.all
     }
 }
 

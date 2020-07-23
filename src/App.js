@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import {autoLogInUser} from './actions/user.js'
+import {autoLogInUser, getAllUsers} from './actions/user.js'
 import {getAllBreweries} from './actions/brewery.js'
 import {getAllCircuits} from './actions/circuit.js'
-// import {getAllNotifications} from './actions/notifications.js'
-import {getAllUsers} from './actions/user.js'
 import NavigationBar from './components/NavigationBar.js'
 import Home from './containers/Home.js'
 import Welcome from './components/Welcome.js'
@@ -18,8 +16,6 @@ import Brewery from './containers/Brewery.js'
 import Circuit from './containers/Circuit.js'
 import Review from './containers/Review.js'
 import User from './containers/User.js'
-import Notification from './components/Notification.js'
-
 
 class App extends Component {
 
@@ -49,8 +45,6 @@ class App extends Component {
         <Route exact path="/create-account" component={CreateAccountForm} />
         <Route exact path="/log-in" component={LogInForm} />
         <Route exact path="/edit-account" component={EditAccountForm} />
-
-        <Route exact path="/notifications" component={Notification} />
       </Router>
     )
   }

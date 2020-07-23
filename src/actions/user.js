@@ -95,7 +95,7 @@ const postFetch = (user, endPoint) => {
                     type: 'LOG_IN',
                     id: json.id,
                     name: json.full_name,
-                    notifications_count: json.notifications_count
+                    notifications: json.notifications
                 })
             }
         })

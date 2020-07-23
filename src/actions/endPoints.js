@@ -8,7 +8,8 @@ const endPoints = {
     breweriesURL: baseURL + "/breweries",
     breweryReviewsURL: baseURL + "/brewery_reviews",
     circuitsURL: baseURL + "/circuits",
-    circuitReviewsURL: baseURL + "/circuit_reviews"
+    circuitReviewsURL: baseURL + "/circuit_reviews",
+    notificationsURL: baseURL + "/notifications"
 }
 
 export default endPoints

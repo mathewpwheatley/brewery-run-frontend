@@ -33,7 +33,7 @@ const CommonTable = ({data, displayKeys, basePath}) => {
     }
 
     const sortData = () => {
-        return data.sort(function(a, b){return sortOrder*(a[sortKey]-b[sortKey])})
+        return data.sort(function(a, b){return sortOrder*(b[sortKey]-a[sortKey])})
     }
     
     const mapData = () => {

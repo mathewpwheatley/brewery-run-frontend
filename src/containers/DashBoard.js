@@ -75,7 +75,7 @@ class DashBoard extends Component {
                 }
 
                 {!!user.public_followees_circuits &&
-                    <CommonNavigation variant='circuits' navSubTitle=': from Followees' data={user.public_followees_circuits} />
+                    <CommonNavigation variant='circuits' navSubTitle=' from Followees' data={user.public_followees_circuits} />
                 }
 
                 {!!user.favorite_circuits &&
