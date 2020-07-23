@@ -58,7 +58,7 @@ class IndexNavigation extends Component {
                     navTitle: 'Reviews' + navSubTitle,
                     navColor: 'secondary',
                     icon: <i className="far fa-newspaper"/>,
-                    basePath: 'breweries/reviews',
+                    basePath: '/breweries/reviews',
                     displayKeys: {title: 'Title', author_name: 'Author', rating: 'Rating'}
                 })
                 break
@@ -67,7 +67,7 @@ class IndexNavigation extends Component {
                     navTitle: 'Reviews' + navSubTitle,
                     navColor: 'secondary',
                     icon: <i className="far fa-newspaper"/>,
-                    basePath: 'circuits/reviews',
+                    basePath: '/circuits/reviews',
                     displayKeys: {title: 'Title', author_name: 'Author', rating: 'Rating'}
                 })
                 break

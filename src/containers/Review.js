@@ -1,33 +1,55 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import {getReview} from '../actions/review.js'
+import {getBreweryReview} from '../actions/review.js'
+import {getCircuitReview} from '../actions/review.js'
 import FetchMessage from '../components/FetchMessage.js'
 
 class Review extends Component {
 
+    state = {
+        baseSubjectURL: ''
+    }
+
     componentDidMount() {
-        this.props.getReview(this.props.variant, this.props.id)
+        switch (this.props.variant) {
+            case 'brewery':
+                this.props.getBreweryReview(this.props.id)
+                this.setState({baseSubjectURL: '/breweries'})
+                break
+            case 'circuit':
+                this.props.getCircuitReview(this.props.id)
+                this.setState({baseSubjectURL: '/circuits'})
+                break
+            default:
+                break
+        }
+
+
+        // this.props.getReview(this.props.variant, this.props.id)
     }
 
     render () {
         const review = this.props.review
+
+
 
         return (
             <Card>
 
                 <FetchMessage/>
                 
-                <Card.Header>Review</Card.Header>
+                <Card.Header>{this.props.variant} Review: </Card.Header>
                 <Card.Body>
-                    {console.log(review)}
-                    {/* <Card.Title>Name: {brewery.name}</Card.Title>
-                    <Card.Text>Type: {brewery.brewery_type}</Card.Text>
-                    <Card.Text>Tags: {brewery.tag_list}</Card.Text>
-                    <Card.Text>Address: {brewery.full_address}</Card.Text>
-                    <Card.Text>Phone: {brewery.phone}</Card.Text>
-                    <Card.Text><Button variant="outline-secondary" href={brewery.website_url} >Brewery Website</Button></Card.Text> */}
+                    <Card.Title>Title: {review.title}</Card.Title>
+                    <Card.Text>Rating: {review.rating}</Card.Text>
+                    <Card.Text>Author: {review.author_name}</Card.Text>
+                    <Card.Text>{this.props.variant}: {review.subject_name}</Card.Text>
+                    <Card.Text>{review.content}</Card.Text>
+                    <Link to={this.state.baseSubjectURL + '/' + review.subject_id} ><Button variant="outline-secondary" >Subject</Button></Link>
+                    <Link to={'/users/' + review.author_id}><Button variant="outline-secondary" >Author</Button></Link>
                 </Card.Body>
             </Card>
         )
@@ -42,8 +64,22 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getReview: (variant, reviewId) => {dispatch(getReview(variant, reviewId))}
+        getBreweryReview: (reviewId) => {dispatch(getBreweryReview(reviewId))},
+        getCircuitReview: (reviewId) => {dispatch(getCircuitReview(reviewId))}
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Review)
+
+
+// let getURL
+//     switch (variant) {
+//         case 'Brewery':
+//             getURL = breweryReviewsURL
+//             break
+//         case 'Circuit':
+//             getURL = circuitReviewsURL
+//             break
+//         default:
+//             break
+//     }

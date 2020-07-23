@@ -34,12 +34,15 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/welcome" component={Welcome} />
         <Route exact path="/dashboard" component={DashBoard} />
+
         <Route exact path="/breweries" component={() => <IndexNavigation variant='breweries' data={this.props.breweries} getData={this.props.getAllBreweries} />} />
         <Route exact path="/breweries/:id" component={(routerProps) => <Brewery id={routerProps.match.params.id}/>} />
-        <Route exact path="/breweries/reviews/:id" component={(routerProps) => <Review variant='brewery-reviews' id={routerProps.match.params.id}/>} />
+        <Route exact path="/breweries/reviews/:id" component={(routerProps) => <Review variant='brewery' id={routerProps.match.params.id}/>} />
+
         <Route exact path="/circuits" component={() => <IndexNavigation variant='circuits' data={this.props.circuits} getData={this.props.getAllCircuits} />} />
         <Route exact path="/circuits/:id" component={(routerProps) => <Circuit id={routerProps.match.params.id}/>} />
-        <Route exact path="/circuits/reviews/:id" component={(routerProps) => <Review variant='circuit-reviews' id={routerProps.match.params.id}/>} />
+        <Route exact path="/circuits/reviews/:id" component={(routerProps) => <Review variant='circuit' id={routerProps.match.params.id} />} />
+
         <Route exact path="/users" component={() => <IndexNavigation variant='users' data={this.props.users} getData={this.props.getAllUsers} />} />
         <Route path="/users/:id" component={(routerProps) => <User id={routerProps.match.params.id}/>} />
         <Route exact path="/create-account" component={CreateAccountForm} />
