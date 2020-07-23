@@ -15,32 +15,24 @@ class Review extends Component {
 
     componentDidMount() {
         switch (this.props.variant) {
-            case 'brewery':
+            case 'brewery-review':
                 this.props.getBreweryReview(this.props.id)
                 this.setState({baseSubjectURL: '/breweries'})
                 break
-            case 'circuit':
+            case 'circuit-review':
                 this.props.getCircuitReview(this.props.id)
                 this.setState({baseSubjectURL: '/circuits'})
                 break
             default:
                 break
         }
-
-
-        // this.props.getReview(this.props.variant, this.props.id)
     }
 
     render () {
         const review = this.props.review
 
-
-
         return (
             <Card>
-
-                <FetchMessage/>
-                
                 <Card.Header>{this.props.variant} Review: </Card.Header>
                 <Card.Body>
                     <Card.Title>Title: {review.title}</Card.Title>
@@ -51,6 +43,9 @@ class Review extends Component {
                     <Link to={this.state.baseSubjectURL + '/' + review.subject_id} ><Button variant="outline-secondary" >Subject</Button></Link>
                     <Link to={'/users/' + review.author_id}><Button variant="outline-secondary" >Author</Button></Link>
                 </Card.Body>
+
+                <FetchMessage/>
+
             </Card>
         )
     }

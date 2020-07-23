@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonNavigation from './CommonNavigation.js'
-
+import CreateReview from './CreateReview.js'
 
 class Circuit extends Component {
 
@@ -55,6 +55,8 @@ class Circuit extends Component {
                 {!!circuit.reviews &&
                     <CommonNavigation variant='circuit-reviews' data={circuit.reviews} />
                 }
+
+                <CreateReview variant='circuit-review' subjectId={circuit.id} subjectName={circuit.title}/>
 
             </CardColumns>
         )

@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 import {getBrewery} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonNavigation from './CommonNavigation.js'
+import CreateReview from './CreateReview.js'
 
 
 class Brewery extends Component {
@@ -52,6 +53,8 @@ class Brewery extends Component {
                 {!!brewery.reviews &&
                     <CommonNavigation variant='brewery-reviews' data={brewery.reviews} />
                 }
+
+                <CreateReview variant='brewery-review' subjectId={brewery.id} subjectName={brewery.name}/>
 
             </CardColumns>
         )

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -43,9 +43,10 @@ class LogInForm extends Component {
 
     render () {
         return (
-            <Container className='col-4 my-4 py-0 border border-secondary rounded-lg'>
+            <Card className='col-4 mt-4 px-0 mx-auto'>
                 {this.handleRedirect()}
-                <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
+                <Card.Header>Log in</Card.Header>
+                <Card.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Group>
                         <Form.Control type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
                     </Form.Group>
@@ -74,9 +75,9 @@ class LogInForm extends Component {
                             </Button>
                         </Col>
                     </Form.Row>
-                </Form>
+                </Card.Body>
                 <FetchMessage/>
-            </Container>
+            </Card>
         )
     }
 }

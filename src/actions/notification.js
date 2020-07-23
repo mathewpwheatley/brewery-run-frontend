@@ -49,7 +49,7 @@ export const deleteNotification = (notificationId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'DELETE_NOTIFICATION',
+                    type: 'REMOVE_NOTIFICATION',
                     id: notificationId
                 })
             }

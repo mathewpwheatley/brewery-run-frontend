@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -42,9 +42,10 @@ class CreateAccountForm extends Component {
 
     render() {
         return (
-            <Container className='col-4 my-4 border border-secondary rounded-lg'>
+            <Card className='col-4 mt-4 mx-auto px-0'>
                 {this.handleRedirect()}
-                <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
+                <Card.Header>Create Account</Card.Header>
+                <Card.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Control type="text" placeholder="First Name" name="first_name" value={this.state.first_name} onChange={event => this.handleChange(event)}/>
@@ -64,21 +65,21 @@ class CreateAccountForm extends Component {
                     </Form.Group>
                     <Form.Row>
                         <Col>
-                            <Button block variant="primary" type="button" onClick={event => this.handleGoogleButtonClick(event)} >
+                            <Button block variant="primary" type="button" title="Sign up with Google" onClick={event => this.handleGoogleButtonClick(event)} >
                                 <i className="fab fa-google"/>
                                 <span className="d-none d-sm-none d-md-inline"> Sign up with Google</span>
                             </Button>
                         </Col>
                         <Col>
-                            <Button block variant="success" type="submit">
+                            <Button block variant="success" type="submit" title="Create Account">
                                 <i className="fas fa-user-plus"/>
                                 <span className="d-none d-sm-none d-md-inline"> Create Account</span>
                             </Button>
                         </Col>
                     </Form.Row>
-                </Form>
+                </Card.Body>
                 <FetchMessage/>
-            </Container>
+            </Card>
         )
     }
 }

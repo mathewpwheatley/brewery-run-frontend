@@ -7,10 +7,11 @@ export const getCircuit = (circuitId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
+            method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Credentials': 'include'
+                'Accept': 'application/json'
             }
         }
         fetch(circuitsURL + '/' + circuitId, options).then(resp => resp.json()).then(json => {
@@ -40,7 +41,8 @@ export const getAllCircuits = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            credentials: 'same-origin',
+            method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

@@ -101,7 +101,7 @@ class CommonNavigation extends Component {
 
     render () {
         return (
-            <Card className="col-11 mt-4 px-0 mx-auto border border-secondary rounded-lg">
+            <Card className="col-11 mt-4 px-0 mx-auto">
                 <Navbar className="shadow" bg={this.state.navColor} variant="dark">
                     <Navbar.Brand className="mr-auto">
                         {this.state.icon}

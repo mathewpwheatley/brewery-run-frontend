@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -38,6 +38,7 @@ class EditAccountForm extends Component {
     handleDeleteClick = () => {
         if (window.confirm("Are you sure? A deleted account can't be restored.")) {
             this.props.deleteUser(this.props.userId)
+            this.handleRedirect()
         }
     }
 
@@ -54,8 +55,9 @@ class EditAccountForm extends Component {
 
     render() {
         return (
-            <Container className='col-8 my-4 border border-secondary rounded-lg'>
+            <Card className='col-8 mt-4 mx-auto px-0'>
                 {this.handleRedirect()}
+                <Card.Header>Edit Account</Card.Header>
                 <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col}>
@@ -131,8 +133,8 @@ class EditAccountForm extends Component {
                         </Col>
                     </Form.Row>
                 </Form>
-                <FetchMessage/>
-            </Container>
+            <FetchMessage/>    
+            </Card>
         )
     }
 }

@@ -17,7 +17,7 @@ export default (state = {all: []}, action) => {
                 }
             })}
 
-        case 'DELETE_NOTIFICATION':
+        case 'REMOVE_NOTIFICATION':
             return {...state, all: [...state.all].filter(one => one.id !== action.id)}
 
         default:

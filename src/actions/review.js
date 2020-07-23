@@ -8,10 +8,10 @@ export const getBreweryReview = (reviewId) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Credentials': 'include'
+                'Accept': 'application/json'
             }
         }
         fetch(breweryReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
@@ -36,10 +36,10 @@ export const getCircuitReview = (reviewId) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Credentials': 'include'
+                'Accept': 'application/json'
             }
         }
         fetch(circuitReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
@@ -59,8 +59,66 @@ export const getCircuitReview = (reviewId) => {
     }
 }
 
-export const clearBrewery = () => {
+export const clearReview = () => {
     return (dispatch) => {
         dispatch({type: 'CLEAR_REVIEW'})
+    }
+}
+
+export const createBreweryReview = (review) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({brewery_review: review})
+        }
+        fetch(breweryReviewsURL, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'SET_ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({
+                    type: 'ADD_BREWERY_REVIEW',
+                    review: json
+                })
+            }
+        })
+    }
+}
+
+export const createCircuitReview = (review) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({circuit_review: review})
+        }
+        fetch(circuitReviewsURL, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'SET_ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({
+                    type: 'ADD_CIRCUIT_REVIEW',
+                    review: json
+                })
+            }
+        })
     }
 }
