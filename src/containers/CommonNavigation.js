@@ -3,9 +3,9 @@ import Card from 'react-bootstrap/Card'
 import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 import FetchMessage from '../components/FetchMessage.js'
-import IndexTable from './IndexTable.js'
+import CommonTable from './CommonTable.js'
 
-class IndexNavigation extends Component {
+class CommonNavigation extends Component {
 
     state = {
         keyWord: '',
@@ -112,10 +112,10 @@ class IndexNavigation extends Component {
                     </Form>
                 </Navbar>
                 <FetchMessage/>
-                <IndexTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} />
+                <CommonTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} />
             </Card>
         )
     }
 }
 
-export default IndexNavigation
+export default CommonNavigation

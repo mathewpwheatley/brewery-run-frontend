@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
-import IndexNavigation from './IndexNavigation.js'
+import CommonNavigation from './CommonNavigation.js'
 
 
 class Circuit extends Component {
@@ -50,11 +50,11 @@ class Circuit extends Component {
                 </Card>
 
                 {!!circuit.breweries &&
-                    <IndexNavigation variant='breweries' data={circuit.breweries} />
+                    <CommonNavigation variant='breweries' data={circuit.breweries} />
                 }
 
                 {!!circuit.reviews &&
-                    <IndexNavigation variant='circuit-reviews' data={circuit.reviews} />
+                    <CommonNavigation variant='circuit-reviews' data={circuit.reviews} />
                 }
 
             </CardColumns>

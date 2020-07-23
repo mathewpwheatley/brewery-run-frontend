@@ -2,7 +2,7 @@ import React from 'react'
 import Table from 'react-bootstrap/Table'
 import CommonTableRow from '../components/CommonTableRow.js'
 
-const IndexTable = ({data, displayKeys, basePath}) => {
+const CommonTable = ({data, displayKeys, basePath}) => {
 
     const mapHeadings = () => {
         return Object.values(displayKeys).map((displayName, index) => {
@@ -31,4 +31,4 @@ const IndexTable = ({data, displayKeys, basePath}) => {
     )
 }
 
-export default IndexTable
+export default CommonTable

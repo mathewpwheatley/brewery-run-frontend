@@ -10,7 +10,7 @@ import NavigationBar from './components/NavigationBar.js'
 import Home from './containers/Home.js'
 import Welcome from './components/Welcome.js'
 import DashBoard from './containers/DashBoard.js'
-import IndexNavigation from './containers/IndexNavigation.js'
+import CommonNavigation from './containers/CommonNavigation.js'
 import CreateAccountForm from './components/CreateAccountForm.js'
 import EditAccountForm from './components/EditAccountForm.js'
 import LogInForm from './components/LogInForm.js'
@@ -35,15 +35,15 @@ class App extends Component {
         <Route exact path="/welcome" component={Welcome} />
         <Route exact path="/dashboard" component={DashBoard} />
 
-        <Route exact path="/breweries" component={() => <IndexNavigation variant='breweries' data={this.props.breweries} getData={this.props.getAllBreweries} />} />
+        <Route exact path="/breweries" component={() => <CommonNavigation variant='breweries' data={this.props.breweries} getData={this.props.getAllBreweries} />} />
         <Route exact path="/breweries/:id" component={(routerProps) => <Brewery id={routerProps.match.params.id}/>} />
         <Route exact path="/breweries/reviews/:id" component={(routerProps) => <Review variant='brewery' id={routerProps.match.params.id}/>} />
 
-        <Route exact path="/circuits" component={() => <IndexNavigation variant='circuits' data={this.props.circuits} getData={this.props.getAllCircuits} />} />
+        <Route exact path="/circuits" component={() => <CommonNavigation variant='circuits' data={this.props.circuits} getData={this.props.getAllCircuits} />} />
         <Route exact path="/circuits/:id" component={(routerProps) => <Circuit id={routerProps.match.params.id}/>} />
         <Route exact path="/circuits/reviews/:id" component={(routerProps) => <Review variant='circuit' id={routerProps.match.params.id} />} />
 
-        <Route exact path="/users" component={() => <IndexNavigation variant='users' data={this.props.users} getData={this.props.getAllUsers} />} />
+        <Route exact path="/users" component={() => <CommonNavigation variant='users' data={this.props.users} getData={this.props.getAllUsers} />} />
         <Route path="/users/:id" component={(routerProps) => <User id={routerProps.match.params.id}/>} />
         <Route exact path="/create-account" component={CreateAccountForm} />
         <Route exact path="/log-in" component={LogInForm} />

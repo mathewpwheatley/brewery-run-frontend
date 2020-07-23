@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getBrewery} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
-import IndexNavigation from './IndexNavigation.js'
+import CommonNavigation from './CommonNavigation.js'
 
 
 class Brewery extends Component {
@@ -46,11 +46,11 @@ class Brewery extends Component {
                 </Card>
 
                 {!!brewery.public_circuits &&
-                    <IndexNavigation variant='circuits' data={brewery.public_circuits} />
+                    <CommonNavigation variant='circuits' data={brewery.public_circuits} />
                 }
 
                 {!!brewery.reviews &&
-                    <IndexNavigation variant='brewery-reviews' data={brewery.reviews} />
+                    <CommonNavigation variant='brewery-reviews' data={brewery.reviews} />
                 }
 
             </CardColumns>

@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
-import IndexNavigation from './IndexNavigation.js'
+import CommonNavigation from './CommonNavigation.js'
 
 
 class User extends Component {
@@ -45,7 +45,7 @@ class User extends Component {
                 </Card>
 
                 {!!user.public_circuits &&
-                    <IndexNavigation variant='circuits' data={user.public_circuits} />
+                    <CommonNavigation variant='circuits' data={user.public_circuits} />
                 }
 
             </CardColumns>
