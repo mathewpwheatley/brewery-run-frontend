@@ -115,7 +115,7 @@ class CommonNavigation extends Component {
                             <Fragment><i className="fas fa-plus-circle"/><span className="d-none d-sm-none d-md-inline"> Expand</span></Fragment>
                         }
                     </Button>
-                    {this.state.showTable &&
+                    {(this.state.showTable && (this.props.hideSearch ? false : true)) &&
                     <Form inline>
                         <Form.Control type="search" placeholder={Object.values(this.state.displayKeys)[0] + " Search"} aria-label="Search" name="keyWord" value={this.state.keyWord} onChange={event => this.handleChange(event)}/>
                     </Form>
@@ -123,7 +123,7 @@ class CommonNavigation extends Component {
                     
                 </Navbar>
                 {this.state.showTable &&
-                    <CommonTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} />
+                    <CommonTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} showLink={this.props.hideLink ? false : true}/>
                 }
             </Card>
         )

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Table from 'react-bootstrap/Table'
 import CommonTableRow from '../components/CommonTableRow.js'
 
-const CommonTable = ({data, displayKeys, basePath}) => {
+const CommonTable = ({data, displayKeys, basePath, showLink}) => {
 
     const [sortKey, setSortKey] = useState(Object.keys(displayKeys)[0])
     const [sortOrder, setSortOrder] = useState(1)
@@ -37,7 +37,7 @@ const CommonTable = ({data, displayKeys, basePath}) => {
     }
     
     const mapData = () => {
-        return sortData().map(datum => <CommonTableRow key={datum.id} basePath={basePath} datum={datum} dataKeys={Object.keys(displayKeys)} />)
+        return sortData().map(datum => <CommonTableRow key={datum.id} basePath={basePath} datum={datum} dataKeys={Object.keys(displayKeys)} showLink={showLink} />)
     }
     
     return (
@@ -45,7 +45,9 @@ const CommonTable = ({data, displayKeys, basePath}) => {
             <thead className="thead-light">
                 <tr>
                     {mapHeadings()}
-                    <th>Link</th>
+                    {showLink &&
+                        <th>Link</th>
+                    }
                 </tr>
             </thead>
             <tbody>
