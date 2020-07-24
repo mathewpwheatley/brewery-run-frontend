@@ -1,7 +1,8 @@
 import endPoints from './endPoints.js'
-// Note that dispatch must be passed in from 'connect' when these functions are called
 
 const {usersURL, logInURL, autoLogInURL, logOutURL} = endPoints
+
+// Note that dispatch must be passed in from 'connect' when these functions are called
 
 export const getUser = (userId) => {
     return (dispatch) => {

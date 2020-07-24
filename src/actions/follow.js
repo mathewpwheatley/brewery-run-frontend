@@ -1,21 +1,22 @@
 import endPoints from './endPoints.js'
 
-const {breweriesURL} = endPoints
+const {followsURL} = endPoints
 
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
-export const getBrewery = (breweryId) => {
+export const createFollow = (followeeId, followerId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
+            method: 'POST',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            }
+            },
+            body: JSON.stringify({follow: {followee_id: followeeId, follower_id: followerId}})
         }
-        fetch(breweriesURL + '/' + breweryId, options).then(resp => resp.json()).then(json => {
+        fetch(followsURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -24,32 +25,22 @@ export const getBrewery = (breweryId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'SET_BREWERY',
-                    selected: json
+                    type: 'ADD_FOLLOW',
+                    followId: json.id
                 })
             }
         })
     }
 }
 
-export const clearBrewery = () => {
-    return (dispatch) => {
-        dispatch({type: 'CLEAR_BREWERY'})
-    }
-}
-
-export const getAllBreweries = () => {
+export const deleteFollow = (followId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            method: 'DELETE',
+            credentials: 'include'
         }
-        fetch(breweriesURL, options).then(resp => resp.json()).then(json => {
+        fetch(followsURL + "/" + followId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -58,16 +49,9 @@ export const getAllBreweries = () => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'SET_ALL_BREWERIES',
-                    all: json
+                    type: 'REMOVE_FOLLOW'
                 })
             }
         })
-    } 
-} 
-
-export const clearAllBreweries = () => {
-    return (dispatch) => {
-        dispatch({type: 'CLEAR_ALL_BREWERIES'})
     }
 }

@@ -19,6 +19,12 @@ export default (state = {selected: {}, all: []}, action) => {
 
         case 'UPDATE_USER':
             return {...state, name: action.name, selected: action.selected}
+
+        case 'ADD_FOLLOW':
+            return {...state, selected: {...state.selected, active_user_follow_id: action.followId}}
+
+        case 'REMOVE_FOLLOW':
+            return {...state, selected: {...state.selected, active_user_follow_id: false}}
         
         case 'SET_ALL_USERS':
             return {...state, all: action.all}

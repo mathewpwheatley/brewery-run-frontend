@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonNavigation from './CommonNavigation.js'
+import FollowButton from '../components/FollowButton.js'
 
 
 class User extends Component {
@@ -20,9 +21,13 @@ class User extends Component {
         return (
             <CardColumns className="p-4">
 
+                {/* Redirect to Welcome page if user is not logged in */}
+                {!this.props.userId && <Redirect to="/log-in" />}
+
                 {/* Redirect to logged in user dashboard if they are looking at their own page */}
                 {this.props.userId === parseInt(this.props.id) && <Redirect to="/dashboard" />}
 
+                
                 <FetchMessage/>
 
                 <Card>
@@ -42,6 +47,8 @@ class User extends Component {
                         <Card.Text>Followers: {user.followers_count}</Card.Text>
                     </Card.Body>
                 </Card>
+
+                <FollowButton followId={user.active_user_follow_id} userId={this.props.userId} followeeId={user.id}/>
 
                 {!!user.public_circuits &&
                     <CommonNavigation variant='circuits' data={user.public_circuits} />
