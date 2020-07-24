@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
-import FetchMessages from './FetchMessage.js'
 import {createFollow, deleteFollow} from '../actions/follow.js'
 
 const FollowButton = ({followId, followeeId, followerId, createFollow, deleteFollow}) => {
@@ -30,7 +29,6 @@ const FollowButton = ({followId, followeeId, followerId, createFollow, deleteFol
             <Button className="mx-2" variant={attributes.variant} size="sm" title={attributes.title} onClick={attributes.action}>
                 {attributes.text} 
             </Button>
-            <FetchMessages/>
         </Fragment>
     )
 }

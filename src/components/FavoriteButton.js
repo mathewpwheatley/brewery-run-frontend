@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
-import FetchMessages from './FetchMessage.js'
 import {createBreweryFavorite, createCircuitFavorite, deleteBreweryFavorite, deleteCircuitFavorite} from '../actions/favorite.js'
 
 const FavoriteButton = ({variant, favoriteId, userId, subjectId, createBreweryFavorite, createCircuitFavorite, deleteBreweryFavorite, deleteCircuitFavorite}) => {
@@ -49,7 +48,6 @@ const FavoriteButton = ({variant, favoriteId, userId, subjectId, createBreweryFa
             <Button className="mx-2" variant={attributes.variant} size="sm" title={attributes.title} onClick={attributes.action}>
                 {attributes.text} 
             </Button>
-            <FetchMessages/>
         </Fragment>
     )
 }
