@@ -45,8 +45,10 @@ class CreateReviewForm extends Component {
 
     render() {
         return (
-            <Card className='mt-4 mx-auto px-0'>
-                <Card.Header><i className="far fa-newspaper"/> Create {this.props.formTitle} Review for {this.props.subjectName}</Card.Header>
+            <Card className='px-0'>
+                <Card.Header><i className="far fa-newspaper"/>
+                    <span className="d-none d-sm-none d-md-inline"> Create {this.props.formTitle} Review for {this.props.subjectName}</span>
+                </Card.Header>
                 <Card.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col} className="col-10">
