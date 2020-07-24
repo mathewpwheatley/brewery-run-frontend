@@ -57,11 +57,11 @@ class Circuit extends Component {
                     </Card.Body>
                 </Card>
 
-                {!!circuit.breweries &&
+                {(!!circuit.breweries && circuit.breweries.length > 0) &&
                     <CommonNavigation variant='breweries' data={circuit.breweries} />
                 }
 
-                {!!circuit.reviews &&
+                {(!!circuit.reviews && circuit.reviews.length > 0) &&
                     <CommonNavigation variant='circuit-reviews' data={circuit.reviews} />
                 }
 

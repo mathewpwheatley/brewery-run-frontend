@@ -90,19 +90,19 @@ class DashBoard extends Component {
                 }
 
                 {(!!user.private_circuits && user.private_circuits.length > 0) &&
-                    <CommonNavigation variant='circuits' navSubTitle=': Private' data={user.private_circuits} />
+                    <CommonNavigation variant='circuits' navSubTitle=': Private' hideTableDefault={true} data={user.private_circuits} />
                 }
 
                 {(!!user.public_circuits && user.public_circuits.length > 0) &&
-                    <CommonNavigation variant='circuits' navSubTitle=': Public' data={user.public_circuits} />
+                    <CommonNavigation variant='circuits' navSubTitle=': Public' hideTableDefault={true} data={user.public_circuits} />
                 }
 
                 {(!!user.brewery_reviews && user.brewery_reviews.length > 0) &&
-                    <CommonNavigation variant='brewery-reviews' navSubTitle=': Brewery' data={user.brewery_reviews} />
+                    <CommonNavigation variant='brewery-reviews' navSubTitle=': Brewery' hideTableDefault={true} data={user.brewery_reviews} />
                 }
 
                 {(!!user.circuit_reviews && user.circuit_reviews.length > 0) &&
-                    <CommonNavigation variant='circuit-reviews' navSubTitle=': Circuit' data={user.circuit_reviews} />
+                    <CommonNavigation variant='circuit-reviews' navSubTitle=': Circuit' hideTableDefault={true} data={user.circuit_reviews} />
                 }
                 
             </CardColumns>

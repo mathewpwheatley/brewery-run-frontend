@@ -54,11 +54,11 @@ class Brewery extends Component {
                     </Card.Body>
                 </Card>
 
-                {!!brewery.public_circuits &&
+                {(!!brewery.public_circuits && brewery.public_circuits.length > 0) &&
                     <CommonNavigation variant='circuits' data={brewery.public_circuits} />
                 }
 
-                {!!brewery.reviews &&
+                {(!!brewery.reviews && brewery.reviews.length > 0) &&
                     <CommonNavigation variant='brewery-reviews' data={brewery.reviews} />
                 }
 

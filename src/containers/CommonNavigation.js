@@ -3,13 +3,12 @@ import Card from 'react-bootstrap/Card'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import FetchMessage from '../components/FetchMessage.js'
 import CommonTable from './CommonTable.js'
 
 class CommonNavigation extends Component {
 
     state = {
-        showTable: true,
+        showTable: this.props.hideTableDefault ? false : true,
         keyWord: '',
         navTitle: '',
         navColor: '',
@@ -21,9 +20,6 @@ class CommonNavigation extends Component {
     componentDidMount() {
         const navSubTitle = this.props.navSubTitle ? this.props.navSubTitle : ''
         this.setVariantion(navSubTitle)
-
-        // I dont like this, it feels a bit janky and requires a refresh of page to get new data
-        if (this.props.getData) {if (this.props.data.length === 0) {this.props.getData()}}
     }
 
     setVariantion = (navSubTitle) => {
@@ -107,22 +103,27 @@ class CommonNavigation extends Component {
 
     render () {
         return (
-            <Card className="col-11 mt-4 px-0 mx-auto">
+            <Card className="px-0 mx-auto">
                 <Navbar className="shadow" bg={this.state.navColor} variant="dark">
                     <Navbar.Brand className="mr-auto">
                         {this.state.icon}
                         <span className="d-none d-sm-none d-md-inline"> {this.state.navTitle}</span>
                     </Navbar.Brand>
-                    <Button className="mr-3" variant="light" size="sm" onClick={this.toggleTable}>Toggle</Button>
+                    <Button className="mr-3" variant="light" size="sm" onClick={this.toggleTable}>
+                        {this.state.showTable ?
+                            <Fragment><i className="fas fa-minus-circle"/><span className="d-none d-sm-none d-md-inline"> Collapse</span></Fragment> :
+                            <Fragment><i className="fas fa-plus-circle"/><span className="d-none d-sm-none d-md-inline"> Expand</span></Fragment>
+                        }
+                    </Button>
+                    {this.state.showTable &&
                     <Form inline>
                         <Form.Control type="search" placeholder={Object.values(this.state.displayKeys)[0] + " Search"} aria-label="Search" name="keyWord" value={this.state.keyWord} onChange={event => this.handleChange(event)}/>
                     </Form>
+                    }
+                    
                 </Navbar>
                 {this.state.showTable &&
-                    <Fragment>
-                        <FetchMessage/>
-                        <CommonTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} />
-                    </Fragment>
+                    <CommonTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} />
                 }
             </Card>
         )
