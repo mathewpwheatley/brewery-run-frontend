@@ -29,6 +29,12 @@ class Circuit extends Component {
                         <Card.Title>Title: {circuit.title}</Card.Title>
                         <Card.Text>Author: {circuit.author_name}</Card.Text>
                         <Card.Text>Description: {circuit.description }</Card.Text>
+                        {!!this.props.userId &&
+                            <Fragment>
+                                <FavoriteButton variant="brewery" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
+                                <LikeButton variant="brewery" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
+                            </Fragment>
+                        }
                     </Card.Body>
                 </Card>
 
@@ -40,12 +46,6 @@ class Circuit extends Component {
                         <Card.Text>Likes: {circuit.likes_count}</Card.Text>
                         <Card.Text>Reviews: {circuit.reviews_count}</Card.Text>
                         <Card.Text>Rating: {circuit.rating}</Card.Text>
-                        {!!this.props.userId &&
-                            <Fragment>
-                                <FavoriteButton variant="brewery" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
-                                <LikeButton variant="brewery" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
-                            </Fragment>
-                        }
                     </Card.Body>
                 </Card>
 

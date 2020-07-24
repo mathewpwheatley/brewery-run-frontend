@@ -11,16 +11,16 @@ const FollowButton = ({followId, followeeId, followerId, createFollow, deleteFol
         if (!!followId) {
             attributes = {
                 title: "Unfollow",
-                variant: "outline-secondary",
+                variant: "success",
                 action: () => deleteFollow(followId),
-                text: <Fragment><i className="far fa-times-circle"/><span className="d-none d-sm-none d-md-inline"> Unfollow</span></Fragment>
+                text: <Fragment><i className="fas fa-beer"/><span className="d-none d-sm-none d-md-inline"> Following</span></Fragment>
             }
         } else {
             attributes = {
                 title: "Follow",
                 variant: "primary",
                 action: () => createFollow(followeeId, followerId),
-                text: <Fragment><i className="fas fa-check-circle"/><span className="d-none d-sm-none d-md-inline"> Follow</span></Fragment>
+                text: <Fragment><i className="fas fa-user-plus"/><span className="d-none d-sm-none d-md-inline"> Follow</span></Fragment>
             }
         }
     }

@@ -40,7 +40,7 @@ class CreateReview extends Component {
     render () {
         return (
             <Fragment>
-                {!this.state.showForm && <Button onClick={this.toggleForm}>Write Review </Button>}
+                {!this.state.showForm && <Button onClick={this.toggleForm}><i class="fas fa-pen"/><span className="d-none d-sm-none d-md-inline"> Write Review</span></Button>}
                 {this.state.showForm && 
                     <CreateReviewForm 
                         variant={this.props.variant}

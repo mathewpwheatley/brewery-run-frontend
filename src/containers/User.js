@@ -36,6 +36,7 @@ class User extends Component {
                         <Card.Title>Name: {user.full_name}</Card.Title>
                         <Card.Text>About: {user.about}</Card.Text>
                         <Card.Text>City: {user.city_address}</Card.Text>
+                        <FollowButton followId={user.active_user_follow_id} followerId={this.props.userId} followeeId={user.id}/>
                     </Card.Body>
                 </Card>
 
@@ -47,8 +48,6 @@ class User extends Component {
                         <Card.Text>Followers: {user.followers_count}</Card.Text>
                     </Card.Body>
                 </Card>
-
-                <FollowButton followId={user.active_user_follow_id} followerId={this.props.userId} followeeId={user.id}/>
 
                 {!!user.public_circuits &&
                     <CommonNavigation variant='circuits' data={user.public_circuits} />
