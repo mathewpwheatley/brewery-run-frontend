@@ -10,7 +10,11 @@ const endPoints = {
     circuitsURL: baseURL + "/circuits",
     circuitReviewsURL: baseURL + "/circuit_reviews",
     notificationsURL: baseURL + "/notifications",
-    followsURL: baseURL + "/follows"
+    followsURL: baseURL + "/follows",
+    breweryLikesURL: baseURL + "/brewery_likes",
+    circuitLikesURL: baseURL + "/circuit_likes",
+    breweryFavoritesURL: baseURL + "/brewery_favorites",
+    circuitFavoritesURL: baseURL + "/circuit_favorites"
 }
 
 export default endPoints

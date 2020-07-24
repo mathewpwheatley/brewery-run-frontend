@@ -48,7 +48,7 @@ class User extends Component {
                     </Card.Body>
                 </Card>
 
-                <FollowButton followId={user.active_user_follow_id} userId={this.props.userId} followeeId={user.id}/>
+                <FollowButton followId={user.active_user_follow_id} followerId={this.props.userId} followeeId={user.id}/>
 
                 {!!user.public_circuits &&
                     <CommonNavigation variant='circuits' data={user.public_circuits} />

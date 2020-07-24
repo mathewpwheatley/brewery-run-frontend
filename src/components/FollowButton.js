@@ -1,27 +1,38 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, Component} from 'react'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import FetchMessages from './FetchMessage.js'
 import {createFollow, deleteFollow} from '../actions/follow.js'
 
-const FollowButton = ({followId, userId, followeeId, createFollow, deleteFollow}) => {
-
-    const handleClick = () => {
-        if (followId) {
-            deleteFollow(followId)
-        } else {
-            createFollow(followeeId, userId)
+class FollowButton extends Component {
+    render () {
+        let attributes = {}
+        const setAttributes = () => {
+            if (!!this.props.followId) {
+                attributes = {
+                    variant: "outline-secondary",
+                    action: () => this.props.deleteFollow(this.props.followId),
+                    text: "Unfollow"
+                }
+            } else {
+                attributes = {
+                    variant: "primary",
+                    action: () => this.props.createFollow(this.props.followeeId, this.props.followerId),
+                    text: "Follow"
+                }
+            }
         }
+        return (
+            <Fragment>
+                {setAttributes()}
+                {console.log(this.props, this.state, attributes)}
+                <Button variant={attributes.variant} onClick={attributes.action}>
+                    {attributes.text} 
+                </Button>
+                <FetchMessages/>
+            </Fragment>
+        )
     }
-
-    return (
-        <Fragment>
-            <Button variant={followId ? "outline-secondary" : "primary"} onClick={handleClick}>
-                {followId ? "Unfollow" : "Follow"} 
-            </Button>
-            <FetchMessages/>
-        </Fragment>
-    )
 }
 
 const mapDispatchToProps = dispatch => {
