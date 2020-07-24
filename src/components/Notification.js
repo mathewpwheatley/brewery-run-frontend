@@ -16,7 +16,7 @@ const Notification = ({notification, markReadNotification, deleteNotification}) 
         <small>{!notification.read && "Unread"}</small>
       </Toast.Header>
       <Toast.Body>
-        {notification.content + " "} {notification.link && <a href={notification.link} target="_blank" rel="noopener noreferrer">Details</a>}
+        {notification.content + " "} {notification.link && <a href={notification.link}>Details</a>}
       </Toast.Body>
     </Toast>
   )

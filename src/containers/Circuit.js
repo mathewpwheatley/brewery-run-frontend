@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
 import {getCircuit} from '../actions/circuit.js'
@@ -27,12 +28,12 @@ class Circuit extends Component {
                     <Card.Header>Circuit Information</Card.Header>
                     <Card.Body>
                         <Card.Title>Title: {circuit.title}</Card.Title>
-                        <Card.Text>Author: {circuit.author_name}</Card.Text>
+                        <Card.Text>Author: {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}</Card.Text>
                         <Card.Text>Description: {circuit.description }</Card.Text>
                         {!!this.props.userId &&
                             <Fragment>
-                                <FavoriteButton variant="brewery" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
-                                <LikeButton variant="brewery" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
+                                <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
+                                <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
                             </Fragment>
                         }
                     </Card.Body>

@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import Card from 'react-bootstrap/Card'
 import Navbar from 'react-bootstrap/Navbar'
+import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonTable from './CommonTable.js'
@@ -8,6 +9,7 @@ import CommonTable from './CommonTable.js'
 class CommonNavigation extends Component {
 
     state = {
+        showTable: true,
         keyWord: '',
         navTitle: '',
         navColor: '',
@@ -99,6 +101,10 @@ class CommonNavigation extends Component {
         }
     }
 
+    toggleTable = () => {
+        this.state.showTable ? this.setState({showTable: false}) : this.setState({showTable: true})
+    }
+
     render () {
         return (
             <Card className="col-11 mt-4 px-0 mx-auto">
@@ -107,12 +113,17 @@ class CommonNavigation extends Component {
                         {this.state.icon}
                         <span className="d-none d-sm-none d-md-inline"> {this.state.navTitle}</span>
                     </Navbar.Brand>
+                    <Button className="mr-3" variant="light" size="sm" onClick={this.toggleTable}>Toggle</Button>
                     <Form inline>
                         <Form.Control type="search" placeholder={Object.values(this.state.displayKeys)[0] + " Search"} aria-label="Search" name="keyWord" value={this.state.keyWord} onChange={event => this.handleChange(event)}/>
                     </Form>
                 </Navbar>
-                <FetchMessage/>
-                <CommonTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} />
+                {this.state.showTable &&
+                    <Fragment>
+                        <FetchMessage/>
+                        <CommonTable data={this.filterDataByName()} displayKeys={this.state.displayKeys} basePath={this.state.basePath} />
+                    </Fragment>
+                }
             </Card>
         )
     }
