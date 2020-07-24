@@ -75,7 +75,7 @@ class CreateReviewForm extends Component {
                     </Form.Group>
                     <Form.Group className="float-right">
                         <Button className="mr-2" variant="secondary" type="button" title="Cancel"onClick={() => this.props.toggleForm()} >
-                            <i className="fas fa-times-circle"/>
+                            <i className="far fa-times-circle"/>
                             <span className="d-none d-sm-none d-md-inline"> Cancel</span>
                         </Button>
                         <Button variant="success" type="submit" title="Submit Review">

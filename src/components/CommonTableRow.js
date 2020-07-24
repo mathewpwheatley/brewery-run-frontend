@@ -13,7 +13,7 @@ const CommonTableRow = ({datum, dataKeys, basePath}) => {
             {mapColumns()}
             <td>
                 <Link to={basePath + "/" + datum.id}>
-                    <Button size="sm" variant="outline-primary">
+                    <Button size="sm" variant="outline-primary" title="View">
                         View
                     </Button>
                 </Link>

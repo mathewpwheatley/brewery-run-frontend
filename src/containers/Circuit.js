@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
@@ -6,6 +6,8 @@ import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonNavigation from './CommonNavigation.js'
 import CreateReview from './CreateReview.js'
+import FavoriteButton from '../components/FavoriteButton.js'
+import LikeButton from '../components/LikeButton.js'
 
 class Circuit extends Component {
 
@@ -38,6 +40,12 @@ class Circuit extends Component {
                         <Card.Text>Likes: {circuit.likes_count}</Card.Text>
                         <Card.Text>Reviews: {circuit.reviews_count}</Card.Text>
                         <Card.Text>Rating: {circuit.rating}</Card.Text>
+                        {!!this.props.userId &&
+                            <Fragment>
+                                <FavoriteButton variant="brewery" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
+                                <LikeButton variant="brewery" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
+                            </Fragment>
+                        }
                     </Card.Body>
                 </Card>
 
@@ -65,7 +73,8 @@ class Circuit extends Component {
 
 const mapStateToProps = state => {
     return {
-        circuit: state.circuit.selected
+        circuit: state.circuit.selected,
+        userId: state.user.id
     }
 }
 

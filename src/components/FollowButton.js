@@ -10,22 +10,24 @@ const FollowButton = ({followId, followeeId, followerId, createFollow, deleteFol
     const setAttributes = () => {
         if (!!followId) {
             attributes = {
+                title: "Unfollow",
                 variant: "outline-secondary",
                 action: () => deleteFollow(followId),
-                text: "Unfollow"
+                text: <Fragment><i className="far fa-times-circle"/><span className="d-none d-sm-none d-md-inline"> Unfollow</span></Fragment>
             }
         } else {
             attributes = {
+                title: "Follow",
                 variant: "primary",
                 action: () => createFollow(followeeId, followerId),
-                text: "Follow"
+                text: <Fragment><i className="fas fa-check-circle"/><span className="d-none d-sm-none d-md-inline"> Follow</span></Fragment>
             }
         }
     }
     return (
         <Fragment>
             {setAttributes()}
-            <Button variant={attributes.variant} onClick={attributes.action}>
+            <Button variant={attributes.variant} title={attributes.title} onClick={attributes.action}>
                 {attributes.text} 
             </Button>
             <FetchMessages/>

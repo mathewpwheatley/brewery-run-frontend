@@ -1,10 +1,10 @@
 import endPoints from './endPoints.js'
 
-const {breweryLikesURL, circuitLikesURL} = endPoints
+const {breweryFavoritesURL, circuitFavoritesURL} = endPoints
 
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
-export const createBreweryLike = (userId, breweryId) => {
+export const createBreweryFavorite = (userId, breweryId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
@@ -14,9 +14,9 @@ export const createBreweryLike = (userId, breweryId) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({brewery_like: {user_id: userId, brewery_id: breweryId}})
+            body: JSON.stringify({brewery_favorite: {user_id: userId, brewery_id: breweryId}})
         }
-        fetch(breweryLikesURL, options).then(resp => resp.json()).then(json => {
+        fetch(breweryFavoritesURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -25,15 +25,15 @@ export const createBreweryLike = (userId, breweryId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'ADD_BREWERY_LIKE',
-                    // ?????
+                    type: 'ADD_BREWERY_FAVORITE',
+                    favoriteId: json.id
                 })
             }
         })
     }
 }
 
-export const createCircuitLike = (userId, circuitId) => {
+export const createCircuitFavorite = (userId, circuitId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
@@ -43,9 +43,9 @@ export const createCircuitLike = (userId, circuitId) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({circuit_like: {user_id: userId, circuit_id: circuitId}})
+            body: JSON.stringify({circuit_favorite: {user_id: userId, circuit_id: circuitId}})
         }
-        fetch(circuitLikesURL, options).then(resp => resp.json()).then(json => {
+        fetch(circuitFavoritesURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -54,22 +54,22 @@ export const createCircuitLike = (userId, circuitId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'ADD_CIRCUIT_LIKE',
-                    // ?????
+                    type: 'ADD_CIRCUIT_FAVORITE',
+                    favoriteId: json.id
                 })
             }
         })
     }
 }
 
-export const deleteBreweryLike = (breweryLikeId) => {
+export const deleteBreweryFavorite = (breweryFavoriteId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'DELETE',
             credentials: 'include'
         }
-        fetch(breweryLikesURL + "/" + breweryLikeId, options).then(resp => resp.json()).then(json => {
+        fetch(breweryFavoritesURL + "/" + breweryFavoriteId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -78,21 +78,21 @@ export const deleteBreweryLike = (breweryLikeId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'REMOVE_BREWERY_LIKE'
+                    type: 'REMOVE_BREWERY_FAVORITE'
                 })
             }
         })
     }
 }
 
-export const deleteCircuitLike = (circuitLikeId) => {
+export const deleteCircuitFavorite = (circuitFavoriteId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'DELETE',
             credentials: 'include'
         }
-        fetch(circuitLikesURL + "/" + circuitLikeId, options).then(resp => resp.json()).then(json => {
+        fetch(circuitFavoritesURL + "/" + circuitFavoriteId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -101,7 +101,7 @@ export const deleteCircuitLike = (circuitLikeId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS'})
                 dispatch({
-                    type: 'REMOVE_CIRCUIT_LIKE'
+                    type: 'REMOVE_CIRCUIT_FAVORITE'
                 })
             }
         })

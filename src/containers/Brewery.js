@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
@@ -7,6 +7,8 @@ import {getBrewery} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonNavigation from './CommonNavigation.js'
 import CreateReview from './CreateReview.js'
+import FavoriteButton from '../components/FavoriteButton.js'
+import LikeButton from '../components/LikeButton.js'
 
 
 class Brewery extends Component {
@@ -32,6 +34,12 @@ class Brewery extends Component {
                         <Card.Text>Address: {brewery.full_address}</Card.Text>
                         <Card.Text>Phone: {brewery.phone}</Card.Text>
                         <Card.Text><Button variant="outline-secondary" href={brewery.website_url} >Brewery Website</Button></Card.Text>
+                        {!!this.props.userId &&
+                            <Fragment>
+                                <FavoriteButton variant="brewery" favoriteId={brewery.active_user_favorite_id} userId={this.props.userId} subjectId={brewery.id} />
+                                <LikeButton variant="brewery" likeId={brewery.active_user_like_id} userId={this.props.userId} subjectId={brewery.id} />
+                            </Fragment>
+                        }
                     </Card.Body>
                 </Card>
 
@@ -63,7 +71,8 @@ class Brewery extends Component {
 
 const mapStateToProps = state => {
     return {
-        brewery: state.brewery.selected
+        brewery: state.brewery.selected,
+        userId: state.user.id
     }
 }
 
