@@ -5,28 +5,44 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import {editUser, updateUser, deleteUser} from '../actions/user.js'
+import {getEditUser, updateUser, deleteUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
 
 class EditAccountForm extends Component {
 
     state = {
-        first_name: this.props.user.first_name,
-        middle_name: this.props.user.middle_name,
-        last_name: this.props.user.last_name,
-        email: this.props.user.email,
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+        email: '',
         password: '',
         password_confirmation: '',
-        about: this.props.user.about,
-        street: this.props.user.street,
-        city: this.props.user.city,
-        state: this.props.user.state,
-        postal_code: this.props.user.postal_code,
-        country: this.props.user.country
+        about: '',
+        street: '',
+        city: '',
+        state: '',
+        postal_code: '',
+        country: '',
     }
 
-    componentDidMount() {
-        this.props.editUser(this.props.userId)
+    async componentDidMount() {
+        await this.props.getEditUser(this.props.userId)
+        this.populateForm()
+    }
+
+    populateForm = () => {
+        this.setState({
+            first_name: this.props.user.first_name,
+            middle_name: this.props.user.middle_name,
+            last_name: this.props.user.last_name,
+            email: this.props.user.email,
+            about: this.props.user.about,
+            street: this.props.user.street,
+            city: this.props.user.city,
+            state: this.props.user.state,
+            postal_code: this.props.user.postal_code,
+            country: this.props.user.country
+        })
     }
 
     handleChange = event => {
@@ -49,13 +65,15 @@ class EditAccountForm extends Component {
 
     handleRedirect = () => {
         if (!this.props.userId) {
-            return <Redirect to='/' />
+            // Redirect if user is not logged in
+            return <Redirect to='/log-in' />
         }
     }
 
     render() {
         return (
             <Card className='col-8 mt-4 mx-auto px-0'>
+                <FetchMessage/>  
                 {this.handleRedirect()}
                 <Card.Header>Edit Account</Card.Header>
                 <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
@@ -132,8 +150,7 @@ class EditAccountForm extends Component {
                             </Button>
                         </Col>
                     </Form.Row>
-                </Form>
-            <FetchMessage/>    
+                </Form>  
             </Card>
         )
     }
@@ -148,7 +165,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        editUser: (userId) => {dispatch(editUser(userId))},
+        getEditUser: async (userId) => {await dispatch(getEditUser(userId))},
         updateUser: (userId, user) => {dispatch(updateUser(userId, user))},
         deleteUser: (userId) => {dispatch(deleteUser(userId))}
     }

@@ -140,8 +140,8 @@ export const logOutUser = () => {
     }
 }
 
-export const editUser = (userId) => {
-    return (dispatch) => {
+export const getEditUser = (userId) => {
+    return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'GET',
@@ -151,7 +151,7 @@ export const editUser = (userId) => {
                 'Accept': 'application/json'
             }
         }
-        fetch(usersURL + '/' + userId + '/edit', options).then(resp => resp.json()).then(json => {
+        await fetch(usersURL + '/' + userId + '/edit', options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
