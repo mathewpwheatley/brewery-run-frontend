@@ -22,7 +22,7 @@ export const getUser = (userId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_USER',
                     selected: json
@@ -56,7 +56,7 @@ export const getAllUsers = () => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_ALL_USERS',
                     all: json
@@ -92,7 +92,7 @@ const postFetch = (user, endPoint) => {
                 })
             } else if (json.id) {
                 // Succesful loggin on backend
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'LOG_IN',
                     id: json.id,
@@ -101,7 +101,7 @@ const postFetch = (user, endPoint) => {
                 })
             } else {
                 // Not logged in on backend but no errors (ie. auto log-in did not find valid jwt)
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
             }
         })
     }
@@ -133,7 +133,7 @@ export const logOutUser = () => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({type: 'LOG_OUT'})
             }
         })
@@ -158,7 +158,7 @@ export const getEditUser = (userId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_USER',
                     selected: json
@@ -188,7 +188,7 @@ export const updateUser = (userId, user) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'UPDATE_USER',
                     name: json.full_name,
@@ -213,7 +213,7 @@ export const deleteUser = (userId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({type: 'CLEAR_USER'})
                 dispatch(logOutUser())
             }

@@ -23,7 +23,7 @@ export const markReadNotification = (notificationId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'MARK_READ_NOTIFICATION',
                     id: json.id,
@@ -48,7 +48,7 @@ export const deleteNotification = (notificationId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_NOTIFICATION',
                     id: notificationId

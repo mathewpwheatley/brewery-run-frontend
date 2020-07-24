@@ -1,15 +1,18 @@
-export default (state = {loading: false, errors: []}, action) => {
+export default (state = {loading: false, errors: [], messages: []}, action) => {
     
     switch (action.type) {
 
         case 'LOADING':
-            return {...state, loading: true, errors: []}
+            return {...state, loading: true, errors: [], messagess: []}
         
         case 'SET_ERRORS':
             return {...state, loading: false, errors: action.errors}
 
-        case 'CLEAR_ERRORS':
-            return {...state, loading: false, errors: []}
+        case 'SET_MESSAGES':
+            return {...state, loading: false, messages: action.messages}
+
+        case 'CLEAR_ERRORS_MESSAGES':
+            return {...state, loading: false, errors: [], messages: []}
 
         default:
             return state

@@ -23,7 +23,7 @@ export const createBreweryLike = (userId, breweryId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_BREWERY_LIKE',
                     likeId: json.id
@@ -52,7 +52,7 @@ export const createCircuitLike = (userId, circuitId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_CIRCUIT_LIKE',
                     likeId: json.id
@@ -76,7 +76,7 @@ export const deleteBreweryLike = (breweryLikeId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_BREWERY_LIKE'
                 })
@@ -99,7 +99,7 @@ export const deleteCircuitLike = (circuitLikeId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_CIRCUIT_LIKE'
                 })

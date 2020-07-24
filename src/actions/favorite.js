@@ -23,7 +23,7 @@ export const createBreweryFavorite = (userId, breweryId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_BREWERY_FAVORITE',
                     favoriteId: json.id
@@ -52,7 +52,7 @@ export const createCircuitFavorite = (userId, circuitId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_CIRCUIT_FAVORITE',
                     favoriteId: json.id
@@ -76,7 +76,7 @@ export const deleteBreweryFavorite = (breweryFavoriteId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_BREWERY_FAVORITE'
                 })
@@ -99,7 +99,7 @@ export const deleteCircuitFavorite = (circuitFavoriteId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_CIRCUIT_FAVORITE'
                 })

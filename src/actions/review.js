@@ -22,7 +22,7 @@ export const getBreweryReview = (reviewId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_REVIEW',
                     selected: json
@@ -50,7 +50,7 @@ export const getCircuitReview = (reviewId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_REVIEW',
                     selected: json
@@ -85,7 +85,7 @@ export const createBreweryReview = (review) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_BREWERY_REVIEW',
                     review: json
@@ -114,7 +114,7 @@ export const createCircuitReview = (review) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_CIRCUIT_REVIEW',
                     review: json

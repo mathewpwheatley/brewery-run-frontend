@@ -23,7 +23,7 @@ export const createFollow = (followeeId, followerId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_FOLLOW',
                     followId: json.id
@@ -47,7 +47,7 @@ export const deleteFollow = (followId) => {
                     errors: json.errors
                 })
             } else {
-                dispatch({type: 'CLEAR_ERRORS'})
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_FOLLOW'
                 })
