@@ -36,12 +36,10 @@ class CreateReviewForm extends Component {
         this.setState({
             [event.target.name]: event.target.value
         })
-        console.log(this.state,this.props)
     }
 
     handleSubmit = event => {
         event.preventDefault()
-        console.log(this.state)
         this.props.submitReview(this.state)
     }
 

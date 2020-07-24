@@ -21,10 +21,16 @@ export default (state = {selected: {}, all: []}, action) => {
             return {...state, name: action.name, selected: action.selected}
 
         case 'ADD_FOLLOW':
-            return {...state, selected: {...state.selected, active_user_follow_id: action.followId}}
+            return {...state, selected: {...state.selected,
+                active_user_follow_id: action.followId,
+                followers_count: state.selected.followers_count + 1
+            }}
 
         case 'REMOVE_FOLLOW':
-            return {...state, selected: {...state.selected, active_user_follow_id: false}}
+            return {...state, selected: {...state.selected,
+                active_user_follow_id: false,
+                followers_count: state.selected.followers_count - 1
+            }}
         
         case 'SET_ALL_USERS':
             return {...state, all: action.all}

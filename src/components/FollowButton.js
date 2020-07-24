@@ -27,7 +27,7 @@ const FollowButton = ({followId, followeeId, followerId, createFollow, deleteFol
     return (
         <Fragment>
             {setAttributes()}
-            <Button variant={attributes.variant} title={attributes.title} onClick={attributes.action}>
+            <Button className="mx-2" variant={attributes.variant} size="sm" title={attributes.title} onClick={attributes.action}>
                 {attributes.text} 
             </Button>
             <FetchMessages/>
