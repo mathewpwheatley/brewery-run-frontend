@@ -47,9 +47,9 @@ class NavigationBar extends Component {
                         {!this.props.userName &&
                             <Fragment>
                                 <Nav.Item>
-                                    <NavLink className="nav-link" to="/create-account" title="Create Account">
+                                    <NavLink className="nav-link" to="/create-user" title="Create User">
                                         <i className="fas fa-user-plus"/>
-                                        <span className="d-none d-sm-none d-md-inline"> Create Account</span>
+                                        <span className="d-none d-sm-none d-md-inline"> Create User</span>
                                     </NavLink>
                                 </Nav.Item>
                                 <Nav.Item>
@@ -80,7 +80,7 @@ class NavigationBar extends Component {
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu alignRight>
                                     <Dropdown.Item as={NavLink} exact to="/dashboard" title="Dashboard"><i className="fas fa-house-user"/> Dashboard</Dropdown.Item>
-                                    <Dropdown.Item as={NavLink} exact to="/edit-account" title="Edit Account"><i className="fas fa-user-edit"/> Edit Account</Dropdown.Item>
+                                    <Dropdown.Item as={NavLink} exact to="/edit-user" title="Edit User"><i className="fas fa-user-edit"/> Edit User</Dropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item title="Log Out" onClick={() => this.props.logOutUser()}><i className="fas fa-sign-out-alt"/> Log Out</Dropdown.Item>
                                 </Dropdown.Menu>

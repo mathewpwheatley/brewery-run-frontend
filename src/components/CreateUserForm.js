@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import {createUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
 
-class CreateAccountForm extends Component {
+class CreateUserForm extends Component {
 
     state = {
         first_name: "",
@@ -44,7 +44,7 @@ class CreateAccountForm extends Component {
         return (
             <Card className='col-4 mt-4 mx-auto px-0'>
                 {this.handleRedirect()}
-                <Card.Header>Create Account</Card.Header>
+                <Card.Header>Create User</Card.Header>
                 <Card.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col}>
@@ -71,9 +71,9 @@ class CreateAccountForm extends Component {
                             </Button>
                         </Col>
                         <Col>
-                            <Button block variant="success" type="submit" title="Create Account">
+                            <Button block variant="success" type="submit" title="Create User">
                                 <i className="fas fa-user-plus"/>
-                                <span className="d-none d-sm-none d-md-inline"> Create Account</span>
+                                <span className="d-none d-sm-none d-md-inline"> Create User</span>
                             </Button>
                         </Col>
                     </Form.Row>
@@ -96,4 +96,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateAccountForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUserForm)

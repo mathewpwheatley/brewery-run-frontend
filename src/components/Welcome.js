@@ -10,10 +10,10 @@ const Welcome = () => {
             <h1 className="display-4"><i className="fas fa-beer" style={{color: "#ffbe32"}} /> Welcome to Beer Run</h1>
             <p className="lead"> Bringing the fun back to your run!</p>
             <hr className="my-3"/>
-            <Link to="/create-account" title="Create Account">
+            <Link to="/create-user" title="Create User">
                 <Button  className="mx-3 my-2" variant="primary">
                     <i className="fas fa-user-plus"/>
-                    <span className="d-none d-sm-none d-md-inline"> Create Account</span>
+                    <span className="d-none d-sm-none d-md-inline"> Create User</span>
                 </Button>
             </Link>
             <Link to="/circuits" title="View Circuits">

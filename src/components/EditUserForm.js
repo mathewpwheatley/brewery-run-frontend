@@ -7,9 +7,9 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {getEditUser, updateUser, deleteUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
-import DeleteAccountButton from './DeleteAccountButton.js'
+import DeleteUserButton from './DeleteUserButton.js'
 
-class EditAccountForm extends Component {
+class EditUserForm extends Component {
 
     state = {
         first_name: '',
@@ -54,7 +54,7 @@ class EditAccountForm extends Component {
     }
 
     handleDeleteClick = () => {
-        if (window.confirm("Are you sure? A deleted account can't be restored.")) {
+        if (window.confirm("Are you sure? A deleted user can't be restored.")) {
             this.props.deleteUser(this.props.userId)
             this.setState({redirectPath: '/log-in'})
         }
@@ -79,7 +79,7 @@ class EditAccountForm extends Component {
             <Card className='col-8 mt-4 mx-auto px-0'>
                 <FetchMessage/>  
                 {this.handleRedirect(this.state.redirectPath)}
-                <Card.Header>Edit Account</Card.Header>
+                <Card.Header>Edit User</Card.Header>
                 <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col}>
@@ -142,12 +142,12 @@ class EditAccountForm extends Component {
                     </Form.Group>
                     <Form.Row className="float-right" >
                         <Col>
-                            <DeleteAccountButton userId={this.state.userId}/>
+                            <DeleteUserButton userId={this.state.userId}/>
                         </Col>
                         <Col>
-                            <Button variant="success" type="submit" title="Update Account">
+                            <Button variant="success" type="submit" title="Update User">
                                 <i className="fas fa-user-plus"/>
-                                <span className="d-none d-sm-none d-md-inline"> Update Account</span>
+                                <span className="d-none d-sm-none d-md-inline"> Update User</span>
                             </Button>
                         </Col>
                     </Form.Row>
@@ -172,4 +172,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditAccountForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditUserForm)

@@ -33,10 +33,10 @@ class Dashboard extends Component {
                         <Card.Text>About: {user.about}</Card.Text>
                         <Card.Text>Email: {user.email}</Card.Text>
                         <Card.Text>Address: {user.full_address}</Card.Text>
-                        <Link to="/edit-account">
-                            <Button variant="secondary" type="button" title="Edit Account">
+                        <Link to="/edit-user">
+                            <Button variant="secondary" type="button" title="Edit User">
                                 <i className="fas fa-user-edit"/>
-                                <span className="d-none d-sm-none d-md-inline"> Edit Account</span>
+                                <span className="d-none d-sm-none d-md-inline"> Edit User</span>
                             </Button>
                         </Link>
                     </Card.Body>
