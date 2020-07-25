@@ -2,8 +2,7 @@ import React, {Fragment, Component} from 'react'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import CreateReviewForm from '../components/CreateReviewForm'
-import {createBreweryReview} from '../actions/review.js'
-import {createCircuitReview} from '../actions/review.js'
+import {createBreweryReview, createCircuitReview} from '../actions/review.js'
 
 
 class CreateReview extends Component {
@@ -40,7 +39,12 @@ class CreateReview extends Component {
     render () {
         return (
             <Fragment>
-                {!this.state.showForm && <Button onClick={this.toggleForm}><i className="fas fa-pen"/><span className="d-none d-sm-none d-md-inline"> Write Review</span></Button>}
+                {!this.state.showForm &&
+                    <Button onClick={this.toggleForm}>
+                        <i className="fas fa-pen"/>
+                        <span className="d-none d-sm-none d-md-inline"> Write Review</span>
+                    </Button>
+                }
                 {this.state.showForm && 
                     <CreateReviewForm 
                         variant={this.props.variant}
@@ -66,7 +70,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         createBreweryReview: (review) => {dispatch(createBreweryReview(review))},
-        createCircuitReview: (circuit) => {dispatch(createCircuitReview(circuit))}
+        createCircuitReview: (review) => {dispatch(createCircuitReview(review))}
     }
 }
 

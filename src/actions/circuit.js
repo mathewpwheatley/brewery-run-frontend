@@ -4,6 +4,35 @@ const {circuitsURL} = endPoints
 
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
+export const createCircuit = (circuit) => {
+    return (dispatch) => {
+        const options = {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({circuit: circuit})
+        }
+        fetch(circuitsURL, options).then(resp => resp.json()).then(json => {
+            console.log(json)
+            if (json.errors) {
+                dispatch({
+                    type: 'SET_ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                dispatch({
+                    type: 'SET_CIRCUIT',
+                    selected: json
+                })
+            }
+        })
+    }
+}
+
 export const getCircuit = (circuitId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})

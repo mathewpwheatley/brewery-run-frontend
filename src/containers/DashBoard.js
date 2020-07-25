@@ -7,9 +7,9 @@ import Button from 'react-bootstrap/Button'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonNavigation from './CommonNavigation.js'
+import CreateCircuit from './CreateCircuit.js'
 
-
-class DashBoard extends Component {
+class Dashboard extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.userId)
@@ -33,21 +33,14 @@ class DashBoard extends Component {
                         <Card.Text>About: {user.about}</Card.Text>
                         <Card.Text>Email: {user.email}</Card.Text>
                         <Card.Text>Address: {user.full_address}</Card.Text>
+                        <Link to="/edit-account">
+                            <Button variant="secondary" type="button" title="Edit Account">
+                                <i className="fas fa-user-edit"/>
+                                <span className="d-none d-sm-none d-md-inline"> Edit Account</span>
+                            </Button>
+                        </Link>
                     </Card.Body>
                 </Card>
-
-                <Link to="/new-circuit">
-                    <Button variant="primary" type="button" title="New Circuit">
-                        <i className="fas fa-route"/>
-                        <span className="d-none d-sm-none d-md-inline"> New Circuit</span>
-                    </Button>
-                </Link>
-                <Link to="/edit-account">
-                    <Button variant="secondary" type="button" title="Edit Account">
-                        <i className="fas fa-user-edit"/>
-                        <span className="d-none d-sm-none d-md-inline"> Edit Account</span>
-                    </Button>
-                </Link>
 
                 <Card>
                     <Card.Header>Statistics</Card.Header>
@@ -62,6 +55,8 @@ class DashBoard extends Component {
                         <Card.Text>Following: {user.following_count}</Card.Text>
                     </Card.Body>
                 </Card>
+
+                <CreateCircuit/>
 
                 <Card>
                     <Card.Header>Recommeded Circuits (Most Likes)</Card.Header>
@@ -123,5 +118,5 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashBoard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
 
