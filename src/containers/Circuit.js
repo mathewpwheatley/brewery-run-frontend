@@ -9,6 +9,7 @@ import CommonNavigation from './CommonNavigation.js'
 import CreateReview from './CreateReview.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
+import DeleteCircuitButton from '../components/DeleteCircuitButton.js'
 
 class Circuit extends Component {
 
@@ -36,6 +37,7 @@ class Circuit extends Component {
                                 <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
                             </Fragment>
                         }
+                        <DeleteCircuitButton circuitId={this.props.circuit.id}/>
                     </Card.Body>
                 </Card>
 

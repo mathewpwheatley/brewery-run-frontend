@@ -100,3 +100,24 @@ export const clearAllCircuits = () => {
         dispatch({type: 'CLEAR_ALL_CIRCUITS'})
     }
 }
+
+export const deleteCircuit = (circuitId) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'DELETE',
+            credentials: 'include'
+        }
+        fetch(circuitsURL + "/" + circuitId, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'SET_ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                dispatch({type: 'CLEAR_CIRCUIT'})
+            }
+        })
+    }
+}

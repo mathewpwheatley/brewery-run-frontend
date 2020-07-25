@@ -11,7 +11,7 @@ export default (state = {selected: {}, all: []}, action) => {
                 favorites_count: state.selected.favorites_count + 1
             }}
 
-        case 'REMOVE_CIRCUIT_FAVORITE':
+        case 'SUBTRACT_CIRCUIT_FAVORITE':
             return {...state, selected: {...state.selected,
                 active_user_favorite_id: false,
                 favorites_count: state.selected.favorites_count - 1
@@ -23,7 +23,7 @@ export default (state = {selected: {}, all: []}, action) => {
                 likes_count: state.selected.likes_count + 1
             }}
 
-        case 'REMOVE_CIRCUIT_LIKE':
+        case 'SUBTRACT_CIRCUIT_LIKE':
             return {...state, selected: {...state.selected,
                 active_user_like_id: false,
                 likes_count: state.selected.likes_count - 1

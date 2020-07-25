@@ -26,7 +26,7 @@ export default (state = {selected: {}, all: []}, action) => {
                 followers_count: state.selected.followers_count + 1
             }}
 
-        case 'REMOVE_FOLLOW':
+        case 'SUBTRACT_FOLLOW':
             return {...state, selected: {...state.selected,
                 active_user_follow_id: false,
                 followers_count: state.selected.followers_count - 1

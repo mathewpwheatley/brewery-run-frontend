@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {getEditUser, updateUser, deleteUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
+import DeleteAccountButton from './DeleteAccountButton.js'
 
 class EditAccountForm extends Component {
 
@@ -41,7 +42,8 @@ class EditAccountForm extends Component {
             city: this.props.user.city,
             state: this.props.user.state,
             postal_code: this.props.user.postal_code,
-            country: this.props.user.country
+            country: this.props.user.country,
+            redirectPath: ''
         })
     }
 
@@ -54,19 +56,21 @@ class EditAccountForm extends Component {
     handleDeleteClick = () => {
         if (window.confirm("Are you sure? A deleted account can't be restored.")) {
             this.props.deleteUser(this.props.userId)
-            this.handleRedirect()
+            this.setState({redirectPath: '/log-in'})
         }
     }
 
     handleSubmit = event => {
         event.preventDefault()
-        this.props.updateUser(this.props.userId, this.state)
+        const user = {...this.state}
+        delete user.redirectPath
+        this.props.updateUser(this.props.userId, user)
+        this.setState({redirectPath: '/dashboard'})
     }
 
-    handleRedirect = () => {
-        if (!this.props.userId) {
-            // Redirect if user is not logged in
-            return <Redirect to='/log-in' />
+    handleRedirect = (path) => {
+        if (path) {
+            return <Redirect to={path} />
         }
     }
 
@@ -74,7 +78,7 @@ class EditAccountForm extends Component {
         return (
             <Card className='col-8 mt-4 mx-auto px-0'>
                 <FetchMessage/>  
-                {this.handleRedirect()}
+                {this.handleRedirect(this.state.redirectPath)}
                 <Card.Header>Edit Account</Card.Header>
                 <Form className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
@@ -136,15 +140,12 @@ class EditAccountForm extends Component {
                             <Form.Label>About</Form.Label>
                             <Form.Control type="text" placeholder="About" name="about" value={this.state.about} onChange={event => this.handleChange(event)}/>
                     </Form.Group>
-                    <Form.Row>
+                    <Form.Row className="float-right" >
                         <Col>
-                            <Button block variant="danger" type="button" title="Delete Account" onClick={() => this.handleDeleteClick()} >
-                                <i className="fas fa-trash-alt"/>
-                                <span className="d-none d-sm-none d-md-inline"> Delete Account</span>
-                            </Button>
+                            <DeleteAccountButton userId={this.state.userId}/>
                         </Col>
                         <Col>
-                            <Button block variant="success" type="submit" title="Update Account">
+                            <Button variant="success" type="submit" title="Update Account">
                                 <i className="fas fa-user-plus"/>
                                 <span className="d-none d-sm-none d-md-inline"> Update Account</span>
                             </Button>

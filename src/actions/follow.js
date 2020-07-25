@@ -49,7 +49,7 @@ export const deleteFollow = (followId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'REMOVE_FOLLOW'
+                    type: 'SUBTRACT_FOLLOW'
                 })
             }
         })

@@ -78,7 +78,7 @@ export const deleteBreweryFavorite = (breweryFavoriteId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'REMOVE_BREWERY_FAVORITE'
+                    type: 'SUBTRACT_BREWERY_FAVORITE'
                 })
             }
         })
@@ -101,7 +101,7 @@ export const deleteCircuitFavorite = (circuitFavoriteId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'REMOVE_CIRCUIT_FAVORITE'
+                    type: 'SUBTRACT_CIRCUIT_FAVORITE'
                 })
             }
         })

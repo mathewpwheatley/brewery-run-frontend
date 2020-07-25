@@ -78,7 +78,7 @@ export const deleteBreweryLike = (breweryLikeId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'REMOVE_BREWERY_LIKE'
+                    type: 'SUBTRACT_BREWERY_LIKE'
                 })
             }
         })
@@ -101,7 +101,7 @@ export const deleteCircuitLike = (circuitLikeId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'REMOVE_CIRCUIT_LIKE'
+                    type: 'SUBTRACT_CIRCUIT_LIKE'
                 })
             }
         })
