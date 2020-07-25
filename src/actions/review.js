@@ -123,3 +123,57 @@ export const createCircuitReview = (review) => {
         })
     }
 }
+
+export const deleteBreweryReview = (reviewId) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }
+        fetch(breweryReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'SET_ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                dispatch({
+                    type: 'REMOVE_BREWERY_REVIEW',
+                })
+            }
+        })
+    }
+}
+
+export const circuitBreweryReview = (reviewId) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }
+        fetch(circuitReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'SET_ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                dispatch({
+                    type: 'REMOVE_CIRCUIT_REVIEW',
+                })
+            }
+        })
+    }
+}
