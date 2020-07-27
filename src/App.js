@@ -13,7 +13,6 @@ import Brewery from './containers/Brewery.js'
 import Breweries from './containers/Breweries.js'
 import Circuit from './containers/Circuit.js'
 import Circuits from './containers/Circuits.js'
-import Review from './containers/Review.js'
 import User from './containers/User.js'
 import Users from './containers/Users.js'
 
@@ -33,11 +32,9 @@ class App extends Component {
 
         <Route exact path="/breweries" component={Breweries} />
         <Route exact path="/breweries/:id" component={(routerProps) => <Brewery id={routerProps.match.params.id}/>} />
-        <Route exact path="/breweries/reviews/:id" component={(routerProps) => <Review variant='brewery-review' id={routerProps.match.params.id}/>} />
 
         <Route exact path="/circuits" component={Circuits} />
         <Route exact path="/circuits/:id" component={(routerProps) => <Circuit id={routerProps.match.params.id}/>} />
-        <Route exact path="/circuits/reviews/:id" component={(routerProps) => <Review variant='circuit-review' id={routerProps.match.params.id} />} />
 
         <Route exact path="/users" component={Users} />
         <Route path="/users/:id" component={(routerProps) => <User id={routerProps.match.params.id}/>} />
