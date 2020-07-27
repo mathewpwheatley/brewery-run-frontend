@@ -37,10 +37,11 @@ export default (state = {selected: {}, all: []}, action) => {
             }}
 
         case 'REMOVE_BREWERY_REVIEW':
+            let deletedReview = state.selected.reviews.find(review => review.id === action.id)
             return {...state, selected: {...state.selected,
                 reviews: [...state.selected.reviews].filter(review => review.id !== action.id),
                 reviews_count: state.selected.reviews_count - 1 ,
-                rating: state.selected.reviews_count === 1 ? "N/A" : (((state.selected.rating * state.selected.reviews_count) - action.review.rating)/(state.selected.reviews_count - 1)).toFixed(2)
+                rating: state.selected.reviews_count === 1 ? "N/A" : (((state.selected.rating * state.selected.reviews_count) - deletedReview.rating)/(state.selected.reviews_count - 1)).toFixed(2)
             }}
     
         case 'CLEAR_BREWERY':

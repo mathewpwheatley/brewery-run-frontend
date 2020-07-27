@@ -215,7 +215,7 @@ export const deleteUser = (userId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({type: 'CLEAR_USER'})
-                dispatch(logOutUser())
+                dispatch({type: 'LOG_OUT'})
             }
         })
     }

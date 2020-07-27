@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {getEditUser, updateUser, deleteUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
-import DeleteUserButton from './DeleteUserButton.js'
+import CommonDeleteButton from './CommonDeleteButton.js'
 
 class EditUserForm extends Component {
 
@@ -142,7 +142,7 @@ class EditUserForm extends Component {
                     </Form.Group>
                     <Form.Row className="float-right" >
                         <Col>
-                            <DeleteUserButton userId={this.state.userId}/>
+                            <CommonDeleteButton variant="user" subjectId={this.props.userId}/>
                         </Col>
                         <Col>
                             <Button variant="success" type="submit" title="Update User">

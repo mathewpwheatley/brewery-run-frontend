@@ -16,7 +16,6 @@ export const createCircuit = (circuit) => {
             body: JSON.stringify({circuit: circuit})
         }
         fetch(circuitsURL, options).then(resp => resp.json()).then(json => {
-            console.log(json)
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',

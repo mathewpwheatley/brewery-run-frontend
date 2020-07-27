@@ -9,7 +9,7 @@ import CommonNavigation from './CommonNavigation.js'
 import CreateReview from './CreateReview.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
-
+import Reviews from './Reviews.js'
 
 class Brewery extends Component {
 
@@ -34,6 +34,7 @@ class Brewery extends Component {
                         <Card.Text>Address: {brewery.full_address}</Card.Text>
                         <Card.Text>Phone: {brewery.phone}</Card.Text>
                         <Card.Text><Button variant="outline-secondary" href={brewery.website_url} >Brewery Website</Button></Card.Text>
+                        {/* Only render like/favorite buttons if user is logged */}
                         {!!this.props.userId &&
                             <Fragment>
                                 <FavoriteButton variant="brewery" favoriteId={brewery.active_user_favorite_id} userId={this.props.userId} subjectId={brewery.id} />
@@ -58,11 +59,14 @@ class Brewery extends Component {
                     <CommonNavigation variant='circuits' data={brewery.public_circuits} />
                 }
 
-                {(!!brewery.reviews && brewery.reviews.length > 0) &&
-                    <CommonNavigation variant='brewery-reviews' data={brewery.reviews} />
+                {/* Only logged in users can write a review */}
+                {this.props.userId &&
+                    <CreateReview variant='brewery-review' subjectId={brewery.id} subjectName={brewery.name}/>
                 }
 
-                <CreateReview variant='brewery-review' subjectId={brewery.id} subjectName={brewery.name}/>
+                {brewery.reviews_count > 0 && 
+                    <Reviews variant='brewery-review' reviews={brewery.reviews} userId={this.props.userId}/>
+                }
 
             </CardColumns>
         )

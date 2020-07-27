@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonNavigation from './CommonNavigation.js'
+import Reviews from './Reviews.js'
 import CreateCircuit from './CreateCircuit.js'
 
 class Dashboard extends Component {
@@ -93,11 +94,11 @@ class Dashboard extends Component {
                 }
 
                 {(!!user.brewery_reviews && user.brewery_reviews.length > 0) &&
-                    <CommonNavigation variant='brewery-reviews' navSubTitle=': Brewery' hideTableDefault={true} data={user.brewery_reviews} />
+                    <Reviews variant='brewery-reviews' reviews={user.brewery_reviews} userId={this.props.userId}/>
                 }
 
                 {(!!user.circuit_reviews && user.circuit_reviews.length > 0) &&
-                    <CommonNavigation variant='circuit-reviews' navSubTitle=': Circuit' hideTableDefault={true} data={user.circuit_reviews} />
+                    <Reviews variant='circuit-reviews' reviews={user.circuit_reviews} userId={this.props.userId}/>
                 }
                 
             </CardColumns>

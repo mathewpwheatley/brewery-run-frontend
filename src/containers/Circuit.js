@@ -9,7 +9,8 @@ import CommonNavigation from './CommonNavigation.js'
 import CreateReview from './CreateReview.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
-import DeleteCircuitButton from '../components/DeleteCircuitButton.js'
+import CommonDeleteButton from '../components/CommonDeleteButton.js'
+import Reviews from './Reviews.js'
 
 class Circuit extends Component {
 
@@ -31,13 +32,17 @@ class Circuit extends Component {
                         <Card.Title>Title: {circuit.title}</Card.Title>
                         <Card.Text>Author: {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}</Card.Text>
                         <Card.Text>Description: {circuit.description }</Card.Text>
-                        {!!this.props.userId &&
+                        {/* Only render like/favorite buttons if user is logged in and not viewing their own circuit */}
+                        {(this.props.userId && (this.props.userId !== circuit.author_id)) &&
                             <Fragment>
                                 <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
                                 <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
                             </Fragment>
                         }
-                        <DeleteCircuitButton circuitId={this.props.circuit.id}/>
+                        {/* Only render delete button if user is logged in and are the author */}
+                        {this.props.userId === circuit.author_id && 
+                            <CommonDeleteButton variant="circuit" subjectId={circuit.id}/>
+                        }
                     </Card.Body>
                 </Card>
 
@@ -63,11 +68,14 @@ class Circuit extends Component {
                     <CommonNavigation variant='breweries' data={circuit.breweries} />
                 }
 
-                {(!!circuit.reviews && circuit.reviews.length > 0) &&
-                    <CommonNavigation variant='circuit-reviews' data={circuit.reviews} />
+                {/* Only logged in users can write a review */}
+                {this.props.userId &&
+                    <CreateReview variant='circuit-review' subjectId={circuit.id} subjectName={circuit.title}/>
                 }
 
-                <CreateReview variant='circuit-review' subjectId={circuit.id} subjectName={circuit.title}/>
+                {circuit.reviews_count > 0 && 
+                    <Reviews variant='circuit-review' reviews={circuit.reviews} userId={this.props.userId}/>
+                }
 
             </CardColumns>
         )
