@@ -49,7 +49,7 @@ class User extends Component {
                     </Card.Body>
                 </Card>
 
-                {!!user.public_circuits &&
+                {(user.public_circuits && user.public_circuits.lenght > 0) &&
                     <CommonNavigation variant='circuits' data={user.public_circuits} />
                 }
 
