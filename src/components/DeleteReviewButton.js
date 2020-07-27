@@ -2,17 +2,17 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import {deleteReview} from '../actions/review.js'
+import {deleteBreweryReview, deleteCircuitReview} from '../actions/review.js'
 
-const DeleteReviewButton = ({reviewId}) => {
+const DeleteReviewButton = ({variant, reviewId, deleteBreweryReview, deleteCircuitReview}) => {
 
     const [redirectPath, setRedirectPath] = useState()
 
     const handleDeleteClick = () => {
-        if (window.confirm("Are you sure? A deleted review can't be restored.")) {
-            deleteReview(reviewId)
-            setRedirectPath('/dashboard')
-        }
+        // if (window.confirm("Are you sure? A deleted review can't be restored.")) {
+            attributes.action()
+            // setRedirectPath('/dashboard')
+        // }
     }
 
     const handleRedirect = (path) => {
@@ -21,14 +21,14 @@ const DeleteReviewButton = ({reviewId}) => {
         }
     }
 
-    let attributes
+    let attributes = {}
     const setAttributes = () => {
         switch (variant) {
             case "brewery":
-                attributes.deleteReview = () => deleteBreweryReview(reviewId)
+                attributes.action = () => deleteBreweryReview(reviewId)
                 break
             case "circuit":
-                attributes.deleteReview = () => deleteCircuitReview(reviewId)
+                attributes.action = () => deleteCircuitReview(reviewId)
                 break
             default:
                 break

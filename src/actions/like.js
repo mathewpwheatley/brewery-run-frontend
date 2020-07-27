@@ -67,7 +67,11 @@ export const deleteBreweryLike = (breweryLikeId) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'DELETE',
-            credentials: 'include'
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
         }
         fetch(breweryLikesURL + "/" + breweryLikeId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
@@ -90,7 +94,11 @@ export const deleteCircuitLike = (circuitLikeId) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'DELETE',
-            credentials: 'include'
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
         }
         fetch(circuitLikesURL + "/" + circuitLikeId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {

@@ -135,7 +135,7 @@ export const deleteBreweryReview = (reviewId) => {
                 'Accept': 'application/json'
             }
         }
-        fetch(breweryReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
+        fetch(breweryReviewsURL + "/" + reviewId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -145,13 +145,14 @@ export const deleteBreweryReview = (reviewId) => {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_BREWERY_REVIEW',
+                    id: reviewId
                 })
             }
         })
     }
 }
 
-export const circuitBreweryReview = (reviewId) => {
+export const deleteCircuitReview = (reviewId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
@@ -162,7 +163,7 @@ export const circuitBreweryReview = (reviewId) => {
                 'Accept': 'application/json'
             }
         }
-        fetch(circuitReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
+        fetch(circuitReviewsURL + "/" + reviewId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -172,6 +173,7 @@ export const circuitBreweryReview = (reviewId) => {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_CIRCUIT_REVIEW',
+                    id: reviewId
                 })
             }
         })
