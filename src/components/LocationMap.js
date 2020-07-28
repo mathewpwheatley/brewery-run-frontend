@@ -1,50 +1,37 @@
-import React, {Component} from 'react'
+import React, {useState} from 'react'
 import Card from 'react-bootstrap/Card'
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react'
 
-export class LocationMap extends Component {
+export const LocationMap = ({name, address, latitude, longitude, zoomLevel, google}) => {
 
-    state = {
-        showingInfoWindow: false,  //Hides or the shows the infoWindow
-        activeMarker: {},          //Shows the active marker upon click
-        selectedPlace: {}          //Shows the infoWindow to the selected place upon a marker
-      }
+    const [showInfo, setShowInfo] = useState(true)
+    const [activeMarker, setactiveMarker] = useState()
 
-    onMarkerClick = (props, marker, event) => {
-        this.setState({
-            selectedPlace: props,
-            activeMarker: marker,
-            showingInfoWindow: true
-        })
+    const onMarkerClick = (props, marker) => {
+        setShowInfo(true)
+        setactiveMarker(marker)
     }
 
-
-    onClose = props => {
-        if (this.state.showingInfoWindow) {
-            this.setState({
-            showingInfoWindow: false,
-            activeMarker: null
-            })
-        }
+    const onCloseClick = () => {
+        setShowInfo(false)
+        setactiveMarker()
     }
 
-    render() {
-        return (
-            <Card style={{height: "50vh", width: "50vw"}}>
-                <Map google={this.props.google}
-                zoom={this.props.zoomLevel ? this.props.zoomLevel : 15}
-                style={{height: "100%", width: "100%"}}
-                initialCenter={{lat: parseFloat(this.props.latitude), lng: parseFloat(this.props.longitude)}}
-                >
-                    <Marker onClick={this.onMarkerClick} name={this.props.name} address={this.props.address}/>
-                    <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow} onClose={this.onClose} >
-                        <h6>{this.state.selectedPlace.name}</h6>
-                        <p>{this.state.selectedPlace.address}</p>
-                    </InfoWindow>
-                </Map>
-            </Card>
-        )
-    }
+    return (
+        <Card style={{height: "50vh", width: "50vw"}}>
+            <Map google={google}
+            zoom={zoomLevel ? zoomLevel : 15}
+            style={{height: "100%", width: "100%"}}
+            initialCenter={{lat: parseFloat(latitude), lng: parseFloat(longitude)}}
+            >
+                <Marker onClick={onMarkerClick}/>
+                <InfoWindow marker={activeMarker} visible={showInfo} onClose={onCloseClick} >
+                    <h6>{name}</h6>
+                    <p>{address}</p>
+                </InfoWindow>
+            </Map>
+        </Card>
+    )
 }
 
 export default GoogleApiWrapper({apiKey: ''})(LocationMap)

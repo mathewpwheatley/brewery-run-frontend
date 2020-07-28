@@ -42,9 +42,12 @@ class Brewery extends Component {
                         }
                     </Card.Body>
                 </Card>
-                {brewery.full_address &&
-                <LocationMap name={brewery.name} address={brewery.full_address} latitude={brewery.latitude} longitude={brewery.longitude} />
+
+                {/* Only show a map if the latitude and longitude data exists */}
+                {(brewery.latitude && brewery.longitude) &&
+                    <LocationMap name={brewery.name} address={brewery.full_address} latitude={brewery.latitude} longitude={brewery.longitude} />
                 }
+
                 <Card>
                     <Card.Header>Statistics</Card.Header>
                     <Card.Body>

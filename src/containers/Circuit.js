@@ -9,7 +9,7 @@ import CreateReview from './CreateReview.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
 import CommonDeleteButton from '../components/CommonDeleteButton.js'
-// import CircuitMap from '../components/CircuitMap.js'
+import CircuitMap from '../components/CircuitMap.js'
 import Reviews from './Reviews.js'
 
 class Circuit extends Component {
@@ -45,8 +45,11 @@ class Circuit extends Component {
                         }
                     </Card.Body>
                 </Card>
-
-                {/* <CircuitMap/> */}
+                
+                {(circuit.breweries && circuit.breweries.length > 0) &&
+                    <CircuitMap breweries={circuit.breweries} />
+                    
+                }
 
                 <Card>
                     <Card.Header>Statistics</Card.Header>
@@ -59,14 +62,7 @@ class Circuit extends Component {
                     </Card.Body>
                 </Card>
 
-                <Card>
-                    <Card.Header>Map</Card.Header>
-                    <Card.Body>
-                        <Card.Text><span className="spinner-border spinner-border-sm text-primary"/> Google Maps API</Card.Text>
-                    </Card.Body>
-                </Card>
-
-                {(!!circuit.breweries && circuit.breweries.length > 0) &&
+                {(circuit.breweries && circuit.breweries.length > 0) &&
                     <CommonNavigation variant='breweries' data={circuit.breweries} />
                 }
 
