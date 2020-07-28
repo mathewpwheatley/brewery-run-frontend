@@ -5,7 +5,7 @@ import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
-import CommonNavigation from './CommonNavigation.js'
+import CommonCard from './CommonCard.js'
 import FollowButton from '../components/FollowButton.js'
 
 
@@ -50,7 +50,7 @@ class User extends Component {
                 </Card>
 
                 {(user.public_circuits && user.public_circuits.lenght > 0) &&
-                    <CommonNavigation variant='circuits' data={user.public_circuits} />
+                    <CommonCard variant='circuits' data={user.public_circuits} />
                 }
 
             </CardColumns>

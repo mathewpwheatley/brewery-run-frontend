@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
-import CommonNavigation from './CommonNavigation.js'
+import CommonCard from './CommonCard.js'
 import Reviews from './Reviews.js'
 import CreateCircuit from './CreateCircuit.js'
 
@@ -73,23 +73,23 @@ class Dashboard extends Component {
                 </Card>
 
                 {(!!user.favorite_breweries && user.favorite_breweries.length > 0) &&
-                    <CommonNavigation variant='breweries' navSubTitle=': Favorite' data={user.favorite_breweries} />
+                    <CommonCard variant='breweries' navSubTitle=': Favorite' data={user.favorite_breweries} />
                 }
 
                 {(!!user.public_followees_circuits && user.public_followees_circuits.length > 0) &&
-                    <CommonNavigation variant='circuits' navSubTitle=' from Followees' data={user.public_followees_circuits} />
+                    <CommonCard variant='circuits' navSubTitle=' from Followees' data={user.public_followees_circuits} />
                 }
 
                 {(!!user.favorite_circuits && user.favorite_circuits.length > 0) &&
-                    <CommonNavigation variant='circuits' navSubTitle=': Favorite' data={user.favorite_circuits} />
+                    <CommonCard variant='circuits' navSubTitle=': Favorite' data={user.favorite_circuits} />
                 }
 
                 {(!!user.private_circuits && user.private_circuits.length > 0) &&
-                    <CommonNavigation variant='circuits' navSubTitle=': Private' hideTableDefault={true} data={user.private_circuits} />
+                    <CommonCard variant='circuits' navSubTitle=': Private' hideTableDefault={true} data={user.private_circuits} />
                 }
 
                 {(!!user.public_circuits && user.public_circuits.length > 0) &&
-                    <CommonNavigation variant='circuits' navSubTitle=': Public' hideTableDefault={true} data={user.public_circuits} />
+                    <CommonCard variant='circuits' navSubTitle=': Public' hideTableDefault={true} data={user.public_circuits} />
                 }
 
                 {(!!user.brewery_reviews && user.brewery_reviews.length > 0) &&

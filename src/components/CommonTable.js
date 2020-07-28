@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Table from 'react-bootstrap/Table'
-import CommonTableRow from '../components/CommonTableRow.js'
+import CommonTableRow from './CommonTableRow.js'
 
 const CommonTable = ({data, displayKeys, basePath, showLink}) => {
 

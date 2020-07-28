@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
-import CommonNavigation from './CommonNavigation.js'
+import CommonCard from './CommonCard.js'
 import CreateReview from './CreateReview.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
@@ -63,7 +63,7 @@ class Circuit extends Component {
                 </Card>
 
                 {(circuit.breweries && circuit.breweries.length > 0) &&
-                    <CommonNavigation variant='breweries' data={circuit.breweries} />
+                    <CommonCard variant='breweries' data={circuit.breweries} />
                 }
 
                 {/* Only logged in users can write a review */}
@@ -72,7 +72,7 @@ class Circuit extends Component {
                 }
 
                 {circuit.reviews_count > 0 && 
-                    <Reviews variant='circuit-review' reviews={circuit.reviews} userId={this.props.userId}/>
+                    <Reviews variant='circuit-reviews' reviews={circuit.reviews} userId={this.props.userId} hideReviewsDefault={true}/>
                 }
 
             </div>

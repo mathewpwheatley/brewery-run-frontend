@@ -19,13 +19,13 @@ const CommonDeleteButton = ({variant, subjectId, deleteCircuit, deleteBreweryRev
                 attributes.title = "Delete Circuit"
                 attributes.confirmMessage = "Are you sure you want to delete your circuit? A deleted circuit can't be restored."
                 break
-            case "brewery-review":
+            case "brewery-reviews":
                 attributes.action = () => deleteBreweryReview(subjectId)
                 attributes.desiredRedirectPath = ""
                 attributes.title = "Delete Review"
                 attributes.confirmMessage = "Are you sure you want to delete your review? A deleted review can't be restored."
                 break
-            case "circuit-review":
+            case "circuit-reviews":
                 attributes.action = () => deleteCircuitReview(subjectId)
                 attributes.desiredRedirectPath = ""
                 attributes.title = "Delete Review"

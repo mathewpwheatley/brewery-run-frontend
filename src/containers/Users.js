@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAllUsers} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
-import CommonNavigation from './CommonNavigation.js'
+import CommonCard from './CommonCard.js'
 
 class Users extends Component {
 
@@ -14,7 +14,7 @@ class Users extends Component {
     return (
       <div className="m-4">
           <FetchMessage/>
-          <CommonNavigation variant='users' data={this.props.users}/>
+          <CommonCard variant='users' data={this.props.users}/>
       </div>
     )
   }

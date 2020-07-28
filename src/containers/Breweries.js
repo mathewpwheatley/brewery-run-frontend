@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAllBreweries} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
-import CommonNavigation from './CommonNavigation.js'
+import CommonCard from './CommonCard.js'
 
 class Breweries extends Component {
 
@@ -14,7 +14,7 @@ class Breweries extends Component {
     return (
       <div className="m-4">
           <FetchMessage/>
-          <CommonNavigation variant='breweries' data={this.props.breweries}/>
+          <CommonCard variant='breweries' data={this.props.breweries}/>
       </div>
     )
   }

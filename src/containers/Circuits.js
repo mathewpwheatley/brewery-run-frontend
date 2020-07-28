@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAllCircuits} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
-import CommonNavigation from './CommonNavigation.js'
+import CommonCard from './CommonCard.js'
 
 class Circuits extends Component {
 
@@ -14,7 +14,7 @@ class Circuits extends Component {
     return (
       <div className="m-4">
           <FetchMessage/>
-          <CommonNavigation variant='circuits' data={this.props.circuits}/>
+          <CommonCard variant='circuits' data={this.props.circuits}/>
       </div>
     )
   }

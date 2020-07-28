@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getBrewery} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
-import CommonNavigation from './CommonNavigation.js'
+import CommonCard from './CommonCard.js'
 import CreateReview from './CreateReview.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
@@ -60,7 +60,7 @@ class Brewery extends Component {
                 </Card>
 
                 {(brewery.public_circuits && brewery.public_circuits.length > 0) &&
-                    <CommonNavigation variant='circuits' data={brewery.public_circuits} />
+                    <CommonCard variant='circuits' data={brewery.public_circuits} />
                 }
 
                 {/* Only logged in users can write a review */}
@@ -69,7 +69,7 @@ class Brewery extends Component {
                 }
 
                 {brewery.reviews_count > 0 && 
-                    <Reviews variant='brewery-review' reviews={brewery.reviews} userId={this.props.userId}/>
+                    <Reviews variant='brewery-reviews' reviews={brewery.reviews} userId={this.props.userId} hideReviewsDefault={true}/>
                 }
 
             </div>
