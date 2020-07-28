@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
 import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
@@ -10,6 +9,7 @@ import CreateReview from './CreateReview.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
 import CommonDeleteButton from '../components/CommonDeleteButton.js'
+// import CircuitMap from '../components/CircuitMap.js'
 import Reviews from './Reviews.js'
 
 class Circuit extends Component {
@@ -22,7 +22,7 @@ class Circuit extends Component {
         const circuit = this.props.circuit
 
         return (
-            <CardColumns className="p-4">
+            <div className="m-4">
                 
                 <FetchMessage/>
 
@@ -45,6 +45,8 @@ class Circuit extends Component {
                         }
                     </Card.Body>
                 </Card>
+
+                {/* <CircuitMap/> */}
 
                 <Card>
                     <Card.Header>Statistics</Card.Header>
@@ -77,7 +79,7 @@ class Circuit extends Component {
                     <Reviews variant='circuit-review' reviews={circuit.reviews} userId={this.props.userId}/>
                 }
 
-            </CardColumns>
+            </div>
         )
     }
 }

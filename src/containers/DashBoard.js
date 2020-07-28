@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
-import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getUser} from '../actions/user.js'
@@ -20,7 +19,7 @@ class Dashboard extends Component {
         const user = this.props.user
 
         return (
-            <CardColumns className="p-4">
+            <div className="m-4">
 
                 {/* Redirect to root if user is not logged in */}
                 {!this.props.userId && <Redirect to="/" />}
@@ -101,7 +100,7 @@ class Dashboard extends Component {
                     <Reviews variant='circuit-reviews' reviews={user.circuit_reviews} userId={this.props.userId}/>
                 }
                 
-            </CardColumns>
+            </div>
         )
     }
 }

@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
-import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {getBrewery} from '../actions/brewery.js'
@@ -9,6 +8,7 @@ import CommonNavigation from './CommonNavigation.js'
 import CreateReview from './CreateReview.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
+import LocationMap from '../components/LocationMap.js'
 import Reviews from './Reviews.js'
 
 class Brewery extends Component {
@@ -21,7 +21,7 @@ class Brewery extends Component {
         const brewery = this.props.brewery
 
         return (
-            <CardColumns className="p-4">
+            <div className="m-4">
 
                 <FetchMessage/>
 
@@ -30,7 +30,6 @@ class Brewery extends Component {
                     <Card.Body>
                         <Card.Title>Name: {brewery.name}</Card.Title>
                         <Card.Text>Type: {brewery.brewery_type}</Card.Text>
-                        <Card.Text>Tags: {brewery.tag_list}</Card.Text>
                         <Card.Text>Address: {brewery.full_address}</Card.Text>
                         <Card.Text>Phone: {brewery.phone}</Card.Text>
                         <Card.Text><Button variant="outline-secondary" href={brewery.website_url} >Brewery Website</Button></Card.Text>
@@ -43,7 +42,9 @@ class Brewery extends Component {
                         }
                     </Card.Body>
                 </Card>
-
+                {brewery.full_address &&
+                <LocationMap name={brewery.name} address={brewery.full_address} latitude={brewery.latitude} longitude={brewery.longitude} />
+                }
                 <Card>
                     <Card.Header>Statistics</Card.Header>
                     <Card.Body>
@@ -55,7 +56,7 @@ class Brewery extends Component {
                     </Card.Body>
                 </Card>
 
-                {(!!brewery.public_circuits && brewery.public_circuits.length > 0) &&
+                {(brewery.public_circuits && brewery.public_circuits.length > 0) &&
                     <CommonNavigation variant='circuits' data={brewery.public_circuits} />
                 }
 
@@ -68,7 +69,7 @@ class Brewery extends Component {
                     <Reviews variant='brewery-review' reviews={brewery.reviews} userId={this.props.userId}/>
                 }
 
-            </CardColumns>
+            </div>
         )
     }
 }
