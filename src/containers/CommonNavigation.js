@@ -39,7 +39,7 @@ class CommonNavigation extends Component {
                     navColor: 'success',
                     icon: <i className="fas fa-route"/>,
                     basePath: '/circuits',
-                    displayKeys: {title: 'Title', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorites'}
+                    displayKeys: {title: 'Title', breweries_count: 'Breweries', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorites'}
                 })
                 break 
             case "users":
