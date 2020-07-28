@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
@@ -19,7 +18,7 @@ class User extends Component {
         const user = this.props.user
         
         return (
-            <CardColumns className="p-4">
+            <div className="col-10 my-4 mx-auto">
 
                 {/* Redirect to Welcome page if user is not logged in */}
                 {!this.props.userId && <Redirect to="/log-in" />}
@@ -53,7 +52,7 @@ class User extends Component {
                     <CommonCard variant='circuits' data={user.public_circuits} />
                 }
 
-            </CardColumns>
+            </div>
         )
     }
 }

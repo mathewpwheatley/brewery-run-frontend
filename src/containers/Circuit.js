@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import Card from 'react-bootstrap/Card'
+import {CardDeck, Card} from 'react-bootstrap'
 import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonCard from './CommonCard.js'
@@ -22,34 +22,36 @@ class Circuit extends Component {
         const circuit = this.props.circuit
 
         return (
-            <div className="m-4">
+            <div className="col-10 my-4 mx-auto">
                 
                 <FetchMessage/>
 
-                <Card>
-                    <Card.Header>Circuit Information</Card.Header>
-                    <Card.Body>
-                        <Card.Title>Title: {circuit.title}</Card.Title>
-                        <Card.Text>Author: {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}</Card.Text>
-                        <Card.Text>Description: {circuit.description }</Card.Text>
-                        {/* Only render like/favorite buttons if user is logged in and not viewing their own circuit */}
-                        {(this.props.userId && (this.props.userId !== circuit.author_id)) &&
-                            <Fragment>
-                                <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
-                                <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
-                            </Fragment>
-                        }
-                        {/* Only render delete button if user is logged in and are the author */}
-                        {this.props.userId === circuit.author_id && 
-                            <CommonDeleteButton variant="circuit" subjectId={circuit.id}/>
-                        }
-                    </Card.Body>
-                </Card>
-                
-                {(circuit.breweries && circuit.breweries.length > 0) &&
-                    <CircuitMap breweries={circuit.breweries} />
+                <CardDeck>
+                    <Card>
+                        <Card.Header>Circuit Information</Card.Header>
+                        <Card.Body>
+                            <Card.Title>Title: {circuit.title}</Card.Title>
+                            <Card.Text>Author: {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}</Card.Text>
+                            <Card.Text>Description: {circuit.description }</Card.Text>
+                            {/* Only render like/favorite buttons if user is logged in and not viewing their own circuit */}
+                            {(this.props.userId && (this.props.userId !== circuit.author_id)) &&
+                                <Fragment>
+                                    <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
+                                    <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
+                                </Fragment>
+                            }
+                            {/* Only render delete button if user is logged in and are the author */}
+                            {this.props.userId === circuit.author_id && 
+                                <CommonDeleteButton variant="circuit" subjectId={circuit.id}/>
+                            }
+                        </Card.Body>
+                    </Card>
                     
-                }
+                    {(circuit.breweries && circuit.breweries.length > 0) &&
+                        <CircuitMap breweries={circuit.breweries} />
+                        
+                    }
+                </CardDeck>
 
                 <Card>
                     <Card.Header>Statistics</Card.Header>
@@ -72,7 +74,7 @@ class Circuit extends Component {
                 }
 
                 {circuit.reviews_count > 0 && 
-                    <Reviews variant='circuit-reviews' reviews={circuit.reviews} userId={this.props.userId} hideReviewsDefault={true}/>
+                    <Reviews variant='circuit-reviews' data={circuit.reviews} userId={this.props.userId} hideDataDefault={true}/>
                 }
 
             </div>

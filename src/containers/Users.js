@@ -12,7 +12,7 @@ class Users extends Component {
 
   render () {
     return (
-      <div className="m-4">
+      <div className="col-10 my-4 mx-auto">
           <FetchMessage/>
           <CommonCard variant='users' data={this.props.users}/>
       </div>

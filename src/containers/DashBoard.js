@@ -19,7 +19,7 @@ class Dashboard extends Component {
         const user = this.props.user
 
         return (
-            <div className="m-4">
+            <div className="col-10 my-4 mx-auto">
 
                 {/* Redirect to root if user is not logged in */}
                 {!this.props.userId && <Redirect to="/" />}

@@ -3,81 +3,46 @@ import Card from 'react-bootstrap/Card'
 import CommonNavigationBar from '../components/CommonNavigationBar.js'
 import Review from './Review.js'
 
-const Reviews = ({variant, reviews, userId, navSubTitle, hideReviewsDefault, hideSearch, hideLink}) => {
+const Reviews = ({variant, data, userId, navSubTitle, hideDataDefault, hideSearch}) => {
 
-    const [showReviews, setShowReviews] = useState(hideReviewsDefault ? false : true)
+    const [showData, setShowData] = useState(hideDataDefault ? false : true)
     const [searchTerm, setSearchTerm] = useState()
 
-    const toggleReviews = () => {
-        showReviews ? setShowReviews(false) : setShowReviews(true)
+    const toggleData = () => {
+        showData ? setShowData(false) : setShowData(true)
     }
 
     const updateSearchTerm = (searchTerm) => setSearchTerm(searchTerm)
 
-    const filterReviewsByName = () => {
+    const filterDataByName = () => {
         if (searchTerm) {
-            const searchTermKey = Object.keys(attributes.displayKeys)[0]
-            return reviews.filter(datum => datum[searchTermKey].toLowerCase().includes(searchTerm.toLowerCase()))
+            const searchTermKey = "title"
+            return data.filter(datum => datum[searchTermKey].toLowerCase().includes(searchTerm.toLowerCase()))
         } else {
-            return reviews
+            return data
         }
     }
 
-    const mapReviews = () => {
-        return reviews.map(review => {
-            return <Review review={review} variant={variant} userId={userId}/> 
+    const mapData = () => {
+        return filterDataByName().map(datum => {
+            return <Review review={datum} variant={variant} userId={userId}/> 
         })
     }
 
-    let attributes
-    const setAttributes = () => {
-        const subTitle = navSubTitle ? navSubTitle : ''
-        switch (variant) {
-            case "brewery-reviews":
-                attributes = {
-                    navTitle: 'Reviews' + subTitle,
-                    navColor: 'secondary',
-                    icon: <i className="far fa-newspaper"/>,
-                    basePath: '/breweries/reviews',
-                    displayKeys: {title: 'Title', author_name: 'Author', rating: 'Rating'}
-                }
-                break
-            case "circuit-reviews":
-                attributes = {
-                    navTitle: 'Reviews' + subTitle,
-                    navColor: 'secondary',
-                    icon: <i className="far fa-newspaper"/>,
-                    basePath: '/circuits/reviews',
-                    displayKeys: {title: 'Title', author_name: 'Author', rating: 'Rating'}
-                }
-                break
-            default:
-                break
-        }
-    }
-
     return (
-        <Card className="px-0 mx-auto">
-            {setAttributes()}
+        <Card>
             <CommonNavigationBar
-                navTitle={attributes.navTitle}
-                navColor={attributes.navColor}
-                icon={attributes.icon}
-                showData={showReviews}
+                variant={variant}
+                navSubTitle={navSubTitle}
+                showData={showData}
                 showSearch={hideSearch ? false : true}
-                toggleData={toggleReviews}
-                searchName={Object.values(attributes.displayKeys)[0]}
+                toggleData={toggleData}
+                searchName={"Title"}
                 searchTerm={searchTerm}
                 updateSearchTerm={updateSearchTerm}
             />
-            {showReviews &&
-                // <CommonTable
-                //     data={filterDataByName()}
-                //     displayKeys={attributes.displayKeys}
-                //     basePath={attributes.basePath}
-                //     showLink={hideLink ? false : true}
-                // />
-                mapReviews()
+            {showData &&
+                mapData()
             }
         </Card>
     )
