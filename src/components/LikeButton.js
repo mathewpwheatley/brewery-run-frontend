@@ -10,7 +10,7 @@ const LikeButton = ({variant, likeId, userId, subjectId, createBreweryLike, crea
         if (!!likeId) {
             attributes = {
                 title: "Unlike",
-                variant: "primary",
+                variant: "info",
                 text: <i className="fas fa-heart" style={{color: "deeppink"}}/>
             }
             switch (variant) {

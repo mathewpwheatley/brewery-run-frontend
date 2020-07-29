@@ -15,7 +15,7 @@ const CommonCard = ({variant, data, navSubTitle, hideDataDefault, hideSearch, hi
     const toggleData = () => {
         showData ? setShowData(false) : setShowData(true)
     }
-
+    
     const filterDataByName = () => {
         if (searchTerm) {
             return data.filter(datum => datum[searchKey].toLowerCase().includes(searchTerm.toLowerCase()))

@@ -6,7 +6,7 @@ import Notification from '../components/Notification.js'
 const Notifications = ({notifications}) => {
 
   return (
-    <Dropdown.Menu className="p-2" alignRight style={{width: "20rem"}}>
+    <Dropdown.Menu className="p-2" alignRight style={{minWidth: "20rem"}}>
       {notifications.map(notification => {return <Notification key={notification.id} notification={notification}/>})}
     </Dropdown.Menu>
   )

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Card from 'react-bootstrap/Card'
 import CommonNavigationBar from '../components/CommonNavigationBar.js'
-import Review from './Review.js'
+import Review from '../components/Review.js'
 
 const Reviews = ({variant, data, userId, subjectId, subjectName, navSubTitle, showWriteReview, hideDataDefault, hideSearch}) => {
 

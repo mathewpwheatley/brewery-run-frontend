@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import {Container, CardDeck, Card, Row, Col} from 'react-bootstrap'
 import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from './FetchMessage.js'
@@ -16,8 +16,21 @@ import Reviews from '../containers/Reviews.js'
 
 class Circuit extends Component {
 
+    state={redirectPath: 0}
+
     componentDidMount() {
         this.props.getCircuit(this.props.id)
+    }
+
+    handleRedirect = () => {
+        if (!this.props.userId && !this.props.circuit.public) {
+            return <Redirect to="/circuits"/> // Redirect, user is not logged in and circuit is private
+        } else if (this.props.userId === this.props.circuit.author_id) {
+            return // Nothing, user is author of circuit so they can see it
+        } else if (!this.props.circuit.public) {
+            console.log("third")
+            return <Redirect to="/circuits"/> // Redirect, circuit is private and doesnt belong to current user
+        }
     }
 
     render () {
@@ -27,6 +40,11 @@ class Circuit extends Component {
             <Container className="col-10 mt-4">
                 
                 <FetchMessage/>
+
+                {/* Ensure circuit has been loading before checking for redirect */}
+                {circuit.id &&
+                    this.handleRedirect()
+                }
 
                 <CardDeck className="mb-4">
                     <Card className="col-5 px-0">
@@ -43,8 +61,10 @@ class Circuit extends Component {
                                 <span className="float-right">
                                     <span className="font-weight-bold">Favorited: </span>
                                     {circuit.favorites_count}
-                                    {/* Only render favorite button if user is logged in */}
-                                    {this.props.userId && <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />}
+                                    {/* Only render favorite button if user is logged in and they are not the owner */}
+                                    {(this.props.userId && (this.props.userId !== circuit.author_id)) && 
+                                        <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
+                                    }
                                 </span>
                             </Card.Text>
                             <Card.Text>
@@ -53,8 +73,10 @@ class Circuit extends Component {
                                 <span className="float-right">
                                     <span className="font-weight-bold">Likes: </span>
                                     {circuit.likes_count}
-                                    {/* Only render favorite button if user is logged in */}
-                                    {this.props.userId && <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />}
+                                    {/* Only render favorite button if user is logged in and they are not the owner */}
+                                    {(this.props.userId && (this.props.userId !== circuit.author_id))  && 
+                                        <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
+                                    }
                                 </span>
                             </Card.Text>
                             <Card.Text>
@@ -91,13 +113,8 @@ class Circuit extends Component {
                 </CardDeck>
 
                 <CardDeck className="mb-4">
-                    {(circuit.breweries && circuit.breweries.length > 0) &&
-                        <CommonCard variant='breweries' data={circuit.breweries} hideDataDefault={true}/>
-                    }
-
-                    {circuit.reviews_count >= 0 && 
-                        <Reviews variant='circuit-reviews' data={circuit.reviews} userId={this.props.userId} subjectId={circuit.id} subjectName={circuit.title} hideDataDefault={true} showWriteReview={true}/>
-                    }
+                    <CommonCard variant='breweries' data={circuit.breweries} hideDataDefault={true}/>
+                    <Reviews variant='circuit-reviews' data={circuit.reviews} userId={this.props.userId} subjectId={circuit.id} subjectName={circuit.title} hideDataDefault={true} showWriteReview={true}/>
                 </CardDeck>
 
             </Container>

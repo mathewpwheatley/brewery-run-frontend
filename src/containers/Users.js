@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {Container} from 'react-bootstrap'
 import {getAllUsers} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonCard from './CommonCard.js'
@@ -12,10 +14,12 @@ class Users extends Component {
 
   render () {
     return (
-      <div className="col-10 my-4 mx-auto">
+      <Container className="col-10 my-4">
+          {/* Redirect to Welcome page if user is not logged in */}
+          {!this.props.userId && <Redirect to="/log-in" />}
           <FetchMessage/>
           <CommonCard variant='users' data={this.props.users}/>
-      </div>
+      </Container>
     )
   }
 }

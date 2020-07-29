@@ -10,7 +10,7 @@ const FavoriteButton = ({variant, favoriteId, userId, subjectId, createBreweryFa
         if (!!favoriteId) {
             attributes = {
                 title: "Unfavorite",
-                variant: "primary",
+                variant: "info",
                 text: <i className="fas fa-star" style={{color: "gold"}}/>
             }
             switch (variant) {

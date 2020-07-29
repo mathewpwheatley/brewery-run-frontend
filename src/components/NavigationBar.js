@@ -45,9 +45,9 @@ class NavigationBar extends Component {
                         {!this.props.userName &&
                             <Fragment>
                                 <Nav.Item>
-                                    <NavLink className="nav-link" to="/create-user" title="Create User">
+                                    <NavLink className="nav-link" to="/create-user" title="Create Accout">
                                         <i className="fas fa-user-plus"/>
-                                        <span className="d-none d-sm-none d-md-inline"> Create User</span>
+                                        <span className="d-none d-sm-none d-md-inline"> Create Accout</span>
                                     </NavLink>
                                 </Nav.Item>
                                 <Nav.Item>

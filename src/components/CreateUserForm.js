@@ -44,7 +44,7 @@ class CreateUserForm extends Component {
         return (
             <Card className='col-4 mt-4 mx-auto px-0'>
                 {this.handleRedirect()}
-                <Card.Header>Create User</Card.Header>
+                <Card.Header>Create Account</Card.Header>
                 <Card.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col}>

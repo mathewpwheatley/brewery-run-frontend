@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import CreateReview from '../containers/CreateReview.js'
 
-const CommonNavigationBar = ({variant, navSubTitle, userId, subjectId, subjectName, showData, toggleData, showWriteReview, showSearch, searchTerm, updateSearchTerm, updateSearchKey}) => {
+const CommonNavigationBar = ({variant, navSubTitle, userId, subjectId, subjectName, dataCount, showData, toggleData, showWriteReview, showSearch, searchTerm, updateSearchTerm, updateSearchKey}) => {
 
     let attributes
     const setAttributes = () => {

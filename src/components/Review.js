@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Card from 'react-bootstrap/Card'
-import RatingStars from '../components/RatingStars.js'
-import CommonDeleteButton from '../components/CommonDeleteButton.js'
+import {Card} from 'react-bootstrap'
+import RatingStars from './RatingStars.js'
+import CommonDeleteButton from './CommonDeleteButton.js'
 
 
 const Review = ({variant, review, userId}) => {

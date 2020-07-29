@@ -55,16 +55,16 @@ class Dashboard extends Component {
                                 </Col>
                                 <Col>
                                     <Card.Text>
-                                        <span className="font-weight-bold">Favorited Breweries: </span>
-                                        {user.favorite_breweries_count}
+                                        <span className="font-weight-bold">Circuit Reviews Written: </span>
+                                        {user.circuit_reviews_count}
                                     </Card.Text>
                                 </Col>
                             </Row>
                             <Row as={Card.Text}>
                                 <Col>
                                     <Card.Text>
-                                        <span className="font-weight-bold">Circuit Reviews Written: </span>
-                                        {user.circuit_reviews_count}
+                                        <span className="font-weight-bold">Favorited Breweries: </span>
+                                        {user.favorite_breweries_count}
                                     </Card.Text>
                                 </Col>
                                 <Col>
@@ -73,6 +73,7 @@ class Dashboard extends Component {
                                         {user.brewery_reviews_count}
                                     </Card.Text>
                                 </Col>
+                                
                             </Row>
                             <Card.Text>
                                 <span className="font-weight-bold">Email: </span>
@@ -105,10 +106,6 @@ class Dashboard extends Component {
                     <CommonCard variant='breweries' navSubTitle=': Favorited' data={user.favorite_breweries} hideDataDefault={true}/> 
                 </CardDeck>
 
-                <CardDeck className="mb-4">
-                    <CommonCard variant='circuits' navSubTitle=': Recommended (Top 5 Liked)' data={[]}  hideDataDefault={true}/>
-                    <CommonCard variant='circuits' navSubTitle=': Recommended (Top 5 Favorited)' data={[]}  hideDataDefault={true}/>
-                </CardDeck>
                 <CardDeck className="mb-4">
                     <CommonCard variant='circuits' navSubTitle=' from Followees' data={user.public_followees_circuits}  hideDataDefault={true}/>
                     <CommonCard variant='circuits' navSubTitle=': Favorited' data={user.favorite_circuits}  hideDataDefault={true}/>
