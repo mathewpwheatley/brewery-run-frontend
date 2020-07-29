@@ -53,4 +53,4 @@ export class CircuitMap extends Component {
     }
 }
 
-export default GoogleApiWrapper({apiKey: ''})(CircuitMap)
+export default GoogleApiWrapper({apiKey: process.env.REACT_APP_GOOGLE_MAP_API})(CircuitMap)

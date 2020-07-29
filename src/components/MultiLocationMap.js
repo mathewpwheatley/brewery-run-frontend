@@ -53,4 +53,4 @@ export class MultiLocationMap extends Component {
     }
 }
 
-export default GoogleApiWrapper({apiKey: ''})(MultiLocationMap)
+export default GoogleApiWrapper({apiKey: process.env.REACT_APP_GOOGLE_MAP_API})(MultiLocationMap)

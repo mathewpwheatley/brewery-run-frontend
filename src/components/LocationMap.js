@@ -34,4 +34,4 @@ export const LocationMap = ({name, address, latitude, longitude, zoomLevel, goog
     )
 }
 
-export default GoogleApiWrapper({apiKey: ''})(LocationMap)
+export default GoogleApiWrapper({apiKey: process.env.REACT_APP_GOOGLE_MAP_API})(LocationMap)
