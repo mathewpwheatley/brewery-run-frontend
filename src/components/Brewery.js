@@ -9,6 +9,7 @@ import RatingStars from './RatingStars.js'
 import FavoriteButton from './FavoriteButton.js'
 import LikeButton from './LikeButton.js'
 import LocationMap from './LocationMap.js'
+import BlankMap from './BlankMap.js'
 import Reviews from '../containers/Reviews.js'
 
 class Brewery extends Component {
@@ -63,8 +64,9 @@ class Brewery extends Component {
                     </Card>
 
                     {/* Only show a map if the latitude and longitude data exists */}
-                    {(brewery.latitude && brewery.longitude) &&
-                        <LocationMap name={brewery.name} address={brewery.full_address} latitude={brewery.latitude} longitude={brewery.longitude} />
+                    {(brewery.latitude && brewery.longitude) ?
+                        <LocationMap name={brewery.name} address={brewery.full_address} latitude={brewery.latitude} longitude={brewery.longitude} /> :
+                        <BlankMap/>
                     }
                 </CardDeck>
 
@@ -73,8 +75,15 @@ class Brewery extends Component {
                         <CommonCard variant='circuits' data={brewery.public_circuits} hideDataDefault={true}/>
                     }
 
-                    {brewery.reviews_count >= 0 && 
-                        <Reviews variant='brewery-reviews' data={brewery.reviews} userId={this.props.userId} subjectId={brewery.id} subjectName={brewery.name} hideDataDefault={true} showWriteReview={true}/>
+                    {brewery.reviews_count >= 0 &&
+                        <Reviews variant='brewery-reviews'
+                        data={brewery.reviews}
+                        userId={this.props.userId}
+                        subjectId={brewery.id}
+                        subjectName={brewery.name}
+                        hideDataDefault={true}
+                        showWriteReview={true}
+                        />
                     }
                 </CardDeck>
 
