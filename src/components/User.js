@@ -3,11 +3,11 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {Container, CardDeck, Card} from 'react-bootstrap'
 import {getUser} from '../actions/user.js'
-import CommonNavigationBar from '../components/CommonNavigationBar.js'
-import FetchMessage from '../components/FetchMessage.js'
-import CommonCard from './CommonCard.js'
-import FollowButton from '../components/FollowButton.js'
-import RatingStars from '../components/RatingStars.js'
+import CommonNavigationBar from './CommonNavigationBar.js'
+import FetchMessage from './FetchMessage.js'
+import CommonCard from '../containers/CommonCard.js'
+import FollowButton from './FollowButton.js'
+import RatingStars from './RatingStars.js'
 
 
 class User extends Component {

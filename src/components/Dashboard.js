@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {Container, CardDeck, Card, Button} from 'react-bootstrap'
 import {getUser} from '../actions/user.js'
-import FetchMessage from '../components/FetchMessage.js'
-import CommonNavigationBar from '../components/CommonNavigationBar.js'
-import CommonCard from './CommonCard.js'
-import Reviews from './Reviews.js'
-import CreateCircuit from './CreateCircuit.js'
-import RatingStars from '../components/RatingStars.js'
+import FetchMessage from './FetchMessage.js'
+import CommonNavigationBar from './CommonNavigationBar.js'
+import CommonCard from '../containers/CommonCard.js'
+import Reviews from '../containers/Reviews.js'
+import CreateCircuit from '../containers/CreateCircuit.js'
+import RatingStars from './RatingStars.js'
 
 class Dashboard extends Component {
 
