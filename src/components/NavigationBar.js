@@ -1,9 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Dropdown from 'react-bootstrap/Dropdown'
+import {Navbar, Nav, Dropdown,Badge} from 'react-bootstrap'
 import Notifications from '../containers/Notifications.js'
 import {logOutUser} from '../actions/user.js'
 
@@ -65,6 +63,8 @@ class NavigationBar extends Component {
                         {this.props.notifications.length > 0 &&
                             <Dropdown as={Nav.Item}>
                                 <Dropdown.Toggle as={Nav.Link} title="Notifications">
+                                    <Badge pill variant="danger">{this.props.notifications.length}</Badge>
+                                    <span> </span>
                                     <i className="fas fa-bell"/>
                                 </Dropdown.Toggle>
                                 <Notifications/>

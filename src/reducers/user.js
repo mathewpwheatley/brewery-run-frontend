@@ -31,6 +31,17 @@ export default (state = {selected: {}, all: []}, action) => {
                 active_user_follow_id: false,
                 followers_count: state.selected.followers_count - 1
             }}
+
+        case 'ADD_CIRCUIT':
+            if (action.circuit.public) {
+                return {...state, selected: {...state.selected,
+                    public_circuits: [...state.selected.public_circuits, action.circuit]
+                }}
+            } else {
+                return {...state, selected: {...state.selected,
+                    private_circuits: [...state.selected.private_circuits, action.circuit]
+                }}
+            }
         
         case 'SET_ALL_USERS':
             return {...state, all: action.all}

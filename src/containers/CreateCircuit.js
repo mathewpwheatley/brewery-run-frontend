@@ -18,17 +18,16 @@ class CreateCircuit extends Component {
     render () {
         return (
             <Fragment>
-                {!this.state.showForm &&
-                    <Button onClick={this.toggleForm}>
-                        <i className="fas fa-pen"/>
-                        <span className="d-none d-sm-none d-md-inline"> Create Circuit</span>
-                    </Button>
-                }
+                <Button onClick={this.toggleForm}>
+                    <i className="fas fa-pen"/>
+                    <span className="d-none d-sm-none d-md-inline"> Create Circuit</span>
+                </Button>
                 {this.state.showForm && 
-                    <CreateCircuitForm asdad={"asda"}
+                    <CreateCircuitForm
                         userId={this.props.userId}
                         submitCircuit={this.props.createCircuit}
                         toggleForm={this.toggleForm}
+                        errors={this.props.errors}
                     />
                 }
             </Fragment>
@@ -38,13 +37,14 @@ class CreateCircuit extends Component {
 
 const mapStateToProps = state => {
     return {
-        userId: state.user.id
+        userId: state.user.id,
+        errors: state.fetchMessage.errors
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
-        createCircuit: (circuit) => {dispatch(createCircuit(circuit))}
+        createCircuit: async (circuit) => {await dispatch(createCircuit(circuit))}
     }
 }
 

@@ -5,7 +5,7 @@ const {circuitsURL} = endPoints
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
 export const createCircuit = (circuit) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         const options = {
             method: 'POST',
             credentials: 'include',
@@ -15,7 +15,7 @@ export const createCircuit = (circuit) => {
             },
             body: JSON.stringify({circuit: circuit})
         }
-        fetch(circuitsURL, options).then(resp => resp.json()).then(json => {
+        await fetch(circuitsURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -24,8 +24,8 @@ export const createCircuit = (circuit) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'SET_CIRCUIT',
-                    selected: json
+                    type: 'ADD_CIRCUIT',
+                    circuit: json
                 })
             }
         })
