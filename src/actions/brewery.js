@@ -1,6 +1,6 @@
 import endPoints from './endPoints.js'
 
-const {breweriesURL} = endPoints
+const {breweriesURL, breweriesIndexFormURL} = endPoints
 
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
@@ -71,3 +71,31 @@ export const clearAllBreweries = () => {
         dispatch({type: 'CLEAR_ALL_BREWERIES'})
     }
 }
+
+export const getAllBreweriesForm = () => {
+    return async (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }
+        await fetch(breweriesIndexFormURL, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'SET_ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                dispatch({
+                    type: 'SET_ALL_BREWERIES',
+                    all: json
+                })
+            }
+        })
+    } 
+} 

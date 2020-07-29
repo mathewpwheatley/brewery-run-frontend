@@ -2,6 +2,7 @@ import React, {Fragment, Component} from 'react'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import CreateCircuitForm from '../components/CreateCircuitForm'
+import {getAllBreweriesForm} from '../actions/brewery'
 import {createCircuit} from '../actions/circuit.js'
 
 
@@ -9,6 +10,10 @@ class CreateCircuit extends Component {
 
     state = {
         showForm: false
+    }
+
+    async componentDidMount() {
+        await this.props.getAllBreweriesForm()
     }
 
     toggleForm = () => {
@@ -24,6 +29,7 @@ class CreateCircuit extends Component {
                 </Button>
                 {this.state.showForm && 
                     <CreateCircuitForm
+                        breweries={this.props.breweries}
                         userId={this.props.userId}
                         submitCircuit={this.props.createCircuit}
                         toggleForm={this.toggleForm}
@@ -37,6 +43,7 @@ class CreateCircuit extends Component {
 
 const mapStateToProps = state => {
     return {
+        breweries: state.brewery.all,
         userId: state.user.id,
         errors: state.fetchMessage.errors
     }
@@ -44,7 +51,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        createCircuit: async (circuit) => {await dispatch(createCircuit(circuit))}
+        createCircuit: async (circuit) => {await dispatch(createCircuit(circuit))},
+        getAllBreweriesForm: async () => {await dispatch(getAllBreweriesForm())}
     }
 }
 

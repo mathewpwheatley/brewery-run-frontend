@@ -9,7 +9,16 @@ class CreateReviewForm extends Component {
         description: '',
         public: false,
         user_id: this.props.userId,
+        breweries_circuits_attributes: [],
         brewery_ids: []
+    }
+
+    mapBreweries = () => {
+        return this.props.breweries.map(brewery => {
+            return (
+                <option key={brewery.id} value={brewery.id}>{brewery.name}</option>
+            )
+        })
     }
 
     handleTitleChange = event => {
@@ -32,9 +41,19 @@ class CreateReviewForm extends Component {
         })
     }
 
+    handleBrewerySelect = selectedBreweries =>{
+        const brewery_ids = Array.from(selectedBreweries, (brewery) => parseInt(brewery.value))
+        this.setState({
+            brewery_ids: brewery_ids,
+            breweries_circuits_attributes: brewery_ids.map(brewery_id => {return {brewery_id: brewery_id}})
+        })
+    }
+
     handleSubmit = async (event) => {
         event.preventDefault()
-        await this.props.submitCircuit(this.state)
+        const new_circuit = {...this.state}
+        delete new_circuit.brewery_ids
+        await this.props.submitCircuit(new_circuit)
         // If there are no errors from the fetch, close form
         if (this.props.errors.length === 0) {this.props.toggleForm()}
     }
@@ -51,33 +70,34 @@ class CreateReviewForm extends Component {
                 <Modal.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col} className="col-10">
+                            <Form.Label>Title</Form.Label>
                             <Form.Control type="text" placeholder="Title" name="title" value={this.state.title} onChange={event => this.handleTitleChange(event)}/>
                             {/* 10 is min character length as enforced by backend */}
                             <Form.Text className={this.state.title.length < 10 ? "text-info" : "text-muted"}>Must be between 10 and 50 characters (Character Count: {this.state.title.length})</Form.Text>
                         </Form.Group>
                         <Form.Group as={Col} className="col-2">
+                            <Form.Label>Visibility</Form.Label>
                             <Form.Control as="select" default="Private" name="public" value={this.state.public} onChange={event => this.handleChange(event)}>
                                 <option value="false">Private</option>
                                 <option value="true">Public</option>
                             </Form.Control>
-                            <Form.Text className="text-muted">Public</Form.Text>
                         </Form.Group>
                     </Form.Row>
-                    <Form.Group>
-                        <Form.Control as="textarea" rows="2" placeholder="Circuit descriptions..." name="description" value={this.state.description} onChange={event => this.handleDescriptionChange(event)}/>
-                        {/* 50 is min character length as enforced by backend */}
-                        <Form.Text className={this.state.description.length < 25 ? "text-info" : "text-muted"}>Must be between 25 and 200 characters (Character Count: {this.state.description.length})</Form.Text>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Breweries</Form.Label>
-                        <Form.Control as="select" multiple>
-                            <option value="1">1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </Form.Control>
-                    </Form.Group>
+                    <Form.Row>
+                        <Form.Group as={Col} className="col-8">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control as="textarea" rows="3" placeholder="Circuit descriptions..." name="description" value={this.state.description} onChange={event => this.handleDescriptionChange(event)}/>
+                            {/* 50 is min character length as enforced by backend */}
+                            <Form.Text className={this.state.description.length < 25 ? "text-info" : "text-muted"}>Must be between 25 and 200 characters (Character Count: {this.state.description.length})</Form.Text>
+                        </Form.Group>
+                        <Form.Group as={Col} className="col-4">
+                            <Form.Label>Breweries</Form.Label>
+                            <Form.Control as="select" multiple name="brewery_ids" value={this.state.brewery_ids} onChange={event => this.handleBrewerySelect(event.target.selectedOptions)}>
+                                {this.mapBreweries()}
+                            </Form.Control>
+                            <Form.Text className="text-muted">Select at least 2</Form.Text>
+                        </Form.Group>
+                    </Form.Row>
                     <Form.Group className="float-right">
                         <Button className="mr-2" variant="secondary" type="button" title="Cancel"onClick={() => this.props.toggleForm()} >
                             <i className="far fa-times-circle"/>

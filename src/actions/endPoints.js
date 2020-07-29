@@ -1,11 +1,12 @@
 const baseURL = "http://localhost:3001"
 
 const endPoints = {
-    logInURL: baseURL + "/log-in",
+    logInURL: baseURL + "/log_in",
     autoLogInURL: baseURL + "/auto_log_in",
-    logOutURL: baseURL + "/log-out",
+    logOutURL: baseURL + "/log_out",
     usersURL: baseURL + "/users",
     breweriesURL: baseURL + "/breweries",
+    breweriesIndexFormURL: baseURL + "/breweries_form_index",
     breweryReviewsURL: baseURL + "/brewery_reviews",
     circuitsURL: baseURL + "/circuits",
     circuitReviewsURL: baseURL + "/circuit_reviews",

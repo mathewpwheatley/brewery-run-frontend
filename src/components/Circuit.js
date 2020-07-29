@@ -85,7 +85,7 @@ class Circuit extends Component {
                     </Card>
                     
                     {(circuit.breweries && circuit.breweries.length > 0) &&
-                        <CircuitMap breweries={circuit.breweries} />
+                        <CircuitMap wayPoints={circuit.breweries} />
                         
                     }
                 </CardDeck>

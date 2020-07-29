@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Card} from 'react-bootstrap'
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react'
 
-export class CircuitMap extends Component {
+export class MultiLocationMap extends Component {
 
     state = {
         showingInfoWindow: false,  //Hides or the shows the infoWindow
@@ -36,7 +36,7 @@ export class CircuitMap extends Component {
 
     render() {
         return (
-            <Card style={{height: "50vh", width: "45vw"}}>
+            <Card style={{height: "30vw", width: "30vw"}}>
                 <Map google={this.props.google}
                 zoom={this.props.zoomLevel ? this.props.zoomLevel : 10}
                 style={{height: "100%", width: "100%"}}
@@ -53,4 +53,4 @@ export class CircuitMap extends Component {
     }
 }
 
-export default GoogleApiWrapper({apiKey: ''})(CircuitMap)
+export default GoogleApiWrapper({apiKey: ''})(MultiLocationMap)
