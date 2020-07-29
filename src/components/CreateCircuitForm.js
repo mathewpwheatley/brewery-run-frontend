@@ -103,7 +103,7 @@ class CreateReviewForm extends Component {
                             <i className="far fa-times-circle"/>
                             <span className="d-none d-sm-none d-md-inline"> Cancel</span>
                         </Button>
-                        <Button variant="primary" type="submit" title="Submit Review">
+                        <Button variant="info" type="submit" title="Submit Review">
                             <i className="fas fa-check-circle"/>
                             <span className="d-none d-sm-none d-md-inline"> Create Circuit</span>
                         </Button>

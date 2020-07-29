@@ -11,7 +11,7 @@ const Notification = ({notification, markReadNotification, deleteNotification}) 
 
   return (
     <Toast onClose={() => deleteNotification(notification.id)} onClick={handleClick} >
-      <Toast.Header className={!notification.read && "bg-primary text-light"}>
+      <Toast.Header className={!notification.read && "bg-info text-light"}>
         <strong className="mr-auto">{notification.title}</strong>
         <small>{!notification.read && "Unread"}</small>
       </Toast.Header>

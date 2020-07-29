@@ -10,7 +10,7 @@ const CircuitPublicButton = ({circuitId, status, togglePublicCircuit}) => {
         if (status) {
             attributes = {
                 title: "Public Circuit",
-                variant: "primary",
+                variant: "info",
                 text: <Fragment><i className="fas fa-lock-open"/><span className="d-none d-sm-none d-md-inline"> Public Circuit</span></Fragment>
             }
         } else {

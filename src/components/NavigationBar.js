@@ -8,7 +8,7 @@ import {logOutUser} from '../actions/user.js'
 class NavigationBar extends Component {
     render () {
         return (
-            <Navbar className="shadow" bg="primary" variant="dark">
+            <Navbar className="shadow" bg="info" variant="dark">
                 <Navbar.Collapse>
                     <NavLink exact to="/" title="Beer Run">
                         <Navbar.Brand>

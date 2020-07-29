@@ -23,7 +23,7 @@ class CreateCircuit extends Component {
     render () {
         return (
             <Fragment>
-                <Button onClick={this.toggleForm}>
+                <Button variant="info" onClick={this.toggleForm}>
                     <i className="fas fa-pen"/>
                     <span className="d-none d-sm-none d-md-inline"> Create Circuit</span>
                 </Button>

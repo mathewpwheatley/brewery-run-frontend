@@ -11,7 +11,7 @@ const Welcome = () => {
             <p className="lead"> Bringing the fun back to your run!</p>
             <hr className="my-3"/>
             <Link to="/breweries" title="View Breweries">
-                <Button  className="mx-3 my-2" variant="primary">
+                <Button  className="mx-3 my-2" variant="info">
                     <i className="fas fa-industry"/>
                     <span className="d-none d-sm-none d-md-inline"> View Breweries</span>
                 </Button>
@@ -23,7 +23,7 @@ const Welcome = () => {
                 </Button>
             </Link>
             <Link to="/circuits" title="View Circuits">
-                <Button  className="mx-3 my-2" variant="primary">
+                <Button  className="mx-3 my-2" variant="info">
                     <i className="fas fa-route"/>
                     <span className="d-none d-sm-none d-md-inline"> View Circuits</span>
                 </Button>

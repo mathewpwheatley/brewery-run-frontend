@@ -76,7 +76,7 @@ class CreateReviewForm extends Component {
                         <Form.Text className={this.state.content.length < 50 ? "text-info" : "text-muted"}>Must be between 50 and 500 characters (Character Count: {this.state.content.length})</Form.Text>
                     </Form.Group>
                     <Form.Group className="float-right">
-                        <Button variant="primary" type="submit" title="Submit Review">
+                        <Button variant="info" type="submit" title="Submit Review">
                             <i className="fas fa-check-circle"/>
                             <span className="d-none d-sm-none d-md-inline"> Submit Review</span>
                         </Button>

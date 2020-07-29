@@ -17,7 +17,7 @@ const FollowButton = ({followId, followeeId, followerId, createFollow, deleteFol
         } else {
             attributes = {
                 title: "Follow",
-                variant: "primary",
+                variant: "info",
                 action: () => createFollow(followeeId, followerId),
                 text: <Fragment><i className="fas fa-user-plus"/><span className="d-none d-sm-none d-md-inline"> Follow</span></Fragment>
             }

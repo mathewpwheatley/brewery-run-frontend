@@ -15,8 +15,10 @@ class Users extends Component {
   render () {
     return (
       <Container className="col-10 my-4">
+
           {/* Redirect to Welcome page if user is not logged in */}
           {!this.props.userId && <Redirect to="/log-in" />}
+
           <FetchMessage/>
           <CommonCard variant='users' data={this.props.users}/>
       </Container>
@@ -26,7 +28,8 @@ class Users extends Component {
 
 const mapStateToProps = state => {
   return {
-      users: state.user.all
+      users: state.user.all,
+      userId: state.user.id
   }
 }
 
