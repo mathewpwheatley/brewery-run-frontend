@@ -1,10 +1,11 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Container, CardDeck, Card, Button} from 'react-bootstrap'
+import {Container, CardDeck, Card, Row, Col, Button} from 'react-bootstrap'
 import {getBrewery} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
+import CommonNavigationBar from '../components/CommonNavigationBar.js'
 import CommonCard from './CommonCard.js'
-import CreateReview from './CreateReview.js'
+import RatingStars from '../components/RatingStars.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
 import LocationMap from '../components/LocationMap.js'
@@ -20,27 +21,50 @@ class Brewery extends Component {
         const brewery = this.props.brewery
 
         return (
-            <Container className="col-10 my-4">
+            <Container className="col-10 mt-4">
 
                 <FetchMessage/>
 
-                <CardDeck>
-                    <Card>
-                        <Card.Header >Brewery Information</Card.Header>
+                <CardDeck className="mb-4">
+                    <Card className="col-5 px-0">
+                        <CommonNavigationBar
+                            variant="brewery"
+                            navSubTitle={": " + brewery.name}
+                            showSearch={false}
+                        />
                         <Card.Body>
-                            <Card.Title>{brewery.name}</Card.Title>
-                            <Card.Text>Type: {brewery.brewery_type}</Card.Text>
-                            <Card.Text>Address: {brewery.full_address}</Card.Text>
-                            <Card.Text>Phone: {brewery.phone}</Card.Text>
-                            <Card.Text><Button variant="outline-secondary" href={brewery.website_url} >Brewery Website</Button></Card.Text>
-                            {/* Only render like/favorite buttons if user is logged */}
-                            {!!this.props.userId &&
-                                <Fragment>
-                                    <FavoriteButton variant="brewery" favoriteId={brewery.active_user_favorite_id} userId={this.props.userId} subjectId={brewery.id} />
-                                    <LikeButton variant="brewery" likeId={brewery.active_user_like_id} userId={this.props.userId} subjectId={brewery.id} />
-                                </Fragment>
-                            }
+                            <Card.Text as={Row}>
+                                <Col sm={7}>
+                                    <Card.Text>
+                                        <span className="font-weight-bold">Rating: <RatingStars rating={brewery.rating} /></span>
+                                        <span className="text-muted"> ({brewery.reviews_count} Reviews)</span>
+                                    </Card.Text>
+                                    <Card.Text>
+                                        <span className="font-weight-bold">Related Circuits: </span>
+                                        {brewery.public_circuits_count}
+                                    </Card.Text>
+                                </Col>
+                                <Col >
+                                    <Card.Text className="float-right">
+                                        <span className="font-weight-bold">Favorited: </span>
+                                        {brewery.favorites_count}
+                                        {/* Only render favorite button if user is logged in */}
+                                        {this.props.userId && <FavoriteButton variant="brewery" favoriteId={brewery.active_user_favorite_id} userId={this.props.userId} subjectId={brewery.id} />}
+                                    </Card.Text>
+                                    <Card.Text className="float-right">
+                                        <span className="font-weight-bold">Likes: </span>
+                                        {brewery.likes_count}
+                                        {/* Only render favorite button if user is logged in */}
+                                        {this.props.userId && <LikeButton variant="brewery" likeId={brewery.active_user_like_id} userId={this.props.userId} subjectId={brewery.id} />}
+                                    </Card.Text>
+                                </Col>
+                            </Card.Text>
                         </Card.Body>
+                        <Card.Footer className="text-muted">
+                            <span className="font-weight-bold">Phone: </span>
+                            {brewery.phone}
+                            <Button className="float-right" variant="outline-secondary" size="sm" href={brewery.website_url} >Brewery Website</Button>
+                        </Card.Footer>
                     </Card>
 
                     {/* Only show a map if the latitude and longitude data exists */}
@@ -49,29 +73,15 @@ class Brewery extends Component {
                     }
                 </CardDeck>
 
-                <Card>
-                    <Card.Header>Statistics</Card.Header>
-                    <Card.Body>
-                        <Card.Text>Circuits: {brewery.public_circuits_count}</Card.Text>
-                        <Card.Text>Favorited: {brewery.favorites_count}</Card.Text>
-                        <Card.Text>Likes: {brewery.likes_count}</Card.Text>
-                        <Card.Text>Reviews: {brewery.reviews_count}</Card.Text>
-                        <Card.Text>Rating: {brewery.rating}</Card.Text>
-                    </Card.Body>
-                </Card>
+                <CardDeck className="mb-4">
+                    {(brewery.public_circuits && brewery.public_circuits.length > 0) &&
+                        <CommonCard variant='circuits' data={brewery.public_circuits} hideDataDefault={true}/>
+                    }
 
-                {(brewery.public_circuits && brewery.public_circuits.length > 0) &&
-                    <CommonCard variant='circuits' data={brewery.public_circuits} />
-                }
-
-                {/* Only logged in users can write a review */}
-                {this.props.userId &&
-                    <CreateReview variant='brewery-review' subjectId={brewery.id} subjectName={brewery.name}/>
-                }
-
-                {brewery.reviews_count > 0 && 
-                    <Reviews variant='brewery-reviews' data={brewery.reviews} userId={this.props.userId} hideDataDefault={true}/>
-                }
+                    {brewery.reviews_count >= 0 && 
+                        <Reviews variant='brewery-reviews' data={brewery.reviews} userId={this.props.userId} subjectId={brewery.id} subjectName={brewery.name} hideDataDefault={true} showWriteReview={true}/>
+                    }
+                </CardDeck>
 
             </Container>
         )

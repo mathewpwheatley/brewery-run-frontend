@@ -9,12 +9,12 @@ const CommonCard = ({variant, data, navSubTitle, hideDataDefault, hideSearch, hi
     const [searchTerm, setSearchTerm] = useState()
     const [searchKey, setSearchKey] = useState()
 
+    const updateSearchTerm = (value) => {setSearchTerm(value)}
+    const updateSearchKey = (value) => {setSearchKey(value)}
+
     const toggleData = () => {
         showData ? setShowData(false) : setShowData(true)
     }
-
-    const updateSearchTerm = (value) => {setSearchTerm(value)}
-    const updateSearchKey = (value) => {setSearchKey(value)}
 
     const filterDataByName = () => {
         if (searchTerm) {

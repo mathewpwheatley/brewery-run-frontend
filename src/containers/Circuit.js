@@ -1,13 +1,15 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {CardDeck, Card} from 'react-bootstrap'
+import {Container, CardDeck, Card, Row, Col} from 'react-bootstrap'
 import {getCircuit} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
+import CommonNavigationBar from '../components/CommonNavigationBar.js'
 import CommonCard from './CommonCard.js'
-import CreateReview from './CreateReview.js'
+import RatingStars from '../components/RatingStars.js'
 import FavoriteButton from '../components/FavoriteButton.js'
 import LikeButton from '../components/LikeButton.js'
+import CircuitPublicButton from '../components/CircuitPublicButton.js'
 import CommonDeleteButton from '../components/CommonDeleteButton.js'
 import CircuitMap from '../components/CircuitMap.js'
 import Reviews from './Reviews.js'
@@ -22,29 +24,69 @@ class Circuit extends Component {
         const circuit = this.props.circuit
 
         return (
-            <div className="col-10 my-4 mx-auto">
+            <Container className="col-10 mt-4">
                 
                 <FetchMessage/>
 
-                <CardDeck>
-                    <Card>
-                        <Card.Header>Circuit Information</Card.Header>
+                <CardDeck className="mb-4">
+                    <Card className="col-5 px-0">
+                        <CommonNavigationBar
+                                variant="circuit"
+                                navSubTitle={": " + circuit.title}
+                                showSearch={false}
+                            />
                         <Card.Body>
-                            <Card.Title>Title: {circuit.title}</Card.Title>
-                            <Card.Text>Author: {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}</Card.Text>
-                            <Card.Text>Description: {circuit.description }</Card.Text>
-                            {/* Only render like/favorite buttons if user is logged in and not viewing their own circuit */}
-                            {(this.props.userId && (this.props.userId !== circuit.author_id)) &&
-                                <Fragment>
-                                    <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
-                                    <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
-                                </Fragment>
-                            }
-                            {/* Only render delete button if user is logged in and are the author */}
+                            <Card.Text as={Row}>
+                                    <Col sm={7}>
+                                        <Card.Text>
+                                            <span className="font-weight-bold">Rating: <RatingStars rating={circuit.rating} /></span>
+                                            <span className="text-muted"> ({circuit.reviews_count} Reviews)</span>
+                                        </Card.Text>
+                                        <Card.Text>
+                                            <span className="font-weight-bold">Related Breweries: </span>
+                                            {circuit.breweries_count}
+                                        </Card.Text>
+                                    </Col>
+                                    <Col >
+                                        <Card.Text className="float-right">
+                                            <span className="font-weight-bold">Favorited: </span>
+                                            {circuit.favorites_count}
+                                            {/* Only render favorite button if user is logged in */}
+                                            {this.props.userId && <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />}
+                                        </Card.Text>
+                                        <Card.Text className="float-right">
+                                            <span className="font-weight-bold">Likes: </span>
+                                            {circuit.likes_count}
+                                            {/* Only render favorite button if user is logged in */}
+                                            {this.props.userId && <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />}
+                                        </Card.Text>
+                                    </Col>
+                                </Card.Text>
+                            <Card.Text>
+                                <span className="font-weight-bold">Author: </span>
+                                {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}
+                            </Card.Text>
+                            <Card.Text>
+                                <span className="font-weight-bold">Description: </span>
+                                {circuit.description }
+                            </Card.Text>
+                  
+                            {/* Only render delete and public buttons if user is logged in and are the author */}
                             {this.props.userId === circuit.author_id && 
-                                <CommonDeleteButton variant="circuit" subjectId={circuit.id}/>
+                            <Row>
+                                <Col className="d-flex justify-content-center">
+                                    <CircuitPublicButton circuitId={circuit.id} status={circuit.public} />
+                                </Col>
+                                <Col className="d-flex justify-content-center">
+                                    <CommonDeleteButton variant="circuit" subjectId={circuit.id}/>
+                                </Col>
+                            </Row>
                             }
                         </Card.Body>
+                        <Card.Footer className="text-muted">
+                            Created: {new Date(circuit.created_at).toLocaleDateString()}
+                            <span className="float-right">Last Updated: {new Date(circuit.updated_at).toLocaleDateString()}</span>
+                        </Card.Footer>
                     </Card>
                     
                     {(circuit.breweries && circuit.breweries.length > 0) &&
@@ -53,31 +95,17 @@ class Circuit extends Component {
                     }
                 </CardDeck>
 
-                <Card>
-                    <Card.Header>Statistics</Card.Header>
-                    <Card.Body>
-                        <Card.Text>Breweries: {circuit.breweries_count}</Card.Text>
-                        <Card.Text>Favorited: {circuit.favorites_count}</Card.Text>
-                        <Card.Text>Likes: {circuit.likes_count}</Card.Text>
-                        <Card.Text>Reviews: {circuit.reviews_count}</Card.Text>
-                        <Card.Text>Rating: {circuit.rating}</Card.Text>
-                    </Card.Body>
-                </Card>
+                <CardDeck className="mb-4">
+                    {(circuit.breweries && circuit.breweries.length > 0) &&
+                        <CommonCard variant='breweries' data={circuit.breweries} hideDataDefault={true}/>
+                    }
 
-                {(circuit.breweries && circuit.breweries.length > 0) &&
-                    <CommonCard variant='breweries' data={circuit.breweries} />
-                }
+                    {circuit.reviews_count >= 0 && 
+                        <Reviews variant='circuit-reviews' data={circuit.reviews} userId={this.props.userId} subjectId={circuit.id} subjectName={circuit.title} hideDataDefault={true} showWriteReview={true}/>
+                    }
+                </CardDeck>
 
-                {/* Only logged in users can write a review */}
-                {this.props.userId &&
-                    <CreateReview variant='circuit-review' subjectId={circuit.id} subjectName={circuit.title}/>
-                }
-
-                {circuit.reviews_count > 0 && 
-                    <Reviews variant='circuit-reviews' data={circuit.reviews} userId={this.props.userId} hideDataDefault={true}/>
-                }
-
-            </div>
+            </Container>
         )
     }
 }

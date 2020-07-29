@@ -43,6 +43,11 @@ export default (state = {selected: {}, all: []}, action) => {
                 reviews_count: state.selected.reviews_count - 1,
                 rating: state.selected.reviews_count === 1 ? "N/A" : (((state.selected.rating * state.selected.reviews_count) - deletedReview.rating)/(state.selected.reviews_count - 1)).toFixed(2)
             }}
+
+        case 'TOGGLE_PUBLIC_CIRCUIT':
+            return {...state, selected: {...state.selected,
+                public: !state.selected.public
+            }}
     
         case 'CLEAR_CIRCUIT':
             return {...state, selected: {}}

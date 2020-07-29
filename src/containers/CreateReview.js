@@ -15,15 +15,13 @@ class CreateReview extends Component {
 
     componentDidMount() {
         switch (this.props.variant) {
-            case 'brewery-review':
+            case 'brewery-reviews':
                 this.setState({
-                    formTitle: "Brewery",
                     submitReview: this.props.createBreweryReview
                 })
                 break
-            case 'circuit-review':
+            case 'circuit-reviews':
                 this.setState({
-                    formTitle: "Circuit",
                     submitReview: this.props.createCircuitReview
                 })
                 break
@@ -39,22 +37,19 @@ class CreateReview extends Component {
     render () {
         return (
             <Fragment>
-                {!this.state.showForm &&
-                    <Button onClick={this.toggleForm}>
-                        <i className="fas fa-pen"/>
-                        <span className="d-none d-sm-none d-md-inline"> Write Review</span>
-                    </Button>
-                }
-                {this.state.showForm && 
-                    <CreateReviewForm 
-                        variant={this.props.variant}
-                        subjectId={this.props.subjectId}
-                        subjectName={this.props.subjectName}
-                        formTitle={this.state.formTitle}
-                        userId={this.props.userId}
-                        submitReview={this.state.submitReview}
-                        toggleForm={this.toggleForm}
-                    />
+                <Button variant="secondary" size="sm" onClick={this.toggleForm}>
+                    <i className="fas fa-pen"/>
+                    <span className="d-none d-sm-none d-md-inline"> Write Review</span>
+                </Button>
+                {this.state.showForm &&
+                <CreateReviewForm 
+                    variant={this.props.variant}
+                    subjectId={this.props.subjectId}
+                    subjectName={this.props.subjectName}
+                    userId={this.props.userId}
+                    submitReview={this.state.submitReview}
+                    toggleForm={this.toggleForm}
+                />
                 }
             </Fragment>
         )

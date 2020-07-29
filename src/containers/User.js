@@ -6,6 +6,7 @@ import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonCard from './CommonCard.js'
 import FollowButton from '../components/FollowButton.js'
+import RatingStars from '../components/RatingStars.js'
 
 
 class User extends Component {
@@ -43,7 +44,7 @@ class User extends Component {
                     <Card.Header>Statistics</Card.Header>
                     <Card.Body>
                         <Card.Text>Created Public Circuits: {user.public_circuits_count}</Card.Text>
-                        <Card.Text>Public Circuits Average Rating: {user.public_circuits_avg_rating}</Card.Text>
+                        <Card.Text>Public Circuits Average Rating: <RatingStars rating={user.public_circuits_avg_rating} /></Card.Text>
                         <Card.Text>Followers: {user.followers_count}</Card.Text>
                     </Card.Body>
                 </Card>

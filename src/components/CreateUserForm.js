@@ -65,7 +65,7 @@ class CreateUserForm extends Component {
                     </Form.Group>
                     <Form.Row>
                         <Col>
-                            <Button block variant="primary" type="button" title="Sign up with Google" onClick={event => this.handleGoogleButtonClick(event)} >
+                            <Button block disabled variant="primary" type="button" title="Sign up with Google" onClick={event => this.handleGoogleButtonClick(event)} >
                                 <i className="fab fa-google"/>
                                 <span className="d-none d-sm-none d-md-inline"> Sign up with Google</span>
                             </Button>

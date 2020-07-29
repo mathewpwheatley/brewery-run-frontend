@@ -55,7 +55,7 @@ class LogInForm extends Component {
                             <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
                         </Form.Group>
                         <Form.Group as={Col} md="4"> 
-                            <Button block variant="primary" type="button" onClick={event => this.handleForgotButtonClick(event)}>
+                            <Button block disabled variant="primary" type="button" onClick={event => this.handleForgotButtonClick(event)}>
                                 <i className="far fa-question-circle"/>
                                 <span className="d-none d-sm-none d-md-inline"> Forgot</span>
                             </Button>
@@ -63,7 +63,7 @@ class LogInForm extends Component {
                     </Form.Row>
                     <Form.Row className="justify-content-center">
                         <Col>
-                            <Button block variant="primary" type="button" title="Log in with Google" onClick={event => this.handleGoogleButtonClick(event)}>
+                            <Button block disabled variant="primary" type="button" title="Log in with Google" onClick={event => this.handleGoogleButtonClick(event)}>
                                 <i className="fab fa-google"/>
                                 <span className="d-none d-sm-none d-md-inline"> Log in with Google</span>
                             </Button>

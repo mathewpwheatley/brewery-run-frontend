@@ -1,9 +1,5 @@
 import React, {Component} from 'react'
-import Card from 'react-bootstrap/Card'
-import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import FetchMessage from './FetchMessage.js'
+import {Modal, Form, Col, Button} from 'react-bootstrap/'
 
 class CreateReviewForm extends Component {
 
@@ -45,11 +41,14 @@ class CreateReviewForm extends Component {
 
     render() {
         return (
-            <Card className='px-0'>
-                <Card.Header><i className="far fa-newspaper"/>
-                    <span className="d-none d-sm-none d-md-inline"> Create {this.props.formTitle} Review for {this.props.subjectName}</span>
-                </Card.Header>
-                <Card.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
+            <Modal size="lg" show={true} onHide={this.props.toggleForm} >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        <i className="far fa-newspaper"/>
+                        <span className="d-none d-sm-none d-md-inline"> Write Review for {this.props.subjectName}</span>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
                         <Form.Group as={Col} className="col-10">
                             <Form.Control type="text" placeholder="Title" name="title" value={this.state.title} onChange={event => this.handleTitleChange(event)}/>
@@ -75,18 +74,13 @@ class CreateReviewForm extends Component {
                         <Form.Text className={this.state.content.length < 50 ? "text-info" : "text-muted"}>Must be between 50 and 500 characters (Character Count: {this.state.content.length})</Form.Text>
                     </Form.Group>
                     <Form.Group className="float-right">
-                        <Button className="mr-2" variant="secondary" type="button" title="Cancel"onClick={() => this.props.toggleForm()} >
-                            <i className="far fa-times-circle"/>
-                            <span className="d-none d-sm-none d-md-inline"> Cancel</span>
-                        </Button>
                         <Button variant="primary" type="submit" title="Submit Review">
                             <i className="fas fa-check-circle"/>
                             <span className="d-none d-sm-none d-md-inline"> Submit Review</span>
                         </Button>
                     </Form.Group>
-                </Card.Body>
-                <FetchMessage/>
-            </Card>
+                </Modal.Body>
+            </Modal>
         )
     }
 }

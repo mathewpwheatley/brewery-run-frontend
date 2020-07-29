@@ -105,7 +105,11 @@ export const deleteCircuit = (circuitId) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'DELETE',
-            credentials: 'include'
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
         }
         fetch(circuitsURL + "/" + circuitId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
@@ -116,6 +120,32 @@ export const deleteCircuit = (circuitId) => {
             } else {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({type: 'CLEAR_CIRCUIT'})
+            }
+        })
+    }
+}
+
+export const togglePublicCircuit = (circuitId, status) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            method: 'PATCH',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({public: status})
+        }
+        fetch(circuitsURL + "/" + circuitId, options).then(resp => resp.json()).then(json => {
+            if (json.errors) {
+                dispatch({
+                    type: 'SET_ERRORS',
+                    errors: json.errors
+                })
+            } else {
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                dispatch({type: 'TOGGLE_PUBLIC_CIRCUIT'})
             }
         })
     }

@@ -18,7 +18,7 @@ export const LocationMap = ({name, address, latitude, longitude, zoomLevel, goog
     }
 
     return (
-        <Card style={{height: "50vh", width: "50vw"}}>
+        <Card style={{minHeight: "50vh", width: "45vw"}}>
             <Map google={google}
             zoom={zoomLevel ? zoomLevel : 15}
             style={{height: "100%", width: "100%"}}

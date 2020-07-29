@@ -3,21 +3,22 @@ import Card from 'react-bootstrap/Card'
 import CommonNavigationBar from '../components/CommonNavigationBar.js'
 import Review from './Review.js'
 
-const Reviews = ({variant, data, userId, navSubTitle, hideDataDefault, hideSearch}) => {
+const Reviews = ({variant, data, userId, subjectId, subjectName, navSubTitle, showWriteReview, hideDataDefault, hideSearch}) => {
 
     const [showData, setShowData] = useState(hideDataDefault ? false : true)
     const [searchTerm, setSearchTerm] = useState()
+    const [searchKey, setSearchKey] = useState()
+
+    const updateSearchTerm = (value) => {setSearchTerm(value)}
+    const updateSearchKey = (value) => {setSearchKey(value)}
 
     const toggleData = () => {
         showData ? setShowData(false) : setShowData(true)
     }
 
-    const updateSearchTerm = (searchTerm) => setSearchTerm(searchTerm)
-
     const filterDataByName = () => {
         if (searchTerm) {
-            const searchTermKey = "title"
-            return data.filter(datum => datum[searchTermKey].toLowerCase().includes(searchTerm.toLowerCase()))
+            return data.filter(datum => datum[searchKey].toLowerCase().includes(searchTerm.toLowerCase()))
         } else {
             return data
         }
@@ -34,12 +35,16 @@ const Reviews = ({variant, data, userId, navSubTitle, hideDataDefault, hideSearc
             <CommonNavigationBar
                 variant={variant}
                 navSubTitle={navSubTitle}
+                userId={userId}
+                subjectId={subjectId}
+                subjectName={subjectName}
                 showData={showData}
                 showSearch={hideSearch ? false : true}
+                showWriteReview={showWriteReview}
                 toggleData={toggleData}
-                searchName={"Title"}
                 searchTerm={searchTerm}
                 updateSearchTerm={updateSearchTerm}
+                updateSearchKey={updateSearchKey}
             />
             {showData &&
                 mapData()

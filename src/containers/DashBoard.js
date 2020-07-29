@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+import {CardDeck, Card, Button} from 'react-bootstrap'
 import {getUser} from '../actions/user.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonCard from './CommonCard.js'
 import Reviews from './Reviews.js'
 import CreateCircuit from './CreateCircuit.js'
+import RatingStars from '../components/RatingStars.js'
 
 class Dashboard extends Component {
 
@@ -36,7 +36,7 @@ class Dashboard extends Component {
                         <Link to="/edit-user">
                             <Button variant="secondary" type="button" title="Edit User">
                                 <i className="fas fa-user-edit"/>
-                                <span className="d-none d-sm-none d-md-inline"> Edit User</span>
+                                <span className="d-none d-sm-none d-md-inline"> Edit Account</span>
                             </Button>
                         </Link>
                     </Card.Body>
@@ -46,7 +46,7 @@ class Dashboard extends Component {
                     <Card.Header>Statistics</Card.Header>
                     <Card.Body>
                         <Card.Text>Created Circuits: {user.circuits_count} (Public: {user.public_circuits_count})</Card.Text>
-                        <Card.Text>Public Circuits Average Rating: {user.public_circuits_avg_rating}</Card.Text>
+                        <Card.Text>Public Circuits Average Rating: <RatingStars rating={user.public_circuits_avg_rating} /></Card.Text>
                         <Card.Text>Favorite Circuits: {user.favorite_circuits_count}</Card.Text>
                         <Card.Text>Circuit Reviews Written: {user.circuit_reviews_count}</Card.Text>
                         <Card.Text>Favorite Breweries: {user.favorite_breweries_count}</Card.Text>
@@ -76,29 +76,35 @@ class Dashboard extends Component {
                     <CommonCard variant='breweries' navSubTitle=': Favorite' data={user.favorite_breweries} />
                 }
 
-                {(!!user.public_followees_circuits && user.public_followees_circuits.length > 0) &&
-                    <CommonCard variant='circuits' navSubTitle=' from Followees' data={user.public_followees_circuits} />
-                }
+                <CardDeck>
+                    {(!!user.public_followees_circuits && user.public_followees_circuits.length > 0) &&
+                        <CommonCard variant='circuits' navSubTitle=' from Followees' data={user.public_followees_circuits} />
+                    }
 
-                {(!!user.favorite_circuits && user.favorite_circuits.length > 0) &&
-                    <CommonCard variant='circuits' navSubTitle=': Favorite' data={user.favorite_circuits} />
-                }
+                    {(!!user.favorite_circuits && user.favorite_circuits.length > 0) &&
+                        <CommonCard variant='circuits' navSubTitle=': Favorite' data={user.favorite_circuits} />
+                    }
+                </CardDeck>
 
-                {(!!user.private_circuits && user.private_circuits.length > 0) &&
-                    <CommonCard variant='circuits' navSubTitle=': Private' hideTableDefault={true} data={user.private_circuits} />
-                }
+                <CardDeck>
+                    {(!!user.private_circuits && user.private_circuits.length > 0) &&
+                        <CommonCard variant='circuits' navSubTitle=': Private' hideTableDefault={true} data={user.private_circuits} />
+                    }
 
-                {(!!user.public_circuits && user.public_circuits.length > 0) &&
-                    <CommonCard variant='circuits' navSubTitle=': Public' hideTableDefault={true} data={user.public_circuits} />
-                }
+                    {(!!user.public_circuits && user.public_circuits.length > 0) &&
+                        <CommonCard variant='circuits' navSubTitle=': Public' hideTableDefault={true} data={user.public_circuits} />
+                    }
+                </CardDeck>
 
-                {(!!user.brewery_reviews && user.brewery_reviews.length > 0) &&
-                    <Reviews variant='brewery-reviews' reviews={user.brewery_reviews} userId={this.props.userId}/>
-                }
+                <CardDeck>
+                    {(!!user.brewery_reviews && user.brewery_reviews.length > 0) &&
+                        <Reviews variant='brewery-reviews' navSubTitle=': Breweries' data={user.brewery_reviews} userId={this.props.userId} hideDataDefault={true}/>
+                    }
 
-                {(!!user.circuit_reviews && user.circuit_reviews.length > 0) &&
-                    <Reviews variant='circuit-reviews' reviews={user.circuit_reviews} userId={this.props.userId}/>
-                }
+                    {(!!user.circuit_reviews && user.circuit_reviews.length > 0) &&
+                        <Reviews variant='circuit-reviews' navSubTitle=': Circuits' data={user.circuit_reviews} userId={this.props.userId} hideDataDefault={true}/>
+                    }
+                </CardDeck>
                 
             </div>
         )

@@ -36,7 +36,7 @@ export class CircuitMap extends Component {
 
     render() {
         return (
-            <Card style={{height: "50vh", width: "50vw"}}>
+            <Card style={{height: "50vh", width: "45vw"}}>
                 <Map google={this.props.google}
                 zoom={this.props.zoomLevel ? this.props.zoomLevel : 10}
                 style={{height: "100%", width: "100%"}}
