@@ -114,7 +114,15 @@ class Circuit extends Component {
 
                 <CardDeck className="mb-4">
                     <CommonCard variant='breweries' data={circuit.breweries} hideDataDefault={true}/>
-                    <Reviews variant='circuit-reviews' data={circuit.reviews} userId={this.props.userId} subjectId={circuit.id} subjectName={circuit.title} hideDataDefault={true} showWriteReview={true}/>
+                    <Reviews
+                    variant='circuit-reviews'
+                    data={circuit.reviews}
+                    userId={this.props.userId}
+                    subjectId={circuit.id}
+                    subjectName={circuit.title}
+                    hideDataDefault={true}
+                    // Can only write a review if logged in and user is not the circuit authro
+                    showWriteReview={this.props.userId && (this.props.userId !== circuit.author_id)}/>
                 </CardDeck>
 
             </Container>
