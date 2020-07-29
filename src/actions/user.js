@@ -169,7 +169,7 @@ export const getEditUser = (userId) => {
 }
 
 export const updateUser = (userId, user) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'PATCH',
@@ -180,8 +180,7 @@ export const updateUser = (userId, user) => {
             },
             body: JSON.stringify({user: user})
         }
-        console.log(user)
-        fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
+        await fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -200,13 +199,13 @@ export const updateUser = (userId, user) => {
 }
 
 export const deleteUser = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'DELETE',
             credentials: 'include'
         }
-        fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
+        await fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',

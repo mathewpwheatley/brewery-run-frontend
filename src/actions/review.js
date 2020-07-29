@@ -67,7 +67,7 @@ export const clearReview = () => {
 }
 
 export const createBreweryReview = (review) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'POST',
@@ -78,7 +78,7 @@ export const createBreweryReview = (review) => {
             },
             body: JSON.stringify({brewery_review: review})
         }
-        fetch(breweryReviewsURL, options).then(resp => resp.json()).then(json => {
+        await fetch(breweryReviewsURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',
@@ -96,7 +96,7 @@ export const createBreweryReview = (review) => {
 }
 
 export const createCircuitReview = (review) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
             method: 'POST',
@@ -107,7 +107,7 @@ export const createCircuitReview = (review) => {
             },
             body: JSON.stringify({circuit_review: review})
         }
-        fetch(circuitReviewsURL, options).then(resp => resp.json()).then(json => {
+        await fetch(circuitReviewsURL, options).then(resp => resp.json()).then(json => {
             if (json.errors) {
                 dispatch({
                     type: 'SET_ERRORS',

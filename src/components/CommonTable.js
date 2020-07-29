@@ -26,7 +26,7 @@ const CommonTable = ({variant, data, showLink}) => {
             case "users":
                 attributes = {
                     basePath: '/users',
-                    displayKeys: {full_name: 'Name', public_circuits_count: 'Circuits', followers_count: 'Followers'}
+                    displayKeys: {full_name: 'Name', public_circuits_avg_rating: 'Circuits Rating', public_circuits_count: 'Circuits', followers_count: 'Followers'}
                 }
                 break
             default:

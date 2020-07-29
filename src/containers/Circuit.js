@@ -36,32 +36,27 @@ class Circuit extends Component {
                                 showSearch={false}
                             />
                         <Card.Body>
-                            <Card.Text as={Row}>
-                                    <Col sm={7}>
-                                        <Card.Text>
-                                            <span className="font-weight-bold">Rating: <RatingStars rating={circuit.rating} /></span>
-                                            <span className="text-muted"> ({circuit.reviews_count} Reviews)</span>
-                                        </Card.Text>
-                                        <Card.Text>
-                                            <span className="font-weight-bold">Related Breweries: </span>
-                                            {circuit.breweries_count}
-                                        </Card.Text>
-                                    </Col>
-                                    <Col >
-                                        <Card.Text className="float-right">
-                                            <span className="font-weight-bold">Favorited: </span>
-                                            {circuit.favorites_count}
-                                            {/* Only render favorite button if user is logged in */}
-                                            {this.props.userId && <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />}
-                                        </Card.Text>
-                                        <Card.Text className="float-right">
-                                            <span className="font-weight-bold">Likes: </span>
-                                            {circuit.likes_count}
-                                            {/* Only render favorite button if user is logged in */}
-                                            {this.props.userId && <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />}
-                                        </Card.Text>
-                                    </Col>
-                                </Card.Text>
+                            <Card.Text>
+                                <span className="font-weight-bold">Rating: </span>
+                                <RatingStars rating={circuit.rating} />
+                                <span className="text-muted"> ({circuit.reviews_count} Reviews)</span>
+                                <span className="float-right">
+                                    <span className="font-weight-bold">Favorited: </span>
+                                    {circuit.favorites_count}
+                                    {/* Only render favorite button if user is logged in */}
+                                    {this.props.userId && <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />}
+                                </span>
+                            </Card.Text>
+                            <Card.Text>
+                                <span className="font-weight-bold">Related Breweries: </span>
+                                {circuit.breweries_count}
+                                <span className="float-right">
+                                    <span className="font-weight-bold">Likes: </span>
+                                    {circuit.likes_count}
+                                    {/* Only render favorite button if user is logged in */}
+                                    {this.props.userId && <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />}
+                                </span>
+                            </Card.Text>
                             <Card.Text>
                                 <span className="font-weight-bold">Author: </span>
                                 {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}

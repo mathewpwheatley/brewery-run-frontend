@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Container, CardDeck, Card, Row, Col, Button} from 'react-bootstrap'
+import {Container, CardDeck, Card, Button} from 'react-bootstrap'
 import {getBrewery} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonNavigationBar from '../components/CommonNavigationBar.js'
@@ -33,31 +33,26 @@ class Brewery extends Component {
                             showSearch={false}
                         />
                         <Card.Body>
-                            <Card.Text as={Row}>
-                                <Col sm={7}>
-                                    <Card.Text>
-                                        <span className="font-weight-bold">Rating: <RatingStars rating={brewery.rating} /></span>
-                                        <span className="text-muted"> ({brewery.reviews_count} Reviews)</span>
-                                    </Card.Text>
-                                    <Card.Text>
-                                        <span className="font-weight-bold">Related Circuits: </span>
-                                        {brewery.public_circuits_count}
-                                    </Card.Text>
-                                </Col>
-                                <Col >
-                                    <Card.Text className="float-right">
-                                        <span className="font-weight-bold">Favorited: </span>
-                                        {brewery.favorites_count}
-                                        {/* Only render favorite button if user is logged in */}
-                                        {this.props.userId && <FavoriteButton variant="brewery" favoriteId={brewery.active_user_favorite_id} userId={this.props.userId} subjectId={brewery.id} />}
-                                    </Card.Text>
-                                    <Card.Text className="float-right">
-                                        <span className="font-weight-bold">Likes: </span>
-                                        {brewery.likes_count}
-                                        {/* Only render favorite button if user is logged in */}
-                                        {this.props.userId && <LikeButton variant="brewery" likeId={brewery.active_user_like_id} userId={this.props.userId} subjectId={brewery.id} />}
-                                    </Card.Text>
-                                </Col>
+                            <Card.Text>
+                                <span className="font-weight-bold">Rating: </span>
+                                <RatingStars rating={brewery.rating} />
+                                <span className="text-muted"> ({brewery.reviews_count} Reviews)</span>
+                                <span className="float-right">
+                                    <span className="font-weight-bold">Favorited: </span>
+                                    {brewery.favorites_count}
+                                    {/* Only render favorite button if user is logged in */}
+                                    {this.props.userId && <FavoriteButton variant="brewery" favoriteId={brewery.active_user_favorite_id} userId={this.props.userId} subjectId={brewery.id} />}
+                                </span>
+                            </Card.Text>
+                            <Card.Text>
+                                <span className="font-weight-bold">Related Circuits: </span>
+                                {brewery.public_circuits_count}
+                                <span className="float-right">
+                                    <span className="font-weight-bold">Likes: </span>
+                                    {brewery.likes_count}
+                                    {/* Only render favorite button if user is logged in */}
+                                    {this.props.userId && <LikeButton variant="brewery" likeId={brewery.active_user_like_id} userId={this.props.userId} subjectId={brewery.id} />}
+                                </span>
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className="text-muted">

@@ -34,9 +34,11 @@ class CreateReviewForm extends Component {
         })
     }
 
-    handleSubmit = event => {
+    handleSubmit = async (event) => {
         event.preventDefault()
-        this.props.submitReview(this.state)
+        await this.props.submitReview(this.state)
+        // If there are no errors from the fetch, close form
+        if (this.props.errors.length === 0) {this.props.toggleForm()}
     }
 
     render() {

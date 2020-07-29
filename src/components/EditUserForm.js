@@ -53,19 +53,21 @@ class EditUserForm extends Component {
         })
     }
 
-    handleDeleteClick = () => {
+    handleDeleteClick = async () => {
         if (window.confirm("Are you sure? A deleted user can't be restored.")) {
-            this.props.deleteUser(this.props.userId)
-            this.setState({redirectPath: '/log-in'})
+            await this.props.deleteUser(this.props.userId)
+            // If there are no errors from the fetch, redirect
+            if (this.props.errors.length === 0) {this.setState({redirectPath: '/log-in'})}
         }
     }
 
-    handleSubmit = event => {
+    handleSubmit = async (event) => {
         event.preventDefault()
         const user = {...this.state}
         delete user.redirectPath
-        this.props.updateUser(this.props.userId, user)
-        this.setState({redirectPath: '/dashboard'})
+        await this.props.updateUser(this.props.userId, user)
+        // If there are no errors from the fetch, redirect
+        if (this.props.errors.length === 0) {this.setState({redirectPath: '/dashboard'})}
     }
 
     handleRedirect = (path) => {
@@ -138,19 +140,15 @@ class EditUserForm extends Component {
                     </Form.Row>
                     <Form.Group>
                             <Form.Label>About</Form.Label>
-                            <Form.Control type="text" placeholder="About" name="about" value={this.state.about} onChange={event => this.handleChange(event)}/>
+                            <Form.Control type="text" as="textarea" rows="2" placeholder="About" name="about" value={this.state.about} onChange={event => this.handleChange(event)}/>
                     </Form.Group>
-                    <Form.Row className="float-right" >
-                        <Col>
-                            <CommonDeleteButton variant="user" subjectId={this.props.userId}/>
-                        </Col>
-                        <Col>
-                            <Button variant="success" type="submit" title="Update User">
-                                <i className="fas fa-user-plus"/>
-                                <span className="d-none d-sm-none d-md-inline"> Update User</span>
-                            </Button>
-                        </Col>
-                    </Form.Row>
+                    <span className="float-right" >
+                        <CommonDeleteButton variant="user" subjectId={this.props.userId}/>
+                        <Button className="ml-4" variant="success" type="submit" title="Update User">
+                            <i className="fas fa-user-plus"/>
+                            <span className="d-none d-sm-none d-md-inline"> Update User</span>
+                        </Button>
+                    </span>
                 </Form>  
             </Card>
         )
@@ -160,15 +158,16 @@ class EditUserForm extends Component {
 const mapStateToProps = state => {
     return {
         userId: state.user.id,
-        user: state.user.selected
+        user: state.user.selected,
+        errors: state.fetchMessage.errors
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         getEditUser: async (userId) => {await dispatch(getEditUser(userId))},
-        updateUser: (userId, user) => {dispatch(updateUser(userId, user))},
-        deleteUser: (userId) => {dispatch(deleteUser(userId))}
+        updateUser: async (userId, user) => {await dispatch(updateUser(userId, user))},
+        deleteUser: async (userId) => {await dispatch(deleteUser(userId))}
     }
 }
 

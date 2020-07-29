@@ -3,7 +3,7 @@ export default (state = {loading: false, errors: [], messages: []}, action) => {
     switch (action.type) {
 
         case 'LOADING':
-            return {...state, loading: true, errors: [], messagess: []}
+            return {...state, loading: true, errors: [], messages: []}
         
         case 'SET_ERRORS':
             return {...state, loading: false, errors: action.errors}

@@ -49,6 +49,7 @@ class CreateReview extends Component {
                     userId={this.props.userId}
                     submitReview={this.state.submitReview}
                     toggleForm={this.toggleForm}
+                    errors={this.props.errors}
                 />
                 }
             </Fragment>
@@ -58,14 +59,15 @@ class CreateReview extends Component {
 
 const mapStateToProps = state => {
     return {
-        userId: state.user.id
+        userId: state.user.id,
+        errors: state.fetchMessage.errors
     }
   }
 
 const mapDispatchToProps = dispatch => {
     return {
-        createBreweryReview: (review) => {dispatch(createBreweryReview(review))},
-        createCircuitReview: (review) => {dispatch(createCircuitReview(review))}
+        createBreweryReview: async (review) => {await dispatch(createBreweryReview(review))},
+        createCircuitReview: async (review) => {await dispatch(createCircuitReview(review))}
     }
 }
 
