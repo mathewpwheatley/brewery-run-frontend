@@ -29,7 +29,23 @@ const Welcome = () => {
                 </Button>
             </Link>
             <p className='text-muted my-2'>
-                Created by Mathew Wheatley <a className="text-muted" href="https://github.com/mathewpwheatley" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"/></a> <a className="text-muted" href="https://www.linkedin.com/in/mathewpwheatley" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
+                Created by Mathew Wheatley 
+                <span> </span>
+                <a href="https://github.com/mathewpwheatley" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-github"/>
+                </a>
+                <span> </span>
+                <a href="https://www.linkedin.com/in/mathewpwheatley" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-linkedin" />
+                </a>
+                <span> </span>
+                <a href="https://medium.com/@mathew.p.wheatley" title="Medium" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-medium" />
+                </a>
+                <span> </span>
+                <a href="https://www.instagram.com/mathew.p.wheatley/" title="Instagram" target="_blank" rel="noopener noreferrer">
+                    <i className="fab fa-instagram" />
+                </a>
             </p>
         </Jumbotron>
     )

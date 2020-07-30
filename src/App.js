@@ -27,6 +27,7 @@ class App extends Component {
     return (
       <Router>
         <NavigationBar/>
+
         <Route exact path="/" component={Home} />
         <Route exact path="/welcome" component={Welcome} />
 

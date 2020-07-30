@@ -5,6 +5,7 @@ import {createStore, applyMiddleware} from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import App from './App.js'
+import Footer from './components/Footer.js'
 import rootReducer from './reducers/index.js'
 import * as serviceWorker from './serviceWorker'
 import 'bootswatch/dist/flatly/bootstrap.min.css'
@@ -20,7 +21,12 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById('root')
-);
+)
+ReactDOM.render(
+  <Footer/>,
+  document.getElementById('footer')
+)
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
