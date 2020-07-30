@@ -12,7 +12,7 @@ const FetchMessage = ({loading, errors, messages, clearErrorsMessages}) => {
 
     const handleShow = () => {
         if (loading) {
-            setTimeout(() => {setShow(true)}, 1000)
+            setTimeout(() => {setShow(true)}, 1500)
         } else if (errors.length > 0 || messages.length > 0) {
             setShow(true)
         } else {
