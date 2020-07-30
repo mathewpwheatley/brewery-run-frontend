@@ -8,7 +8,7 @@ import CommonCard from '../containers/CommonCard.js'
 import RatingStars from './RatingStars.js'
 import FavoriteButton from './FavoriteButton.js'
 import LikeButton from './LikeButton.js'
-import LocationMap from './LocationMap.js'
+import LocationsMap from './LocationsMap.js'
 import BlankMap from './BlankMap.js'
 import Reviews from '../containers/Reviews.js'
 
@@ -65,7 +65,8 @@ class Brewery extends Component {
 
                     {/* Only show a map if the latitude and longitude data exists */}
                     {(brewery.latitude && brewery.longitude) ?
-                        <LocationMap name={brewery.name} address={brewery.full_address} latitude={brewery.latitude} longitude={brewery.longitude} /> :
+                        <LocationsMap locations={[brewery]} /> :
+                        // <LocationMap name={brewery.name} address={brewery.full_address} latitude={brewery.latitude} longitude={brewery.longitude} /> :
                         <BlankMap/>
                     }
                 </CardDeck>

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getAllBreweries} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonCard from './CommonCard.js'
-import MultiLocationMap from '../components/MultiLocationMap.js'
+import LocationsMap from '../components/LocationsMap.js'
 import BlankMap from '../components/BlankMap.js'
 import {Container, CardDeck} from 'react-bootstrap'
 
@@ -21,7 +21,7 @@ class Breweries extends Component {
           <CardDeck className="mb-4">
             <CommonCard variant='breweries' data={this.props.breweries}/>
             {(this.props.breweries.length > 0 && this.props.breweries[0].latitude) ?
-              <MultiLocationMap wayPoints={this.props.breweries} /> :
+              <LocationsMap locations={this.props.breweries}/> :
               <BlankMap/>
             }
           </CardDeck>

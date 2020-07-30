@@ -11,7 +11,7 @@ import FavoriteButton from './FavoriteButton.js'
 import LikeButton from './LikeButton.js'
 import CircuitPublicButton from './CircuitPublicButton.js'
 import CommonDeleteButton from './CommonDeleteButton.js'
-import CircuitMap from './CircuitMap.js'
+// import CircuitMap from './CircuitMap.js'
 import BlankMap from './BlankMap.js'
 import Reviews from '../containers/Reviews.js'
 
@@ -106,10 +106,10 @@ class Circuit extends Component {
                             <span className="float-right">Last Updated: {new Date(circuit.updated_at).toLocaleDateString()}</span>
                         </Card.Footer>
                     </Card>
-                    {(circuit.breweries && circuit.breweries.length > 0) ?
+                    {/* {(circuit.breweries && circuit.breweries.length > 0) ?
                         <CircuitMap wayPoints={circuit.breweries} /> :
                         <BlankMap/>
-                     }
+                     } */}
                 </CardDeck>
 
                 <CardDeck className="mb-4">

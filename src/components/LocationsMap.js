@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react'
 import {Card} from 'react-bootstrap'
 
-const CircuitMap = ({locations, mapSize, zoomLevel}) => {
+const LocationsMap = ({locations, mapSize, zoomLevel}) => {
   const googleMapRef = React.createRef()
   const googleMap = useRef()
   const markers = useRef()
@@ -64,4 +64,4 @@ const CircuitMap = ({locations, mapSize, zoomLevel}) => {
   )
 }
 
-export default CircuitMap
+export default LocationsMap

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Toast from 'react-bootstrap/Toast'
+import {Toast} from 'react-bootstrap'
 import {markReadNotification, deleteNotification} from '../actions/notification.js'
 
 const Notification = ({notification, markReadNotification, deleteNotification}) => {
