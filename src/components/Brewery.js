@@ -59,7 +59,7 @@ class Brewery extends Component {
                         <Card.Footer className="text-muted">
                             <span className="font-weight-bold">Phone: </span>
                             {brewery.phone}
-                            <Button className="float-right" variant="outline-secondary" size="sm" href={brewery.website_url} >Brewery Website</Button>
+                            <Button className="float-right" variant="outline-secondary" size="sm" href={brewery.website_url} target="_blank" rel="noopener noreferrer">Brewery Website</Button>
                         </Card.Footer>
                     </Card>
 
