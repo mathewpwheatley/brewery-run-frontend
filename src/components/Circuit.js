@@ -17,8 +17,6 @@ import Reviews from '../containers/Reviews.js'
 
 class Circuit extends Component {
 
-    state={redirectPath: 0}
-
     componentDidMount() {
         this.props.getCircuit(this.props.id)
     }
@@ -107,7 +105,8 @@ class Circuit extends Component {
                         </Card.Footer>
                     </Card>
 
-                    {(circuit.breweries && circuit.breweries.length > 0 && !this.props.loading) ?
+                    {/* Prevent map from loading without data or old data via various checks (Not ideal but works for now) */}
+                    {(circuit.breweries && circuit.breweries.length > 0 && circuit.id === parseInt(this.props.id)) ?
                     <CircuitMap locations={circuit.breweries} hideDirectionsDefault={true} /> :
                     <BlankMap/>
                     }
@@ -135,8 +134,7 @@ class Circuit extends Component {
 const mapStateToProps = state => {
     return {
         circuit: state.circuit.selected,
-        userId: state.user.id,
-        loading: state.fetchMessage.loading
+        userId: state.user.id
     }
 }
 

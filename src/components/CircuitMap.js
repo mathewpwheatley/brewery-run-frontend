@@ -10,18 +10,26 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
   const googleMap = useRef()
   
   useEffect(() => {
-    // Load google maps and visualizer scripts
-    const googleMapScript = document.createElement('script')
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API}&libraries=places`
-    window.document.body.appendChild(googleMapScript)
+    // Load google maps and visualizer scripts if (one is not already loaded)
+    if (!document.getElementById("googleMapScript")) {
+      const googleMapScript = document.createElement('script')
+      googleMapScript.id = "googleMapScript"
+      googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API}&libraries=places`
+      window.document.body.appendChild(googleMapScript)
 
-    // Add event listener to wait for script to load (Should probably also wait for visualizer to load)
-    googleMapScript.addEventListener('load', () => {
+      // Add event listener to wait for script to load (Should probably also wait for visualizer to load)
+      googleMapScript.addEventListener('load', () => {
+        // Render Map
+        googleMap.current = createGoogleMap(locations[0])
+        // Get directions and elevation then render directions, path, and elevation chart
+        mapPlotCircuit(locations)
+      })
+    } else {
       // Render Map
       googleMap.current = createGoogleMap(locations[0])
       // Get directions and elevation then render directions, path, and elevation chart
       mapPlotCircuit(locations)
-    })
+    }
     // eslint-disable-next-line (Used to ignore error of blank array in following line, this use used to make effect run only on mount)
   },[])
   const createGoogleMap = (origin) => {
@@ -158,11 +166,11 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
       <CardGroup style={mapSize ? mapSize : {width: '100%', height: '45vh'}}>
         <Card className="m-0 rounded-0" ref={googleMapRef} style={{width: '100%', height: '100%'}} />
         <Card className="col-4 m-0 p-0 rounded-0" style={{maxHeight: "100%", overflowY: "scroll", display: showDirections ? "block" : "none"}} >
-          <Card.Header>Directions</Card.Header>
+          <Card.Header className="text-center">Directions</Card.Header>
           <Card.Body className="p-1" ref={googleMapSidePanelRef} />
         </Card>
       </CardGroup>
-      <Card className="m-0 rounded-0 rounded-bottom" maxHeight="10vh">
+      <Card className="m-0 rounded-0 rounded-bottom" style={{height:"10vh"}}>
         <canvas ref={googleMapBottomPanelRef} />
       </Card>
     </Card>

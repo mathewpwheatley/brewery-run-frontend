@@ -7,15 +7,28 @@ const LocationsMap = ({locations, mapSize, zoomLevel}) => {
   const googleMap = useRef()
 
   useEffect(() => {
-    const googleMapScript = document.createElement('script')
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API}&libraries=places`
-    window.document.body.appendChild(googleMapScript)
+    // Load google maps and visualizer scripts if (one is not already loaded)
+    if (!document.getElementById("googleMapScript")) {
+      const googleMapScript = document.createElement('script')
+      googleMapScript.id = "googleMapScript"
+      googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API}&libraries=places`
+      window.document.body.appendChild(googleMapScript)
 
-    googleMapScript.addEventListener('load', () => {
+      // Add event listener to wait for script to load (Should probably also wait for visualizer to load)
+      googleMapScript.addEventListener('load', () => {
+        // Render Map
+        googleMap.current = createGoogleMap(locations[0])
+        // Add location markers
+        mapLocationMarkers(locations)
+      })
+    } else {
+      // Render Map
       googleMap.current = createGoogleMap(locations[0])
+      // Add location markers
       mapLocationMarkers(locations)
-    })
-  })
+    }
+    // eslint-disable-next-line (Used to ignore error of blank array in following line, this use used to make effect run only on mount)
+  },[])
 
   const createGoogleMap = (origin) => {
     return new window.google.maps.Map(googleMapRef.current, {
