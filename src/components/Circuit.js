@@ -42,13 +42,13 @@ class Circuit extends Component {
                 
                 <FetchMessage/>
 
-                {/* Ensure circuit has been loading before checking for redirect */}
+                {/* Ensure circuit has been loading before checking for redirect if private circuit*/}
                 {circuit.id &&
                     this.handleRedirect()
                 }
 
                 <CardDeck className="mb-4">
-                    <Card className="col-5 px-0">
+                    <Card className="col-4 px-0">
                         <CommonNavigationBar
                                 variant="circuit"
                                 navSubTitle={": " + circuit.title}
@@ -88,7 +88,7 @@ class Circuit extends Component {
                                 <span className="font-weight-bold">Description: </span>
                                 {circuit.description }
                             </Card.Text>
-                  
+                    
                             {/* Only render delete and public buttons if user is logged in and are the author */}
                             {this.props.userId === circuit.author_id && 
                             <Row>
@@ -106,13 +106,13 @@ class Circuit extends Component {
                             <span className="float-right">Last Updated: {new Date(circuit.updated_at).toLocaleDateString()}</span>
                         </Card.Footer>
                     </Card>
-                    
-                </CardDeck>
 
-                {(circuit.breweries && circuit.breweries.length > 0) ?
-                        <CircuitMap locations={circuit.breweries} /> :
-                        <BlankMap/>
-                     }
+                    {(circuit.breweries && circuit.breweries.length > 0) ?
+                    <CircuitMap locations={circuit.breweries} hideDirectionsDefault={true} /> :
+                    <BlankMap/>
+                    }
+
+                </CardDeck>                
 
                 <CardDeck className="mb-4">
                     <CommonCard variant='breweries' data={circuit.breweries} hideDataDefault={true}/>

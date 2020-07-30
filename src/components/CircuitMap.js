@@ -1,14 +1,14 @@
-import React, {Fragment, useEffect, useRef, createRef} from 'react'
+import React, {useState, useEffect, useRef, createRef} from 'react'
 import Chart from 'chart.js'
 import {CardGroup, Card} from 'react-bootstrap'
+import CommonNavigationBar from './CommonNavigationBar.js'
 
-const CircuitMap = ({locations, mapSize, zoomLevel}) => {
+const CircuitMap = ({locations, hideDirectionsDefault}) => {
   const googleMapRef = createRef()
   const googleMapSidePanelRef = createRef()
   const googleMapBottomPanelRef = createRef()
   const googleMap = useRef()
   
-
   useEffect(() => {
     // Load google maps and visualizer scripts
     const googleMapScript = document.createElement('script')
@@ -22,11 +22,11 @@ const CircuitMap = ({locations, mapSize, zoomLevel}) => {
       // Get directions and elevation then render directions, path, and elevation chart
       mapPlotCircuit(locations)
     })
-  })
-
+    // eslint-disable-next-line (Used to ignore error of blank array in following line, this use used to make effect run only on mount)
+  },[])
   const createGoogleMap = (origin) => {
     return new window.google.maps.Map(googleMapRef.current, {
-      zoom: zoomLevel ? zoomLevel : 15,
+      zoom: 15,
       center: {
         lat: parseFloat(origin.latitude),
         lng: parseFloat(origin.longitude)
@@ -90,9 +90,9 @@ const CircuitMap = ({locations, mapSize, zoomLevel}) => {
   function plotElevation(elevationData, sampleCount, totalDistance) {
     // Set map and directions container to render in
     const googleMapBottomPanel = googleMapBottomPanelRef.current
-    
-    // Prepare data for plotting
-    const elevation = elevationData.map(elevation => {return elevation.elevation})
+    // Prepare data for plotting (Note weird rounding since javascrip is bad with numbers)
+    // (Note distance is in meters so 0.3048 m/ft conversion is used)
+    const elevation = elevationData.map(elevation => {return (Math.round(elevation.elevation/0.3048 * 100) / 100)})
     const distance = [0]
     let i
     for (i = 0; i < sampleCount-1; i++) {
@@ -108,7 +108,7 @@ const CircuitMap = ({locations, mapSize, zoomLevel}) => {
         datasets: [{
           label: "Elevation (ft)",
           data: elevation,
-          boarderColor: "#69E5AE",
+          borderColor: "#4A89F3",
           fill: false
         }]
       },
@@ -121,6 +121,12 @@ const CircuitMap = ({locations, mapSize, zoomLevel}) => {
             scaleLabel: {
               display: true,
               labelString: 'Elevation (ft)'
+            },
+            ticks:{
+              beginAtZero: false,
+              display: true,
+              autoSkip: true,
+              maxTicksLimit: 5
             }
           }],
           xAxes: [{
@@ -134,14 +140,29 @@ const CircuitMap = ({locations, mapSize, zoomLevel}) => {
     })
   }
 
+  const [showDirections, setShowDirections] = useState(hideDirectionsDefault ? false : true)
+
+  const toggleDirections = () => {
+    showDirections ? setShowDirections(false) : setShowDirections(true)
+  }
+
   return (
-    <Card className="mb-4">
+    <Card className="p-0">
+      <CommonNavigationBar
+        variant="circuit-map"
+        showSearch={false}
+        showData={showDirections}
+        toggleData={toggleDirections}
+      />
       <CardGroup>
-        <Card className="col-8" id="google-map" ref={googleMapRef} style={mapSize ? mapSize : {width: '100%', height: '50vh'}} />
-        <Card className="col-4" id="google-map-side-panel" ref={googleMapSidePanelRef} style={{maxHeight: "50vh", overflowY: "scroll"}}/>
+        <Card className="m-0 rounded-0" ref={googleMapRef} style={{width: '100%', height: '40vh'}} />
+        <Card className="col-4 m-0 p-0 rounded-0" style={{maxHeight: "40vh", overflowY: "scroll", display: showDirections ? "block" : "none"}} >
+          <Card.Header>Directions</Card.Header>
+          <Card.Body className="p-1" ref={googleMapSidePanelRef} />
+        </Card>
       </CardGroup>
-      <Card maxHeight="20vh">
-        <canvas id="google-map-bottom-panel" ref={googleMapBottomPanelRef} />
+      <Card className="m-0 rounded-0 rounded-bottom" maxHeight="20vh">
+        <canvas ref={googleMapBottomPanelRef} />
       </Card>
     </Card>
   )

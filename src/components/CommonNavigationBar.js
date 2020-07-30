@@ -84,6 +84,22 @@ const CommonNavigationBar = ({variant, navSubTitle, userId, subjectId, subjectNa
                 }
                 updateSearchKey("title")
                 break
+            case "locations-map":
+                attributes = {
+                    navTitle: 'Map' + subTitle,
+                    navColor: 'danger',
+                    icon: <i className="fas fa-map-marked-alt"/>,
+                    showToggle: false
+                }
+                break
+            case "circuit-map":
+                attributes = {
+                    navTitle: 'Map' + subTitle,
+                    navColor: 'danger',
+                    icon: <i className="fas fa-map-marked-alt"/>,
+                    showToggle: true
+                }
+                break
             default:
                 break
         }

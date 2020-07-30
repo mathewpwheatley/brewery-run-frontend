@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react'
 import {Card} from 'react-bootstrap'
+import CommonNavigationBar from './CommonNavigationBar.js'
 
 const LocationsMap = ({locations, mapSize, zoomLevel}) => {
   const googleMapRef = React.createRef()
@@ -59,7 +60,11 @@ const LocationsMap = ({locations, mapSize, zoomLevel}) => {
   }
 
   return (
-    <Card id="google-map" ref={googleMapRef} style={mapSize ? mapSize : {width: '100%', height: '50vh'}} />
+    <Card>
+      <CommonNavigationBar variant="locations-map" showSearch={false} />
+      <Card className="m-0" ref={googleMapRef} style={mapSize ? mapSize : {width: '100%', height: '50vh'}} />
+    </Card>
+    
   )
 }
 
