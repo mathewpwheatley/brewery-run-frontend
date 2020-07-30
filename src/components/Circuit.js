@@ -48,7 +48,7 @@ class Circuit extends Component {
                 }
 
                 <CardDeck className="mb-4">
-                    <Card className="col-4 px-0">
+                    <Card className="col-4 px-0" style={{height:"0%"}}>
                         <CommonNavigationBar
                                 variant="circuit"
                                 navSubTitle={": " + circuit.title}
@@ -107,7 +107,7 @@ class Circuit extends Component {
                         </Card.Footer>
                     </Card>
 
-                    {(circuit.breweries && circuit.breweries.length > 0) ?
+                    {(circuit.breweries && circuit.breweries.length > 0 && !this.props.loading) ?
                     <CircuitMap locations={circuit.breweries} hideDirectionsDefault={true} /> :
                     <BlankMap/>
                     }
@@ -135,7 +135,8 @@ class Circuit extends Component {
 const mapStateToProps = state => {
     return {
         circuit: state.circuit.selected,
-        userId: state.user.id
+        userId: state.user.id,
+        loading: state.fetchMessage.loading
     }
 }
 

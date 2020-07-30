@@ -64,12 +64,12 @@ class CreateUserForm extends Component {
                         <Form.Control type="password" placeholder="Confirm Password" name="password_confirmation" value={this.state.password_confirmation} onChange={event => this.handleChange(event)}/>
                     </Form.Group>
                     <Form.Row>
-                        <Col>
-                            <Button block disabled variant="secondary-outline" type="button" title="Sign up with Google" onClick={event => this.handleGoogleButtonClick(event)} >
+                        {/* <Col>
+                            <Button block variant="primary" type="button" title="Sign up with Google" onClick={event => this.handleGoogleButtonClick(event)} >
                                 <i className="fab fa-google"/>
                                 <span className="d-none d-sm-none d-md-inline"> Sign up with Google</span>
                             </Button>
-                        </Col>
+                        </Col> */}
                         <Col>
                             <Button block variant="success" type="submit" title="Create User">
                                 <i className="fas fa-user-plus"/>

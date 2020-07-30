@@ -3,7 +3,7 @@ import Chart from 'chart.js'
 import {CardGroup, Card} from 'react-bootstrap'
 import CommonNavigationBar from './CommonNavigationBar.js'
 
-const CircuitMap = ({locations, hideDirectionsDefault}) => {
+const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
   const googleMapRef = createRef()
   const googleMapSidePanelRef = createRef()
   const googleMapBottomPanelRef = createRef()
@@ -116,6 +116,13 @@ const CircuitMap = ({locations, hideDirectionsDefault}) => {
         legend: {display: false},
         responsive: true,
         aspectRatio: 7.5,
+        tooltips: {
+          enabled: true,
+          mode: 'single',
+          callbacks: {
+            title: (tooltipItem) => {return "Miles: " + tooltipItem[0].xLabel}
+          }
+        },
         scales: {
           yAxes: [{
             scaleLabel: {
@@ -127,12 +134,6 @@ const CircuitMap = ({locations, hideDirectionsDefault}) => {
               display: true,
               autoSkip: true,
               maxTicksLimit: 5
-            }
-          }],
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Total Distance (miles)'
             }
           }]
         }     
@@ -147,21 +148,21 @@ const CircuitMap = ({locations, hideDirectionsDefault}) => {
   }
 
   return (
-    <Card className="p-0">
+    <Card className="p-0" style={{width: '100%', height: '100%'}}>
       <CommonNavigationBar
         variant="circuit-map"
         showSearch={false}
         showData={showDirections}
         toggleData={toggleDirections}
       />
-      <CardGroup>
-        <Card className="m-0 rounded-0" ref={googleMapRef} style={{width: '100%', height: '40vh'}} />
-        <Card className="col-4 m-0 p-0 rounded-0" style={{maxHeight: "40vh", overflowY: "scroll", display: showDirections ? "block" : "none"}} >
+      <CardGroup style={mapSize ? mapSize : {width: '100%', height: '45vh'}}>
+        <Card className="m-0 rounded-0" ref={googleMapRef} style={{width: '100%', height: '100%'}} />
+        <Card className="col-4 m-0 p-0 rounded-0" style={{maxHeight: "100%", overflowY: "scroll", display: showDirections ? "block" : "none"}} >
           <Card.Header>Directions</Card.Header>
           <Card.Body className="p-1" ref={googleMapSidePanelRef} />
         </Card>
       </CardGroup>
-      <Card className="m-0 rounded-0 rounded-bottom" maxHeight="20vh">
+      <Card className="m-0 rounded-0 rounded-bottom" maxHeight="10vh">
         <canvas ref={googleMapBottomPanelRef} />
       </Card>
     </Card>

@@ -25,7 +25,7 @@ const CommonCard = ({variant, data, navSubTitle, hideDataDefault, hideSearch, hi
     }
    
     return (
-        <Card>
+        <Card  style={{height:"0%"}}>
             <CommonNavigationBar
                 variant={variant}
                 navSubTitle={navSubTitle}

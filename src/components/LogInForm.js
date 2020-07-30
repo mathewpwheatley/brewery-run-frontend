@@ -51,23 +51,23 @@ class LogInForm extends Component {
                         <Form.Control type="email" placeholder="Email Address" name="email" value={this.state.email} onChange={event => this.handleChange(event)}/>
                     </Form.Group>
                     <Form.Row>
-                        <Form.Group as={Col} md="8"> 
+                        <Form.Group as={Col}> 
                             <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={event => this.handleChange(event)}/>
                         </Form.Group>
-                        <Form.Group as={Col} md="4"> 
-                            <Button block disabled variant="secondary-outline" type="button" onClick={event => this.handleForgotButtonClick(event)}>
+                        {/* <Form.Group as={Col} md="4"> 
+                            <Button block disabled variant="primary" type="button" onClick={event => this.handleForgotButtonClick(event)}>
                                 <i className="far fa-question-circle"/>
                                 <span className="d-none d-sm-none d-md-inline"> Forgot</span>
                             </Button>
-                        </Form.Group>
+                        </Form.Group> */}
                     </Form.Row>
                     <Form.Row className="justify-content-center">
-                        <Col>
-                            <Button block disabled variant="secondary-outline" type="button" title="Log in with Google" onClick={event => this.handleGoogleButtonClick(event)}>
+                        {/* <Col>
+                            <Button block variant="primary" type="button" title="Log in with Google" onClick={event => this.handleGoogleButtonClick(event)}>
                                 <i className="fab fa-google"/>
                                 <span className="d-none d-sm-none d-md-inline"> Log in with Google</span>
                             </Button>
-                        </Col>
+                        </Col> */}
                         <Col>
                             <Button block variant="success" type="submit" title="Log in to Beer Run">
                                 <i className="fas fa-sign-in-alt"/>

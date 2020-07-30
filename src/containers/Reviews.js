@@ -31,7 +31,7 @@ const Reviews = ({variant, data, userId, subjectId, subjectName, navSubTitle, sh
     }
 
     return (
-        <Card>
+        <Card  style={{height:"0%"}}>
             <CommonNavigationBar
                 variant={variant}
                 navSubTitle={navSubTitle}

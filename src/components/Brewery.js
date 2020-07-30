@@ -27,7 +27,7 @@ class Brewery extends Component {
                 <FetchMessage/>
 
                 <CardDeck className="mb-4">
-                    <Card className="col-5 px-0">
+                    <Card className="col-5 px-0" style={{height:"0%"}} >
                         <CommonNavigationBar
                             variant="brewery"
                             navSubTitle={": " + brewery.name}

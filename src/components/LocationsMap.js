@@ -60,9 +60,9 @@ const LocationsMap = ({locations, mapSize, zoomLevel}) => {
   }
 
   return (
-    <Card>
+    <Card style={mapSize ? mapSize : {width: '100%', height: '50vh'}} >
       <CommonNavigationBar variant="locations-map" showSearch={false} />
-      <Card className="m-0" ref={googleMapRef} style={mapSize ? mapSize : {width: '100%', height: '50vh'}} />
+      <Card className="m-0" ref={googleMapRef} style={{width: '100%', height: '100%'}} />
     </Card>
     
   )

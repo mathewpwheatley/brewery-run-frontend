@@ -28,7 +28,7 @@ class Dashboard extends Component {
                 <FetchMessage/>
 
                 <CardDeck className="mb-4">
-                    <Card className="px-0">
+                    <Card className="px-0"  style={{height:"0%"}}>
                         <CommonNavigationBar
                             variant="user"
                             navSubTitle={": " + user.full_name}

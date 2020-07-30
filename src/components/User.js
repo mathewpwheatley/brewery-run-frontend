@@ -30,7 +30,7 @@ class User extends Component {
                 
                 <FetchMessage/>
 
-                <CardDeck className="mb-4">
+                <CardDeck className="mb-4" style={{height:"0%"}} >
                     <Card className="col-5 px-0">
                         <CommonNavigationBar
                             variant="user"
