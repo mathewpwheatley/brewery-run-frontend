@@ -4,7 +4,6 @@ import {Card} from 'react-bootstrap'
 const LocationsMap = ({locations, mapSize, zoomLevel}) => {
   const googleMapRef = React.createRef()
   const googleMap = useRef()
-  const markers = useRef()
 
   useEffect(() => {
     const googleMapScript = document.createElement('script')
@@ -13,7 +12,7 @@ const LocationsMap = ({locations, mapSize, zoomLevel}) => {
 
     googleMapScript.addEventListener('load', () => {
       googleMap.current = createGoogleMap(locations[0])
-      markers.current = mapLocationMarkers(locations)
+      mapLocationMarkers(locations)
     })
   })
 
@@ -28,11 +27,11 @@ const LocationsMap = ({locations, mapSize, zoomLevel}) => {
   }
 
   const mapLocationMarkers = (locations) => {
-    // Setup bounds and info window object to add markers into
+    // Initialize bounds and info window object to add markers into
     const mapBounds = new window.google.maps.LatLngBounds()
     const infoWindow = new window.google.maps.InfoWindow()
     // Map all locations to a marker
-    locations.map(location => {
+    locations.forEach(location => {
       // Create position object
       const position = new window.google.maps.LatLng({
         lat: parseFloat(location.latitude),
@@ -49,8 +48,8 @@ const LocationsMap = ({locations, mapSize, zoomLevel}) => {
       // Create marker click events to display info window
       window.google.maps.event.addListener(marker, "click", () => {
         infoWindow.setContent(
-          "<h6>" + location.name + "</h6>" +
-          "<p>" + location.full_address + "</p>"
+          `<h6>${location.name} (Rating: ${location.rating})</h6>` +
+          `<p>${location.full_address}</p>`
         )
         infoWindow.open(googleMap.current, marker)
       })
