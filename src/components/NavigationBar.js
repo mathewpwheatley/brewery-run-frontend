@@ -6,6 +6,10 @@ import Notifications from '../containers/Notifications.js'
 import {logOutUser} from '../actions/user.js'
 
 class NavigationBar extends Component {
+    unreadNotificationsCount = () => {
+        return this.props.notifications.filter((notification) => !notification.read).length
+    }
+
     render () {
         return (
             <Navbar className="shadow" bg="info" variant="dark">
@@ -63,8 +67,12 @@ class NavigationBar extends Component {
                         {this.props.notifications.length > 0 &&
                             <Dropdown as={Nav.Item}>
                                 <Dropdown.Toggle as={Nav.Link} title="Notifications">
-                                    <Badge pill variant="danger">{this.props.notifications.length}</Badge>
-                                    <span> </span>
+                                    {this.unreadNotificationsCount() > 0 &&
+                                    <Fragment>
+                                        <Badge pill variant="danger">{this.unreadNotificationsCount()}</Badge>
+                                        <span> </span>
+                                    </Fragment>
+                                    }
                                     <i className="fas fa-bell"/>
                                 </Dropdown.Toggle>
                                 <Notifications/>
