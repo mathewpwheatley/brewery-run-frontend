@@ -1,10 +1,10 @@
 import React from 'react'
-import {Navbar} from 'react-bootstrap'
+import {Navbar, Nav} from 'react-bootstrap'
 
 const  Footer = () => {
     return (
         <Navbar className="footer" bg="light">
-            <p className="text-secondary mx-auto">
+            <Nav.Item className="text-secondary mx-auto">
                 Created by Mathew Wheatley
                 <span> </span>
                 <a className="text-danger" href="https://github.com/mathewpwheatley" title="Github" target="_blank" rel="noopener noreferrer">
@@ -22,7 +22,7 @@ const  Footer = () => {
                 <a className="text-danger" href="https://www.instagram.com/mathew.p.wheatley/" title="Instagram" target="_blank" rel="noopener noreferrer">
                     <i className="fab fa-instagram" />
                 </a>
-            </p>
+            </Nav.Item>
         </Navbar>
     )
 }

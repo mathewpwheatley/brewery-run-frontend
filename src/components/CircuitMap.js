@@ -116,8 +116,9 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
         datasets: [{
           label: "Elevation (ft)",
           data: elevation,
-          borderColor: "#4A89F3",
-          fill: false
+          borderColor: "rgba(74, 137, 243, 1)",
+          fill: true,
+          backgroundColor: "rgba(74, 137, 243, 0.5)"
         }]
       },
       options: {
