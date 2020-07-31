@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getAllCircuits} from '../actions/circuit.js'
+import {getAllCircuits, clearAllCircuits} from '../actions/circuit.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonCard from './CommonCard.js'
 
@@ -8,6 +8,9 @@ class Circuits extends Component {
 
   componentDidMount() {
     this.props.getAllCircuits()
+  }
+  componentWillUnmount() {
+    this.props.clearAllCircuits()
   }
 
   render () {
@@ -28,7 +31,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllCircuits: () => {dispatch(getAllCircuits())}
+    getAllCircuits: () => {dispatch(getAllCircuits())},
+    clearAllCircuits: () => {dispatch(clearAllCircuits())}
   }
 }
 

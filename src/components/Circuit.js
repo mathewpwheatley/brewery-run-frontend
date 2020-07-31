@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {Container, CardDeck, Card, Row, Col} from 'react-bootstrap'
-import {getCircuit} from '../actions/circuit.js'
+import {getCircuit, clearCircuit} from '../actions/circuit.js'
 import FetchMessage from './FetchMessage.js'
 import CommonNavigationBar from './CommonNavigationBar.js'
 import CommonCard from '../containers/CommonCard.js'
@@ -19,6 +19,10 @@ class Circuit extends Component {
 
     componentDidMount() {
         this.props.getCircuit(this.props.id)
+    }
+
+    componentWillUnmount() {
+        this.props.clearCircuit()
     }
 
     handleRedirect = () => {
@@ -105,8 +109,8 @@ class Circuit extends Component {
                         </Card.Footer>
                     </Card>
 
-                    {/* Prevent map from loading without data or old data via various checks (Not ideal but works for now) */}
-                    {(circuit.breweries && circuit.breweries.length > 0 && circuit.id === parseInt(this.props.id)) ?
+                    {/* Prevent map from loading without data */}
+                    {(circuit.breweries && circuit.breweries.length > 0) ?
                     <CircuitMap locations={circuit.breweries} hideDirectionsDefault={true} /> :
                     <BlankMap/>
                     }
@@ -140,7 +144,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getCircuit: (id) => {dispatch(getCircuit(id))}
+        getCircuit: (id) => {dispatch(getCircuit(id))},
+        clearCircuit: (id) => {dispatch(clearCircuit())}
     }
 }
 

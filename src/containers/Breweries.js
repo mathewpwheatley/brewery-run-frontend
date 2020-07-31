@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getAllBreweries} from '../actions/brewery.js'
+import {getAllBreweries, clearAllBreweries} from '../actions/brewery.js'
 import FetchMessage from '../components/FetchMessage.js'
 import CommonCard from './CommonCard.js'
 import LocationsMap from '../components/LocationsMap.js'
@@ -11,6 +11,10 @@ class Breweries extends Component {
 
   componentDidMount() {
     this.props.getAllBreweries()
+  }
+
+  componentWillUnmount() {
+    this.props.clearAllBreweries()
   }
 
   render () {
@@ -39,7 +43,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllBreweries: () => {dispatch(getAllBreweries())}
+    getAllBreweries: () => {dispatch(getAllBreweries())},
+    clearAllBreweries: () => {dispatch(clearAllBreweries())}
   }
 }
 

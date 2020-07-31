@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Container, CardDeck, Card, Button} from 'react-bootstrap'
-import {getBrewery} from '../actions/brewery.js'
+import {getBrewery, clearBrewery} from '../actions/brewery.js'
 import FetchMessage from './FetchMessage.js'
 import CommonNavigationBar from './CommonNavigationBar.js'
 import CommonCard from '../containers/CommonCard.js'
@@ -16,6 +16,10 @@ class Brewery extends Component {
 
     componentDidMount() {
         this.props.getBrewery(this.props.id)
+    }
+
+    componentWillUnmount() {
+        this.props.clearBrewery()
     }
 
     render () {
@@ -101,7 +105,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getBrewery: (id) => {dispatch(getBrewery(id))}
+        getBrewery: (id) => {dispatch(getBrewery(id))},
+        clearBrewery: () => {dispatch(clearBrewery())}
     }
 }
 

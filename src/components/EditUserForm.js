@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import {getEditUser, updateUser, deleteUser} from '../actions/user.js'
+import {getEditUser, updateUser, deleteUser, clearUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
 import CommonDeleteButton from './CommonDeleteButton.js'
 
@@ -29,6 +29,10 @@ class EditUserForm extends Component {
     async componentDidMount() {
         await this.props.getEditUser(this.props.userId)
         this.populateForm()
+    }
+
+    componentWillUnmount() {
+        this.props.clearUser()
     }
 
     populateForm = () => {
@@ -167,7 +171,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getEditUser: async (userId) => {await dispatch(getEditUser(userId))},
         updateUser: async (userId, user) => {await dispatch(updateUser(userId, user))},
-        deleteUser: async (userId) => {await dispatch(deleteUser(userId))}
+        deleteUser: async (userId) => {await dispatch(deleteUser(userId))},
+        clearUser: () => {dispatch(clearUser())}
     }
 }
 

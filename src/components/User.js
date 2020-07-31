@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {Container, CardDeck, Card} from 'react-bootstrap'
-import {getUser} from '../actions/user.js'
+import {getUser, clearUser} from '../actions/user.js'
 import CommonNavigationBar from './CommonNavigationBar.js'
 import FetchMessage from './FetchMessage.js'
 import CommonCard from '../containers/CommonCard.js'
@@ -14,6 +14,10 @@ class User extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.id)
+    }
+
+    componentWillUnmount() {
+        this.props.clearUser()
     }
 
     render () {
@@ -77,7 +81,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getUser: (userId) => {dispatch(getUser(userId))}
+        getUser: (userId) => {dispatch(getUser(userId))},
+        clearUser: () => {dispatch(clearUser())}
     }
 }
 
