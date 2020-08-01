@@ -69,9 +69,9 @@ class LogInForm extends Component {
                             </Button>
                         </Col> */}
                         <Col>
-                            <Button block variant="success" type="submit" title="Log in to Beer Run">
+                            <Button block variant="success" type="submit" title="Log in to Brewery Run">
                                 <i className="fas fa-sign-in-alt"/>
-                                <span className="d-none d-sm-none d-md-inline"> Log in to Beer Run</span>
+                                <span className="d-none d-sm-none d-md-inline"> Log in to Brewery Run</span>
                             </Button>
                         </Col>
                     </Form.Row>

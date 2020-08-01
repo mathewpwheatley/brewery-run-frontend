@@ -7,7 +7,7 @@ const Welcome = () => {
 
     return (
         <Jumbotron className="col-6 mt-4 mx-auto p-3 text-center bg-white">
-            <h1 className="display-4 text-primary"><i className="fas fa-beer" style={{color: "#ffbe32"}} /> Welcome to Beer Run</h1>
+            <h1 className="display-4 text-primary"><i className="fas fa-beer" style={{color: "#ffbe32"}} /> Welcome to Brewery Run</h1>
             <p className="lead text-secondary"> Bringing the fun back to your run!</p>
             <div>
                 <img style={{width: "35vw"}}alt="Running in Park" src={process.env.PUBLIC_URL + '/running_park.png'} />

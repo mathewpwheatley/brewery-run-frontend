@@ -14,10 +14,10 @@ class NavigationBar extends Component {
         return (
             <Navbar className="shadow" bg="info" variant="dark">
                 <Navbar.Collapse>
-                    <NavLink exact to="/" title="Beer Run">
+                    <NavLink exact to="/" title="Brewery Run">
                         <Navbar.Brand>
                             <i className="fas fa-beer"/>
-                            <span className="d-none d-sm-none d-md-inline"> Beer Run</span>
+                            <span className="d-none d-sm-none d-md-inline"> Brewery Run</span>
                         </Navbar.Brand>
                     </NavLink>
                     
