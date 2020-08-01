@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
-import Modal from 'react-bootstrap/Modal'
+import {Modal, Spinner} from 'react-bootstrap'
 
 const FetchMessage = ({loading, errors, messages, clearErrorsMessages}) => {
 
@@ -33,8 +33,8 @@ const FetchMessage = ({loading, errors, messages, clearErrorsMessages}) => {
                 {/* Conditionally render via && operator acting as if statement */}
                 {loading &&
                     <div className="text-center">
-                        <span className="spinner-border spinner-border-sm text-primary"/>
-                        <span className="d-none d-sm-none d-md-inline"> Loading</span>
+                        <Spinner animation="border" variant="success" />
+                        <h3 className="d-none d-sm-none d-md-inline"> Loading </h3>
                     </div>
                 }
                 {/* Conditionally render via && operator acting as if statement */}

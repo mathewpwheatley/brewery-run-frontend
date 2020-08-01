@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {logInUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
+import DemoAlert from './DemoAlert.js'
 
 class LogInForm extends Component {
     state = {
@@ -61,6 +62,7 @@ class LogInForm extends Component {
                             </Button>
                         </Form.Group> */}
                     </Form.Row>
+                    <DemoAlert />
                     <Form.Row className="justify-content-center">
                         {/* <Col>
                             <Button block variant="primary" type="button" title="Log in with Google" onClick={event => this.handleGoogleButtonClick(event)}>

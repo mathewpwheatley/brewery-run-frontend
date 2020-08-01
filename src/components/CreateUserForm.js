@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import {createUser} from '../actions/user.js'
 import FetchMessage from './FetchMessage.js'
+import DemoAlert from './DemoAlert.js'
 
 class CreateUserForm extends Component {
 
@@ -44,6 +45,7 @@ class CreateUserForm extends Component {
         return (
             <Card className='col-4 mt-4 mx-auto px-0'>
                 {this.handleRedirect()}
+                <FetchMessage/>
                 <Card.Header>Create Account</Card.Header>
                 <Card.Body as={Form} className="py-3 px-3" onSubmit={event => this.handleSubmit(event)}>
                     <Form.Row>
@@ -63,6 +65,7 @@ class CreateUserForm extends Component {
                     <Form.Group>
                         <Form.Control type="password" placeholder="Confirm Password" name="password_confirmation" value={this.state.password_confirmation} onChange={event => this.handleChange(event)}/>
                     </Form.Group>
+                    <DemoAlert />
                     <Form.Row>
                         {/* <Col>
                             <Button block variant="primary" type="button" title="Sign up with Google" onClick={event => this.handleGoogleButtonClick(event)} >
@@ -78,7 +81,6 @@ class CreateUserForm extends Component {
                         </Col>
                     </Form.Row>
                 </Card.Body>
-                <FetchMessage/>
             </Card>
         )
     }

@@ -107,6 +107,7 @@ class Dashboard extends Component {
                     </Card>
 
                     <CommonCard variant='breweries' navSubTitle=': Favorited' data={user.favorite_breweries} hideDataDefault={true}/> 
+
                 </CardDeck>
 
                 <CardDeck className="mb-4">

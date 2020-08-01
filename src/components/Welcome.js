@@ -14,19 +14,19 @@ const Welcome = () => {
             </div>
             <div>
                 <Link to="/breweries" title="View Breweries">
-                    <Button  className="mx-3" variant="info">
+                    <Button  className="mx-3" variant="info" size="sm" >
                         <i className="fas fa-industry"/>
                         <span className="d-none d-sm-none d-md-inline"> View Breweries</span>
                     </Button>
                 </Link>
                 <Link to="/create-user" title="Create Accout">
-                    <Button  className="mx-3" variant="success">
+                    <Button  className="mx-3" variant="success" >
                         <i className="fas fa-user-plus"/>
                         <span className="d-none d-sm-none d-md-inline"> Create Accout</span>
                     </Button>
                 </Link>
                 <Link to="/circuits" title="View Circuits">
-                    <Button  className="mx-3" variant="info">
+                    <Button  className="mx-3" variant="info" size="sm" >
                         <i className="fas fa-route"/>
                         <span className="d-none d-sm-none d-md-inline"> View Circuits</span>
                     </Button>
