@@ -10,7 +10,7 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
   const googleMap = useRef()
   
   useEffect(() => {
-    // Load google maps and visualizer scripts if (one is not already loaded)
+    // Load google maps and visualizer scripts if (one is not already loaded) 
     if (!document.getElementById("googleMapScript")) {
       const googleMapScript = document.createElement('script')
       googleMapScript.id = "googleMapScript"
