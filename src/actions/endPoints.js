@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:3001"
+const baseURL = "https://brewery-run-backend.herokuapp.com/"
 
 const endPoints = {
     logInURL: baseURL + "/log_in",
