@@ -21,10 +21,11 @@ The user interface for Brewery Run is hosted on Heroku therefore you can access 
 If you instead wanted to manipulate the frontend you must install it locally via the following steps:
 1. Assuming you are familiar with Git: Clone or fork/clone the [frontend](https://github.com/mathewpwheatley/brewery-run-frontend).
 2. On your local machine, from the remote git directory, run the following commands:
-  1. "npm install" to install all required javascript libraries
-  2. API KEY to .env
-  3. connect to backend
-  4. "npm start" to start the frontend at default port (localhost:3000)
+  1. "npm install" to install all required javascript libraries.
+  2. Update the endpoint variable "baseURL" to point to your backend database in "./src/actions/endPoints.js". (Instructions for installing the backend can be found [here](https://github.com/mathewpwheatley/brewery-run-backend))
+  3. The Google Maps Javascript API requires an key which you can obtain from [here](https://developers.google.com/maps/documentation/javascript/get-api-key).
+  4. Create file "./.env" and add Google Maps Javascript API as variable "REACT_APP_GOOGLE_MAP_API=YOUR_KEY_HERE".
+  5. "npm start" to start the frontend at default port (localhost:3000).
 
 ## Contributing
 Contributions are welcome, submit a pull request!
