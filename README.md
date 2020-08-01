@@ -13,8 +13,15 @@ The remainder of this README.md will discuss the frontend exclusivley. The backe
 - Font Awesome
 
 ## Features
-- Browse Breweries and view them on a map
-- Browse Circuits and view their route as well as elevation 
+- Browse/sort Breweries and view them on a map
+- Browse Circuits and view their route as well as elevation on a map
+- Brewery and circuit reviews
+- Create, edit, delete user account
+- Like and favorite circuits & breweries
+- Write reviews/rate breweries and reviews
+- Follow other users
+- Get circuits recommended
+- Author circuits
 
 ## Installation
 The user interface for Brewery Run is hosted on Heroku therefore you can access it directly from your browser at https://brewery-run.herokuapp.com. You will not have access to directly edit the frontend interface from the website.
