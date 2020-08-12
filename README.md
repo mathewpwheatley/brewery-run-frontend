@@ -28,10 +28,10 @@ The remainder of this README.md will discuss the frontend exclusivley. The backe
 ![Welcome Page](screenshot/Brewery_Run_Welcome.png)
 
 - Sample Circuit
-[Sample Circuit](screenshot/Brewery_Run_Circuit.png)
+![Sample Circuit](screenshot/Brewery_Run_Circuit.png)
 
 - Sample User Dashboard
-[Sample User Dashboard]screenshot/Brewery_Run_Dashboard.png)
+![Sample User Dashboard](screenshot/Brewery_Run_Dashboard.png)
 
 ## Installation
 The user interface for Brewery Run is hosted on Heroku therefore you can access it directly from your browser at https://brewery-run.herokuapp.com. You will not have access to directly edit the frontend interface from the website.
