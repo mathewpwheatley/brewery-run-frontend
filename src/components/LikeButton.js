@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
-import {createBreweryLike, createCircuitLike, deleteBreweryLike, deleteCircuitLike} from '../actions/like.js'
+import {createLike, deleteLike} from '../actions/like.js'
 
-const LikeButton = ({variant, likeId, userId, subjectId, createBreweryLike, createCircuitLike, deleteBreweryLike, deleteCircuitLike}) => {
+const LikeButton = ({variant, likeId, userId, subjectId, createLike, deleteLike}) => {
 
     let attributes
     const setAttributes = () => {
@@ -11,33 +11,15 @@ const LikeButton = ({variant, likeId, userId, subjectId, createBreweryLike, crea
             attributes = {
                 title: "Unlike",
                 variant: "info",
-                text: <i className="fas fa-heart" style={{color: "deeppink"}}/>
-            }
-            switch (variant) {
-                case "brewery":
-                    attributes.action = () => deleteBreweryLike(likeId)
-                    break
-                case "circuit":
-                    attributes.action = () => deleteCircuitLike(likeId)
-                    break
-                default:
-                    break
+                text: <i className="fas fa-heart" style={{color: "deeppink"}}/>,
+                action: () => deleteLike(likeId, variant)
             }
         } else {
             attributes = {
                 title: "Like",
                 variant: "outline-secondary",
-                text: <i className="far fa-heart"/>
-            }
-            switch (variant) {
-                case "brewery":
-                    attributes.action = () => createBreweryLike(userId, subjectId)
-                    break
-                case "circuit":
-                    attributes.action = () => createCircuitLike(userId, subjectId)
-                    break
-                default:
-                    break
+                text: <i className="far fa-heart"/>,
+                action: () => createLike(userId, subjectId, variant)
             }
         }
     }
@@ -54,10 +36,8 @@ const LikeButton = ({variant, likeId, userId, subjectId, createBreweryLike, crea
 
 const mapDispatchToProps = dispatch => {
     return {
-        createBreweryLike: (userId, breweryId) => {dispatch(createBreweryLike(userId, breweryId))},
-        deleteBreweryLike: (likeId) => {dispatch(deleteBreweryLike(likeId))},
-        createCircuitLike: (userId, circuitId) => {dispatch(createCircuitLike(userId, circuitId))},
-        deleteCircuitLike: (likeId) => {dispatch(deleteCircuitLike(likeId))}
+        createLike: (userId, subjectId, variant) => {dispatch(createLike(userId, subjectId, variant))},
+        deleteLike: (likeId, variant) => {dispatch(deleteLike(likeId, variant))}
     }
 }
 

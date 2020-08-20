@@ -1,31 +1,45 @@
 import endPoints from './endPoints.js'
+import {standardFetchOptions, fetchErrorsCheck} from './fetchHelper.js'
 
 const {breweryLikesURL, circuitLikesURL} = endPoints
 
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
-export const createBreweryLike = (userId, breweryId) => {
+export const createLike = (userId, subjectId, variant) => {
     return (dispatch) => {
+        // Set loading via dispatch
         dispatch({type: 'LOADING'})
-        const options = {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({brewery_like: {user_id: userId, brewery_id: breweryId}})
+        // Setup fetch options & url
+        let body
+        let fetchURL
+        let dispatchType
+        switch (variant) {
+            case "brewery": 
+                body = JSON.stringify({brewery_like: {user_id: userId, brewery_id: subjectId}})
+                fetchURL = breweryLikesURL
+                dispatchType = 'ADD_BREWERY_LIKE'
+                break
+            case "circuit":
+                body = JSON.stringify({circuit_like: {user_id: userId, circuit_id: subjectId}})
+                fetchURL = circuitLikesURL
+                dispatchType = 'ADD_CIRCUIT_LIKE'
+                break
+            default:
+                break
         }
-        fetch(breweryLikesURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+        const options = {
+            ...standardFetchOptions,
+            method: 'POST',
+            body: body   
+        }
+        // Fetch request
+        fetch(fetchURL, options).then(resp => resp.json()).then(json => {
+            // Error checking/handling
+            if (!fetchErrorsCheck(dispatch, json)) {
+                // Update redux state to update webpage
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'ADD_BREWERY_LIKE',
+                    type: dispatchType,
                     likeId: json.id
                 })
             }
@@ -33,84 +47,36 @@ export const createBreweryLike = (userId, breweryId) => {
     }
 }
 
-export const createCircuitLike = (userId, circuitId) => {
+export const deleteLike = (likeId, variant) => {
     return (dispatch) => {
+        // Set loading via dispatch
         dispatch({type: 'LOADING'})
-        const options = {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({circuit_like: {user_id: userId, circuit_id: circuitId}})
+        // Setup fetch options & url
+        let fetchURL
+        let dispatchType
+        switch (variant) {
+            case "brewery": 
+                fetchURL = breweryLikesURL
+                dispatchType = 'SUBTRACT_BREWERY_LIKE'
+                break
+            case "circuit":
+                fetchURL = circuitLikesURL
+                dispatchType = 'SUBTRACT_CIRCUIT_LIKE'
+                break
+            default:
+                break
         }
-        fetch(circuitLikesURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
-                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'ADD_CIRCUIT_LIKE',
-                    likeId: json.id
-                })
-            }
-        })
-    }
-}
-
-export const deleteBreweryLike = (breweryLikeId) => {
-    return (dispatch) => {
-        dispatch({type: 'LOADING'})
         const options = {
+            ...standardFetchOptions,
             method: 'DELETE',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
         }
-        fetch(breweryLikesURL + "/" + breweryLikeId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+        // Fetch request
+        fetch(fetchURL + "/" + likeId, options).then(resp => resp.json()).then(json => {
+            // Error checking/handling
+            if (!fetchErrorsCheck(dispatch, json)) {
+                // Update redux state to update webpage
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'SUBTRACT_BREWERY_LIKE'
-                })
-            }
-        })
-    }
-}
-
-export const deleteCircuitLike = (circuitLikeId) => {
-    return (dispatch) => {
-        dispatch({type: 'LOADING'})
-        const options = {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        }
-        fetch(circuitLikesURL + "/" + circuitLikeId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
-                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'SUBTRACT_CIRCUIT_LIKE'
-                })
+                dispatch({type: dispatchType})
             }
         })
     }
