@@ -1,4 +1,5 @@
 import endPoints from './endPoints.js'
+import {standardFetchOptions, fetchErrorsCheck} from './fetchHelper.js'
 
 const {usersURL, logInURL, autoLogInURL, logOutURL} = endPoints
 
@@ -8,20 +9,11 @@ export const getUser = (userId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'GET'
         }
         fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_USER',
@@ -42,20 +34,11 @@ export const getAllUsers = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'GET'
         }
         fetch(usersURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_ALL_USERS',
@@ -76,32 +59,25 @@ const postFetch = (user, endPoint) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
+            ...standardFetchOptions,
             method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
             body: JSON.stringify({user: user})
         }
         fetch(endPoint, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else if (json.id) {
-                // Succesful loggin on backend
-                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'LOG_IN',
-                    id: json.id,
-                    name: json.full_name,
-                    notifications: json.notifications
-                })
-            } else {
-                // Not logged in on backend but no errors (ie. auto log-in did not find valid jwt)
-                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+            if (!fetchErrorsCheck(dispatch, json)) {
+                if (json.id) {
+                    // Succesful loggin on backend
+                    dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                    dispatch({
+                        type: 'LOG_IN',
+                        id: json.id,
+                        name: json.full_name,
+                        notifications: json.notifications
+                    })
+                } else {
+                    // Not logged in on backend but no errors (ie. auto log-in did not find valid jwt)
+                    dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                }
             }
         })
     }
@@ -123,16 +99,11 @@ export const logOutUser = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'DELETE',
-            credentials: 'include'
+            ...standardFetchOptions,
+            method: 'DELETE'
         }
         fetch(logOutURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({type: 'LOG_OUT'})
             }
@@ -144,20 +115,11 @@ export const getEditUser = (userId) => {
     return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'GET'
         }
         await fetch(usersURL + '/' + userId + '/edit', options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_USER',
@@ -172,21 +134,12 @@ export const updateUser = (userId, user) => {
     return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
+            ...standardFetchOptions,
             method: 'PATCH',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
             body: JSON.stringify({user: user})
         }
         await fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'UPDATE_USER',
@@ -202,16 +155,11 @@ export const deleteUser = (userId) => {
     return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'DELETE',
-            credentials: 'include'
+            ...standardFetchOptions,
+            method: 'DELETE'
         }
         await fetch(usersURL + '/' + userId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({type: 'CLEAR_USER'})
                 dispatch({type: 'LOG_OUT'})
