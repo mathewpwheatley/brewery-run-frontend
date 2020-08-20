@@ -1,4 +1,5 @@
 import endPoints from './endPoints.js'
+import {standardFetchOptions, fetchErrorsCheck} from './fetchHelper.js'
 
 const {notificationsURL} = endPoints
 
@@ -8,21 +9,12 @@ export const markReadNotification = (notificationId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
+            ...standardFetchOptions,
             method: 'PATCH',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
             body: JSON.stringify({notification: {read: true}})
         }
         fetch(notificationsURL + "/" + notificationId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'MARK_READ_NOTIFICATION',
@@ -38,16 +30,11 @@ export const deleteNotification = (notificationId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'DELETE',
-            credentials: 'include'
+            ...standardFetchOptions,
+            method: 'DELETE'
         }
         fetch(notificationsURL + "/" + notificationId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'REMOVE_NOTIFICATION',

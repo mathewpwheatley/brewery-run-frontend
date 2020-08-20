@@ -1,93 +1,43 @@
 import endPoints from './endPoints.js'
+import {standardFetchOptions, fetchErrorsCheck} from './fetchHelper.js'
 
 const {breweryReviewsURL, circuitReviewsURL} = endPoints
 
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
-// export const getBreweryReview = (reviewId) => {
-//     return (dispatch) => {
-//         dispatch({type: 'LOADING'})
-//         const options = {
-//             method: 'GET',
-//             credentials: 'include',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Accept': 'application/json'
-//             }
-//         }
-//         fetch(breweryReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
-//             if (json.errors) {
-//                 dispatch({
-//                     type: 'SET_ERRORS',
-//                     errors: json.errors
-//                 })
-//             } else {
-//                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-//                 dispatch({
-//                     type: 'SET_REVIEW',
-//                     selected: json
-//                 })
-//             }
-//         })
-//     }
-// }
-
-// export const getCircuitReview = (reviewId) => {
-//     return (dispatch) => {
-//         dispatch({type: 'LOADING'})
-//         const options = {
-//             method: 'GET',
-//             credentials: 'include',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Accept': 'application/json'
-//             }
-//         }
-//         fetch(circuitReviewsURL + '/' + reviewId, options).then(resp => resp.json()).then(json => {
-//             if (json.errors) {
-//                 dispatch({
-//                     type: 'SET_ERRORS',
-//                     errors: json.errors
-//                 })
-//             } else {
-//                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-//                 dispatch({
-//                     type: 'SET_REVIEW',
-//                     selected: json
-//                 })
-//             }
-//         })
-//     }
-// }
-
-export const clearReview = () => {
-    return (dispatch) => {
-        dispatch({type: 'CLEAR_REVIEW'})
-    }
-}
-
-export const createBreweryReview = (review) => {
+export const createReview = (review, variant) => {
     return async (dispatch) => {
+        // Set loading via dispatch
         dispatch({type: 'LOADING'})
-        const options = {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({brewery_review: review})
+        // Setup fetch options & url
+        let body
+        let fetchURL
+        let dispatchType
+        switch (variant) {
+            case "brewery-reviews": 
+                body = JSON.stringify({brewery_review: review})
+                fetchURL = breweryReviewsURL
+                dispatchType = 'ADD_BREWERY_REVIEW'
+                break
+            case "circuit-reviews":
+                body = JSON.stringify({circuit_review: review})
+                fetchURL = circuitReviewsURL
+                dispatchType = 'ADD_CIRCUIT_REVIEW'
+                break
+            default:
+                break
         }
-        await fetch(breweryReviewsURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+        const options = {
+            ...standardFetchOptions,
+            method: 'POST',
+            body: body   
+        }
+        // Fetch request
+        await fetch(fetchURL, options).then(resp => resp.json()).then(json => {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'ADD_BREWERY_REVIEW',
+                    type: dispatchType,
                     review: json
                 })
             }
@@ -95,85 +45,35 @@ export const createBreweryReview = (review) => {
     }
 }
 
-export const createCircuitReview = (review) => {
-    return async (dispatch) => {
-        dispatch({type: 'LOADING'})
-        const options = {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({circuit_review: review})
-        }
-        await fetch(circuitReviewsURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
-                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'ADD_CIRCUIT_REVIEW',
-                    review: json
-                })
-            }
-        })
-    }
-}
-
-export const deleteBreweryReview = (reviewId) => {
+export const deleteReview = (reviewId, variant) => {
     return (dispatch) => {
+        // Set loading via dispatch
         dispatch({type: 'LOADING'})
-        const options = {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+        // Setup fetch options & url
+        let fetchURL
+        let dispatchType
+        switch (variant) {
+            case "brewery-reviews": 
+                fetchURL = breweryReviewsURL
+                dispatchType = 'REMOVE_BREWERY_REVIEW'
+                break
+            case "circuit-reviews":
+                fetchURL = circuitReviewsURL
+                dispatchType = 'REMOVE_CIRCUIT_REVIEW'
+                break
+            default:
+                break
         }
-        fetch(breweryReviewsURL + "/" + reviewId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+        const options = {
+            ...standardFetchOptions,
+            method: 'DELETE'
+        }
+        // Fetch request
+        fetch(fetchURL + "/" + reviewId, options).then(resp => resp.json()).then(json => {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'REMOVE_BREWERY_REVIEW',
-                    id: reviewId
-                })
-            }
-        })
-    }
-}
-
-export const deleteCircuitReview = (reviewId) => {
-    return (dispatch) => {
-
-        dispatch({type: 'LOADING'})
-        const options = {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        }
-        fetch(circuitReviewsURL + "/" + reviewId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
-                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'REMOVE_CIRCUIT_REVIEW',
+                    type: dispatchType,
                     id: reviewId
                 })
             }

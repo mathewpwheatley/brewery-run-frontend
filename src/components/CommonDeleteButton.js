@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import {deleteCircuit} from '../actions/circuit.js'
-import {deleteBreweryReview, deleteCircuitReview} from '../actions/review.js'
+import {deleteReview} from '../actions/review.js'
 import {deleteUser} from '../actions/user.js'
 
-const CommonDeleteButton = ({variant, subjectId, deleteCircuit, deleteBreweryReview, deleteCircuitReview, deleteUser}) => {
+const CommonDeleteButton = ({variant, subjectId, deleteCircuit, deleteReview, deleteUser}) => {
 
     const [redirectPath, setRedirectPath] = useState()
 
@@ -20,13 +20,13 @@ const CommonDeleteButton = ({variant, subjectId, deleteCircuit, deleteBreweryRev
                 attributes.confirmMessage = "Are you sure you want to delete your circuit? A deleted circuit can't be restored."
                 break
             case "brewery-reviews":
-                attributes.action = () => deleteBreweryReview(subjectId)
+                attributes.action = () => deleteReview(subjectId, variant)
                 attributes.desiredRedirectPath = ""
                 attributes.title = "Delete Review"
                 attributes.confirmMessage = "Are you sure you want to delete your review? A deleted review can't be restored."
                 break
             case "circuit-reviews":
-                attributes.action = () => deleteCircuitReview(subjectId)
+                attributes.action = () => deleteReview(subjectId, variant)
                 attributes.desiredRedirectPath = ""
                 attributes.title = "Delete Review"
                 attributes.confirmMessage = "Are you sure you want to delete your review? A deleted review can't be restored."
@@ -68,8 +68,7 @@ const CommonDeleteButton = ({variant, subjectId, deleteCircuit, deleteBreweryRev
 const mapDispatchToProps = dispatch => {
     return {
         deleteCircuit: (circuitId) => {dispatch(deleteCircuit(circuitId))},
-        deleteBreweryReview: (reviewId) => {dispatch(deleteBreweryReview(reviewId))},
-        deleteCircuitReview: (reviewId) => {dispatch(deleteCircuitReview(reviewId))},
+        deleteReview: (reviewId, variant) => {dispatch(deleteReview(reviewId, variant))},
         deleteUser: (userId) => {dispatch(deleteUser(userId))}
     }
 }

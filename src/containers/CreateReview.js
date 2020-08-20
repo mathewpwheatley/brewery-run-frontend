@@ -2,32 +2,14 @@ import React, {Fragment, Component} from 'react'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import CreateReviewForm from '../components/CreateReviewForm'
-import {createBreweryReview, createCircuitReview} from '../actions/review.js'
+import {createReview} from '../actions/review.js'
 
 
 class CreateReview extends Component {
 
     state = {
         showForm: false,
-        formTitle: '',
-        submitReview: ''
-    }
-
-    componentDidMount() {
-        switch (this.props.variant) {
-            case 'brewery-reviews':
-                this.setState({
-                    submitReview: this.props.createBreweryReview
-                })
-                break
-            case 'circuit-reviews':
-                this.setState({
-                    submitReview: this.props.createCircuitReview
-                })
-                break
-            default:
-                break
-        }
+        formTitle: ''
     }
 
     toggleForm = () => {
@@ -47,7 +29,7 @@ class CreateReview extends Component {
                     subjectId={this.props.subjectId}
                     subjectName={this.props.subjectName}
                     userId={this.props.userId}
-                    submitReview={this.state.submitReview}
+                    submitReview={this.props.createReview}
                     toggleForm={this.toggleForm}
                     errors={this.props.errors}
                 />
@@ -66,8 +48,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        createBreweryReview: async (review) => {await dispatch(createBreweryReview(review))},
-        createCircuitReview: async (review) => {await dispatch(createCircuitReview(review))}
+        createReview: async (review, variant) => {await dispatch(createReview(review, variant))}
     }
 }
 
