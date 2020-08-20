@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
 import Button from 'react-bootstrap/Button'
-import {createBreweryFavorite, createCircuitFavorite, deleteBreweryFavorite, deleteCircuitFavorite} from '../actions/favorite.js'
+import {createFavorite, deleteFavorite} from '../actions/favorite.js'
 
-const FavoriteButton = ({variant, favoriteId, userId, subjectId, createBreweryFavorite, createCircuitFavorite, deleteBreweryFavorite, deleteCircuitFavorite}) => {
+const FavoriteButton = ({variant, favoriteId, userId, subjectId, createFavorite, deleteFavorite}) => {
 
     let attributes
     const setAttributes = () => {
@@ -11,33 +11,15 @@ const FavoriteButton = ({variant, favoriteId, userId, subjectId, createBreweryFa
             attributes = {
                 title: "Unfavorite",
                 variant: "info",
-                text: <i className="fas fa-star" style={{color: "gold"}}/>
-            }
-            switch (variant) {
-                case "brewery":
-                    attributes.action = () => deleteBreweryFavorite(favoriteId)
-                    break
-                case "circuit":
-                    attributes.action = () => deleteCircuitFavorite(favoriteId)
-                    break
-                default:
-                    break
+                text: <i className="fas fa-star" style={{color: "gold"}}/>,
+                action: () => deleteFavorite(favoriteId, variant)
             }
         } else {
             attributes = {
                 title: "Favorite",
                 variant: "outline-secondary",
-                text: <i className="far fa-star"/>
-            }
-            switch (variant) {
-                case "brewery":
-                    attributes.action = () => createBreweryFavorite(userId, subjectId)
-                    break
-                case "circuit":
-                    attributes.action = () => createCircuitFavorite(userId, subjectId)
-                    break
-                default:
-                    break
+                text: <i className="far fa-star"/>,
+                action: () => createFavorite(userId, subjectId, variant)
             }
         }
     }
@@ -54,10 +36,8 @@ const FavoriteButton = ({variant, favoriteId, userId, subjectId, createBreweryFa
 
 const mapDispatchToProps = dispatch => {
     return {
-        createBreweryFavorite: (userId, breweryId) => {dispatch(createBreweryFavorite(userId, breweryId))},
-        deleteBreweryFavorite: (favoriteId) => {dispatch(deleteBreweryFavorite(favoriteId))},
-        createCircuitFavorite: (userId, circuitId) => {dispatch(createCircuitFavorite(userId, circuitId))},
-        deleteCircuitFavorite: (favoriteId) => {dispatch(deleteCircuitFavorite(favoriteId))}
+        createFavorite: (userId, subjectId, variant) => {dispatch(createFavorite(userId, subjectId, variant))},
+        deleteFavorite: (favoriteId, variant) => {dispatch(deleteFavorite(favoriteId, variant))}
     }
 }
 

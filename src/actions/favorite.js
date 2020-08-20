@@ -1,31 +1,45 @@
 import endPoints from './endPoints.js'
+import {standardFetchOptions, fetchErrorsCheck} from './fetchHelper.js'
 
 const {breweryFavoritesURL, circuitFavoritesURL} = endPoints
 
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
-export const createBreweryFavorite = (userId, breweryId) => {
+export const createFavorite = (userId, subjectId, variant) => {
     return (dispatch) => {
+        // Set loading via dispatch
         dispatch({type: 'LOADING'})
-        const options = {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({brewery_favorite: {user_id: userId, brewery_id: breweryId}})
+        // Setup fetch options & url
+        let body
+        let fetchURL
+        let dispatchType
+        switch (variant) {
+            case "brewery": 
+                body = JSON.stringify({brewery_favorite: {user_id: userId, brewery_id: subjectId}})
+                fetchURL = breweryFavoritesURL
+                dispatchType = 'ADD_BREWERY_FAVORITE'
+                break
+            case "circuit":
+                body = JSON.stringify({circuit_favorite: {user_id: userId, circuit_id: subjectId}})
+                fetchURL = circuitFavoritesURL
+                dispatchType = 'ADD_CIRCUIT_FAVORITE'
+                break
+            default:
+                break
         }
-        fetch(breweryFavoritesURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+        const options = {
+            ...standardFetchOptions,
+            method: 'POST',
+            body: body   
+        }
+        // Fetch request
+        fetch(fetchURL, options).then(resp => resp.json()).then(json => {
+            // Error checking/handling
+            if (!fetchErrorsCheck(dispatch, json)) {
+                // Update redux state to update webpage
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
-                    type: 'ADD_BREWERY_FAVORITE',
+                    type: dispatchType,
                     favoriteId: json.id
                 })
             }
@@ -33,76 +47,36 @@ export const createBreweryFavorite = (userId, breweryId) => {
     }
 }
 
-export const createCircuitFavorite = (userId, circuitId) => {
+export const deleteFavorite = (favoriteId, variant) => {
     return (dispatch) => {
+        // Set loading via dispatch
         dispatch({type: 'LOADING'})
-        const options = {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({circuit_favorite: {user_id: userId, circuit_id: circuitId}})
+        // Setup fetch options & url
+        let fetchURL
+        let dispatchType
+        switch (variant) {
+            case "brewery": 
+                fetchURL = breweryFavoritesURL
+                dispatchType = 'SUBTRACT_BREWERY_FAVORITE'
+                break
+            case "circuit":
+                fetchURL = circuitFavoritesURL
+                dispatchType = 'SUBTRACT_CIRCUIT_FAVORITE'
+                break
+            default:
+                break
         }
-        fetch(circuitFavoritesURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
-                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'ADD_CIRCUIT_FAVORITE',
-                    favoriteId: json.id
-                })
-            }
-        })
-    }
-}
-
-export const deleteBreweryFavorite = (breweryFavoriteId) => {
-    return (dispatch) => {
-        dispatch({type: 'LOADING'})
         const options = {
+            ...standardFetchOptions,
             method: 'DELETE',
-            credentials: 'include'
         }
-        fetch(breweryFavoritesURL + "/" + breweryFavoriteId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+        // Fetch request
+        fetch(fetchURL + "/" + favoriteId, options).then(resp => resp.json()).then(json => {
+            // Error checking/handling
+            if (!fetchErrorsCheck(dispatch, json)) {
+                // Update redux state to update webpage
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'SUBTRACT_BREWERY_FAVORITE'
-                })
-            }
-        })
-    }
-}
-
-export const deleteCircuitFavorite = (circuitFavoriteId) => {
-    return (dispatch) => {
-        dispatch({type: 'LOADING'})
-        const options = {
-            method: 'DELETE',
-            credentials: 'include'
-        }
-        fetch(circuitFavoritesURL + "/" + circuitFavoriteId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
-                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'SUBTRACT_CIRCUIT_FAVORITE'
-                })
+                dispatch({type: dispatchType})
             }
         })
     }
