@@ -9,21 +9,12 @@ export const createFollow = (followeeId, followerId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
+            ...standardFetchOptions,
             method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
             body: JSON.stringify({follow: {followee_id: followeeId, follower_id: followerId}})
         }
         fetch(followsURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_FOLLOW',
@@ -38,20 +29,13 @@ export const deleteFollow = (followId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'DELETE',
-            credentials: 'include'
+            ...standardFetchOptions,
+            method: 'DELETE'
         }
         fetch(followsURL + "/" + followId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
-                dispatch({
-                    type: 'SUBTRACT_FOLLOW'
-                })
+                dispatch({type: 'SUBTRACT_FOLLOW'})
             }
         })
     }
