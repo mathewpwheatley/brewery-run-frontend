@@ -1,4 +1,5 @@
 import endPoints from './endPoints.js'
+import {standardFetchOptions, fetchErrorsCheck} from './fetchHelper.js'
 
 const {circuitsURL} = endPoints
 
@@ -7,21 +8,12 @@ const {circuitsURL} = endPoints
 export const createCircuit = (circuit) => {
     return async (dispatch) => {
         const options = {
+            ...standardFetchOptions,
             method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
             body: JSON.stringify({circuit: circuit})
         }
         await fetch(circuitsURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'ADD_CIRCUIT',
@@ -36,20 +28,11 @@ export const getCircuit = (circuitId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'GET'
         }
         fetch(circuitsURL + '/' + circuitId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_CIRCUIT',
@@ -70,20 +53,11 @@ export const getAllCircuits = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'GET'
         }
         fetch(circuitsURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_ALL_CIRCUITS',
@@ -104,20 +78,11 @@ export const deleteCircuit = (circuitId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'DELETE',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'DELETE'
         }
         fetch(circuitsURL + "/" + circuitId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({type: 'CLEAR_CIRCUIT'})
             }
@@ -129,21 +94,12 @@ export const togglePublicCircuit = (circuitId, status) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
+            ...standardFetchOptions,
             method: 'PATCH',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
             body: JSON.stringify({public: status})
         }
         fetch(circuitsURL + "/" + circuitId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({type: 'TOGGLE_PUBLIC_CIRCUIT'})
             }

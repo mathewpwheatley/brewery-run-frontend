@@ -1,4 +1,5 @@
 import endPoints from './endPoints.js'
+import {standardFetchOptions, fetchErrorsCheck} from './fetchHelper.js'
 
 const {breweriesURL, breweriesIndexFormURL} = endPoints
 
@@ -8,20 +9,11 @@ export const getBrewery = (breweryId) => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'GET'
         }
         fetch(breweriesURL + '/' + breweryId, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_BREWERY',
@@ -42,20 +34,11 @@ export const getAllBreweries = () => {
     return (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'GET'
         }
         fetch(breweriesURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_ALL_BREWERIES',
@@ -76,20 +59,11 @@ export const getAllBreweriesForm = () => {
     return async (dispatch) => {
         dispatch({type: 'LOADING'})
         const options = {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            ...standardFetchOptions,
+            method: 'GET'
         }
         await fetch(breweriesIndexFormURL, options).then(resp => resp.json()).then(json => {
-            if (json.errors) {
-                dispatch({
-                    type: 'SET_ERRORS',
-                    errors: json.errors
-                })
-            } else {
+            if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({
                     type: 'SET_ALL_BREWERIES',
