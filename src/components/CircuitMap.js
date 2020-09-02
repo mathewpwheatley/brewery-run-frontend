@@ -123,7 +123,6 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize, circuitId, store
     // updateDistanceElevationCircuit
     const elevationGain = Math.round(maxElevation - minElevation)
     if (elevationGain !== storedElevation || totalDistance.toString() !== storedDistance) {
-      console.log(totalDistance, elevationGain)
       updateDistanceElevationCircuit(circuitId, totalDistance.toString(), elevationGain.toString())
     }
 
