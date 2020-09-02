@@ -1,5 +1,5 @@
-const baseURL = "https://brewery-run-backend.herokuapp.com/"
-// const baseURL = "http://localhost:3001/"
+// const baseURL = "https://brewery-run-backend.herokuapp.com/"
+const baseURL = "http://localhost:3001/"
 
 const endPoints = {
     logInURL: baseURL + "log_in",
@@ -10,6 +10,7 @@ const endPoints = {
     breweriesIndexFormURL: baseURL + "breweries_form_index",
     breweryReviewsURL: baseURL + "brewery_reviews",
     circuitsURL: baseURL + "circuits",
+    circuitsUpdateDistanceElevationURL: baseURL + "update_circuit_distance_elevation",
     circuitReviewsURL: baseURL + "circuit_reviews",
     notificationsURL: baseURL + "notifications",
     followsURL: baseURL + "follows",

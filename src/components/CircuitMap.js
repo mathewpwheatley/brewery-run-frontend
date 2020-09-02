@@ -1,9 +1,11 @@
 import React, {useState, useEffect, useRef, createRef} from 'react'
+import {connect} from 'react-redux'
 import Chart from 'chart.js'
 import {CardGroup, Card} from 'react-bootstrap'
+import {updateDistanceElevationCircuit} from '../actions/circuit.js'
 import CommonNavigationBar from './CommonNavigationBar.js'
 
-const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
+const CircuitMap = ({locations, hideDirectionsDefault, mapSize, circuitId, storedDistance, storedElevation ,updateDistanceElevationCircuit}) => {
   const googleMapRef = createRef()
   const googleMapSidePanelRef = createRef()
   const googleMapBottomPanelRef = createRef()
@@ -30,7 +32,7 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
       // Get directions and elevation then render directions, path, and elevation chart
       mapPlotCircuit(locations)
     }
-    // eslint-disable-next-line (Used to ignore error of blank array in following line, this use used to make effect run only on mount)
+    /// eslint-disable-next-line (Used to ignore error of blank array in following line, this use used to make effect run only on mount)
   },[])
   const createGoogleMap = (origin) => {
     return new window.google.maps.Map(googleMapRef.current, {
@@ -86,7 +88,7 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
               return
             }
             // Plot elevation data
-            plotElevation(elevationData, sampleCount, totalDistance)
+            plotElevation(elevationData, sampleCount, Math.round(totalDistance*100)/100)
           })
         } else {
           window.alert("Directions request failed due to " + status)
@@ -98,16 +100,33 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
   const plotElevation = (elevationData, sampleCount, totalDistance) => {
     // Set map and directions container to render in
     const googleMapBottomPanel = googleMapBottomPanelRef.current
-    // Prepare data for plotting (Note weird rounding since javascrip is bad with numbers)
+    // Prepare data for plotting (Note weird rounding since javascript is bad with numbers)
     // (Note distance is in meters so 0.3048 m/ft conversion is used)
-    const elevation = elevationData.map(elevation => {return (Math.round(elevation.elevation/0.3048 * 100) / 100)})
+    let minElevation = (elevationData[0].elevation/0.3048 * 100) / 100
+    let maxElevation = minElevation
+    const elevation = elevationData.map(elevation => {
+      // Convert elevation to feet and find max/min elevation
+      let currentElevation = (Math.round(elevation.elevation/0.3048 * 100) / 100)
+      if (currentElevation < minElevation) {minElevation = currentElevation}
+      if (currentElevation > maxElevation) {maxElevation = currentElevation}
+      return currentElevation
+    })
     const distance = [0]
+    // Create points for plotting
     let i
     for (i = 0; i < sampleCount-1; i++) {
       const x = distance[i] + totalDistance/sampleCount
-      // Note weird rounding since javascrip is bad with numbers
+      // Note weird rounding since javascript is bad with numbers
       distance.push(Math.round(x * 100) / 100)
     }
+    // Push to backend if distance/elevation doesnt match Google Maps
+    // updateDistanceElevationCircuit
+    const elevationGain = Math.round(maxElevation - minElevation)
+    if (elevationGain !== storedElevation || totalDistance.toString() !== storedDistance) {
+      console.log(totalDistance, elevationGain)
+      updateDistanceElevationCircuit(circuitId, totalDistance.toString(), elevationGain.toString())
+    }
+
     // Creat elevation line chart
     new Chart(googleMapBottomPanel, {
       type: 'line',
@@ -178,4 +197,19 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
   )
 }
 
-export default CircuitMap
+const mapStateToProps = state => {
+  return {
+      circuitId: state.circuit.selected.id,
+      locations: state.circuit.selected.breweries,
+      storedDistance: state.circuit.selected.distance,
+      storedElevation: state.circuit.selected.elevation
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      updateDistanceElevationCircuit: (circuitId, distance, elevation) => {dispatch(updateDistanceElevationCircuit(circuitId, distance, elevation))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CircuitMap)

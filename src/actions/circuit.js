@@ -1,7 +1,7 @@
 import endPoints from './endPoints.js'
 import {standardFetchOptions, fetchErrorsCheck} from './fetchHelper.js'
 
-const {circuitsURL} = endPoints
+const {circuitsURL, circuitsUpdateDistanceElevationURL} = endPoints
 
 // Note that dispatch must be passed in from 'connect' when these functions are called
 
@@ -115,7 +115,7 @@ export const updateDistanceElevationCircuit = (circuitId, distance, elevation) =
             method: 'PATCH',
             body: JSON.stringify({distance: distance, elevation: elevation})
         }
-        fetch(circuitsURL + "/" + circuitId, options).then(resp => resp.json()).then(json => {
+        fetch(circuitsUpdateDistanceElevationURL + "/" + circuitId, options).then(resp => resp.json()).then(json => {
             if (!fetchErrorsCheck(dispatch, json)) {
                 dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
                 dispatch({

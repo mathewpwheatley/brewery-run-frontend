@@ -86,7 +86,7 @@ class Circuit extends Component {
                                 <span className="font-weight-bold">Distance (miles): </span>
                                 {circuit.distance}
                                 <span className="float-right">
-                                    <span className="font-weight-bold">Elevation Gain (ft): </span>
+                                    <span className="font-weight-bold">Elevation (ft): </span>
                                     {circuit.elevation}
                                 </span>
                             </Card.Text>
@@ -119,7 +119,7 @@ class Circuit extends Component {
 
                     {/* Prevent map from loading without data */}
                     {(circuit.breweries && circuit.breweries.length > 0) ?
-                    <CircuitMap locations={circuit.breweries} hideDirectionsDefault={true} /> :
+                    <CircuitMap hideDirectionsDefault={true} /> :
                     <BlankMap/>
                     }
 
