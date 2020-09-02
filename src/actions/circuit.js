@@ -106,3 +106,23 @@ export const togglePublicCircuit = (circuitId, status) => {
         })
     }
 }
+
+export const updateDistanceElevationCircuit = (circuitId, distance, elevation) => {
+    return (dispatch) => {
+        dispatch({type: 'LOADING'})
+        const options = {
+            ...standardFetchOptions,
+            method: 'PATCH',
+            body: JSON.stringify({distance: distance, elevation: elevation})
+        }
+        fetch(circuitsURL + "/" + circuitId, options).then(resp => resp.json()).then(json => {
+            if (!fetchErrorsCheck(dispatch, json)) {
+                dispatch({type: 'CLEAR_ERRORS_MESSAGES'})
+                dispatch({
+                    type: 'UPDATE_DISTANCE_ELEVATION_CIRCUIT',
+                    selected: json
+                })
+            }
+        })
+    }
+}

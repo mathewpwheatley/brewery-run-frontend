@@ -95,7 +95,7 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize}) => {
     )
   }
   
-  function plotElevation(elevationData, sampleCount, totalDistance) {
+  const plotElevation = (elevationData, sampleCount, totalDistance) => {
     // Set map and directions container to render in
     const googleMapBottomPanel = googleMapBottomPanelRef.current
     // Prepare data for plotting (Note weird rounding since javascrip is bad with numbers)

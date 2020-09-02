@@ -83,20 +83,20 @@ class Circuit extends Component {
                                 </span>
                             </Card.Text>
                             <Card.Text>
-                                <span className="font-weight-bold">Author: </span>
-                                {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}
-                            </Card.Text>
-                            <Card.Text>
-                                <span className="font-weight-bold">Description: </span>
-                                {circuit.description }
-                            </Card.Text>
-                            <Card.Text>
                                 <span className="font-weight-bold">Distance (miles): </span>
                                 {circuit.distance}
                                 <span className="float-right">
                                     <span className="font-weight-bold">Elevation Gain (ft): </span>
                                     {circuit.elevation}
                                 </span>
+                            </Card.Text>
+                            <Card.Text>
+                                <span className="font-weight-bold">Author: </span>
+                                {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}
+                            </Card.Text>
+                            <Card.Text>
+                                <span className="font-weight-bold">Description: </span>
+                                {circuit.description }
                             </Card.Text>
                     
                             {/* Only render delete and public buttons if user is logged in and are the author */}

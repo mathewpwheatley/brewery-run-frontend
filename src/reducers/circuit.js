@@ -48,6 +48,12 @@ export default (state = {selected: {}, all: []}, action) => {
             return {...state, selected: {...state.selected,
                 public: !state.selected.public
             }}
+
+        case 'UPDATE_DISTANCE_ELEVATION_CIRCUIT':
+            return {...state, selected: {...state.selected,
+                distance: action.selected.distance,
+                elevation: action.selected.elevation
+            }}
     
         case 'CLEAR_CIRCUIT':
             return {...state, selected: {}}
