@@ -90,6 +90,14 @@ class Circuit extends Component {
                                 <span className="font-weight-bold">Description: </span>
                                 {circuit.description }
                             </Card.Text>
+                            <Card.Text>
+                                <span className="font-weight-bold">Distance (miles): </span>
+                                {circuit.distance}
+                                <span className="float-right">
+                                    <span className="font-weight-bold">Elevation Gain (ft): </span>
+                                    {circuit.elevation}
+                                </span>
+                            </Card.Text>
                     
                             {/* Only render delete and public buttons if user is logged in and are the author */}
                             {this.props.userId === circuit.author_id && 

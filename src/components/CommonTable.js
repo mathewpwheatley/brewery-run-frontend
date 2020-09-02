@@ -20,7 +20,7 @@ const CommonTable = ({variant, data, showLink}) => {
             case "circuits":
                 attributes = {
                     basePath: '/circuits',
-                    displayKeys: {title: 'Title', breweries_count: 'Breweries', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorites'}
+                    displayKeys: {title: 'Title', distance: 'Distance (mi)', elevation: 'Elevation (ft)', breweries_count: 'Breweries', rating: 'Rating', likes_count: 'Likes', reviews_count: 'Reviews', favorites_count: 'Favorites'}
                 }
                 break 
             case "users":
