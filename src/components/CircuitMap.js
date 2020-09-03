@@ -32,7 +32,7 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize, circuitId, store
       // Get directions and elevation then render directions, path, and elevation chart
       mapPlotCircuit(locations)
     }
-    /// eslint-disable-next-line (Used to ignore error of blank array in following line, this use used to make effect run only on mount)
+    // eslint-disable-next-line (Used to ignore error of blank array in following line, this use used to make effect run only on mount)
   },[])
   const createGoogleMap = (origin) => {
     return new window.google.maps.Map(googleMapRef.current, {
