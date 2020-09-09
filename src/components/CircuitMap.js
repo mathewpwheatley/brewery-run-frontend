@@ -2,10 +2,10 @@ import React, {useState, useEffect, useRef, createRef} from 'react'
 import {connect} from 'react-redux'
 import Chart from 'chart.js'
 import {CardGroup, Card} from 'react-bootstrap'
-import {updateDistanceElevationCircuit} from '../actions/circuit.js'
+import {updateDistanceElevationCircuit, addCircuitLegs} from '../actions/circuit.js'
 import CommonNavigationBar from './CommonNavigationBar.js'
 
-const CircuitMap = ({locations, hideDirectionsDefault, mapSize, circuitId, storedDistance, storedElevation ,updateDistanceElevationCircuit}) => {
+const CircuitMap = ({locations, hideDirectionsDefault, mapSize, circuitId, storedDistance, storedElevation ,updateDistanceElevationCircuit, addCircuitLegs}) => {
   const googleMapRef = createRef()
   const googleMapSidePanelRef = createRef()
   const googleMapBottomPanelRef = createRef()
@@ -85,6 +85,7 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize, circuitId, store
               distance: leg.distance.text
             }
           })
+          addCircuitLegs(circuit_legs)
 
           // Pull distance from each let to calculate total distance (Note distance is in meters so 1603.34 m/mile conversion is used)
           const totalDistance = (response.routes[0].legs.reduce((sum, current) => sum + current.distance.value, 0))/1603.34
@@ -215,7 +216,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      updateDistanceElevationCircuit: (circuitId, distance, elevation) => {dispatch(updateDistanceElevationCircuit(circuitId, distance, elevation))}
+      updateDistanceElevationCircuit: (circuitId, distance, elevation) => {dispatch(updateDistanceElevationCircuit(circuitId, distance, elevation))},
+      addCircuitLegs: (circuit_legs) => {dispatch(addCircuitLegs(circuit_legs))}
   }
 }
 

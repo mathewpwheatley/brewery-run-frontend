@@ -56,7 +56,7 @@ export default (state = {selected: {}, all: []}, action) => {
             }}
         
         case 'ADD_CIRCUIT_LEGS':
-            return {...state, selected: {...{...state.selected,
+            return {...state, selected: {...state.selected,
                 legs: action.legs
             }}
     
