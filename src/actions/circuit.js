@@ -126,3 +126,12 @@ export const updateDistanceElevationCircuit = (circuitId, distance, elevation) =
         })
     }
 }
+
+export const addCircuitLegs = (legs) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'ADD_CIRCUIT_LEGS',
+            legs: legs
+        })
+    }
+}

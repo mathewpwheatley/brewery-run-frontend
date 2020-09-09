@@ -54,6 +54,11 @@ export default (state = {selected: {}, all: []}, action) => {
                 distance: action.selected.distance,
                 elevation: action.selected.elevation
             }}
+        
+        case 'ADD_CIRCUIT_LEGS':
+            return {...state, selected: {...{...state.selected,
+                legs: action.legs
+            }}
     
         case 'CLEAR_CIRCUIT':
             return {...state, selected: {}}
