@@ -69,7 +69,7 @@ const CommonTable = ({variant, data, showLink}) => {
     }
     
     return (
-        <Table className="text-center" hover size="sm">
+        <Table className="text-center" size="sm" hover>
             {setAttributes()}
             <thead className="thead-light">
                 <tr>

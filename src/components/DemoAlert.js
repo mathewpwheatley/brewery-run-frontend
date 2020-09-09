@@ -1,7 +1,7 @@
 import React from 'react'
 import {Alert} from 'react-bootstrap'
 
-const  DemoAlert = () => {
+const DemoAlert = () => {
     return (
         <Alert variant="light">
             <h5>Brewery Run Demonstration: </h5>
