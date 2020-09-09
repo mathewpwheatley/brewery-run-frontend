@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
-import {Container, CardDeck, Card, Row, Col} from 'react-bootstrap'
+import {Container, CardDeck, Card, Row, Col, Table} from 'react-bootstrap'
 import {getCircuit, clearCircuit} from '../actions/circuit.js'
 import FetchMessage from './FetchMessage.js'
 import CommonNavigationBar from './CommonNavigationBar.js'
@@ -38,6 +38,31 @@ class Circuit extends Component {
 
     render () {
         const circuit = this.props.circuit
+
+        const legsTable = () => {
+            return (
+                <Table bordered hover className="text-center" size="sm">
+                    <thead className="thead-light">
+                        <tr>
+                            <th>Start Address</th>
+                            <th>End Address</th>
+                            <th>Distance</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        {circuit.legs.map(leg => {
+                            return (
+                                <tr>
+                                    <td>{leg.start_address}</td>
+                                    <td>{leg.end_address}</td>
+                                    <td>{leg.distance}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            )
+        }
 
         return (
             <Container className="col-10 mt-4">
@@ -110,6 +135,12 @@ class Circuit extends Component {
                                 </Col>
                             </Row>
                             }
+
+                            {/* Conditionally load circuit legs table */}
+                            {!!circuit.legs &&
+                                legsTable()
+                            }
+
                         </Card.Body>
                         <Card.Footer className="text-muted">
                             Created: {new Date(circuit.created_at).toLocaleDateString()}
