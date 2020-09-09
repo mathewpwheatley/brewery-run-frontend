@@ -120,6 +120,7 @@ class Circuit extends Component {
                     {/* Prevent map from loading without data */}
                     {(circuit.breweries && circuit.breweries.length > 0) ?
                     <CircuitMap hideDirectionsDefault={true} /> :
+                    // <BlankMap/> :
                     <BlankMap/>
                     }
 

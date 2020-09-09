@@ -77,6 +77,15 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize, circuitId, store
           // Render directions on map
           directionsRenderer.setDirections(response)
 
+          // Map response and add it to redux circuit state
+          let circuit_legs = response.routes[0].legs.map((leg) => {
+            return {
+              start_address: leg.start_address,
+              end_address: leg.end_address,
+              distance: leg.distance.text
+            }
+          })
+
           // Pull distance from each let to calculate total distance (Note distance is in meters so 1603.34 m/mile conversion is used)
           const totalDistance = (response.routes[0].legs.reduce((sum, current) => sum + current.distance.value, 0))/1603.34
 
@@ -120,7 +129,6 @@ const CircuitMap = ({locations, hideDirectionsDefault, mapSize, circuitId, store
       distance.push(Math.round(x * 100) / 100)
     }
     // Push to backend if distance/elevation doesnt match Google Maps
-    // updateDistanceElevationCircuit
     const elevationGain = Math.round(maxElevation - minElevation)
     if (elevationGain !== storedElevation || totalDistance.toString() !== storedDistance) {
       updateDistanceElevationCircuit(circuitId, totalDistance.toString(), elevationGain.toString())
