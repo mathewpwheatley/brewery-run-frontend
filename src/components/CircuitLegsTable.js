@@ -26,7 +26,7 @@ const CircuitLegsTable = ({ legs }) => {
     <Table className='text-center' size='sm' hover bordered>
       <thead className='thead-light'>
         <tr>
-          <th>Circuit Leg</th>
+          <th>Leg</th>
           <th>Start Address</th>
           <th>End Address</th>
           <th>Distance</th>
