@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Link, Redirect} from 'react-router-dom'
-import {Container, CardDeck, Card, Row, Col} from 'react-bootstrap'
-import {getCircuit, clearCircuit} from '../actions/circuit.js'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
+import { Container, CardDeck, Card, Row, Col } from 'react-bootstrap'
+import { getCircuit, clearCircuit } from '../actions/circuit.js'
 import FetchMessage from './FetchMessage.js'
 import CommonNavigationBar from './CommonNavigationBar.js'
 import CommonCard from '../containers/CommonCard.js'
@@ -17,151 +17,184 @@ import CircuitLegsTable from './CircuitLegsTable.js'
 import Reviews from '../containers/Reviews.js'
 
 class Circuit extends Component {
+  componentDidMount() {
+    this.props.getCircuit(this.props.id)
+  }
 
-    componentDidMount() {
-        this.props.getCircuit(this.props.id)
+  componentWillUnmount() {
+    this.props.clearCircuit()
+  }
+
+  handleRedirect = () => {
+    if (!this.props.userId && !this.props.circuit.public) {
+      return <Redirect to='/circuits' /> // Redirect, user is not logged in and circuit is private
+    } else if (this.props.userId === this.props.circuit.author_id) {
+      return // Nothing, user is author of circuit so they can see it
+    } else if (!this.props.circuit.public) {
+      console.log('third')
+      return <Redirect to='/circuits' /> // Redirect, circuit is private and doesnt belong to current user
     }
+  }
 
-    componentWillUnmount() {
-        this.props.clearCircuit()
-    }
+  render() {
+    const circuit = this.props.circuit
 
-    handleRedirect = () => {
-        if (!this.props.userId && !this.props.circuit.public) {
-            return <Redirect to="/circuits"/> // Redirect, user is not logged in and circuit is private
-        } else if (this.props.userId === this.props.circuit.author_id) {
-            return // Nothing, user is author of circuit so they can see it
-        } else if (!this.props.circuit.public) {
-            console.log("third")
-            return <Redirect to="/circuits"/> // Redirect, circuit is private and doesnt belong to current user
-        }
-    }
+    return (
+      <Container className='col-10 mt-4'>
+        <FetchMessage />
 
-    render () {
-        const circuit = this.props.circuit
+        {/* Ensure circuit has been loading before checking for redirect if private circuit*/}
+        {circuit.id && this.handleRedirect()}
 
-        return (
-            <Container className="col-10 mt-4">
-                
-                <FetchMessage/>
+        <CardDeck className='mb-4'>
+          <Card className='col-6 px-0' style={{ height: '0%' }}>
+            <CommonNavigationBar
+              variant='circuit'
+              navSubTitle={': ' + circuit.title}
+              showSearch={false}
+            />
+            <Card.Body>
+              <Card.Text>
+                <span className='font-weight-bold'>Rating: </span>
+                <RatingStars rating={circuit.rating} />
+                <span className='text-muted'>
+                  {' '}
+                  ({circuit.reviews_count} Reviews)
+                </span>
+                <span className='float-right'>
+                  <span className='font-weight-bold'>Favorited: </span>
+                  {circuit.favorites_count}
+                  {/* Only render favorite button if user is logged in and they are not the owner */}
+                  {this.props.userId &&
+                    this.props.userId !== circuit.author_id && (
+                      <FavoriteButton
+                        variant='circuit'
+                        favoriteId={circuit.active_user_favorite_id}
+                        userId={this.props.userId}
+                        subjectId={circuit.id}
+                      />
+                    )}
+                </span>
+              </Card.Text>
+              <Card.Text>
+                <span className='font-weight-bold'>Related Breweries: </span>
+                {circuit.breweries_count}
+                <span className='float-right'>
+                  <span className='font-weight-bold'>Likes: </span>
+                  {circuit.likes_count}
+                  {/* Only render favorite button if user is logged in and they are not the owner */}
+                  {this.props.userId &&
+                    this.props.userId !== circuit.author_id && (
+                      <LikeButton
+                        variant='circuit'
+                        likeId={circuit.active_user_like_id}
+                        userId={this.props.userId}
+                        subjectId={circuit.id}
+                      />
+                    )}
+                </span>
+              </Card.Text>
+              <Card.Text>
+                <span className='font-weight-bold'>Distance (miles): </span>
+                {circuit.distance}
+                <span className='float-right'>
+                  <span className='font-weight-bold'>Elevation (ft): </span>
+                  {circuit.elevation}
+                </span>
+              </Card.Text>
+              <Card.Text>
+                <span className='font-weight-bold'>Author: </span>
+                {this.props.userId ? (
+                  <Link to={'/users/' + circuit.author_id}>
+                    {circuit.author_name}
+                  </Link>
+                ) : (
+                  circuit.author_name
+                )}
+              </Card.Text>
+              <Card.Text>
+                <span className='font-weight-bold'>Description: </span>
+                {circuit.description}
+              </Card.Text>
 
-                {/* Ensure circuit has been loading before checking for redirect if private circuit*/}
-                {circuit.id &&
-                    this.handleRedirect()
-                }
+              {/* Only render delete and public buttons if user is logged in and are the author */}
+              {this.props.userId === circuit.author_id && (
+                <Row>
+                  <Col className='d-flex justify-content-center'>
+                    <CircuitPublicButton
+                      circuitId={circuit.id}
+                      status={circuit.public}
+                    />
+                  </Col>
+                  <Col className='d-flex justify-content-center'>
+                    <CommonDeleteButton
+                      variant='circuit'
+                      subjectId={circuit.id}
+                    />
+                  </Col>
+                </Row>
+              )}
 
-                <CardDeck className="mb-4">
-                    <Card className="col-4 px-0" style={{height:"0%"}}>
-                        <CommonNavigationBar
-                                variant="circuit"
-                                navSubTitle={": " + circuit.title}
-                                showSearch={false}
-                            />
-                        <Card.Body>
-                            <Card.Text>
-                                <span className="font-weight-bold">Rating: </span>
-                                <RatingStars rating={circuit.rating} />
-                                <span className="text-muted"> ({circuit.reviews_count} Reviews)</span>
-                                <span className="float-right">
-                                    <span className="font-weight-bold">Favorited: </span>
-                                    {circuit.favorites_count}
-                                    {/* Only render favorite button if user is logged in and they are not the owner */}
-                                    {(this.props.userId && (this.props.userId !== circuit.author_id)) && 
-                                        <FavoriteButton variant="circuit" favoriteId={circuit.active_user_favorite_id} userId={this.props.userId} subjectId={circuit.id} />
-                                    }
-                                </span>
-                            </Card.Text>
-                            <Card.Text>
-                                <span className="font-weight-bold">Related Breweries: </span>
-                                {circuit.breweries_count}
-                                <span className="float-right">
-                                    <span className="font-weight-bold">Likes: </span>
-                                    {circuit.likes_count}
-                                    {/* Only render favorite button if user is logged in and they are not the owner */}
-                                    {(this.props.userId && (this.props.userId !== circuit.author_id))  && 
-                                        <LikeButton variant="circuit" likeId={circuit.active_user_like_id} userId={this.props.userId} subjectId={circuit.id} />
-                                    }
-                                </span>
-                            </Card.Text>
-                            <Card.Text>
-                                <span className="font-weight-bold">Distance (miles): </span>
-                                {circuit.distance}
-                                <span className="float-right">
-                                    <span className="font-weight-bold">Elevation (ft): </span>
-                                    {circuit.elevation}
-                                </span>
-                            </Card.Text>
-                            <Card.Text>
-                                <span className="font-weight-bold">Author: </span>
-                                {this.props.userId ? <Link to={"/users/"+ circuit.author_id}>{circuit.author_name}</Link>: circuit.author_name}
-                            </Card.Text>
-                            <Card.Text>
-                                <span className="font-weight-bold">Description: </span>
-                                {circuit.description }
-                            </Card.Text>
-                    
-                            {/* Only render delete and public buttons if user is logged in and are the author */}
-                            {this.props.userId === circuit.author_id && 
-                            <Row>
-                                <Col className="d-flex justify-content-center">
-                                    <CircuitPublicButton circuitId={circuit.id} status={circuit.public} />
-                                </Col>
-                                <Col className="d-flex justify-content-center">
-                                    <CommonDeleteButton variant="circuit" subjectId={circuit.id}/>
-                                </Col>
-                            </Row>
-                            }
+              {/* Conditionally load circuit legs table */}
+              {!!circuit.legs && <CircuitLegsTable legs={circuit.legs} />}
+            </Card.Body>
+            <Card.Footer className='text-muted'>
+              Created: {new Date(circuit.created_at).toLocaleDateString()}
+              <span className='float-right'>
+                Last Updated:{' '}
+                {new Date(circuit.updated_at).toLocaleDateString()}
+              </span>
+            </Card.Footer>
+          </Card>
 
-                            {/* Conditionally load circuit legs table */}
-                            {!!circuit.legs &&
-                                <CircuitLegsTable legs={circuit.legs}/>
-                            }
+          {/* Prevent map from loading without data */}
+          {circuit.breweries && circuit.breweries.length > 0 ? (
+            <CircuitMap hideDirectionsDefault={true} />
+          ) : (
+            <BlankMap />
+          )}
+        </CardDeck>
 
-                        </Card.Body>
-                        <Card.Footer className="text-muted">
-                            Created: {new Date(circuit.created_at).toLocaleDateString()}
-                            <span className="float-right">Last Updated: {new Date(circuit.updated_at).toLocaleDateString()}</span>
-                        </Card.Footer>
-                    </Card>
-
-                    {/* Prevent map from loading without data */}
-                    {(circuit.breweries && circuit.breweries.length > 0) ?
-                    <CircuitMap hideDirectionsDefault={true} /> :
-                    <BlankMap/>
-                    }
-
-                </CardDeck>                
-
-                <CardDeck className="mb-4">
-                    <CommonCard variant='breweries' data={circuit.breweries} hideDataDefault={true}/>
-                    <Reviews
-                    variant='circuit-reviews'
-                    data={circuit.reviews}
-                    userId={this.props.userId}
-                    subjectId={circuit.id}
-                    subjectName={circuit.title}
-                    hideDataDefault={true}
-                    // Can only write a review if logged in and user is not the circuit authro
-                    showWriteReview={this.props.userId && (this.props.userId !== circuit.author_id)}/>
-                </CardDeck>
-
-            </Container>
-        )
-    }
+        <CardDeck className='mb-4'>
+          <CommonCard
+            variant='breweries'
+            data={circuit.breweries}
+            hideDataDefault={true}
+          />
+          <Reviews
+            variant='circuit-reviews'
+            data={circuit.reviews}
+            userId={this.props.userId}
+            subjectId={circuit.id}
+            subjectName={circuit.title}
+            hideDataDefault={true}
+            // Can only write a review if logged in and user is not the circuit authro
+            showWriteReview={
+              this.props.userId && this.props.userId !== circuit.author_id
+            }
+          />
+        </CardDeck>
+      </Container>
+    )
+  }
 }
 
-const mapStateToProps = state => {
-    return {
-        circuit: state.circuit.selected,
-        userId: state.user.id
-    }
+const mapStateToProps = (state) => {
+  return {
+    circuit: state.circuit.selected,
+    userId: state.user.id,
+  }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getCircuit: (id) => {dispatch(getCircuit(id))},
-        clearCircuit: (id) => {dispatch(clearCircuit())}
-    }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCircuit: (id) => {
+      dispatch(getCircuit(id))
+    },
+    clearCircuit: (id) => {
+      dispatch(clearCircuit())
+    },
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Circuit)
